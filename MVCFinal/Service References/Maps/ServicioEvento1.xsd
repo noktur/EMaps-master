@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Lugar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Capacidad" type="xs:int" />
+      <xs:element minOccurs="0" name="CoordenadaX" type="xs:float" />
+      <xs:element minOccurs="0" name="CoordenadaY" type="xs:float" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdLugar" type="xs:int" />
+      <xs:element minOccurs="0" name="MapaLugar" nillable="true" type="tns:Mapa" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiciosLugar" nillable="true" type="tns:ArrayOfServicio" />
+      <xs:element minOccurs="0" name="UbicacionLugar" nillable="true" type="tns:Ciudad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Lugar" nillable="true" type="tns:Lugar" />
+  <xs:complexType name="Mapa">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Areas" nillable="true" type="tns:ArrayOfArea" />
+      <xs:element minOccurs="0" name="IdMapa" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UrlImagen" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Mapa" nillable="true" type="tns:Mapa" />
+  <xs:complexType name="ArrayOfArea">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Area" nillable="true" type="tns:Area" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArea" nillable="true" type="tns:ArrayOfArea" />
+  <xs:complexType name="Area">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdArea" type="xs:int" />
+      <xs:element minOccurs="0" name="MapaAsociado" nillable="true" type="tns:Mapa" />
+      <xs:element minOccurs="0" name="NombreArea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PuntosArea" nillable="true" type="tns:Punto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Area" nillable="true" type="tns:Area" />
+  <xs:complexType name="Punto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CoordenadaX" type="xs:double" />
+      <xs:element minOccurs="0" name="CoordenadaY" type="xs:double" />
+      <xs:element minOccurs="0" name="IdPunto" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Punto" nillable="true" type="tns:Punto" />
+  <xs:complexType name="ArrayOfServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Servicio" nillable="true" type="tns:Servicio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServicio" nillable="true" type="tns:ArrayOfServicio" />
+  <xs:complexType name="Servicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contacto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreServicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Precio" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Servicio" nillable="true" type="tns:Servicio" />
+  <xs:complexType name="Ciudad">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ubicacion">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UnPais" nillable="true" type="tns:Pais" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Ciudad" nillable="true" type="tns:Ciudad" />
+  <xs:complexType name="Ubicacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CoordenadaX" type="xs:float" />
+      <xs:element minOccurs="0" name="CoordenadaY" type="xs:float" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ubicacion" nillable="true" type="tns:Ubicacion" />
+  <xs:complexType name="Pais">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Ubicacion">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Pais" nillable="true" type="tns:Pais" />
+  <xs:complexType name="ArrayOfCiudad">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ciudad" nillable="true" type="tns:Ciudad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCiudad" nillable="true" type="tns:ArrayOfCiudad" />
+  <xs:complexType name="ArrayOfPais">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pais" nillable="true" type="tns:Pais" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPais" nillable="true" type="tns:ArrayOfPais" />
+  <xs:complexType name="Usuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CI" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contraseña" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Usuario" nillable="true" type="tns:Usuario" />
+  <xs:complexType name="Cliente">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Usuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EntradasEvento" nillable="true" type="tns:ArrayOfEntrada" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Cliente" nillable="true" type="tns:Cliente" />
+  <xs:complexType name="ArrayOfEntrada">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Entrada" nillable="true" type="tns:Entrada" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntrada" nillable="true" type="tns:ArrayOfEntrada" />
+  <xs:complexType name="Entrada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Beneficios" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Precio" type="xs:double" />
+      <xs:element minOccurs="0" name="UnCliente" nillable="true" type="tns:Cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entrada" nillable="true" type="tns:Entrada" />
+  <xs:complexType name="Admin">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Usuario">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Admin" nillable="true" type="tns:Admin" />
+  <xs:complexType name="Dueño">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Usuario">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Dueño" nillable="true" type="tns:Dueño" />
+  <xs:complexType name="Organizador">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Usuario">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Organizador" nillable="true" type="tns:Organizador" />
+  <xs:complexType name="ArrayOfAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Admin" nillable="true" type="tns:Admin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAdmin" nillable="true" type="tns:ArrayOfAdmin" />
+  <xs:complexType name="ArrayOfDueño">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Dueño" nillable="true" type="tns:Dueño" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDueño" nillable="true" type="tns:ArrayOfDueño" />
+  <xs:complexType name="ArrayOfOrganizador">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Organizador" nillable="true" type="tns:Organizador" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizador" nillable="true" type="tns:ArrayOfOrganizador" />
+  <xs:complexType name="ArrayOfCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Cliente" nillable="true" type="tns:Cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCliente" nillable="true" type="tns:ArrayOfCliente" />
+</xs:schema>

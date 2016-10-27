@@ -1,0 +1,7 @@
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\bin\Release\Persistencia.dll
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\bin\Release\Persistencia.pdb
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\bin\Release\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\bin\Release\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\obj\Release\Persistencia.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\obj\Release\Persistencia.dll
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Persistencia\obj\Release\Persistencia.pdb

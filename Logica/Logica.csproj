@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{025CFFA7-3315-4881-AD40-1BB78E1B27FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Logica</RootNamespace>
+    <AssemblyName>Logica</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClasesTrabajo\LogicaAlquiler.cs" />
+    <Compile Include="ClasesTrabajo\LogicaArea.cs" />
+    <Compile Include="ClasesTrabajo\LogicaEntrada.cs" />
+    <Compile Include="ClasesTrabajo\LogicaEvento.cs" />
+    <Compile Include="ClasesTrabajo\LogicaFeedbackEvento.cs" />
+    <Compile Include="ClasesTrabajo\LogicaFeedbackLugar.cs" />
+    <Compile Include="ClasesTrabajo\LogicaLugar.cs" />
+    <Compile Include="ClasesTrabajo\LogicaMapa.cs" />
+    <Compile Include="ClasesTrabajo\LogicaPunto.cs" />
+    <Compile Include="ClasesTrabajo\LogicaUbicacion.cs" />
+    <Compile Include="ClasesTrabajo\LogicaUsuario.cs" />
+    <Compile Include="FabricaLogica.cs" />
+    <Compile Include="Interfaces\ILogicaAlquiler.cs" />
+    <Compile Include="Interfaces\ILogicaArea.cs" />
+    <Compile Include="Interfaces\ILogicaEntrada.cs" />
+    <Compile Include="Interfaces\ILogicaEvento.cs" />
+    <Compile Include="Interfaces\ILogicaFeedbackEvento.cs" />
+    <Compile Include="Interfaces\ILogicaFeedbackLugar.cs" />
+    <Compile Include="Interfaces\ILogicaLugar.cs" />
+    <Compile Include="Interfaces\ILogicaMapa.cs" />
+    <Compile Include="Interfaces\ILogicaPunto.cs" />
+    <Compile Include="Interfaces\ILogicaUbicacion.cs" />
+    <Compile Include="Interfaces\ILogicaUsuario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntidadesCompartidas\EntidadesCompartidas.csproj">
+      <Project>{3bd0dd4c-4a1a-4d07-9c44-fd3592cfd320}</Project>
+      <Name>EntidadesCompartidas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
+      <Project>{4004779f-0b44-4875-84c1-8f6fbe584f1c}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

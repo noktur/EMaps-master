@@ -1,0 +1,4 @@
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb

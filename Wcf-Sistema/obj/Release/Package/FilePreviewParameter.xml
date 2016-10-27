@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/Wcf-Sistema" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Matias\\Desktop\\Nueva\ idea\ Ubicacion\ Mashup\\E-Maps\\E-Maps\\Wcf-Sistema\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Matias\\Desktop\\Nueva\ idea\ Ubicacion\ Mashup\\E-Maps\\E-Maps\\Wcf-Sistema\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>
