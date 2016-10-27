@@ -36,7 +36,7 @@ namespace Wcf_Sistema
         {
             Lugar _Lugar = null;
 
-            _Lugar = FabricaLogica.getLogicaLugar().BuscarLugarxId(IdLugar,NombreCiudad,NombrePais);
+            //_Lugar = FabricaLogica.getLogicaLugar().BuscarLugarxId(IdLugar,NombreCiudad,NombrePais);
 
             return _Lugar;
         }
