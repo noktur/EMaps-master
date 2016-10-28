@@ -83,6 +83,10 @@ namespace MVCFinal.Controllers
             }
         }
 
+        public ActionResult ListadoLugaresDueño()
+        {
+            return View();
+        }
 
     }
 }

@@ -40,11 +40,11 @@ namespace MVCFinal.Controllers
                 EventoModel Evento = new EventoModel();
                 Evento.NombreEvento = Convert.ToString(collection["Nombre"]);
                 Evento.Descripcion = Convert.ToString(collection["Descripcion"]);
-                //Evento.ClasificacionEvento =
+                Evento.ClasificacionEvento =
                 Evento.FechaEvento = Convert.ToDateTime(collection["Fecha"]);
                 Evento.UnLugar = new LugarModel();//_ServicioWCF.BuscarLugarxId(1,"","");
 
-                //CreoServicio().AltaEvento(ModelEvento(Evento));
+                CreoServicio().AltaEvento(ModelEvento(Evento));
                 return View();
             }
             catch {
