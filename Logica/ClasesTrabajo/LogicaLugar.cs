@@ -26,8 +26,11 @@ namespace Logica.ClasesTrabajo
         public void AltaLugar(Lugar l)
         {
             FabricaPersistencia.getPersistenciaLugar().AltaLugar(l);
+            foreach(FotosLugar f in l.Fotos)
+            {
+                FabricaPersistencia.getPersistenciaLugar().AgregoFoto(f, l);
+            }
         }
-
         public void ModificarLugar(Lugar l)
         {
             FabricaPersistencia.getPersistenciaLugar().ModificarLugar(l);

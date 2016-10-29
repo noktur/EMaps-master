@@ -23,7 +23,7 @@ namespace Wcf_Sistema
         void ModificarLugar(Lugar l);
 
         [OperationContract]
-        Lugar BuscarLugarxId(int IdLugar, string NombreCiudad, string NombrePais);
+        Lugar BuscarLugar(string NombreLugar);
 
         [OperationContract]
         void BajaLugar(Lugar l);

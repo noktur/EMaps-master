@@ -17,7 +17,7 @@ namespace MVCFinal.Models
         public string Descripcion { get; set; }
         public int  Capacidad { get; set; }
 
-        private Ciudad Ubicacion;
+        private Ciudad Ubicacion  { get; set; }
 
         public string NombreCiudad { get{ return Ubicacion.Nombre; } set{}}
 
@@ -25,7 +25,7 @@ namespace MVCFinal.Models
 
         public int IdMapa { get { return Mapa.IdMapa; } set { } }
 
-        public string Imagen { get { return Mapa.UrlImagen; } set { } }
+        public byte[] Imagen { get { return Mapa.Imagen; } set { } }
         
         public float CoordenadaX { get; set; }
 

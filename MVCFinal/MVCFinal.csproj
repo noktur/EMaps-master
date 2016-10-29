@@ -20,7 +20,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -142,7 +141,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -150,6 +148,7 @@
     <Compile Include="Controllers\MapaController.cs" />
     <Compile Include="Controllers\MultiButtonAttribute.cs" />
     <Compile Include="Controllers\PaisController.cs" />
+    <Compile Include="Controllers\PortadaController.cs" />
     <Compile Include="Controllers\RegistroAController.cs" />
     <Compile Include="Controllers\RegistroCController.cs" />
     <Compile Include="Controllers\RegistroDController.cs" />
@@ -159,6 +158,7 @@
     </Compile>
     <Compile Include="Models\CiudadModel.cs" />
     <Compile Include="Models\EventoModel.cs" />
+    <Compile Include="Models\HelperClases.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LugarModel.cs" />
@@ -200,15 +200,38 @@
     <Content Include="Content\css\Register.css" />
     <Content Include="Content\css\resetRegister.css" />
     <Content Include="Content\css\target-admin.css" />
+    <Content Include="Content\css\templatemo_style.css" />
+    <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\battery.png" />
+    <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\Carrousel1.jpg" />
+    <Content Include="Content\images\Carrousel2jpg.jpg" />
+    <Content Include="Content\images\Carrousel3.jpg" />
+    <Content Include="Content\images\email.png" />
+    <Content Include="Content\images\globe.png" />
+    <Content Include="Content\images\leaf.png" />
+    <Content Include="Content\images\location.png" />
+    <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\map.png" />
+    <Content Include="Content\images\mobile.png" />
+    <Content Include="Content\images\mobile1.png" />
+    <Content Include="Content\images\orange.png" />
+    <Content Include="Content\images\phone.png" />
+    <Content Include="Content\images\phone1.png" />
+    <Content Include="Content\images\social-icon-dribbble-over.png" />
+    <Content Include="Content\images\social-icon-dribbble.png" />
+    <Content Include="Content\images\social-icon-fb-over.png" />
+    <Content Include="Content\images\social-icon-fb.png" />
+    <Content Include="Content\images\social-icon-linkedin-over.png" />
+    <Content Include="Content\images\social-icon-linkedin.png" />
+    <Content Include="Content\images\social-icon-rss-over.png" />
+    <Content Include="Content\images\social-icon-rss.png" />
+    <Content Include="Content\images\social-icon-twitter-over.png" />
+    <Content Include="Content\images\social-icon-twitter.png" />
+    <Content Include="Content\images\social_icon2.png" />
+    <Content Include="Content\images\team_blank.png" />
+    <Content Include="Content\images\team_orange.png" />
     <Content Include="Content\img\Arrow_Right_Blue.png" />
-    <Content Include="Content\img\avatars\avatar-1-md.jpg" />
-    <Content Include="Content\img\avatars\avatar-1-xs.jpg" />
-    <Content Include="Content\img\avatars\avatar-1.jpg" />
-    <Content Include="Content\img\avatars\avatar-2-md.jpg" />
-    <Content Include="Content\img\avatars\avatar-2-xs.jpg" />
-    <Content Include="Content\img\avatars\avatar-2.jpg" />
-    <Content Include="Content\img\avatars\avatar-large-1.jpg" />
-    <Content Include="Content\img\avatars\avatar-large-2.jpg" />
     <Content Include="Content\img\gallery\zoom.png" />
     <Content Include="Content\img\jquery\handle-vertical.png" />
     <Content Include="Content\img\jquery\handle.png" />
@@ -450,6 +473,18 @@
     <Content Include="Content\img\pricing\label-yellow.png" />
     <Content Include="Content\img\sativa.png" />
     <Content Include="Content\img\Sin-título-1.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\colorbox\colorbox.css" />
+    <Content Include="Content\js\colorbox\images\border.png" />
+    <Content Include="Content\js\colorbox\images\controls.png" />
+    <Content Include="Content\js\colorbox\images\loading.gif" />
+    <Content Include="Content\js\colorbox\images\loading_background.png" />
+    <Content Include="Content\js\colorbox\images\overlay.png" />
+    <Content Include="Content\js\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Content\js\colorbox\jquery.colorbox.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\stickUp.min.js" />
+    <Content Include="Content\js\templatemo_script.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -585,13 +620,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Views\Ciudad\Index.aspx" />
-    <Content Include="Views\Cliente\ListadoClientes.aspx" />
     <Content Include="Views\Evento\Index.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Lugar\Index.aspx" />
+    <Content Include="Views\Lugar\SubirImagen.aspx" />
     <Content Include="Views\Mapa\Index.aspx" />
     <Content Include="Views\Mapa\SubirImagen.aspx" />
     <Content Include="Views\Pais\Index.aspx" />
+    <Content Include="Views\Portada\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\_LoginPartial.aspx" />
     <Content Include="Views\Login\LoginUsuario.aspx" />
@@ -615,7 +651,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\MasterAdmin.Master" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -632,7 +667,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\NewFolder1\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

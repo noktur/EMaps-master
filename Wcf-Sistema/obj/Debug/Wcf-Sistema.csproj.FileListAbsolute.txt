@@ -10,15 +10,15 @@ C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Wcf-Sistema\bi
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll.config
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.pdb
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.dll
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Logica.dll
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Persistencia.dll
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.pdb
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Logica.pdb
-C:\Users\Ruber Boy\Desktop\Proyecto final\EMaps-master\Wcf-Sistema\bin\Persistencia.pdb
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll.config
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.pdb
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.dll
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Logica.dll
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Persistencia.dll
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.pdb
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Logica.pdb
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\bin\Persistencia.pdb
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
+C:\Users\draco\Documents\GitHub\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb

@@ -12,9 +12,11 @@ namespace MVCFinal.Models
     {
         public string NombreEvento { get; set; }
         public string Descripcion { get; set; }
-        public DateTime FechaEvento { get; set; }
+        public DateTime FechaInicio { get; set; }
+
+        public DateTime FechaFin { get; set; }
         public LugarModel UnLugar { get; set; }
         public List<Entrada> EntradasEvento { get; set; }
-        public Interes ClasificacionEvento { get; set; }
+        public Categoria ClasificacionEvento { get; set; }
     }
 }

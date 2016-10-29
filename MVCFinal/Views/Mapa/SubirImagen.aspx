@@ -49,6 +49,7 @@
             //$("#OriginalPreviewFondo2").attr('style', 'display:none;');
             $("#preview").attr('style', '');
             ImageFondo2Aux = input;
+            obtenerImagenFondo();
         }
 
         function showerrorfondo(response) {
@@ -76,16 +77,19 @@
                      showerrorfondo(response)
                  }
              });
-          
+            //$("#submitcoso").click();
          }
         </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <div>
-     <input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png" onchange="showPicture(input)"/>
-    <img id="preview" src="" onload="initializeguillotineFondo2()" style="width: 300px; height: 300px"/>
+    <%Html.BeginForm("SubirImagen", "Mapa", new {  method="post", enctype="multipart/form-data"});%>
+     <input type="file" id="uploadFondoInput" name="uploadFondoInput" accept="image/gif, image/jpeg, image/png" onchange="showPicture(this)"/>
+    <img id="preview" src="#" onload="initializeguillotineFondo2()" style="width: 300px; height: 300px"/>
     <label id="lblRespuestaFondo"></label>
+    <input type="submit" id="submitcoso" />
+    <% %>
 </div>
 </asp:Content>
 

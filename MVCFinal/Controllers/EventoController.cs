@@ -40,11 +40,12 @@ namespace MVCFinal.Controllers
                 EventoModel Evento = new EventoModel();
                 Evento.NombreEvento = Convert.ToString(collection["Nombre"]);
                 Evento.Descripcion = Convert.ToString(collection["Descripcion"]);
-                Evento.ClasificacionEvento =
-                Evento.FechaEvento = Convert.ToDateTime(collection["Fecha"]);
+                //Evento.ClasificacionEvento =
+                Evento.FechaInicio = Convert.ToDateTime(collection["FechaInicio"]);
+                Evento.FechaFin = Convert.ToDateTime(collection["FechaFin"]);
                 Evento.UnLugar = new LugarModel();//_ServicioWCF.BuscarLugarxId(1,"","");
 
-                CreoServicio().AltaEvento(ModelEvento(Evento));
+                //CreoServicio().AltaEvento(ModelEvento(Evento));
                 return View();
             }
             catch {
@@ -59,9 +60,9 @@ namespace MVCFinal.Controllers
 
             _evento.NombreEvento = e.NombreEvento;
             _evento.Descripcion = e.Descripcion;
-            _evento.EntradasEvento = e.EntradasEvento;
-            _evento.FechaEvento = e.FechaEvento;
-            _evento.ClasificacionEvento = e.ClasificacionEvento;
+            _evento.FechaInicio = e.FechaInicio;
+            _evento.FechaFin = e.FechaFin;
+            _evento.CategoriaEvento = e.ClasificacionEvento;
             _evento.UnLugar = new EntidadesCompartidas.Lugar();//e.UnLugar;
 
             return _evento;

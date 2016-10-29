@@ -10,6 +10,7 @@ namespace Persistencia.Interfaces
     public interface IPersistenciaLugar
     {
         void AltaLugar(Lugar l);
+        void AgregoFoto(FotosLugar f, Lugar l);
         void ModificarLugar(Lugar l);
         Lugar BuscarLugar(string NombreLugar);
         void BajaLugar(Lugar l);

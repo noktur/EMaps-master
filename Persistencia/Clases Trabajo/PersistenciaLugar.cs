@@ -47,7 +47,6 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pCiDueño", l.DueñoLugar.CI);
 
 
-
             try
             {
                 con.Open();
@@ -62,7 +61,30 @@ namespace Persistencia.Clases_Trabajo
                 con.Close();
             }
         }
+        public void AgregoFoto(FotosLugar unaFoto,Lugar l)
+        {
+            MySqlConnection conexion = new MySqlConnection(Conexion.Cnn );
 
+            MySqlCommand comando = new MySqlCommand("AltaFotosLugar", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@pNombreFoto", unaFoto.NombreFoto);
+            comando.Parameters.AddWithValue("@pFoto", unaFoto.Imagen);
+            comando.Parameters.AddWithValue("@pNombreLugar", l.Nombre);
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         public void ModificarLugar(Lugar l)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
