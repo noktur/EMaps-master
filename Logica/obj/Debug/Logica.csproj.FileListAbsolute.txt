@@ -7,12 +7,3 @@ C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Logica\bin\Deb
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Logica\bin\Debug\Persistencia.pdb
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Logica\obj\Debug\Logica.dll
 C:\Users\Matias\Desktop\Nueva idea Ubicacion Mashup\E-Maps\E-Maps\Logica\obj\Debug\Logica.pdb
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\Logica.dll
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\Logica.pdb
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\EntidadesCompartidas.dll
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\Persistencia.dll
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\EntidadesCompartidas.pdb
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\bin\Debug\Persistencia.pdb
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\obj\Debug\Logica.csprojResolveAssemblyReference.cache
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\obj\Debug\Logica.dll
-C:\Users\draco\Documents\GitHub\EMaps-master\Logica\obj\Debug\Logica.pdb
