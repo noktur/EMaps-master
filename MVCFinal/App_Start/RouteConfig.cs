@@ -16,7 +16,7 @@ namespace MVCFinal
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Pais", action = "index", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "LoginUsuario", id = UrlParameter.Optional }
             );
         }
     }
