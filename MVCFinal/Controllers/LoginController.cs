@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace MVCFinal.Controllers
 {
@@ -56,8 +57,8 @@ namespace MVCFinal.Controllers
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Dueño"] = JsonUsuario;
-
                     return RedirectToAction("AdministrarLugares", "Dueño");
+                    
                 }
                 else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Cliente)
                 {

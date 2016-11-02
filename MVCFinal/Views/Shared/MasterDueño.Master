@@ -1,17 +1,122 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
+<html lang="en" style="height:100%;">
+    <head> 
+        <meta charset="utf-8"> 
+        <title>Ubicatrex - </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="shortcut icon" href="ico/favicon.png"> 
+        <!-- Core CSS -->         
+        <link href="../../Content/css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="../../Content/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet">
+        <!-- Style Library -->         
+        <link href="../../Content/css/style-library-1.css" rel="stylesheet">
+        <link href="../../Content/css/plugins.css" rel="stylesheet">
+        <link href="../../Content/css/blocks.css" rel="stylesheet">
+        <link href="../../Content/css/custom.css" rel="stylesheet">
 
-<html>
-<head runat="server">
-    <meta name="viewport" content="width=device-width" />
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-</head>
-<body>
-    <div>
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+         <script type="text/javascript" src="../../Content/js/jquery-1.11.1.min.js"></script>         
+        <script type="text/javascript" src="../../Content/js/bootstrap.min.js"></script>         
+        <script type="text/javascript" src="../../Content/js/plugins.js"></script>
+        <script type="text/javascript" src="../../Content/js/bskit-scripts.js"></script>   
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->         
+        <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->    
+                   
+    </head>     
+    <body data-spy="scroll" data-target="nav">
+        <div id="bodyDueño">
+        <header id="header-1" class="soft-scroll header-1">
+            <!-- Navbar -->
+            <nav class="main-nav navbar-fixed-top headroom headroom--pinned">
+                <div class="container">
+                    <!-- Brand and toggle -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="#">
+                            <img src="../../Content/img/pgblocks-logo-white.png" class="brand-img img-responsive">
+                        </a>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active nav-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Administrar lugares</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Feedback</a>
+                            </li>                            
+                            <li class="nav-item">
+                                <a href="#">Noticias</a>
+                            </li>
+                        </ul>
+                        <!--//nav-->
+                    </div>
+                    <!--// End Navigation -->
+                </div>
+                <!--// End Container -->
+            </nav>
+            <!--// End Navbar -->
+            </header>
         
-        </asp:ContentPlaceHolder>
-    </div>
-</body>
-</html>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+
+ <section class="content-block-nopad bg-deepocean footer-wrap-1-3">
+            <div class="container footer-1-3">
+                <div class="col-md-4 pull-left">
+                    <img src="../../Content/img/pgblocks-logo-white.png" class="brand-img img-responsive">
+                    <ul class="social social-light">
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-pinterest"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-behance"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-dribbble"></i></a>
+                        </li>
+                        
+                    </ul>
+                    <!-- /.social -->
+                </div>
+                <div class="col-md-3 pull-right">
+                   <p class="address-bold-line">Nosotros somos su cliente</p>
+                    <p class="address small">
+					Montevideo,<br>
+					Uruguay</p>
+                </div>
+                <div class="col-xs-12 footer-text">
+                    <p>Please take a few minutes to read our <a href="#">Terminos y Condiciones</a></p>
+                </div>
+            </div>
+            <!-- /.container -->
+        </section>     
+        <asp:ContentPlaceHolder ID="head" runat="server">
+                        </asp:ContentPlaceHolder>     
+
+            </div>
+        </body>
+    </html>

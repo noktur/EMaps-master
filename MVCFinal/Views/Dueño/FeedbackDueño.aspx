@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterPage.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterDueño.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -34,8 +34,6 @@
                     <li>
                         <a href="#tab3" role="tab" data-toggle="tab">Respuestas a feedback</a>
                     </li>
-                    <li>
-</li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1">
