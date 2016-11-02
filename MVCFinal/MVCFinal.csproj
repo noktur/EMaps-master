@@ -140,14 +140,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
     <Compile Include="Controllers\DueñoController.cs" />
+    <Compile Include="Controllers\ElClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LugarController.cs" />
     <Compile Include="Controllers\MapaController.cs" />
     <Compile Include="Controllers\MultiButtonAttribute.cs" />
+    <Compile Include="Controllers\OrganizadorController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\PortadaController.cs" />
     <Compile Include="Controllers\RegistroAController.cs" />
@@ -585,6 +588,15 @@
     <Content Include="Content\fonts\ElegantIcons.ttf" />
     <Content Include="Content\fonts\ElegantIcons.woff" />
     <Content Include="Graph1.dgml" />
+    <Content Include="imagenes de prueba\img1.jpg" />
+    <Content Include="imagenes de prueba\img2.jpg" />
+    <Content Include="imagenes de prueba\img3.jpg" />
+    <Content Include="imagenes de prueba\img4.jpg" />
+    <Content Include="imagenes de prueba\img5.jpg" />
+    <Content Include="imagenes de prueba\img6.jpg" />
+    <Content Include="imagenes de prueba\img7.jpg" />
+    <Content Include="imagenes de prueba\img8.jpg" />
+    <Content Include="imagenes de prueba\img9.jpg" />
     <Content Include="Properties\DataSources\EntidadesCompartidas.Admin.datasource" />
     <Content Include="Properties\DataSources\EntidadesCompartidas.Ciudad.datasource" />
     <Content Include="Properties\DataSources\EntidadesCompartidas.Cliente.datasource" />
@@ -677,11 +689,11 @@
     <Content Include="Views\Admin\ControlPaises.aspx" />
     <Content Include="Views\Admin\ControlUsuarios.aspx" />
     <Content Include="Views\Ciudad\Index.aspx" />
-    <Content Include="Views\Cliente\GeolocalizarEventos.aspx" />
-    <Content Include="Views\Cliente\MuestreoEventos.aspx" />
-    <Content Include="Views\Cliente\MuestreoLugares.aspx" />
-    <Content Include="Views\Cliente\ParticipacionEvento.aspx" />
-    <Content Include="Views\Cliente\ReservacionEntradas.aspx" />
+    <Content Include="Views\ElCliente\GeolocalizarEventos.aspx" />
+    <Content Include="Views\ElCliente\MuestreoEventos.aspx" />
+    <Content Include="Views\ElCliente\MuestreoLugares.aspx" />
+    <Content Include="Views\ElCliente\ParticipacionEvento.aspx" />
+    <Content Include="Views\ElCliente\ReservacionEntradas.aspx" />
     <Content Include="Views\Dueño\AdministrarLugares.aspx" />
     <Content Include="Views\Dueño\FeedbackDueño.aspx" />
     <Content Include="Views\Dueño\PlanoLugar.aspx" />
@@ -690,7 +702,7 @@
     <Content Include="Views\Mapa\Index.aspx" />
     <Content Include="Views\Mapa\SubirImagen.aspx" />
     <Content Include="Views\Organizador\AlquilerLugares.aspx" />
-    <Content Include="Views\Organizador\FeedbackCliente.aspx" />
+    <Content Include="Views\Organizador\FeedbackOrganizador.aspx" />
     <Content Include="Views\Organizador\Geolocalizacion.aspx" />
     <Content Include="Views\Organizador\MuestreoLugares.aspx" />
     <Content Include="Views\Organizador\Principal.aspx" />
@@ -712,7 +724,10 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\MasterPage.Master" />
+    <Content Include="Views\Shared\MasterDueño.Master" />
+    <Content Include="Views\Shared\MasterOrganizador.Master" />
+    <Content Include="Views\Shared\MasterCliente.Master" />
+    <Content Include="Views\Shared\MasterAdmin.Master" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
