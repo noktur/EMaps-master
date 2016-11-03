@@ -1,52 +1,112 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
+<html lang="en" style="height:100%;">
+    <head> 
+        <meta charset="utf-8"> 
+        <title>Ubicatrex - </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="shortcut icon" href="ico/favicon.png"> 
+        <!-- Core CSS -->         
+        <link href="../../Content/css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="../../Content/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet">
+        <!-- Style Library -->         
+        <link href="../../Content/css/style-library-1.css" rel="stylesheet">
+        <link href="../../Content/css/plugins.css" rel="stylesheet">
+        <link href="../../Content/css/blocks.css" rel="stylesheet">
+        <link href="../../Content/css/custom.css" rel="stylesheet">
 
-    
+         <script type="text/javascript" src="../../Content/js/jquery-1.11.1.min.js"></script>         
+        <script type="text/javascript" src="../../Content/js/bootstrap.min.js"></script>         
+        <script type="text/javascript" src="../../Content/js/plugins.js"></script>
+        <script type="text/javascript" src="../../Content/js/bskit-scripts.js"></script>   
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->         
+        <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->    
+                   
+    </head>     
+    <body data-spy="scroll" data-target="nav">
+  <div id="bodyAdmin">
+            <header id="header-1" class="soft-scroll header-1">
+            <!-- Navbar -->
+            <nav class="main-nav navbar-fixed-top headroom headroom--pinned">
+                <div class="container">
+                    <!-- Brand and toggle -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="#">
+                            <img src="../../Content/images/pgblocks-logo-white.png" class="brand-img img-responsive">
+                        </a>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right fa-ul">
+                            <li class="active nav-item">
+                                <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse fa-th-large"></i></span></a>
+                            </li>
+                            <li class="nav-item"> 
+                                <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-inverse fa-stack-1x fa-lg fa-user"></i></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse fa-feed"></i></span></a>
+                            </li>                             
+                            <li class="nav-item">
+                                <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse fa-lock"></i></span></a>
+                            </li>
+                        </ul>
+                        <!--//nav-->
+                    </div>
+                    <!--// End Navigation -->
+                </div>
+                <!--// End Container -->
+            </nav>
+            <!--// End Navbar -->
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar bg-tamarind">
+                    <ul class="nav nav-sidebar">
+                        <li class="active">
+                            <a href="#" class="text-uppercase">Control Paises </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-uppercase">Control Eventos</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-uppercase">Control Lugares</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-uppercase">Control Feedback</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-uppercase">Control Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10">    
+                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>  
+                </div>
 
-<html>
-<head runat="server">
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="<%= Url.Content("~/Content/css/bootstrap.min.css")%>" type="text/css"/>
-    
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-</head>
-<body>
-    
-    <nav class="navbar navbar-inverse ">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Admin</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="/Cliente/ListadoClientes">Listado Clientes <span class="sr-only">(current)</span></a></li>
-                    <li><a href="/Pais/Index">Paises</a></li>
-                    <li><a href="/Ciudad/Index">Ciudades</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-3 col-md-8 main">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
             </div>
         </div>
-    </div>
-    
-</body>
-</html>
+        <div class="copyright-bar-2 bg-orange">
+            <div class="container text-center">
+                <p>© COPYRIGHT 2017 - Ubicatrex - ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+            <asp:ContentPlaceHolder ID="head" runat="server">
+                        </asp:ContentPlaceHolder> 
+
+            </div>
+        </body>
+    </html>

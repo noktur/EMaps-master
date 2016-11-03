@@ -27,7 +27,6 @@ namespace Logica.ClasesTrabajo
         {
             FabricaPersistencia.getPersistenciaLugar().AltaLugar(l);
         }
-
         public void ModificarLugar(Lugar l)
         {
             FabricaPersistencia.getPersistenciaLugar().ModificarLugar(l);
