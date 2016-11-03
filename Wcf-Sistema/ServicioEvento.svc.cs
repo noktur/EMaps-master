@@ -32,11 +32,11 @@ namespace Wcf_Sistema
             FabricaLogica.getLogicaLugar().BajaLugar(l);
         }
 
-        Lugar IServicioEvento.BuscarLugarxId(int IdLugar, string NombreCiudad, string NombrePais)
+        Lugar IServicioEvento.BuscarLugar(string NombreLugar)
         {
             Lugar _Lugar = null;
 
-            //_Lugar = FabricaLogica.getLogicaLugar().BuscarLugarxId(IdLugar,NombreCiudad,NombrePais);
+            _Lugar = FabricaLogica.getLogicaLugar().BuscarLugar(NombreLugar);
 
             return _Lugar;
         }
@@ -104,11 +104,11 @@ namespace Wcf_Sistema
             return _Pais;
         }
 
-        Ciudad IServicioEvento.BuscarCiudad(string pNombrePais, Pais UnPais)
+        Ciudad IServicioEvento.BuscarCiudad(string pNombreCiudad, Pais UnPais)
         {
             Ciudad _Ciudad = null;
 
-            _Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(pNombrePais,UnPais);
+            _Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(pNombreCiudad);
 
             return _Ciudad;
         }

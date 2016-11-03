@@ -8,7 +8,7 @@
      <meta charset="utf-8">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Login Page |   E-Maps </title>
+    <title>Login Page |   Ubicatrex </title>
 
     <!-- Bootstrap CSS -->    
     <link href="../../Content/css/bootstrap.min.css" rel="stylesheet">
