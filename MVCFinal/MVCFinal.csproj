@@ -683,11 +683,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Admin\ControlCiudad.aspx" />
     <Content Include="Views\Admin\ControlEventos.aspx" />
     <Content Include="Views\Admin\ControlFeedbacks.aspx" />
     <Content Include="Views\Admin\ControlLugares.aspx" />
     <Content Include="Views\Admin\ControlPaises.aspx" />
-    <Content Include="Views\Admin\ControlUsuarios.aspx" />
+    <Content Include="Views\Admin\ModificarPerfil.aspx" />
     <Content Include="Views\Ciudad\Index.aspx" />
     <Content Include="Views\ElCliente\GeolocalizarEventos.aspx" />
     <Content Include="Views\ElCliente\MuestreoEventos.aspx" />
