@@ -57,13 +57,8 @@ namespace MVCFinal.Controllers
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Dueño"] = JsonUsuario;
-<<<<<<< HEAD
                     return RedirectToAction("Principal", "Dueño");
                    
-=======
-                    return RedirectToAction("AdministrarLugares", "Dueño");
-                    
->>>>>>> refs/remotes/origin/master
                 }
                 else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Cliente)
                 {

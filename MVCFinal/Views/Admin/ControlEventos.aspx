@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-<<<<<<< HEAD
    <section class="content-block contact-1 bg-deepocean margin-bottom0 pad-bottom0" data-pg-collapsed>
             <div class="container text-center">
                 <div class="col-sm-10 col-sm-offset-1">
@@ -89,9 +88,6 @@
             <!-- /.container -->
         </section>
 
-=======
-   
->>>>>>> refs/remotes/origin/master
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">

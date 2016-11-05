@@ -20,10 +20,7 @@
                             <div class="row">
                                 <!-- /.col -->
                                 <div class="col-md-5 col-md-offset-1 col-sm-6 bg-offwhite">
-<<<<<<< HEAD
                                     <div class="table-responsive">
-=======
->>>>>>> refs/remotes/origin/master
                                     <table class="table bg-offwhite"> 
                                         <thead> 
                                             <tr> 
@@ -64,10 +61,7 @@
                                             </tr>                                             
                                         </tbody>
                                     </table>
-<<<<<<< HEAD
                                         </div>
-=======
->>>>>>> refs/remotes/origin/master
                                 </div>
                                 <div class="col-md-5 col-sm-6">
                                     <h3></h3>
@@ -100,10 +94,7 @@
                             <!-- /.row -->
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-2">
-<<<<<<< HEAD
                                     <div class="table-responsive">
-=======
->>>>>>> refs/remotes/origin/master
                                     <table class="table table-hover table-striped"> 
                                         <thead> 
                                             <tr> 
@@ -144,10 +135,7 @@
                                             </tr>                                             
                                         </tbody>
                                     </table>
-<<<<<<< HEAD
                                         </div>
-=======
->>>>>>> refs/remotes/origin/master
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -160,12 +148,8 @@
                                 <p class="text-center" style="font-size:1.3em; font-family:open">
     LISTA FEEDBACK</p>
                                 <div class="col-md-10 col-md-offset-1">
-<<<<<<< HEAD
                                    <div class="table-responsive">
                                      <table class="table table-striped table-condensed table-hover" style=" font-family:Satisfy ; font-size:1.0em"> 
-=======
-                                    <table class="table table-striped table-condensed table-hover" style=" font-family:Satisfy ; font-size:1.0em"> 
->>>>>>> refs/remotes/origin/master
                                         <thead> 
                                             <tr> 
                                                 <th>#</th> 
@@ -204,12 +188,8 @@
                                                 </td>
                                             </tr>                                             
                                         </tbody>
-<<<<<<< HEAD
                                     </table> 
                                        </div>                                    
-=======
-                                    </table>                                     
->>>>>>> refs/remotes/origin/master
                                 </div>
                                 <div class="col-md-3 margin-top15">
                                     <h3 style="font-size:1.2em; font-family:open">AQUI RESPONDA EL FEEDBACK ELEGIDO</h3> 
