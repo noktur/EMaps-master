@@ -57,36 +57,29 @@ namespace MVCFinal.Controllers
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Dueño"] = JsonUsuario;
-                    return RedirectToAction("AdministrarLugares", "Dueño");
-                    
+                    return RedirectToAction("Principal", "Dueño");
+                   
                 }
                 else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Cliente)
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Cliente"] = JsonUsuario;
 
-                    return RedirectToAction("PlanoLugar", "Dueño");
-                }
-                else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Dueño)
-                {
-                    string JsonUsuario = JsonConvert.SerializeObject(Usuario);
-                    Session["Dueño"] = JsonUsuario;
-
-                    return RedirectToAction("AdministrarLugares", "Dueño");
+                    return RedirectToAction("Principal", "Cliente");
                 }
                 else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Admin)
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Admin"] = JsonUsuario;
 
-                    return RedirectToAction("FeedbackDueño", "Dueño");
+                    return RedirectToAction("Principal", "Admin");
                 }
                 else if (convertirModelUsuario(Usuario) is EntidadesCompartidas.Organizador)
                 {
                     string JsonUsuario = JsonConvert.SerializeObject(Usuario);
                     Session["Organizador"] = JsonUsuario;
 
-                    return RedirectToAction("Principal", "Dueño");
+                    return RedirectToAction("Principal", "Organizador");
                 }
 
 

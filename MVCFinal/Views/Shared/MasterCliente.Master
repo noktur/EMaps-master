@@ -31,7 +31,7 @@
     </head>     
     <body data-spy="scroll" data-target="nav">
    <div id="bodyCliente">
-            <header id="header-1" class=" soft-scroll header-1 " data-pg-collapsed>
+          <header id="header-1" class="soft-scroll header-1" data-pg-collapsed>
             <!-- Navbar -->
             <nav class="main-nav navbar-fixed-top headroom headroom--pinned bg-marina">
                 <div class="container">
@@ -44,28 +44,25 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a href="#">
-                            <img src="../../Content/images/pgblocks-logo-white.png" class="brand-img img-responsive">
+                            <img src="../../Content/images/pgblocks-logo-nostrap.png" class="brand-img img-responsive">
                         </a>
                     </div>
                     <!-- Navigation -->
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right" data-pg-collapsed>
+                        <ul class="nav navbar-nav navbar-right">
                             <li class="active nav-item">
                                 <a href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Buscar Eventos</a>
+                                <a href="#">News</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Feedback</a>
+                                <a href="#">Buy Ticket</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">list events</a>
                             </li>
                             <!--//dropdown-->                             
-                            <li class="nav-item">
-                                <a href="#">Control Administracion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#">Noticias</a>
-                            </li>
                         </ul>
                         <!--//nav-->
                     </div>
@@ -77,31 +74,25 @@
         </header>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
-        <section class="content-block-nopad footer-wrap-1-1 bg-aqua white">
-            <div class="container footer-1-1">
+          <section class="content-block-nopad footer-wrap-1-1 bg-aqua white" data-pg-collapsed>
+            <div class="container footer-1-1 margin-bottom0 pad15 pad-bottom10">
                 <div class="row">
                     <div class="col-sm-5">
-                        <img src="../../Content/images/pgblocks-logo-white.png" class="brand-img img-responsive">                        
+                        <img src="../../Content/images/pgblocks-logo-white.png" class="brand-img img-responsive">
                     </div>
                     <div class="col-sm-6 col-sm-offset-1 white">
                         <div class="row">
                             <div class="col-md-4">
-                                <h4>Shortcuts</h4>
+                                <h4>Legal Stuff</h4>
                                 <ul>
                                     <li>
-                                        <a href="#" class="white">About us</a>
+                                        <a href="#" class="white">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="white">Services</a>
+                                        <a href="#" class="white">Terms & Conditions</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="white">Portfolio</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="white">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="white">Contact</a>
+                                        <a href="#" class="white">Cookie Policy</a>
                                     </li>
                                 </ul>
                             </div>
@@ -118,10 +109,6 @@
                                         <a href="#" class="white">Cookie Policy</a>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="col-md-4">
-                                <h4>Seen Enough?</h4>
-                                <a href="#" class="btn btn-block btn-primary">Buy Now</a>
                             </div>
                         </div>
                     </div>

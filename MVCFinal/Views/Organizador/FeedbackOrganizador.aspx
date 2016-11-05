@@ -20,6 +20,7 @@
                             <div class="row">
                                 <!-- /.col -->
                                 <div class="col-md-5 col-md-offset-1 col-sm-6 bg-offwhite">
+                                    <div class="table-responsive">
                                     <table class="table bg-offwhite"> 
                                         <thead> 
                                             <tr> 
@@ -60,6 +61,7 @@
                                             </tr>                                             
                                         </tbody>
                                     </table>
+                                        </div>
                                 </div>
                                 <div class="col-md-5 col-sm-6">
                                     <h3></h3>
@@ -92,6 +94,7 @@
                             <!-- /.row -->
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-2">
+                                    <div class="table-responsive">
                                     <table class="table table-hover table-striped"> 
                                         <thead> 
                                             <tr> 
@@ -132,6 +135,7 @@
                                             </tr>                                             
                                         </tbody>
                                     </table>
+                                        </div>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -144,7 +148,8 @@
                                 <p class="text-center" style="font-size:1.3em; font-family:open">
     LISTA FEEDBACK</p>
                                 <div class="col-md-10 col-md-offset-1">
-                                    <table class="table table-striped table-condensed table-hover" style=" font-family:Satisfy ; font-size:1.0em"> 
+                                   <div class="table-responsive">
+                                     <table class="table table-striped table-condensed table-hover" style=" font-family:Satisfy ; font-size:1.0em"> 
                                         <thead> 
                                             <tr> 
                                                 <th>#</th> 
@@ -183,7 +188,8 @@
                                                 </td>
                                             </tr>                                             
                                         </tbody>
-                                    </table>                                     
+                                    </table> 
+                                       </div>                                    
                                 </div>
                                 <div class="col-md-3 margin-top15">
                                     <h3 style="font-size:1.2em; font-family:open">AQUI RESPONDA EL FEEDBACK ELEGIDO</h3> 

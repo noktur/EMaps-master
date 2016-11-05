@@ -11,7 +11,12 @@ namespace MVCFinal.Controllers
         //
         // GET: /ElCliente/
 
-        public ActionResult ParticipacionEvento()
+        public ActionResult DetalleEvento()
+        {
+            return View();
+        }
+
+        public ActionResult Principal()
         {
             return View();
         }

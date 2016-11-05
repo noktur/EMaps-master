@@ -16,5 +16,30 @@ namespace MVCFinal.Controllers
             return View();
         }
 
+        public ActionResult ControlCiudad()
+        {
+            return View();
+        }
+
+        public ActionResult ControlPaises()
+        {
+            return View();
+        }
+
+        public ActionResult ModificarPerfil()
+        {
+            return View();
+        }
+        
+        public ActionResult ControlLugares()
+        {
+            return View();
+        }
+
+        public ActionResult ControlFeedbacks()
+        {
+            return View();
+        }
+
     }
 }
