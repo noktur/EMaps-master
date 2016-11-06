@@ -227,7 +227,6 @@
     <Content Include="Content\images\header-3-bg.jpg" />
     <Content Include="Content\images\leaf.png" />
     <Content Include="Content\images\location.png" />
-    <Content Include="Content\images\Logo.png" />
     <Content Include="Content\images\low-poly-1.jpg" />
     <Content Include="Content\images\low-poly-2.jpg" />
     <Content Include="Content\images\map-pin.png" />
@@ -244,8 +243,6 @@
     <Content Include="Content\images\partner-logos\logo-less.png" />
     <Content Include="Content\images\partner-logos\logo-sass.png" />
     <Content Include="Content\images\partner-logos\logo-yeoman.png" />
-    <Content Include="Content\images\pgblocks-logo-nostrap.jpg" />
-    <Content Include="Content\images\pgblocks-logo-white-nostrap.jpg" />
     <Content Include="Content\images\pgblocks-logo-white.png" />
     <Content Include="Content\images\pgblocks-symbol-1.jpg" />
     <Content Include="Content\images\pgblocks-symbol-2.jpg" />
@@ -683,21 +680,21 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Admin\ControlCiudad.aspx" />
     <Content Include="Views\Admin\ControlEventos.aspx" />
     <Content Include="Views\Admin\ControlFeedbacks.aspx" />
     <Content Include="Views\Admin\ControlLugares.aspx" />
     <Content Include="Views\Admin\ControlPaises.aspx" />
-    <Content Include="Views\Admin\ControlUsuarios.aspx" />
+    <Content Include="Views\Admin\ModificarPerfil.aspx" />
     <Content Include="Views\Ciudad\Index.aspx" />
-    <Content Include="Views\ElCliente\GeolocalizarEventos.aspx" />
-    <Content Include="Views\ElCliente\MuestreoEventos.aspx" />
-    <Content Include="Views\ElCliente\MuestreoLugares.aspx" />
-    <Content Include="Views\ElCliente\ParticipacionEvento.aspx" />
-    <Content Include="Views\ElCliente\ReservacionEntradas.aspx" />
+    <Content Include="Views\ElCliente\DetalleEvento.aspx" />
+    <Content Include="Views\ElCliente\ImprimirEntrada.aspx" />
     <Content Include="Views\Dueño\AdministrarLugares.aspx" />
     <Content Include="Views\Dueño\FeedbackDueño.aspx" />
     <Content Include="Views\Dueño\PlanoLugar.aspx" />
     <Content Include="Views\Dueño\Principal.aspx" />
+    <Content Include="Views\ElCliente\Principal.aspx" />
+    <Content Include="Views\ElCliente\VentaEntrada.aspx" />
     <Content Include="Views\Lugar\Index.aspx" />
     <Content Include="Views\Mapa\Index.aspx" />
     <Content Include="Views\Mapa\SubirImagen.aspx" />

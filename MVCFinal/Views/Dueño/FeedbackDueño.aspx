@@ -40,6 +40,7 @@
                         <div class="row">
                             <!-- /.col -->
                             <div class="col-md-5 col-md-offset-1 col-sm-6 bg-offwhite">
+                                <div class="table-responsive">
                                 <table class="table bg-offwhite" data-pg-collapsed> 
                                     <thead> 
                                         <tr> 
@@ -80,6 +81,7 @@
                                         </tr>                                         
                                     </tbody>
                                 </table>
+                                    </div>
                             </div>
                             <div class="col-md-5 col-sm-6">
                                 <h3></h3>
@@ -112,6 +114,7 @@
                         <!-- /.row -->
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
+                                <div class="table-responsive">
                                 <table class="table table-hover table-striped"> 
                                     <thead> 
                                         <tr> 
@@ -152,6 +155,7 @@
                                         </tr>                                         
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -164,6 +168,7 @@
 </div>
                             <p class="text-center" style="font-size:1.3em; font-family:open">
     LISTA FEEDBACK</p>
+                            <div class="table-responsive">
                             <table class="table table-striped table-condensed" style=" font-family:Satisfy ; font-size:1.0em" data-pg-collapsed> 
                                 <thead> 
                                     <tr> 
@@ -204,6 +209,7 @@
                                     </tr>                                     
                                 </tbody>
                             </table>
+                                </div>
                             <div class="col-md-4">
                                 <h3 style="font-size:1.2em; font-family:open">AQUI RESPONDA EL FEEDBACK ELEGIDO</h3> 
                                 <p>A la derecha usted podra responder el feedback que solicito un organizador.</p>
@@ -253,6 +259,7 @@
                         <h3 class="bg-clouds turquoise text-uppercase" style=" font-family:Satisfy ">Table Feedback</h3> 
                     </div>
                 </div>
+                <div class="table-responsive">
                 <table class="table"> 
                     <thead> 
                         <tr> 
@@ -293,6 +300,7 @@
                         </tr>                         
                     </tbody>
                 </table>
+                    </div>
             </div>
         </section>
         <div class="content-block contact-3">

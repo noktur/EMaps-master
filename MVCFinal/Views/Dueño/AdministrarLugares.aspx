@@ -121,6 +121,7 @@
                         <h3 class="bg-clouds turquoise text-uppercase" style=" font-family:Satisfy ">Table Lugares</h3>                          
                     </div>
                 </div>
+                <div class="table-responsive">
                 <table class="table"> 
                     <thead> 
                         <tr> 
@@ -161,6 +162,7 @@
                         </tr>                         
                     </tbody>
                 </table>
+                    </div>
             </div>
         </section> 
     </div>     
