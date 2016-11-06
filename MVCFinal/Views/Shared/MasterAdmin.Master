@@ -31,9 +31,8 @@
     </head>     
     <body data-spy="scroll" data-target="nav">
   <div id="bodyAdmin">
-            <header id="header-1" class="soft-scroll header-1">
-            <!-- Navbar -->
-            <nav class="main-nav navbar-fixed-top headroom headroom--pinned">
+            <header id="header-1" class="header-1 soft-scroll" data-pg-collapsed>
+            <nav class="main-nav navbar-fixed-top headroom headroom--pinned bg-sienna">
                 <div class="container">
                     <!-- Brand and toggle -->
                     <div class="navbar-header">
@@ -48,7 +47,7 @@
                         </a>
                     </div>
                     <!-- Navigation -->
-                    <div class="collapse navbar-collapse">
+                    <div class="collapse navbar-collapse" data-pg-collapsed>
                         <ul class="nav navbar-nav navbar-right fa-ul">
                             <li class="active nav-item">
                                 <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse fa-th-large"></i></span></a>
@@ -69,36 +68,40 @@
                 </div>
                 <!--// End Container -->
             </nav>
+            <!-- Navbar -->
             <!--// End Navbar -->
         </header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar bg-tamarind">
-                    <ul class="nav nav-sidebar">
-                        <li class="active">
-                            <a href="#" class="text-uppercase">Control Paises </a>
+        <nav class="navbar navbar-default pad-bottom0 margin-bottom0 no-shadow lead bg-offwhite" role="navigation" data-pg-collapsed> 
+            <div class="container-fluid"> 
+                <div class="navbar-header" data-pg-collapsed>
+                    <button class="navbar-toggle" data-toggle="collapse" data-target="#nav1">
+                        <span class="sr-only">Toggle navigation</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span>
+                    </button>                     
+                    
+                </div>                 
+                <div class="collapse navbar-collapse" id="nav1" style="float:right;">
+                    <ul class="nav navbar-nav"> 
+                        <li class="bg-clouds-hover">
+                            <a href="#">CONTROL PAISES</a>
                         </li>
-                        <li>
-                            <a href="#" class="text-uppercase">Control Eventos</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-uppercase">Control Lugares</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-uppercase">Control Feedback</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-uppercase">Control Usuarios</a>
-                        </li>
+                        <li class="bg-clouds-hover">
+                            <a href="#">CONTROL USUARIOS</a>
+                        </li>                         
+                        <li class="bg-clouds-hover">
+                            <a href="#">CONTROL FEEDBACK </a>
+                        </li>                         
+                        <li class="bg-clouds-hover">
+                            <a href="#">CONTROL EVENTOS</a>
+                        </li>                         
                     </ul>
                 </div>
-                <div class="col-md-10">    
-                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>  
-                </div>
-
-            </div>
-        </div>
+            </div>             
+        </nav>
+   <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder> 
         <div class="copyright-bar-2 bg-orange">
             <div class="container text-center">
                 <p>© COPYRIGHT 2017 - Ubicatrex - ALL RIGHTS RESERVED.</p>

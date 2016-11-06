@@ -61,7 +61,7 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <section style="background-image:url('../../Content/img/bg1.jpg');" class="margin-bottom15">
+    <section style="background-image:url('../../Content/img/bg1.jpg'); border-bottom:dashed 2px black"  class="margin-botomm5 offwhite">
         <div class="container">
             <div class="brand">
                 <a href="#">

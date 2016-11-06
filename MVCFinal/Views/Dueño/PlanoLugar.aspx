@@ -40,6 +40,7 @@
     <div class="row">
         <div class="col-md-12">
             <p class="text-center" style=" font-family:Satisfy;font-size:1.3em ">LISTA DE AREAS DE PLANO</p>
+            <div class="table-responsive">
             <table class="table" data-pg-collapsed=""> 
                 <thead> 
                     <tr> 
@@ -70,6 +71,7 @@
                     </tr>                     
                 </tbody>
             </table>
+                </div>
         </div>
     </div>
 </section>
