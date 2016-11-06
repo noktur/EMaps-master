@@ -1,43 +1,116 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PaisModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <form id="form1" runat="server">
+         <% using (Html.BeginForm())
+                       { %> 
     <section class="content-block content-2-3 bg-deepocean" style="border-bottom-right-radius:55px;border-bottom-left-radius:55px">
             <div class="container">
                 <div class="col-sm-7 pull-left">
                     <h2 class="text-uppercase" style=" font-family:Satisfy ; font-size:1.5em;">Aqui podra gestionar las ubicaciones internas de su sistema</h2>
                 </div>
                 <div class="col-sm-4 pull-right">
+                    
                     <div class="input-group">
-                        <input type="email" class="form-control" placeholder="Ingrese el pais">
-                        <span class="input-group-btn"><button class="btn btn-primary" type="submit">Buscar</button></span>
+                        <input type="text" class="form-control" id="NombrePais" name="NombrePais" placeholder="Ingrese el Pais">
+                        <% } %>
+                        <span class="input-group-btn"><input class="btn btn-primary" value="Buscar" name="action" type="submit"></span>
                     </div>
                     <!-- /.input-group -->
                 </div>
             </div>
             <!-- /.container -->
         </section>
-        <div class="map min-height-500px"></div>
-        <section id="content-2-6" class="content-block content-2-6 margin-top0 pad0 pad-bottom0 bg-tan">
+        <div id="mapa" class="map min-height-500px"></div>
+        <section id="content-2-6" class="content-block content-2-6 margin-top0 margin-bottom0 pad0 pad-bottom0 bg-offwhite">
             <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
-                <form role="form" class="black"> 
-                    <input type="email" class="form-control hidden" id="exampleInputEmail1" placeholder="Enter email">
-                    <input type="password" class="form-control hidden" id="exampleInputPassword1" placeholder="Password">
-                    <p class="form-control-static black pad-bottom0 margin-bottom0" style=" font-family:Satisfy ; font-size:1.5em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
-                    <a href="#" class="btn btn-outline btn-outline-xl outline-light black bg-sunflower">Enviar Datos</a>
-                </form>
-            </div>
+                 <% using (Html.BeginForm())
+                       { %> 
+
+                    <input type="text" class="form-control hidden" id="CoordenadaX" name="CoordenadaX" >
+                    <input type="text" class="form-control hidden" id="CoordenadaY" name="CoordenadaY" >
+                    <input type="text" class="form-control hidden" id="CodPais" name="CodPais" >
+                
+                    <p class="form-control-static black pad-bottom0 margin-bottom0" style=" font-family:'Baskerville Old Face' ; font-size:1.2em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
+
+                    <input class="btn btn-outline btn-outline-xs outline-light black bg-sunflower" value="Enviar Datos" name="action" type="submit">
+                <% }  %>
+                
+                  </div>
             <!-- /.container -->
         </section>
+        <section id="content-3-7" class="content-block content-3-7 " data-pg-collapsed>
+        <%       if( Model.milista == null) 
+                 {     %>
+        <div class="container" style="display:none">
+            </div>
+            <% }
+               else 
+               {   %>
 
+    <div class="container">
+        <div class="col-sm-12">
+            <div class="underlined-title" data-pg-collapsed>
+                <h1 style=" font-family:Constantia; font-size:1.9em;">AQUI SE ENCUENTRAN LOS PAISES REGISTRADOS&nbsp;</h1>
+                <hr>
+                <h2>usted podra modificar o eliminar los datos de un pais seleccionando el correspondiente en la tabla que se encuentra debajo</h2>
+            </div>
+        </div>
+        <div class="col-md-12 col-md-offset-0"> 
+            <div class="table-responsive bg-offwhite deepocean" style=" border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:25px ">
+                <table class="table margin-top0 margin-bottom0 bg-offwhite"> 
+                    <thead> 
+                        <tr> 
+                            <th>#</th> 
+                            <th>Codigo</th> 
+                            <th>Nombre</th> 
+                            <th>CoordenadaX</th> 
+                            <th>CoordenadaY</th> 
+                            <th> Modificar</th>
+                            <th> Eliminar</th>
+                        </tr>                         
+                    </thead>                     
+                    <tbody> 
+                        <tr> 
+                            <% for(int i=0;i < Model.milista.Count;i++)
+                                {
+                                    
+                                    
+                                  %>                             
+                            <td></td>      
+                            <td><%=Model.milista[i].CodPais%>/td> 
+                            <td><%= Model.milista[i].Nombre %></td> 
+                            <td><%=Model.milista[i].CoordenadaX %></td> 
+                            <td><%= Model.milista[i].CoordenadaY %></td>
+                            <td>
+                                <button type="submit" name="action" id="Modificar" class="btn btn-default btn-sm">Modificar</button>
+                            </td>                             
+                            <td>
+                                <button type="submit" name="action" id="Eliminar" class="btn btn-default btn-sm">Eliminar</button>
+                            </td>
+                            <% } %>
+                        </tr>                                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+            <% } %>
+</section>
+    </form>
 </asp:Content>
 
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+           <script src="<%= Url.Content("~/Scripts/jquery-2.2.3.min.js")%>" type="text/javascript"></script>
+     <script src="<%= Url.Content("~/Scripts/jquery-2.2.3.js")%>" type="text/javascript"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJiCs0vB2sIBGKclrmhydA4I9uekWOIvk&libraries=places"></script>
     
-    
+
+
+
     <script type="text/javascript">
 
 
@@ -58,11 +131,12 @@
 
 
 
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function ()
+        {
             //Asignamos al evento click del boton la funcion codeAddress
             //Inicializamos la función de google maps una vez el DOM este cargado
             initialize();
-            Listar();
+
 
             autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */
@@ -74,6 +148,7 @@ document.getElementById('NombrePais')), {
 );
 
         });
+
 
 
 
@@ -106,7 +181,7 @@ document.getElementById('NombrePais')), {
         }
 
         function Listar() {
-            var jsonlist = '<%= (string)Session["datos"]%>';
+            var jsonlist = '<%= (string)Session["ListaPaises"]%>';
             var jsonconvertido;
             if (jsonlist != undefined) {
                 jsonconvertido = jQuery.parseJSON(jsonlist);
