@@ -34,12 +34,16 @@ namespace MVCFinal.Controllers
                 model.milista = CreoServicio().ListarPais().ToList();
                
 
-                model.milista=(List<EntidadesCompartidas.Pais>) Session["ListaPaises1"];
-
                 if (model.milista.Count > 0)
                 {
-                    return View(model);
+
+                    string JsonResponse = JsonConvert.SerializeObject(model.milista);
+                    Session["ListaPaises"] = JsonResponse;
+
+                    return View(model.milista); 
+                   
                 }
+
 
                 return View();
 
@@ -98,8 +102,8 @@ namespace MVCFinal.Controllers
 
                 Session["PaisActual"] = Pais;
 
-                return RedirectToAction("Index", "Ciudad");
-
+                return RedirectToAction("ControlCiudad", "Admin");
+                
             }
             catch
             {
@@ -151,9 +155,10 @@ namespace MVCFinal.Controllers
 
                     nombrePais = milista.milista[0].Nombre;
                     
+                
                     
                     
-
+                
                     return View();
 
             }

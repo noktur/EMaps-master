@@ -21,8 +21,8 @@ namespace MVCFinal.Maps {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ModificarLugar", ReplyAction="http://tempuri.org/IServicioEvento/ModificarLugarResponse")]
         void ModificarLugar(EntidadesCompartidas.Lugar l);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarLugarxId", ReplyAction="http://tempuri.org/IServicioEvento/BuscarLugarxIdResponse")]
-        EntidadesCompartidas.Lugar BuscarLugarxId(int IdLugar, string NombreCiudad, string NombrePais);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarLugar", ReplyAction="http://tempuri.org/IServicioEvento/BuscarLugarResponse")]
+        EntidadesCompartidas.Lugar BuscarLugar(string NombreLugar);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BajaLugar", ReplyAction="http://tempuri.org/IServicioEvento/BajaLugarResponse")]
         void BajaLugar(EntidadesCompartidas.Lugar l);
@@ -72,36 +72,36 @@ namespace MVCFinal.Maps {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaUsuario", ReplyAction="http://tempuri.org/IServicioEvento/AltaUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void AltaUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ModificarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/ModificarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void ModificarUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/EliminarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/EliminarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void EliminarUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/BuscarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         EntidadesCompartidas.Usuario BuscarUsuario(string pDoc);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/Login", ReplyAction="http://tempuri.org/IServicioEvento/LoginResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         EntidadesCompartidas.Usuario Login(string nomUsu, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarAdmin", ReplyAction="http://tempuri.org/IServicioEvento/ListarAdminResponse")]
@@ -152,8 +152,8 @@ namespace MVCFinal.Maps {
             base.Channel.ModificarLugar(l);
         }
         
-        public EntidadesCompartidas.Lugar BuscarLugarxId(int IdLugar, string NombreCiudad, string NombrePais) {
-            return base.Channel.BuscarLugarxId(IdLugar, NombreCiudad, NombrePais);
+        public EntidadesCompartidas.Lugar BuscarLugar(string NombreLugar) {
+            return base.Channel.BuscarLugar(NombreLugar);
         }
         
         public void BajaLugar(EntidadesCompartidas.Lugar l) {

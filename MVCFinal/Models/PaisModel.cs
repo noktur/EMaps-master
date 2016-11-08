@@ -15,7 +15,7 @@ namespace MVCFinal.Models
 
         public string CodPais { get; set; }
 
-        public List<EntidadesCompartidas.Pais> milista { get; set { } }
+        public List<EntidadesCompartidas.Pais> milista { get; set; }
         
 
     }

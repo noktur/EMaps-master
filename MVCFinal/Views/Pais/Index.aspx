@@ -127,16 +127,10 @@
             initialize();
             Listar();
 
-                 autocomplete = new google.maps.places.Autocomplete(
-                 /** @type {!HTMLInputElement} */
-                (
-    document.getElementById('NombrePais')), {
-        types: ['(regions)']
-            }
-        
-    );
+              var input=document.getElementById('NombrePais');
 
-        });
+            autocomplete = new google.maps.places.Autocomplete(input);
+
 
 
 
@@ -318,7 +312,7 @@
                        { %> 
                      <fieldset>
                           Pais
-                     <input " class="form-control"  id="NombrePais" name="NombrePais" placeholder="Nombre" type="text"   />
+                     <input class="form-control"  id="NombrePais" name="NombrePais" placeholder="Nombre" type="text"   />
 
                        Coordenada X
                       <input class="form-control" id="CoordenadaX" autocomplete="off" readonly="readonly" name="CoordenadaX"  type="text"/>

@@ -18,6 +18,7 @@ namespace EntidadesCompartidas
 
        #region Propiedades
 
+        [DataMember]
         public string CodPais
         {
             get { return _CodPais; }

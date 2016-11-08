@@ -19,11 +19,11 @@
   <wsdl:message name="IServicioEvento_ModificarLugar_OutputMessage">
     <wsdl:part name="parameters" element="tns:ModificarLugarResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicioEvento_BuscarLugarxId_InputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarLugarxId" />
+  <wsdl:message name="IServicioEvento_BuscarLugar_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarLugar" />
   </wsdl:message>
-  <wsdl:message name="IServicioEvento_BuscarLugarxId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarLugarxIdResponse" />
+  <wsdl:message name="IServicioEvento_BuscarLugar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarLugarResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioEvento_BajaLugar_InputMessage">
     <wsdl:part name="parameters" element="tns:BajaLugar" />
@@ -166,9 +166,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ModificarLugar" message="tns:IServicioEvento_ModificarLugar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ModificarLugarResponse" message="tns:IServicioEvento_ModificarLugar_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="BuscarLugarxId">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarLugarxId" message="tns:IServicioEvento_BuscarLugarxId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarLugarxIdResponse" message="tns:IServicioEvento_BuscarLugarxId_OutputMessage" />
+    <wsdl:operation name="BuscarLugar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarLugar" message="tns:IServicioEvento_BuscarLugar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarLugarResponse" message="tns:IServicioEvento_BuscarLugar_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="BajaLugar">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BajaLugar" message="tns:IServicioEvento_BajaLugar_InputMessage" />
@@ -279,8 +279,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="BuscarLugarxId">
-      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarLugarxId" style="document" />
+    <wsdl:operation name="BuscarLugar">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarLugar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

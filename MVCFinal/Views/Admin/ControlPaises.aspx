@@ -1,21 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PaisModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="form1" runat="server">
-         <% using (Html.BeginForm())
-                       { %> 
+    <form id="formulario" runat="server">
+      
     <section class="content-block content-2-3 bg-deepocean" style="border-bottom-right-radius:55px;border-bottom-left-radius:55px">
             <div class="container">
                 <div class="col-sm-7 pull-left">
                     <h2 class="text-uppercase" style=" font-family:Satisfy ; font-size:1.5em;">Aqui podra gestionar las ubicaciones internas de su sistema</h2>
                 </div>
                 <div class="col-sm-4 pull-right">
+
+                     <% using(Html.BeginForm())
+                       { %>    
+                                            
+                        <input type="text" class="form-control" autocomplete="off" id="NombrePais1" name="NombrePais1" />
+                       <% }   %>
+
+                        <input class="btn btn-primary" onclick="Buscar()" value="Buscar" type="button" />
                     
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="NombrePais" name="NombrePais" placeholder="Ingrese el Pais">
-                        <% } %>
-                        <span class="input-group-btn"><input class="btn btn-primary" value="Buscar" name="action" type="submit"></span>
-                    </div>
                     <!-- /.input-group -->
                 </div>
             </div>
@@ -23,31 +25,33 @@
         </section>
         <div id="mapa" class="map min-height-500px"></div>
         <section id="content-2-6" class="content-block content-2-6 margin-top0 margin-bottom0 pad0 pad-bottom0 bg-offwhite">
-            <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
+             <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
                  <% using (Html.BeginForm())
-                       { %> 
-
-                    <input type="text" class="form-control hidden" id="CoordenadaX" name="CoordenadaX" >
-                    <input type="text" class="form-control hidden" id="CoordenadaY" name="CoordenadaY" >
-                    <input type="text" class="form-control hidden" id="CodPais" name="CodPais" >
+                       { %>  
+                 <input type="text" class="form-control hidden" autocomplete="off" id="NombrePais" name="NombrePais" />
+                   <input type="text" class="form-control hidden "  autocomplete="off" id="CoordenadaX" name="CoordenadaX"  />
+                    <input type="text" class="form-control hidden"  autocomplete="off" id="CoordenadaY" name="CoordenadaY" />
+                    <input type="text" class="form-control hidden" autocomplete="off" id="CodPais" name="CodPais" />
                 
                     <p class="form-control-static black pad-bottom0 margin-bottom0" style=" font-family:'Baskerville Old Face' ; font-size:1.2em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
-
-                    <input class="btn btn-outline btn-outline-xs outline-light black bg-sunflower" value="Enviar Datos" name="action" type="submit">
-                <% }  %>
+                
+                    <input class="btn btn-outline btn-outline-xs outline-light black bg-sunflower" value="Enviar Datos" name="action" type="submit" />
+                     <% }  %>
                 
                   </div>
             <!-- /.container -->
         </section>
-        <section id="content-3-7" class="content-block content-3-7 " data-pg-collapsed>
-        <%       if( Model.milista == null) 
+        
+        <%       if((Session["ListaPaises"]) == null) 
                  {     %>
+        <section id="content-4-7" class="content-block content-3-7 " style="display:none" data-pg-collapsed>
         <div class="container" style="display:none">
             </div>
+            </section>
             <% }
                else 
                {   %>
-
+        <section id="content-3-7" class="content-block content-3-7 " data-pg-collapsed>
     <div class="container">
         <div class="col-sm-12">
             <div class="underlined-title" data-pg-collapsed>
@@ -95,21 +99,18 @@
             </div>
         </div>
     </div>
+            </section>
             <% } %>
-</section>
+
     </form>
 </asp:Content>
 
 
 
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-           <script src="<%= Url.Content("~/Scripts/jquery-2.2.3.min.js")%>" type="text/javascript"></script>
-     <script src="<%= Url.Content("~/Scripts/jquery-2.2.3.js")%>" type="text/javascript"></script>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server"> 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJiCs0vB2sIBGKclrmhydA4I9uekWOIvk&libraries=places"></script>
     
-
-
 
     <script type="text/javascript">
 
@@ -117,11 +118,11 @@
         //Declaramos las variables que vamos a user
         var map = null;
         var geocoder = null;
-        var marker = null;
+        var marker;
         var nuevosmarcadores = [];
         var marcadoresBD = [];
         var infoWindow = null;
-        var address = null;
+        var address;
 
         function limpiar_marcadores(lista) {
             for (i in lista) {
@@ -138,16 +139,11 @@
             initialize();
 
 
-            autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */
-           (
-document.getElementById('NombrePais')), {
-    types: ['(regions)']
-}
+            var input = document.getElementById('NombrePais1');
 
-);
-
+            autocomplete = new google.maps.places.Autocomplete(input);
         });
+        
 
 
 
@@ -164,7 +160,7 @@ document.getElementById('NombrePais')), {
             //Definimos algunas opciones del mapa a crear
             var myOptions = {
                 center: latLng,//centro del mapa
-                zoom: 7,//zoom del mapa
+                zoom: 5,//zoom del mapa
                 mapTypeId: google.maps.MapTypeId.ROADMAP //tipo de mapa, carretera, híbrido,etc
             };
             //creamos el mapa con las opciones anteriores y le pasamos el elemento div
@@ -223,9 +219,10 @@ document.getElementById('NombrePais')), {
 
         }
 
-        function Buscar() {
+        function Buscar()
+        {
             // Obtenemos la dirección y la asignamos a una variable
-            address = $('#NombrePais').val();
+            address = $('#NombrePais1').val();
 
 
             // Creamos el Objeto Geocoder
