@@ -147,6 +147,8 @@ create table Evento
   NombreLugar varchar(30) ,
   CiOrganizador varchar(30) not null,
   NombreCategoria varchar(30) not null,
+  CapacidadDisponible int not null,
+  EstadoReserva boolean default false,
   foreign key (NombreCategoria) references categoria (NombreCategoria),
   foreign key (NombreLugar) references Lugar (NombreLugar),
   foreign key (CiOrganizador) references Organizador(CiOrganizador),
@@ -154,6 +156,18 @@ create table Evento
   Eliminado boolean default 0
 );
 
+create table Reserva
+(
+IdReserva int not null AUTO_INCREMENT,
+ClienteReserva varchar(30) not null,
+EventoReservado int not null,
+CantidadReserva int not null,
+FechaReserva timestamp not null,
+FechaEmision timestamp not null,
+primary key(IdReserva,ClienteReserva,EventoReservado),
+foreign key (ClienteReserva) references Clientes(CiCliente),
+foreign key (EventoReservado) references Evento(IdEvento)
+);
 
 
 create table Entrada
@@ -168,6 +182,7 @@ foreign key (IdEvento) references Evento (IdEvento),
 foreign key (CiCliente) references Clientes(CiCliente),
 primary key(IdEntrada,IdEvento,CiCliente)
 );
+
 
 create table MedioPago
 ( 
@@ -946,7 +961,7 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarEventoPorFecha()
+CREATE PROCEDURE ListarEventosPorFecha()
 BEGIN
 SELECT *
 FROM Evento
@@ -954,6 +969,8 @@ where evento.Eliminado=0
 order by  UNIX_TIMESTAMP(evento.FechaInicio) desc;
 END//
 DELIMITER;
+
+
 
 DELIMITER //
 CREATE PROCEDURE ListarEventosOrganizador(pCiOrganizador varchar(30))
@@ -973,11 +990,22 @@ SELECT *
 FROM organizador 
 join evento 
 on Organizador.CiOrganizador=evento.CiOrganizador
-join Entrada 
-on evento.IdEvento=entrada.IdEvento
+join Reserva
+on evento.IdEvento=Reserva.EventoReservado
 join clientes
-on entrada.CiCliente=clientes.CiCliente
-where  evento.Eliminado=0;
+on Reserva.ClienteReserva=clientes.CiCliente
+where  evento.Eliminado=0 and evento.EstadoReserva=1;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarEventosDisponibles()
+BEGIN
+SELECT *
+FROM evento
+join reserva
+on evento.IdEvento=Reserva.EventoReservado
+where evento.Eliminado=0 and evento.EstadoReserva=0;
 END//
 DELIMITER;
 
@@ -994,10 +1022,82 @@ where evento.NombreLugar=pNombreLugar and evento.Eliminado=0;
 END//
 DELIMITER;
 
+-- PROCEDIMIENTOS ALMACENADOS RESERVA
+
+DELIMITER //
+CREATE PROCEDURE AltaReserva (pClienteReserva varchar(30),pIdEvento int,pCantidad int,pFechaReserva timestamp,pFechaEmision timestamp)
+BEGIN
+INSERT INTO Reserva(IdReserva,ClienteReserva,EventoReservado,CantidadReserva,FechaReserva,FechaEmision) VALUES(0,pClienteReserva,pIdEvento,pCantidad,pFechaReserva,pFechaEmision);
+UPDATE Evento set EstadoReserva=1 where evento.IdEvento=reserva.EventoReservado;
+END//
+
+DELIMITER //
+CREATE PROCEDURE ModificarReserva (pIdReserva int,pClienteReserva varchar(30),pIdEvento int,pCantidad int,pFechaReserva timestamp,pFechaEmision timestamp)
+BEGIN
+UPDATE reserva SET ClienteReserva=pClienteReserva,EventoReservado=pIdEvento,CantidadReserva=pCantidad,FechaReserva=pFechaReserva,FechaEmision=pFechaEmision WHERE IdReserva=pIdReserva;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE EliminarReserva (pIdReserva int,pIdEvento int)
+BEGIN
+delete from reserva where IdReserva=pIdReserva;
+UPDATE EVENTO SET evento.EstadoReserva=1 where evento.IdEvento=reserva.EventoReservado;
+END//
+DELIMITER;
 
 
+DELIMITER //
+CREATE PROCEDURE BuscarReserva(pIdReserva int)
+BEGIN
+SELECT *
+FROM reserva
+WHERE reserva.IdReserva=pIdReserva and evento.EstadoReserva=1;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorFecha()
+BEGIN
+SELECT *
+FROM reserva
+where evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(reserva.FechaEmision) desc;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorCliente(pCiCliente varchar(30))
+BEGIN
+SELECT *
+FROM clientes
+join Reserva
+on clientes.CiCliente=Reserva.ClienteReserva
+where Reserva.ClienteReserva=pCiCliente and evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(reserva.FechaEmision) desc;
+END//
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorEvento(pIdEvento int)
+BEGIN
+SELECT *
+FROM Evento
+join reserva
+on evento.IdEvento=reserva.EventoReservado
+where reserva.EventoReservado=pIdEvento and evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
+END//
 
 
+DELIMITER //
+CREATE PROCEDURE ComprobarEstadoEvento(pIdEvento int,pFechaInicio timestamp,pFechaFin timestamp)
+BEGIN
+SELECT *
+FROM Evento 
+where Evento.IdEvento=pIdEvento and evento.FechaInicio >= pFechaFin 
+  AND evento.FechaFin <= pFechaInicio;
+END//
+DELIMITER;
 
 
 -- PROCEDIMIENTOS ALMACENADOS ENTRADA
@@ -1015,18 +1115,6 @@ BEGIN
 UPDATE Entrada SET Precio=pPrecio,IdEvento=pIdEvento,CiCliente=pCiCliente,Cantidad=pCantidad,FechaEmision=pFechaEmision WHERE IdEntrada=pIdEntrada;
 END//
 DELIMITER;
-
-
-DELIMITER //
-CREATE PROCEDURE ComprobarEstadoEvento(pIdEvento int,pFechaInicio timestamp,pFechaFin timestamp)
-BEGIN
-SELECT *
-FROM Evento 
-where Evento.IdEvento=pIdEvento and evento.FechaInicio >= pFechaFin 
-  AND evento.FechaFin <= pFechaInicio;
-END//
-DELIMITER;
-
 
 DELIMITER //
 CREATE PROCEDURE EliminarEntrada (pIdEntrada int,pIdEvento int)
