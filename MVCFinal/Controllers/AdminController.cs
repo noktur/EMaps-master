@@ -16,36 +16,75 @@ namespace MVCFinal.Controllers
 
         public ActionResult ControlEventos()
         {
-            return View();
-        }
 
+            MVCFinal.Models.EventoModel Evento=new EventoModel();
+
+            try
+            {
+
+                List<EntidadesCompartidas.Evento> lista = Logica.FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+
+               Evento.milista = lista;
+                return View(Evento);
+
+            }
+            catch
+            {
+
+                return View();
+            }
+        }
+        [HttpGet]
         public ActionResult ControlCiudad()
         {
-            return View();
+
+            MVCFinal.Models.CiudadModel Ciudad = new CiudadModel();
+            MVCFinal.Models.PaisModel Pais;
+            Pais = (PaisModel)Session["PaisActual"];
+
+            try
+            { 
+
+            List<EntidadesCompartidas.Ciudad> lista = CreoServicio().ListarCiudadesPais(convertirModelPais(Pais)).ToList();
+
+            string JsonResponse = JsonConvert.SerializeObject(lista);
+            Session["ListarCiudadesPais"] = JsonResponse;
+            string JsonPais = JsonConvert.SerializeObject(Pais);
+            Session["Pais"] = JsonPais;
+
+            Ciudad.milista = lista;
+            return View(Ciudad);
+
+            }
+            catch
+            {
+
+                string JsonPais = JsonConvert.SerializeObject(Pais);
+                Session["Pais"] = JsonPais;
+                return View();
+            }
+
         }
 
+
+        [HttpGet]
         public ActionResult ControlPaises()
         {
 
             try
             {
+
+
+                List<EntidadesCompartidas.Pais> lista = CreoServicio().ListarPais().ToList();
+                PaisModel pais = new PaisModel();
+
                 
-                PaisModel model = new PaisModel();   
-                model.milista = CreoServicio().ListarPais().ToList();
-               
 
-                if (model.milista.Count > 0)
-                {
-
-                    string JsonResponse = JsonConvert.SerializeObject(model.milista);
-                    Session["ListaPaises"] = JsonResponse;
-
-                    return View(model.milista); 
-                   
-                }
-
-
-                return View();
+                string JsonResponse = JsonConvert.SerializeObject(lista);
+                Session["ListaPaises"] = JsonResponse;
+                pais.milista = lista;
+                Session["ListaTablePais"] = lista;
+                return View(pais);             
 
 
             }
@@ -57,8 +96,44 @@ namespace MVCFinal.Controllers
 
         public ActionResult ModificarPerfil()
         {
+
+            if (Session["Admin"] == null)
+            {
+                RedirectToAction("Portada,Index");
+            }
+            else
+            {
+                AdminModel miAdmin =(AdminModel)Session["Admin"];
+
+                return View(miAdmin);
+
+            }
+
+
+            return RedirectToAction("Portada", "Index");
+        }
+
+        public ActionResult SaveChanges()
+        {
+
+            if (Session["Admin"] == null)
+            {
+                RedirectToAction("Portada,Index");
+            }
+            else
+            {
+                AdminModel miAdmin = (AdminModel)Session["Admin"];
+
+                return View(miAdmin);
+
+            }
+
+
             return View();
         }
+
+
+
 
 
 
@@ -129,11 +204,17 @@ namespace MVCFinal.Controllers
 
 
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Modificar")]
-        public ActionResult Modificar(PaisModel miPais)
+        public ActionResult ModificarCiudad(string Nombre)
         {
+            string valor1="";
+            valor1 = Nombre;
+
             try
             {
+               
+                
+
+
                 return View();
 
             }
@@ -146,18 +227,12 @@ namespace MVCFinal.Controllers
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Eliminar")]
-        public ActionResult Eliminar(PaisModel milista)
+        public ActionResult Eliminar(FormCollection coleccion)
         {
             try
             {
+                string Nombre = Convert.ToString(coleccion["Nombre"]);
 
-                    var nombrePais = "";
-
-                    nombrePais = milista.milista[0].Nombre;
-                    
-                
-                    
-                    
                 
                     return View();
 

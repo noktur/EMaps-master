@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterDueño.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterDueño.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LugarModel>" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">        
      
@@ -21,7 +21,8 @@
 
           });
 
-          function initialize() {
+          function initialize()
+          {
 
 
 
@@ -34,13 +35,35 @@
                   mapTypeId: google.maps.MapTypeId.ROADMAP //tipo de mapa, carretera, híbrido,etc
               };
               //creamos el mapa con las opciones anteriores y le pasamos el elemento div
-              map = new google.maps.Map(document.getElementById("map"), myOptions);
+              map = new google.maps.Map(document.getElementById("mapa"), myOptions);
 
           }
 
+          function IrController()
+          {
+              nombreCiudad = document.getElementById("seleccion").value();
+
+              $.ajax({
+                  url: "<%= Url.Action("CiudadObtenida", "Dueño")%>",
+                  type: 'POST',
+                  data: {
+                      nombreCiudad: nombre,
+                  },
+                  contentType: 'application/json; charset=utf-8',
+                  dataType: 'json',
+                  success: function ()
+                  {
+                  }
+              });
+          }
+
+
+
            </script>
-    <div data-spy="scroll" data-target="nav">
+    <form id="form1" runat="server">
+    <div data-spy="scroll" data-target="nav">     
         <section class="content-block contact-1">
+            
             <div class="container text-center">
                 <div class="col-sm-10 col-sm-offset-1">
                     <div class="underlined-title">
@@ -49,56 +72,86 @@
                         <h2>aqui usted puede administrar sus lugares<br></h2>
                     </div>
                     <p>Dentro de esta pagina usted podra ver el registro de sus lugares alquilados, reservados, crear un nuevo lugar, subir una galeria de imagenes&nbsp;a su edificio &nbsp;y adjuntar el plano de su sitio,<br></p>
-                    <div id="map" class="map min-height-500px" style=" width: 980px;
-    height:100%;" ></div>
-                    <div id="contact" class="form-container">
-                        <div id="message"></div>
-                        <form id="form1">
-                            <div class="form-group">
+                    <% if(Session["ListaCiudad"] == null) 
+                       { %>
+                    <div class="row">
+                         <div class="form-group">
+                             
+                         <select id="seleccion1" class="form-control" name="seleccion"> 
+                           <option>No existen Ciudades</option>                                                                                       
+                            </select>
+                          </div>
+                 </div>
+                    <% 
+                        } 
+                        else 
+                       { %>
+                     <div class="row">
+                         <div class="form-group">   
+                             <% foreach(var item in Model.milistaCiudad ) { %>        
+                        <select id="seleccion" class="form-control" name="seleccion"> 
+                           <option value="<%= item.Nombre %>"><%= item.Nombre %></option>                                                                                       
+                            </select>
+                             <% } %>
+                          </div>
+                 </div>
+                    <% } %>
+                    
+
+                    </div>
+                    <div id="mapa" style="display:none" class="map min-height-500px"></div>
+                    <div id="contact" class="form-container">   
+                        <% using (Html.BeginForm()) { %>     
+                         <div class="row">
+                                 
+                                    <div class="form-group">
                                 <input name="Direccion" id="Direccion" type="text" value="" placeholder="Ingrese la direccion deseada" class="form-control" />
-                                <div> 
+                                        </div>
+                                 </div>
+                              <div class="col-sm-4">
+                                    <div class="form-group">
+                                <input name="Direccion" id="Nombre" type="text" value="" placeholder="Ingrese el nombre" class="form-control" />
+                                        </div>
+                                 </div>
+                                 <div> 
                                     <p>Aqui arriba ingrese la direccion deseada y el sitema ubicara la direccion en el mapa y adjuntara las coordenadas a su lugar para poder ser ubicado por sus cliente.</p>
                                 </div>
-                            </div>
+                             <div class="col-sm-12 text-center">
+                                <button  class="btn btn-dark" type="button" id="cf-send1" name="buscar">Buscar</button>
+                                </div>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <input name="Nombre" id="Nombre" type="text" value="" placeholder="Nombre" class="form-control" />
-                                    </div>                                     
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input name="Capacidad" id="Capacidad" type="text" value="" placeholder="Capacidad" class="form-control" />
+                                        <input name="Capacidad" id="Capacidad" type="number" disabled="disabled" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <input name="phone" id="phone" type="text" value="" placeholder="Direccion" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input name="UbicacionCiudad" id="UbicacionCiudad" type="text" value="" placeholder="Ubicacion Ciudad" class="form-control" />
+                                        <input name="NombreCiudad" id="NombreCiudad" type="text" value="" placeholder="Ubicacion Ciudad" class="form-control hidden" />
                                     </div>                                     
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" style="display:none">
                                     <div class="form-group">
-                                        <input name="CoordenadaX" visible="false" id="CoordenadaX" type="text" value="" placeholder="Coordenada X" class="form-control" />
+                                        <input name="CoordenadaX" id="CoordenadaX" type="text" value="" placeholder="Coordenada X" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4" style="display:none">
+                                    <div class="form-group">
+                                        <input name="CoordenadaX" id="CoordenadaY" type="text" value="" placeholder="Coordenada X" class="form-control" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion"></textarea>
-                                <p class="small text-muted"><span class="guardsman">* All fields are required.</span> Once we receive your message we will respond as soon as possible.</p>
+                                <textarea name="Descripcion" id="Descripcion" disabled="disabled" class="form-control" rows="3" placeholder="Agregue aqui la descripcion"></textarea>
                             </div>
                             <!-- /.row -->
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit" id="cf-send" name="submit">Send</button>
+                                <button class="btn btn-primary" type="submit" id="cf-send" name="submit">Enviar</button>
                             </div>
-                        </form>
-                    </div>
+                                 <% } %>
+                         </div>
+               
                     <!-- /.form-container -->
-                </div>
                 <!-- /.col-sm-10 -->
             </div>
             <!-- /.container -->
@@ -114,7 +167,13 @@
                 </div>
             </div>
         </section>
-        <section id="content-3-7" class="content-block content-3-7" style=" background-color:#AED1DD   ">
+        <% if(Session["ListaLugares"] == null) { %>
+        <section id="" class="content-block content-3-7" style=" display:none; background-color:#AED1DD   ">
+            </section>
+            <% }
+               else
+               { %>
+            <section id="content-3-7" class="content-block content-3-7" style=" background-color:#AED1DD   ">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -126,44 +185,39 @@
                     <thead> 
                         <tr> 
                             <th>#</th> 
-                            <th>First Name</th> 
-                            <th>Last Name</th> 
-                            <th>Username</th> 
+                            <th>Propietario</th> 
+                            <th>Ciudad</th> 
+                            <th>Descripcion</th> 
+                            <th>Capacidad</th> 
+                            <th>Direccion</th> 
                             <th>Action</th>
                         </tr>                         
-                    </thead>                     
+                    </thead>  
+                    <% using (Html.BeginForm()) { %>                   
                     <tbody> 
+                        <% foreach( var item in Model.milistaLugar)
+                           { %>
                         <tr> 
-                            <td>1</td> 
-                            <td>Mark</td> 
-                            <td>Otto</td> 
-                            <td>@mdo</td> 
+                            <td></td> 
+                            <td><%= item.DueñoLugar.Nombre  %></td> 
+                            <td><%= item.UbicacionLugar.Nombre %> <td> 
+                            <td><%= item.Descripcion  %></td> 
+                            <td><%= item.Capacidad  %></td> 
+                            <td><%= item.Direccion  %></td> 
                             <td>
                                 <button type="submit" class="btn btn-default" value="ENVIAR" name="ENVIAR" style="font-size:0.9em">SELECCIONAR</button>
                             </td>
                         </tr>
-                        <tr> 
-                            <td>2</td> 
-                            <td>Jacob</td> 
-                            <td>Thornton</td> 
-                            <td>@fat</td> 
-                            <td>
-                                <button type="button" class="btn btn-default" style="font-size:0.9em">Seleccionar</button>
-                            </td>
-                        </tr>                         
-                        <tr> 
-                            <td>3</td> 
-                            <td>Larry</td> 
-                            <td>the Bird</td> 
-                            <td>@twitter</td> 
-                            <td>
-                                <button type="button" class="btn btn-default" style="font-size:0.9em">Seleccionar</button>
-                            </td>
-                        </tr>                         
+                           <% } %>
                     </tbody>
+                 <% } %>
                 </table>
                     </div>
             </div>
-        </section> 
-    </div>     
+          
+        </section>   
+        <% } %> 
+    </div>   
+      </form>  
+    
 </asp:Content>

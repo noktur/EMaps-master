@@ -212,6 +212,43 @@ namespace Persistencia.Clases_Trabajo
             return listaAlquiler;
         }
 
+        public List<Alquiler> ListarAlquileresOrganizador(string Ci)
+        {
+            MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
+            Alquiler UnAlquiler = null;
+            List<Alquiler> listaAlquiler = new List<Alquiler>();
+
+            MySqlCommand comando = new MySqlCommand("ListarAlquilerdeOrganizador", conexion);
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("pCiOrganizador", Ci);
+
+            try
+            {
+                conexion.Open();
+                MySqlDataReader lector = comando.ExecuteReader();
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaOrganizador.GetInstancia().Buscar(Ci), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
+                        listaAlquiler.Add(UnAlquiler);
+                    }
+                }
+                lector.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return listaAlquiler;
+        }
+
+
+
 
 
         #endregion

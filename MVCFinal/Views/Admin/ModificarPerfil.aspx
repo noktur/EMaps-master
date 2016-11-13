@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.AdminModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
 
@@ -9,28 +9,31 @@
                         <h3 class="text-left">Edit Profile Settings</h3>
                     </div>
                     <p class="offwhite text-left margin-top20 pad-bottom20">En este modulo usted podra modificar los datos de su perfil en caso que lo solicite.</p>
-                    <form action="./page-settings.html" class="form-horizontal" data-pg-collapsed> 
+                    <form id="formulario" runat="server"> 
+                        <%  if(Session["Admin"] != null) { %>
+                        <% using (Html.BeginForm()) 
+                           { %>
                         <!-- /.form-group -->
                         <div class="form-group">
                             <label class="col-md-3 text-left">Cedula Identidad</label>
                             <div class="col-md-7">
-                                <input type="text" name="user-name" value="jumpstartui" class="form-control" disabled="">
+                                <input type="text" name="Ci" id="Ci" placeholder="<%= Model.Ci %>" value="<%= Model.Ci  %>"  class="form-control" disabled="disabled">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
                         <!-- /.form-group -->
                         <div class="form-group">
-                            <label class="col-md-3 text-left">First Name</label>
+                            <label class="col-md-3 text-left">Nombre Completo</label>
                             <div class="col-md-7">
-                                <input type="text" name="first-name" value="Rod" class="form-control">
+                                <input type="text" name="Nombre" id="Nombre" placeholder="<%= Model.Nombre %>" value="<%= Model.Nombre %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
                         <!-- /.form-group -->
                         <div class="form-group">
-                            <label class="col-md-3 text-left">Last Name</label>
+                            <label class="col-md-3 text-left">Contraseña</label>
                             <div class="col-md-7">
-                                <input type="text" name="last-name" value="Howard" class="form-control">
+                                <input type="text" name="Password" id="Password" placeholder="<%= Model.Password %>" value="<%= Model.Password %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -38,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Email Address</label>
                             <div class="col-md-7">
-                                <input type="text" name="email-address" value="rod@example.com" class="form-control">
+                                <input type="text" name="Email" id="Email" placeholder="<%= Model.Email %>" value="<%= Model.Email %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -46,7 +49,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">User Login</label>
                             <div class="col-md-7">
-                                <input type="text" name="website" value="http://jumpstartthemes.com" class="form-control">
+                                <input type="text" name="Usuario" id="Usuario" placeholder="<%= Model.Usuario %>" value="<%= Model.Usuario %>"  class ="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -54,14 +57,17 @@
                         <!-- /.form-group -->
                         <div class="form-group">
                             <div class="col-md-7 col-md-push-3">
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <input type="submit" class="btn btn-primary" value="Save Changes"/>
                                 &nbsp;
-                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <input type="submit" class="btn btn-default" value="Cancel"/>
                             </div>                             
                             <!-- /.col -->
                         </div>                         
                         <!-- /.form-group -->
-                    </form>
+                        <% } %>
+                        <% } %>
+                    </form>                  
+                </div>
                 </div>
                 <!-- /.container -->
         </section>

@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterOrganizador.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterOrganizador.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.EventoModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
- <section class="content-block content-1-8 pad-bottom15 pad45">
+    <form id="formulario" runat="server">
+        <section class="content-block content-1-8 pad-bottom15 pad45">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-offset-1 col-md-10">
@@ -13,58 +13,79 @@
                             </div>
                             <p class="orange margin-top0 margin-bottom45 pad0" style="font-size:0.9em;font-family:constantia;">Aqui usted podra agregar los datos pertinentes a la publicacion de un evento</p>
                             <div id="contact1" class="form-container">
+                                <% using (Html.BeginForm()) { %>
                                 <div id="message1"></div>
-                                <form method="post" action="js/contact-form.php" name="contactform" id="contactform1">
                                     <div class="row">
+                                        <%  if (Session["ListaAlquiler"] == null)  
+                                            { %>
                                         <div class="col-sm-4">
                                             <div class="form-group">
+                                        
                                                 <select class="form-control"> 
-                                                    <option>Lugar 1</option>                                                     
-                                                    <option>Lugar 2</option>                                                     
-                                                    <option>Lugar 3</option>                                                     
+                                                    <option>No existen Alqulieres</option>                                                                                                         
                                                 </select>
                                             </div>
                                         </div>
+                                        <% }
+                                           else { %>
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <% foreach(var item in Model.listalugaresAlquilados) {  %>
+                                                <select class="form-control"> 
+                                                    <option value="<%=item.IdAlquiler %>"><%= item.LugarAlquiler %></option>                                                                                                         
+                                                </select>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <%  } %>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <input name="email" id="email1" type="datetime-local" value="" placeholder="Email" class="form-control">
+                                                <input name="FechaInicio" id="FechaInicio" type="datetime-local" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <input name="phone" id="phone1" type="datetime-local" value="" placeholder="Phone" class="form-control">
+                                               <input name="FechaFin" id="FechaFin" type="datetime-local"  class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.row -->
                                     <div class="form-group text-center">
-                                        <button class="btn btn-warning" type="submit" id="cf-submit1" name="submit">Comprobar disponibilidad</button>
+                                        <input class="btn btn-warning" type="submit" id="cf-submit2" value="Comprobar disponibilidad" name="ComprobarDisponibilidad" />
                                     </div>
-                                    <div class="text-center col-md-5" style="padding-left:0px;">
+                                    <div class="text-center col-md-4" style="padding-left:0px;">
+                                        <%  if(Session["ListaCategorias"]== null) { %>
                                         <div class="form-group"> 
-                                            <label class="control-label pull-left orange" for="formInput132" style=" font-family:Constantia; font-size:0.9em;">Elige un lugar</label>                                             
-                                            <select id="formInput132" class="form-control"> 
-                                                <option>Categoria 1</option>                                                 
-                                                <option>Categoria 2</option>                                                 
-                                                <option>Categoria 3</option>                                                 
+                                            <label class="control-label pull-left orange" for="formInput132" style=" font-family:Constantia; font-size:0.9em;">Elige un&nbsp; categoria</label>                                             
+                                            <select class="form-control"> 
+                                                <option>No existen Categorias </option>                                                                                                
                                             </select>
-                                        </div>                                         
+                                        </div>     
+                                        <% } else { %>   
+                                        <div class="form-group"> 
+                                            <label class="control-label pull-left orange" for="formInput132" style=" font-family:Constantia; font-size:0.9em;">Elige un&nbsp; categoria</label>                                             
+                                            <% foreach(var item in Model.listaCategorias) { %>
+                                             <select class="form-control"> 
+                                                <option value="<%= item.NombreCategoria %>"><%= item.NombreCategoria %></option>                                                                                                
+                                            </select>
+                                            <% } %>
+                                        </div> 
+                                        <% } %>                                 
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="comments" id="comments1" class="form-control" rows="3" placeholder="Message"></textarea>
-                                        <p class="small text-muted"><span class="guardsman">* All fields are required.</span> Once we receive your message we will respond as soon as possible.</p>
+                                        <textarea name="Descripcion" id="Descripcion" rows="3" class="form-control" placeholder="Descripcion"></textarea>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button class="btn btn-info" type="submit" id="cf-submit1" name="submit">PUBLICAR EVENTO</button>
+                                        <input  class="btn btn-info" type="submit" id="cf-submit1" name="Publicar Evento" value="Publicar Evento" />
                                     </div>
-                                </form>
+                                <% } %>
                             </div>
                             <!-- /.form-container -->
                         </div>
                     </div>
                 </div>
             </section>
-
+        </form> 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">

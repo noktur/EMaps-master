@@ -358,12 +358,9 @@
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="email" id="email" type="text" value="" class="form-control" placeholder="Fecha Reservacion" readonly="readonly" />
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit" id="cf-submit" name="submit">Send</button>
+                                        <div class="col-sm-12 text-center">
+                                            <input class="btn btn-success" type="submit" value="Comprobar Disponibilidad" name="BtnDisponible" />
+                                        </div>
                                     </div>
                                 </form>
                             </fieldset>

@@ -42,7 +42,7 @@
             <!-- /.container -->
         </section>
         
-        <%       if((Session["ListaPaises"]) == null) 
+    <%       if (Model == null) 
                  {     %>
         <section id="content-4-7" class="content-block content-3-7 " style="display:none" data-pg-collapsed>
         <div class="container" style="display:none">
@@ -73,28 +73,31 @@
                             <th> Modificar</th>
                             <th> Eliminar</th>
                         </tr>                         
-                    </thead>                     
+                    </thead>   
+                     <% using (Html.BeginForm())
+                       { %>                    
                     <tbody> 
-                        <tr> 
-                            <% for(int i=0;i < Model.milista.Count;i++)
-                                {
-                                    
-                                    
-                                  %>                             
+                       
+                         <% 
+                             
+                            foreach(var item in Model.milista)
+                            {%> 
+                        <tr>                                    
                             <td></td>      
-                            <td><%=Model.milista[i].CodPais%>/td> 
-                            <td><%= Model.milista[i].Nombre %></td> 
-                            <td><%=Model.milista[i].CoordenadaX %></td> 
-                            <td><%= Model.milista[i].CoordenadaY %></td>
-                            <td>
-                                <button type="submit" name="action" id="Modificar" class="btn btn-default btn-sm">Modificar</button>
+                            <td><%=item.CodPais%></td> 
+                            <td><%= item.Nombre%></td> 
+                            <td><%= item.CoordenadaX%></td> 
+                            <td><%= item.CoordenadaY%></td>                          
+                            <td>       
+                             <%= Html.ActionLink("ModificarCiudad", "ControlPaises", "Admin", new { NombrePais = item.Nombre }, new { @class = "btn btn-default btn-sm" })%>                
                             </td>                             
-                            <td>
-                                <button type="submit" name="action" id="Eliminar" class="btn btn-default btn-sm">Eliminar</button>
-                            </td>
-                            <% } %>
-                        </tr>                                   
+                            <td>                               
+                            </td>                  
+                        </tr> 
+                         <% } %>                                 
                     </tbody>
+                                 
+                    <% } %>
                 </table>
             </div>
         </div>
@@ -182,8 +185,7 @@
             if (jsonlist != undefined) {
                 jsonconvertido = jQuery.parseJSON(jsonlist);
 
-
-                $.each(jsonconvertido, function (i, item) {
+                $.each(Model.milista, function (i, item) {
 
 
 
@@ -296,6 +298,23 @@
             infoWindow.close();
         }
 
+
+        function Grabar(nombre)
+        {
+
+            $.ajax({
+                url: '@Url.Action("Modificar", "Admin")',
+                type: 'POST',
+                data: { 
+                    nombrePais: nombre,
+                },
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function () {
+
+                }
+            });
+        };
 
 
     </script>
