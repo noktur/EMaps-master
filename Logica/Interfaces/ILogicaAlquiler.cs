@@ -14,5 +14,7 @@ namespace Logica.Interfaces
         Alquiler BuscarAlquiler(int IdAlquiler);
         List<Alquiler> ListarAlquileres();
         List<Alquiler> ListarAlquileresLugar(string NombreLugar);
+
+        List<Alquiler> ListarAlquileresOrganizador(string Ci);
     }
 }

@@ -11,5 +11,7 @@ namespace MVCFinal.Models
         public float CoordenadaX { get; set; }
         public float CoordenadaY { get; set; }
         public string NombreCiudad { get; set; }
+
+        public List<EntidadesCompartidas.Ciudad> milista { get; set; }
     }
 }

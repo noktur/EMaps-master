@@ -46,7 +46,7 @@ namespace Wcf_Sistema
 
         #endregion
 
-        #region Ubicacion
+        #region Ubicaciones
 
         [OperationContract]
         void AltaUbicacion(Ubicacion U);

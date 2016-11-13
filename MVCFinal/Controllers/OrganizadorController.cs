@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCFinal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,7 +19,30 @@ namespace MVCFinal.Controllers
 
         public ActionResult FeedbackOrganizador()
         {
-            return View();
+            if (Session["Organizador"] != null)
+            {
+
+
+                    EntidadesCompartidas.Organizador Organizaor = (EntidadesCompartidas.Organizador)Session["Organizador"];
+
+                    FeebackOrganizadorModel miModel = new FeebackOrganizadorModel();
+
+                    try
+                    {
+
+                        miModel.OrganizadorActual = Organizaor;
+
+                        return View(miModel);
+
+                    }
+                    catch
+                    {
+
+                        return View();
+                    }
+            }
+
+            return RedirectToAction("Index,Portada");
         }
 
         public ActionResult MuestreoLugares()
@@ -38,7 +62,47 @@ namespace MVCFinal.Controllers
 
         public ActionResult PublicacionEventos()
         {
+
+            if(Session["Organizador"] != null)
+            {
+
+                EntidadesCompartidas.Organizador Organizador=(EntidadesCompartidas.Organizador)Session["Organizador"];
+
+               
+
+                MVCFinal.Models.EventoModel Evento = new EventoModel();
+
+                    try
+                    {
+                
+
+                        List<EntidadesCompartidas.Categoria> listaCategoria = Logica.FabricaLogica.getLogicaEvento().ListarCategorias();
+                        List<EntidadesCompartidas.Alquiler> listaLugares = Logica.FabricaLogica.getLogicaAlquiler().ListarAlquileresOrganizador(Organizador.CI);
+
+
+                        Evento.listaCategorias = listaCategoria;
+                        Evento.listalugaresAlquilados = listaLugares;
+
+
+                        Session["ListaAlquiler"] = listaLugares;
+                        Session["ListaCategorias"] = listaCategoria;
+                        return View(Evento);
+
+                    }
+                    catch
+                    {
+
+                        return View();
+                    }
+                }
+            else
+            {
+                RedirectToAction("Index,Portada");
+            }
+
+
             return View();
+
         }
     }
 }

@@ -37,33 +37,29 @@ namespace MVCFinal.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-              
-           
+
             try
-            {           
-                List<PaisModel> list=new List<PaisModel>();
-                 List<EntidadesCompartidas.Pais> lista  = CreoServicio().ListarPais().ToList();
-                
+            {
+
+
+                List<PaisModel> list = new List<PaisModel>();
+                List<EntidadesCompartidas.Pais> lista = CreoServicio().ListarPais().ToList();
+                PaisModel pais=new PaisModel();
+
                 if (lista.Count > 0)
                 {
-                    for(int i=0; i < lista.Count;i++)
-                    {
-                        MVCFinal.Models.PaisModel Pais=new PaisModel();
-
-                        Pais.CoordenadaX=lista[i].CoordenadaX ;
-                        Pais.CoordenadaY = lista[i].CoordenadaY;
-                        Pais.NombrePais = lista[i].Nombre;
-                        Pais.CodPais = lista[i].CodPais;
-
-                        list.Add(Pais);
-                   }
+                    lista = pais.milista;
                     
-             
                 }
-           
-                    string JsonResponse =JsonConvert.SerializeObject(list);
-                    Session["datos"] = JsonResponse;
-                return View();
+
+                else
+                {
+                    return View();
+                }
+
+                string JsonResponse = JsonConvert.SerializeObject(lista);
+                Session["ListaPaises"] = JsonResponse;
+                return View(pais);
 
             }
             catch
@@ -73,25 +69,26 @@ namespace MVCFinal.Controllers
         }
 
 
+        
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar")]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Enviar Datos")]
         public ActionResult Guardar(FormCollection collection)
         {
 
             try
             {
                 MVCFinal.Models.PaisModel Pais = new Models.PaisModel();
-                
+
                 Pais.NombrePais = Convert.ToString(collection["NombrePais"]);
                 Pais.CodPais = Convert.ToString(collection["CodPais"]);
-                Pais.CoordenadaX =float.Parse(collection["CoordenadaX"],System.Globalization.CultureInfo.InvariantCulture);
-                Pais.CoordenadaY =float.Parse(collection["CoordenadaY"],System.Globalization.CultureInfo.InvariantCulture);
-                
-                CreoServicio().AltaUbicacion(convertirModelPais(Pais));
-                
-                Session["PaisActual"]=Pais;
+                Pais.CoordenadaX = float.Parse(collection["CoordenadaX"], System.Globalization.CultureInfo.InvariantCulture);
+                Pais.CoordenadaY = float.Parse(collection["CoordenadaY"], System.Globalization.CultureInfo.InvariantCulture);
 
-                return RedirectToAction("Index","Ciudad");
+                CreoServicio().AltaUbicacion(convertirModelPais(Pais));
+
+                Session["PaisActual"] = Pais;
+
+                return RedirectToAction("ControlCiudad", "Admin");
 
             }
             catch
@@ -114,6 +111,44 @@ namespace MVCFinal.Controllers
                 return View();
             }
         }
+
+
+
+        [HttpPost]
+        public ActionResult Modificar(string Nombre)
+        {
+            try
+            {
+                
+
+                return View();
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Eliminar")]
+        public ActionResult Eliminar(FormCollection coleccion)
+        {
+            try
+            {
+                string Nombre = Convert.ToString(coleccion["Nombre"]);
+
+
+                return View();
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
 
         public static EntidadesCompartidas.Pais convertirModelPais(MVCFinal.Models.PaisModel model)

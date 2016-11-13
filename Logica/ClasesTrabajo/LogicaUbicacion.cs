@@ -30,11 +30,11 @@ namespace Logica.ClasesTrabajo
             {
                 FabricaPersistencia.getPersistenciaPais().AltaPais((Pais)U);
             }
+
             else if (U is Ciudad)
             {
                 FabricaPersistencia.getPersistenciaCiudad().AltaCiudad((Ciudad)U);
             }
-
         }
 
         public void Modificar(Ubicacion U)

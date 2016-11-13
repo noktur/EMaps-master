@@ -12,8 +12,8 @@ namespace EntidadesCompartidas
      {
          #region Atributos
 
-        private int _IdEntrada; 
-        private double _Precio;
+         private int _IdEntrada; 
+         private double _Precio;
          private Cliente _UnCliente;
          private int _Cantidad;
          private Evento _EventoAsociado;

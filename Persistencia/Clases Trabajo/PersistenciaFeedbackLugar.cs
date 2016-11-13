@@ -39,6 +39,7 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
             cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
+            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
             cmd.Parameters.AddWithValue("pNombreLugar", e.LugarFeedback.Nombre);
 
 
@@ -66,6 +67,7 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackLugar);
             cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
             cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
+            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
             cmd.Parameters.AddWithValue("pNombreLugar", e.LugarFeedback.Nombre);
 
@@ -147,7 +149,7 @@ namespace Persistencia.Clases_Trabajo
                     }
 
 
-                    UnFeedbackLugar = new FeedbackLugar(IdFeedback, Convert.ToString(oReader["NombreFeedback"]), unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)oReader["NombreLugar"]));
+                    UnFeedbackLugar = new FeedbackLugar(IdFeedback, Convert.ToString(oReader["NombreFeedback"]),Convert.ToString(oReader["MensajeFeedback"]) ,unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)oReader["NombreLugar"]));
                 }
 
                 oReader.Close();
@@ -198,7 +200,7 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
+                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
                         listaFeedbackLugar.Add(UnFeedbackLugar);
                     }
                 }
@@ -251,7 +253,7 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
+                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
                         listaFeedbacklugar.Add(UnFeedbackLugar);
                     }
                 }
@@ -304,7 +306,7 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
+                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
                         listaFeedbackLugar.Add(UnFeedbackLugar);
                     }
                 }
@@ -358,7 +360,7 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
+                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
                         listaFeedbackLugar.Add(UnFeedbackLugar);
                     }
                 }

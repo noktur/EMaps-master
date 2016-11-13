@@ -71,7 +71,7 @@ namespace Wcf_Sistema
 
         #endregion
 
-        #region Ubicacion
+        #region Ubicaciones
 
         void IServicioEvento.AltaUbicacion(Ubicacion U)
         {
@@ -79,21 +79,37 @@ namespace Wcf_Sistema
             {
                 FabricaLogica.getLogicaUbicacion().Alta((Pais)U);
             }
-            else if (U is Ciudad)
+            else if(U is Ciudad)
             {
                 FabricaLogica.getLogicaUbicacion().Alta((Ciudad)U);
             }
+
         }
 
         void IServicioEvento.ModificarUbicacion(Ubicacion U)
         {
-            FabricaLogica.getLogicaUbicacion().Modificar(U);
+            if (U is Pais)
+            {
+                FabricaLogica.getLogicaUbicacion().Modificar((Pais)U);
+            }
+            else if (U is Ciudad)
+            {
+                FabricaLogica.getLogicaUbicacion().Modificar((Ciudad)U);
+            }
         }
 
         void IServicioEvento.EliminarUbicacion(Ubicacion U)
         {
-            FabricaLogica.getLogicaUbicacion().Eliminar(U);
+            if (U is Pais)
+            {
+                FabricaLogica.getLogicaUbicacion().Eliminar((Pais)U);
+            }
+            else if (U is Ciudad)
+            {
+                FabricaLogica.getLogicaUbicacion().Eliminar((Ciudad)U);
+            }
         }
+
 
         Pais IServicioEvento.BuscarPais(string pNombre)
         {

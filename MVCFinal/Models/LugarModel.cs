@@ -11,7 +11,6 @@ namespace MVCFinal.Models
 {
     public class LugarModel
     {
-        public int _IdLugar { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
@@ -30,5 +29,9 @@ namespace MVCFinal.Models
         public float CoordenadaX { get; set; }
 
         public float CoordenadaY { get; set; }
+
+        public List<EntidadesCompartidas.Lugar> milistaLugar { get; set; }
+
+        public List<EntidadesCompartidas.Ciudad> milistaCiudad { get; set; }
     }
 }
