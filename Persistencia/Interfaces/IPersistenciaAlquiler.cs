@@ -15,5 +15,7 @@ namespace Persistencia.Interfaces
         List<Alquiler> ListarAlquileres();
         List<Alquiler> ListarAlquileresLugar(string NombreLugar);
 
+        List<Alquiler> ListarAlquileresOrganizador(string Ci);
+
     }
 }

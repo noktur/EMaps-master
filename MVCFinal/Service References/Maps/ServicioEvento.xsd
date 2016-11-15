@@ -25,19 +25,17 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="BuscarLugarxId">
+  <xs:element name="BuscarLugar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="IdLugar" type="xs:int" />
-        <xs:element minOccurs="0" name="NombreCiudad" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="NombrePais" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NombreLugar" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="BuscarLugarxIdResponse">
+  <xs:element name="BuscarLugarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarLugarxIdResult" nillable="true" type="q3:Lugar" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarLugarResult" nillable="true" type="q3:Lugar" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

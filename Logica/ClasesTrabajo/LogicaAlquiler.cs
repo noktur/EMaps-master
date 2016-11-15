@@ -48,6 +48,11 @@ namespace Logica.ClasesTrabajo
           return  FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresLugar(NombreLugar);
         }
 
+        public List<Alquiler> ListarAlquileresOrganizador(string Ci)
+        {
+            return FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresOrganizador(Ci);
+        }
+
 
         #endregion
     }

@@ -114,7 +114,7 @@ namespace MVCFinal.Controllers
                  Ciudad.CoordenadaX = float.Parse(collection["CoordenadaX"],System.Globalization.CultureInfo.InvariantCulture);
                  Ciudad.CoordenadaY = float.Parse(collection["CoordenadaY"],System.Globalization.CultureInfo.InvariantCulture);
 
-                 CreoServicio().AltaUbicacion(convertirModelCiudad(Ciudad));
+                 //CreoServicio().AltaCiudad(convertirModelCiudad(Ciudad));
 
                  Session["Ciudad"] = Ciudad;
                  

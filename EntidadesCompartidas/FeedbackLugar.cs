@@ -14,8 +14,10 @@ namespace EntidadesCompartidas
         private int _IdFeedbackLugar;
         private string _NombreFeedback;
         private Usuario _UsuarioFeedback;
+        private string _Mensaje;
         private DateTime _FechaRealizado;
         private Lugar _LugarFeedback;
+
 
        #endregion
 
@@ -56,16 +58,24 @@ namespace EntidadesCompartidas
             set { _LugarFeedback= value;}
         }
 
+        [DataMember]
+        public string Mensaje
+        {
+            get { return _Mensaje; }
+            set { _Mensaje = value; }
+        }
+
        #endregion
 
        #region Constructores
 
-        public FeedbackLugar(int pIdFeedbackLugar,string pNombreFeedback,Usuario pUsuarioFeedback, DateTime pFechaRealizado,Lugar pLugarFeedback)
+        public FeedbackLugar(int pIdFeedbackLugar,string pNombreFeedback,string pMensaje,Usuario pUsuarioFeedback, DateTime pFechaRealizado,Lugar pLugarFeedback)
         {
             IdFeedbackLugar=pIdFeedbackLugar;
             NombreFeedback=pNombreFeedback;
             UsuarioFeedback=pUsuarioFeedback;
             FechaRealizado=pFechaRealizado;
+            Mensaje = pMensaje;
             LugarFeedback=pLugarFeedback;
         }
 
@@ -74,6 +84,7 @@ namespace EntidadesCompartidas
             IdFeedbackLugar=0;
             NombreFeedback="";
             UsuarioFeedback=null;
+            Mensaje = "";
             FechaRealizado=DateTime.Now;
             LugarFeedback=null;
         }

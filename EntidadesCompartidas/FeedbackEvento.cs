@@ -13,6 +13,7 @@ namespace EntidadesCompartidas
         private int _IdFeedbackEvento;
         private string _NombreFeedback;
         private Usuario _UsuarioFeedback;
+        private string _Mensaje;
         private DateTime _FechaRealizado;
         private Evento _EventoFeedback;
 
@@ -55,16 +56,24 @@ namespace EntidadesCompartidas
             set { _EventoFeedback= value;}
         }
 
+        [DataMember]
+        public string Mensaje
+        {
+            get { return _Mensaje; }
+            set { _Mensaje = value; }
+        }
+
        #endregion
 
        #region Constructores
 
-        public FeedbackEvento(int pIdFeedbackEvento,string pNombreFeedback,Usuario pUsuarioFeedback, DateTime pFechaRealizado,Evento pEventoFeedback)
+        public FeedbackEvento(int pIdFeedbackEvento,string pNombreFeedback,string pMensaje,Usuario pUsuarioFeedback, DateTime pFechaRealizado,Evento pEventoFeedback)
         {
             IdFeedbackEvento=pIdFeedbackEvento;
             NombreFeedback=pNombreFeedback;
             UsuarioFeedback=pUsuarioFeedback;
             FechaRealizado=pFechaRealizado;
+            Mensaje = pMensaje;
             EventoFeedback=pEventoFeedback;
         }
 
@@ -73,6 +82,7 @@ namespace EntidadesCompartidas
             IdFeedbackEvento=0;
             NombreFeedback="";
             UsuarioFeedback=null;
+            Mensaje = "";
             FechaRealizado=DateTime.Now;
             EventoFeedback=null;
         }

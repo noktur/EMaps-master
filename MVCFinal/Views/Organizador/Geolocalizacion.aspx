@@ -34,6 +34,7 @@
                                 <!-- /.col -->
                                 <!-- /.col -->
                                 <div class="col-md-10 col-md-offset-1" data-pg-collapsed>
+
                                     <div class="map min-height-500px"></div>                                                                          
                                 </div>
                             </div>

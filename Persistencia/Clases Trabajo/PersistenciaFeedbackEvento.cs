@@ -38,6 +38,7 @@ namespace Persistencia
             cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
             cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
+            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
             cmd.Parameters.AddWithValue("pIdEvento", e.EventoFeedback.IdEvento);
 
 
@@ -65,6 +66,7 @@ namespace Persistencia
             cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackEvento);
             cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
             cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
+            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
             cmd.Parameters.AddWithValue("pIdEvento", e.EventoFeedback.IdEvento);
 
@@ -146,7 +148,7 @@ namespace Persistencia
                     }
 
 
-                    UnFeedbackEvento = new FeedbackEvento(IdFeedback, Convert.ToString(oReader["NombreFeedback"]), unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)oReader["IdEvento"]));
+                    UnFeedbackEvento = new FeedbackEvento(IdFeedback, Convert.ToString(oReader["NombreFeedback"]),Convert.ToString(oReader["MensajeFeedback"]), unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)oReader["IdEvento"]));
                 }
 
                 oReader.Close();
@@ -197,7 +199,7 @@ namespace Persistencia
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)lector["IdEvento"]));
+                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]),Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)lector["IdEvento"]));
                         listaFeedbackEvento.Add(UnFeedbackEvento);
                     }
                 }
@@ -250,7 +252,7 @@ namespace Persistencia
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
                         }
 
-                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)lector["IdEvento"]));
+                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]),Convert.ToString(lector["MensajeFeedback"]) ,unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento((int)lector["IdEvento"]));
                         listaFeedbackEvento.Add(UnFeedbackEvento);
                     }
                 }
@@ -303,7 +305,7 @@ namespace Persistencia
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento(IdEvento));
+                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]),Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento(IdEvento));
                         listaFeedbackEvento.Add(UnFeedbackEvento);
                     }
                 }
@@ -357,7 +359,7 @@ namespace Persistencia
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
                         }
 
-                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento(IdEvento));
+                        UnFeedbackEvento = new FeedbackEvento(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaEvento.GetInstancia().BuscarEvento(IdEvento));
                         listaFeedbackEvento.Add(UnFeedbackEvento);
                     }
                 }

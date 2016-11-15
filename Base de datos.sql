@@ -12,7 +12,7 @@ create table Usuarios
     NombreUsuario varchar(30) not null,
     Ci varchar(30) not null primary key, 
     Email varchar(50) not null,
-    Eliminado boolean default 0
+    Eliminado boolean
 );
 
 create table Clientes
@@ -44,12 +44,12 @@ Create table Ubicacion
 	Nombre varchar(30) not null primary key,
 	cordX real,
 	cordY real,
-    Eliminado boolean default 0
+    Eliminado boolean
 );
 create table Pais 
 (
     NombrePais varchar(30) not null primary key,
-    CodPais varchar(2) not null,
+    CodPais varchar(4) not null,
     foreign key (NombrePais) references Ubicacion(Nombre)
 );
 
@@ -67,7 +67,7 @@ create table Mapa
     IdMapa int AUTO_INCREMENT not null primary key,
 	Nombre varchar(30) not null,
 	Imagen varbinary(300),
-    Eliminado boolean default 0
+    Eliminado boolean
 );
 
 create table Punto 
@@ -75,7 +75,7 @@ create table Punto
     IdPunto int AUTO_INCREMENT not null primary key,
 	cordX real,
 	cordY real,
-    Eliminado boolean default 0
+    Eliminado boolean
 );
 
 create table Area 
@@ -83,7 +83,7 @@ create table Area
     IdArea INT AUTO_INCREMENT not null ,
     IdMapa int not null,
 	Nombre varchar(30) not null,
-    Eliminado boolean default 0,
+    Eliminado boolean,
     IdPunto int not null,
     foreign key (IdPunto) references Punto (IdPunto),
     foreign key (IdMapa) references Mapa (IdMapa),
@@ -99,7 +99,7 @@ create table Lugar
 	UbicacionCiudad varchar(30) not null,
     CordX real not null,
     CordY real not null,
-    Eliminado boolean default 0,
+    Eliminado boolean,
     IdMapa int not null,
 	CiDueño varchar(30) not null,
     foreign key (CiDueño) references Dueño (CiDueño),
@@ -147,6 +147,8 @@ create table Evento
   NombreLugar varchar(30) ,
   CiOrganizador varchar(30) not null,
   NombreCategoria varchar(30) not null,
+  CapacidadDisponible int not null,
+  EstadoReserva boolean default false,
   foreign key (NombreCategoria) references categoria (NombreCategoria),
   foreign key (NombreLugar) references Lugar (NombreLugar),
   foreign key (CiOrganizador) references Organizador(CiOrganizador),
@@ -154,6 +156,18 @@ create table Evento
   Eliminado boolean default 0
 );
 
+create table Reserva
+(
+IdReserva int not null AUTO_INCREMENT,
+ClienteReserva varchar(30) not null,
+EventoReservado int not null,
+CantidadReserva int not null,
+FechaReserva timestamp not null,
+FechaEmision timestamp not null,
+primary key(IdReserva,ClienteReserva,EventoReservado),
+foreign key (ClienteReserva) references Clientes(CiCliente),
+foreign key (EventoReservado) references Evento(IdEvento)
+);
 
 
 create table Entrada
@@ -169,6 +183,7 @@ foreign key (CiCliente) references Clientes(CiCliente),
 primary key(IdEntrada,IdEvento,CiCliente)
 );
 
+
 create table MedioPago
 ( 
 IdMedioPago int unique,
@@ -181,6 +196,7 @@ create table FeedbackLugar
 ( 
 IdFeedback int  AUTO_INCREMENT,
 NombreFeedback varchar(30),
+MensajeFeedback varchar(100),
 CiUsuario varchar(30),
 FechaRealizado timestamp,
 NombreLugar varchar(30),
@@ -194,6 +210,7 @@ create table FeedbackEvento
 IdFeedback int  AUTO_INCREMENT,
 NombreFeedback varchar(30),
 CiUsuario varchar(30),
+MensajeFeedback varchar(100),
 FechaRealizado timestamp,
 IdEvento int,
 foreign key (CiUsuario) references Usuarios(Ci),
@@ -209,8 +226,8 @@ CREATE PROCEDURE AltaAdmin (pNombre VARCHAR(30), pContraseña Varchar(30),pNombr
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiAdmin,pEmail);
-INSERT INTO Admin(CiAdmin) values(pCiAdmin);
+INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiAdmin,pEmail);
+INSERT INTO Admin values(pCiAdmin);
 		COMMIT;
 END //
 DELIMITER;
@@ -239,10 +256,10 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE BuscarAdmin(pCiAdmin varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Admin
-ON Usuarios.Ci =Admin.CiAdmin
-WHERE Admin.CiAdmin=pCiAdmin;
+SELECT *
+FROM Usuarios u JOIN Admin a
+ON u.Ci =a.CiAdmin
+WHERE a.Ci=pCiAdmin;
 END //
 DELIMITER;
 
@@ -250,19 +267,19 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE AdminLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Admin
-ON Usuarios.Ci = Admin.CiAdmin
-WHERE Usuarios.NombreUsuario=pNombreUsuario and Usuarios.Contraseña=pContraseña;
+SELECT *
+FROM Usuarios u JOIN Admin a
+ON u.Ci =a.CiAdmin
+WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
 END //
 DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE ListarAdmin()
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Admin
-ON Usuarios.Ci= Admin.CiAdmin;
+SELECT *
+FROM Usuarios u JOIN Admin a
+ON u.Ci=a.CiAdmin;
 END//
 DELIMITER;
 
@@ -274,11 +291,13 @@ CREATE PROCEDURE AltaCliente (pNombre VARCHAR(30), pContraseña Varchar(30),pNom
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiCliente,pEmail);
-INSERT INTO Clientes(CiCliente) values(pCiCliente);
+INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiCliente,pEmail);
+INSERT INTO Clientes values(pCiCliente);
 		COMMIT;
 END //
 DELIMITER;
+
+
 
 
 DELIMITER //
@@ -304,10 +323,10 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE BuscarCliente(pCiCliente varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Clientes
-ON Usuarios.Ci = Clientes.CiCliente
-WHERE Clientes.CiCliente = pCiCliente;
+SELECT *
+FROM Usuarios u JOIN Clientes c
+ON u.Ci =c.CiCliente
+WHERE c.CiCliente=pCiCliente;
 END //
 DELIMITER;
 
@@ -315,19 +334,19 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE ClienteLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Clientes
-ON Usuarios.Ci = Clientes.CiCliente
-WHERE Usuarios.NombreUsuario=pNombreUsuario and Usuarios.Contraseña=pContraseña;
+SELECT *
+FROM Usuarios u JOIN Clientes c
+ON u.Ci =c.CiCliente
+WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
 END //
 DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE ListarClientes()
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Clientes
-ON Usuarios.Ci= Clientes.CiCliente;
+SELECT *
+FROM Usuarios u JOIN Clientes c
+ON u.Ci=c.CiCliente;
 END//
 DELIMITER;
 
@@ -339,8 +358,8 @@ CREATE PROCEDURE AltaDueño (pNombre VARCHAR(30), pContraseña Varchar(30),pNomb
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiDueño,pEmail);
-INSERT INTO Dueño(CiDueño) values(pCiDueño);
+INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiDueño,pEmail);
+INSERT INTO Dueño values(pCiDueño);
 		COMMIT;
 END //
 DELIMITER;
@@ -369,10 +388,10 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE BuscarDueño(pCiDueño varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Dueño
-ON Usuarios.Ci = Dueño.CiDueño
-WHERE Dueño.CiDueño = pCiDueño;
+SELECT *
+FROM Usuarios u JOIN Dueño d
+ON u.Ci =d.CiDueño
+WHERE d.CiDueño=pCiDueño;
 END //
 DELIMITER;
 
@@ -380,19 +399,19 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE DueñoLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Dueño
-ON Usuarios.Ci = Dueño.CiDueño
-WHERE Usuarios.NombreUsuario=pNombreUsuario and Usuarios.Contraseña=pContraseña;
+SELECT *
+FROM Usuarios u JOIN Dueño c
+ON u.Ci =c.CiDueño
+WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
 END //
 DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE ListarDueños()
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Dueño
-ON Usuarios.Ci= Dueño.CiDueño and Usuarios.Eliminado=0;
+SELECT *
+FROM Usuarios u JOIN Dueño d
+ON u.Ci=d.CiDueño and u.Eliminado=0;
 END//
 DELIMITER;
 
@@ -404,8 +423,8 @@ CREATE PROCEDURE AltaOrganizador (pNombre VARCHAR(30), pContraseña Varchar(30),
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiOrganizador,pEmail);
-INSERT INTO Organizador(CiOrganizador) values(pCiOrganizador);
+INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiOrganizador,pEmail);
+INSERT INTO Organizador values(pCiOrganizador);
 		COMMIT;
 END //
 DELIMITER;
@@ -434,10 +453,10 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE BuscarOrganizador(pCiOrganizador varchar(30))
 BEGIN
-SELECT Usuario.*
-FROM Usuarios JOIN Organizador
-ON Usuarios.Ci = Organizador.CiOrganizador
-WHERE Organizador.CiOrganizador=pCiOrganizador and Usuarios.Eliminado=0;
+SELECT *
+FROM Usuarios u JOIN Organizador o
+ON u.Ci =o.CiOrganizador
+WHERE o.CiOrganizador=pCiOrganizador and u.Eliminado=0;
 END //
 DELIMITER;
 
@@ -445,32 +464,35 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE OrganizadorLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Organizador
-ON Usuarios.Ci = Organizador.CiOrganizador
-WHERE Usuarios.NombreUsuario=pNombreUsuario and Usuarios.Contraseña=pContraseña;
+SELECT *
+FROM Usuarios u JOIN Organizador o
+ON u.Ci =o.CiOrganizador
+WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
 END //
 DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE ListarOrganizadores()
 BEGIN
-SELECT Usuarios.*
-FROM Usuarios JOIN Organizador
-ON Usuarios.Ci= Organizador.CiOrganizador and Usuarios.Eliminado=0;
+SELECT *
+FROM Usuarios u JOIN Organizador o
+ON u.Ci=o.CiOrganizador and u.Eliminado=0;
 END//
 DELIMITER;
+
+
 
 -- PROCEDIMIENTOS ALMACENADOS PAIS
 
 
 DELIMITER //
-CREATE PROCEDURE AltaPais (pNombre VARCHAR(30),pCodPais varchar(2),pCordX real,pCordY real)
+CREATE PROCEDURE AltaPais (pNombre VARCHAR(30),pCodPais varchar(4),pCordX real,pCordY real)
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Ubicacion(Nombre,cordX,cordY) VALUES(pNombre,pCordx,pCordy);
-INSERT INTO Pais(NombrePais,CodPais) VALUES(pNombre,pCodPais);
+INSERT INTO Ubicacion(Ubicacion.Nombre,Ubicacion.cordX,Ubicacion.cordY) VALUES(pNombre,pCordx,pCordy);
+INSERT INTO Pais(Pais.NombrePais,Pais.CodPais) VALUES(pNombre,pCodPais);
+UPDATE Ubicacion SET Eliminado=0;
 COMMIT;
 END//
 DELIMITER;
@@ -517,8 +539,9 @@ CREATE PROCEDURE AltaCiudad (pNombre VARCHAR(30),pCordX real,pCordY real,pNombre
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Ubicacion(Nombre,cordX,cordY) VALUES(pNombre,pCordx,pCordy);
-INSERT INTO Ciudad(NombrePais,NombreCiudad) VALUES(pNombrePais,pNombre);
+INSERT INTO Ubicacion(Ubicacion.Nombre,Ubicacion.cordX,Ubicacion.cordY) VALUES(pNombre,pCordx,pCordy);
+INSERT INTO Ciudad(Ciudad.NombrePais,Ciudad.NombreCiudad) VALUES(pNombrePais,pNombre);
+UPDATE Ubicacion SET Eliminado=0;
 COMMIT;
 END//
 DELIMITER;
@@ -796,6 +819,7 @@ DELIMITER //
 CREATE PROCEDURE AltaMapa (pNombre varchar(30),pImagen varbinary(300))
 BEGIN
 INSERT INTO Mapa(IdMapa,Nombre,Imagen) VALUES(0,pNombre,pImagen);
+UPDATE Mapa SET Eliminado=0;
 END//
 DELIMITER;
 
@@ -937,7 +961,7 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarEventoPorFecha()
+CREATE PROCEDURE ListarEventosPorFecha()
 BEGIN
 SELECT *
 FROM Evento
@@ -945,6 +969,8 @@ where evento.Eliminado=0
 order by  UNIX_TIMESTAMP(evento.FechaInicio) desc;
 END//
 DELIMITER;
+
+
 
 DELIMITER //
 CREATE PROCEDURE ListarEventosOrganizador(pCiOrganizador varchar(30))
@@ -964,11 +990,22 @@ SELECT *
 FROM organizador 
 join evento 
 on Organizador.CiOrganizador=evento.CiOrganizador
-join Entrada 
-on evento.IdEvento=entrada.IdEvento
+join Reserva
+on evento.IdEvento=Reserva.EventoReservado
 join clientes
-on entrada.CiCliente=clientes.CiCliente
-where  evento.Eliminado=0;
+on Reserva.ClienteReserva=clientes.CiCliente
+where  evento.Eliminado=0 and evento.EstadoReserva=1;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarEventosDisponibles()
+BEGIN
+SELECT *
+FROM evento
+join reserva
+on evento.IdEvento=Reserva.EventoReservado
+where evento.Eliminado=0 and evento.EstadoReserva=0;
 END//
 DELIMITER;
 
@@ -983,7 +1020,84 @@ join evento
 on lugar.NombreLugar=evento.NombreLugar
 where evento.NombreLugar=pNombreLugar and evento.Eliminado=0;
 END//
+DELIMITER;
 
+-- PROCEDIMIENTOS ALMACENADOS RESERVA
+
+DELIMITER //
+CREATE PROCEDURE AltaReserva (pClienteReserva varchar(30),pIdEvento int,pCantidad int,pFechaReserva timestamp,pFechaEmision timestamp)
+BEGIN
+INSERT INTO Reserva(IdReserva,ClienteReserva,EventoReservado,CantidadReserva,FechaReserva,FechaEmision) VALUES(0,pClienteReserva,pIdEvento,pCantidad,pFechaReserva,pFechaEmision);
+UPDATE Evento set EstadoReserva=1 where evento.IdEvento=reserva.EventoReservado;
+END//
+
+DELIMITER //
+CREATE PROCEDURE ModificarReserva (pIdReserva int,pClienteReserva varchar(30),pIdEvento int,pCantidad int,pFechaReserva timestamp,pFechaEmision timestamp)
+BEGIN
+UPDATE reserva SET ClienteReserva=pClienteReserva,EventoReservado=pIdEvento,CantidadReserva=pCantidad,FechaReserva=pFechaReserva,FechaEmision=pFechaEmision WHERE IdReserva=pIdReserva;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE EliminarReserva (pIdReserva int,pIdEvento int)
+BEGIN
+delete from reserva where IdReserva=pIdReserva;
+UPDATE EVENTO SET evento.EstadoReserva=1 where evento.IdEvento=reserva.EventoReservado;
+END//
+DELIMITER;
+
+
+DELIMITER //
+CREATE PROCEDURE BuscarReserva(pIdReserva int)
+BEGIN
+SELECT *
+FROM reserva
+WHERE reserva.IdReserva=pIdReserva and evento.EstadoReserva=1;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorFecha()
+BEGIN
+SELECT *
+FROM reserva
+where evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(reserva.FechaEmision) desc;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorCliente(pCiCliente varchar(30))
+BEGIN
+SELECT *
+FROM clientes
+join Reserva
+on clientes.CiCliente=Reserva.ClienteReserva
+where Reserva.ClienteReserva=pCiCliente and evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(reserva.FechaEmision) desc;
+END//
+
+DELIMITER //
+CREATE PROCEDURE ListarReservasPorEvento(pIdEvento int)
+BEGIN
+SELECT *
+FROM Evento
+join reserva
+on evento.IdEvento=reserva.EventoReservado
+where reserva.EventoReservado=pIdEvento and evento.EstadoReserva=1
+order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
+END//
+
+
+DELIMITER //
+CREATE PROCEDURE ComprobarEstadoEvento(pIdEvento int,pFechaInicio timestamp,pFechaFin timestamp)
+BEGIN
+SELECT *
+FROM Evento 
+where Evento.IdEvento=pIdEvento and evento.FechaInicio >= pFechaFin 
+  AND evento.FechaFin <= pFechaInicio;
+END//
+DELIMITER;
 
 
 -- PROCEDIMIENTOS ALMACENADOS ENTRADA
@@ -1001,18 +1115,6 @@ BEGIN
 UPDATE Entrada SET Precio=pPrecio,IdEvento=pIdEvento,CiCliente=pCiCliente,Cantidad=pCantidad,FechaEmision=pFechaEmision WHERE IdEntrada=pIdEntrada;
 END//
 DELIMITER;
-
-
-DELIMITER //
-CREATE PROCEDURE ComprobarEstadoEvento(pIdEvento int,pFechaInicio timestamp,pFechaFin timestamp)
-BEGIN
-SELECT *
-FROM Evento 
-where Evento.IdEvento=pIdEvento and evento.FechaInicio >= pFechaFin 
-  AND evento.FechaFin <= pFechaInicio;
-END//
-DELIMITER;
-
 
 DELIMITER //
 CREATE PROCEDURE EliminarEntrada (pIdEntrada int,pIdEvento int)
@@ -1065,16 +1167,16 @@ END//
 -- PROCEDIMIENTOS ALMACENADOS FeedbackLugar
 
 DELIMITER //
-CREATE PROCEDURE AltaFeedbackLugar (pNombreFeedback varchar(30),pCiUsuario varchar(30),pFechaRealizado timestamp,pNombreLugar varchar(30))
+CREATE PROCEDURE AltaFeedbackLugar (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pNombreLugar varchar(30))
 BEGIN
-INSERT INTO feedbacklugar(IdFeedback,NombreFeedback,CiUsuario,FechaRealizado,NombreLugar) VALUES(0,pNombreFeedback,pCiUsuario,pFechaRealizado,pNombreLugar);
+INSERT INTO feedbacklugar(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,NombreLugar) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pNombreLugar);
 END//
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarFeedbackLugar (IdFeedback int,pNombreFeedback varchar(30),pCiUsuario varchar(30),pFechaRealizado timestamp,pNombreLugar varchar(30))
+CREATE PROCEDURE ModificarFeedbackLugar (IdFeedback int,pNombreFeedback varchar(30),pMensaje varchar(100),pCiUsuario varchar(30),pFechaRealizado timestamp,pNombreLugar varchar(30))
 begin
-UPDATE feedbacklugar SET NombreFeedback=pNombreFeedback,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado,NombreLugar=pNombreLugar WHERE IdFeedback=pIdFeedback;
+UPDATE feedbacklugar SET NombreFeedback=pNombreFeedback,MensajeFeedback=pMensaje,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado,NombreLugar=pNombreLugar WHERE IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
@@ -1139,16 +1241,16 @@ END//
 -- PROCEDIMIENTOS ALMACENADOS FeedbackEvento
 
 DELIMITER //
-CREATE PROCEDURE AltaFeedbackEvento (pNombreFeedback varchar(30),pCiUsuario varchar(30),pFechaRealizado timestamp,pIdEvento int)
+CREATE PROCEDURE AltaFeedbackEvento (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
 BEGIN
-INSERT INTO feedbackEvento(IdFeedback,NombreFeedback,CiUsuario,FechaRealizado,IdEvento) VALUES(0,pNombreFeedback,pCiUsuario,pFechaRealizado,pIdEvento);
+INSERT INTO feedbackEvento(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,IdEvento) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pIdEvento);
 END//
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarFeedbackEvento (pIdFeedback int,pNombreFeedback varchar(30),pCiUsuario varchar(30),pFechaRealizado timestamp,pIdEvento int)
+CREATE PROCEDURE ModificarFeedbackEvento (pIdFeedback int,pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
 begin
-UPDATE feedbackEvento SET NombreFeedback=pNombreFeedback,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado,IdEvento=pIdEvento WHERE IdFeedback=pIdFeedback;
+UPDATE feedbackEvento SET NombreFeedback=pNombreFeedback,CiUsuario=pCiUsuario,MensajeFeedback=pMensaje,FechaRealizado=pFechaRealizado,IdEvento=pIdEvento WHERE IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
@@ -1230,10 +1332,4 @@ SELECT *
 FROM categoria;
 END//
 
-Call AltaCliente('Ruben', '1234','Ruber','11111111','Kappita@gmail.com');//
-
-Call AltaAdmin('Admin','admin','admin','00000000','admin@gmail.com');//
-Call BuscarAdmin('00000000');//
-Call AdminLogueo('admin','admin');//
-select * from usuarios
-
+call AltaCliente('a','matiasmelfi','la','aasdasd','asdasd@fasdasd')

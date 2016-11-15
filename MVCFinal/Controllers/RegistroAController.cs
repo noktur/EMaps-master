@@ -31,7 +31,7 @@ namespace MVCFinal.Controllers
         //
         // GET: /RegistroAdmin/
 
-        public ActionResult RegistroAdmin(MVCFinal.Models.RegistroAdmin model)
+        public ActionResult RegistroAdmin(MVCFinal.Models.AdminModel model)
         {
             return View();
         }
@@ -43,7 +43,7 @@ namespace MVCFinal.Controllers
 
             try
             {
-                MVCFinal.Models.RegistroAdmin Usuario = new Models.RegistroAdmin();
+                MVCFinal.Models.AdminModel Usuario = new Models.AdminModel();
 
                 Usuario.Ci = Convert.ToString(collection["Ci"]);
                 Usuario.Email = Convert.ToString(collection["Email"]);
@@ -65,7 +65,7 @@ namespace MVCFinal.Controllers
         }
 
 
-        public EntidadesCompartidas.Admin convertirModelAdmin(MVCFinal.Models.RegistroAdmin model)
+        public EntidadesCompartidas.Admin convertirModelAdmin(MVCFinal.Models.AdminModel model)
         {
             EntidadesCompartidas.Admin p = new EntidadesCompartidas.Admin();
 
