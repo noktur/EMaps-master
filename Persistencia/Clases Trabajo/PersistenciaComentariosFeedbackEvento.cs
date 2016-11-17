@@ -9,19 +9,19 @@ using System.Text;
 
 namespace Persistencia.Clases_Trabajo
 {
-    internal class PersistenciaFeedbackLugar:IPersistenciaFeedbackLugar
+    internal class PersistenciaComentariosFeedbackEvento:IPersistenciaComentariosFeedbackEvento
     {
+        
+           #region Singleton
 
-         #region Singleton
+        private static PersistenciaComentariosFeedbackEvento _instancia = null;
 
-        private static PersistenciaFeedbackLugar _instancia = null;
+        private PersistenciaComentariosFeedbackEvento() { }
 
-        private PersistenciaFeedbackLugar() { }
-
-        public static PersistenciaFeedbackLugar GetInstancia()
+        public static PersistenciaComentariosFeedbackEvento GetInstancia()
         {
             if (_instancia == null)
-                _instancia = new PersistenciaFeedbackLugar();
+                _instancia = new PersistenciaComentariosFeedbackEvento();
 
             return _instancia;
         }
@@ -30,17 +30,17 @@ namespace Persistencia.Clases_Trabajo
 
         #region Operaciones
 
-        public void AltaMensajeFeebackLugar(FeedbackLugar e)
+        public void AltaComentarioFeebackEvento(ComentarioFeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AltaMensajeFeedbackLugar", con);
+            MySqlCommand cmd = new MySqlCommand("AltaComentarioFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
-            cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
+            cmd.Parameters.AddWithValue("pIdFeedback", e.MensajeAsociado.IdFeedbackEvento);
+            cmd.Parameters.AddWithValue("pAsunto", e.AsuntoComentario);
+            cmd.Parameters.AddWithValue("pMensajeComentario", e.Comentario);
+            cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioComentario);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
-            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
-            cmd.Parameters.AddWithValue("pNombreLugar", e.LugarFeedback.Nombre);
 
 
             try
@@ -58,18 +58,18 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-        public void ModificarMensajeFeebackLugar(FeedbackLugar e)
+        public void ModificarComentarioFeebackEvento(ComentarioFeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("ModificarMensajeFeedbackLugar", con);
+            MySqlCommand cmd = new MySqlCommand("ModificarComentarioFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackLugar);
-            cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
-            cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioFeedback.CI);
-            cmd.Parameters.AddWithValue("pMensaje", e.Mensaje);
+            cmd.Parameters.AddWithValue("pIdComentario", e.IdComentarioEvento);
+            cmd.Parameters.AddWithValue("pIdFeedback", e.MensajeAsociado.IdFeedbackEvento);
+            cmd.Parameters.AddWithValue("pAsunto", e.AsuntoComentario);
+            cmd.Parameters.AddWithValue("pMensajeComentario", e.Comentario);
+            cmd.Parameters.AddWithValue("pCiUsuario", e.UsuarioComentario);
             cmd.Parameters.AddWithValue("pFechaRealizado", e.FechaRealizado);
-            cmd.Parameters.AddWithValue("pNombreLugar", e.LugarFeedback.Nombre);
 
 
             try
@@ -87,13 +87,13 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-        public void BajaMensajeFeedbackLugar(FeedbackLugar e)
+        public void BajaComentarioFeedbackEvento(ComentarioFeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("EliminarMensajeFeedbackLugar", con);
+            MySqlCommand cmd = new MySqlCommand("EliminarComentarioFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackLugar);
+            cmd.Parameters.AddWithValue("pIdComentario", e.IdComentarioEvento);
 
             try
             {
@@ -110,15 +110,16 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-        public FeedbackLugar BuscarMensajeFeedbackLugar(int IdFeedback)
+        public ComentarioFeedbackEvento BuscarComentarioDeunMensajeFeedbackEvento(int IdFeedback,int IdComentario)
         {
-            FeedbackLugar UnFeedbackLugar = null;
+           ComentarioFeedbackEvento ComentarioFeedbackEvento = null;
 
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("BuscarMensajeFeebackLugar", con);
+            MySqlCommand cmd = new MySqlCommand("BuscarComentariodeUnMensajeFeebackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
             
             cmd.Parameters.AddWithValue("pIdFeedback", IdFeedback);
+            cmd.Parameters.AddWithValue("pIdComentario", IdComentario);
 
             try
             {
@@ -149,7 +150,7 @@ namespace Persistencia.Clases_Trabajo
                     }
 
 
-                    UnFeedbackLugar = new FeedbackLugar(IdFeedback, Convert.ToString(oReader["NombreFeedback"]),Convert.ToString(oReader["MensajeFeedback"]) ,unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)oReader["NombreLugar"]));
+                    ComentarioFeedbackEvento = new ComentarioFeedbackEvento(IdComentario, Convert.ToString(oReader["AsuntoComentario"]),Convert.ToString(oReader["MensajeComentario"]), unUsuario, Convert.ToDateTime(oReader["FechaRealizado"]),PersistenciaFeedbackEvento.GetInstancia().BuscarMensajeFeedbackEvento(IdFeedback));
                 }
 
                 oReader.Close();
@@ -162,16 +163,16 @@ namespace Persistencia.Clases_Trabajo
             {
                 con.Close();
             }
-            return UnFeedbackLugar;
+            return ComentarioFeedbackEvento;
         }
 
-        public List<FeedbackLugar> ListarMensajesFeedbackLugar()
+        public List<ComentarioFeedbackEvento> ListarComentariosFeedbackEvento()
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            FeedbackLugar UnFeedbackLugar = null;
-            List<FeedbackLugar> listaFeedbackLugar = new List<FeedbackLugar>();
+            ComentarioFeedbackEvento ComentarioFeedbackEvento = null;
+            List<ComentarioFeedbackEvento> listaComentariosFeedbackEvento = new List<ComentarioFeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackLugar", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarComentariosFeedbackEvento", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
 
             try
@@ -200,8 +201,8 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
-                        listaFeedbackLugar.Add(UnFeedbackLugar);
+                        ComentarioFeedbackEvento = new  ComentarioFeedbackEvento(Convert.ToInt32(lector["IdComentario"]), Convert.ToString(lector["AsuntoComentario"]),Convert.ToString(lector["MensajeComentario"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), PersistenciaFeedbackEvento.GetInstancia().BuscarMensajeFeedbackEvento((int)lector["IdFeedback"]));
+                        listaComentariosFeedbackEvento.Add(ComentarioFeedbackEvento);
                     }
                 }
                 lector.Close();
@@ -214,16 +215,16 @@ namespace Persistencia.Clases_Trabajo
             {
                 conexion.Close();
             }
-            return listaFeedbackLugar;
+            return listaComentariosFeedbackEvento;
         }
 
-        public List<FeedbackLugar> ListarMensajesFeedbackLugaresxUsuario(string CiUsuario)
+        public List<ComentarioFeedbackEvento> ListarComentariosFeedbackEventoxUsuario(string CiUsuario)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            FeedbackLugar UnFeedbackLugar = null;
-           List<FeedbackLugar> listaFeedbacklugar = new List<FeedbackLugar>();
+            ComentarioFeedbackEvento ComentarioFeedbackEvento = null;
+            List<ComentarioFeedbackEvento> listaComentariosFeedbackEvento = new List<ComentarioFeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackLugaresxUsuario", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarComentariosFeedbackEventoxUsuario", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("pCiUsuario", CiUsuario);
 
@@ -253,8 +254,8 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar((string)lector["NombreLugar"]));
-                        listaFeedbacklugar.Add(UnFeedbackLugar);
+                        ComentarioFeedbackEvento = new ComentarioFeedbackEvento(Convert.ToInt32(lector["IdComentario"]), Convert.ToString(lector["AsuntoComentario"]), Convert.ToString(lector["MensajeComentario"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), PersistenciaFeedbackEvento.GetInstancia().BuscarMensajeFeedbackEvento((int)lector["IdFeedback"]));
+                        listaComentariosFeedbackEvento.Add(ComentarioFeedbackEvento);
                     }
                 }
                 lector.Close();
@@ -267,18 +268,18 @@ namespace Persistencia.Clases_Trabajo
             {
                 conexion.Close();
             }
-            return listaFeedbacklugar;
+            return listaComentariosFeedbackEvento;
         }
 
-        public List<FeedbackLugar> ListarMensajesFeedbackdeUnLugar(string NombreLugar)
+        public List<ComentarioFeedbackEvento> ListarComentariosdeUnMensajeFeedbackEvento(int IdFeedback)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            FeedbackLugar UnFeedbackLugar = null;
-            List<FeedbackLugar> listaFeedbackLugar = new List<FeedbackLugar>();
+            ComentarioFeedbackEvento ComentarioFeedbackEvento = null;
+            List<ComentarioFeedbackEvento> listaComentariosFeedbackEvento = new List<ComentarioFeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackdeUnLugar", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarComentariosdeUnMensajeFeedbackEvento", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pNombreLugar", NombreLugar);
+            comando.Parameters.AddWithValue("pIdFeedback", IdFeedback);
 
             try
             {
@@ -306,8 +307,8 @@ namespace Persistencia.Clases_Trabajo
                             unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar((string)lector["CiUsuario"]);
                         }
 
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
-                        listaFeedbackLugar.Add(UnFeedbackLugar);
+                        ComentarioFeedbackEvento = new ComentarioFeedbackEvento(Convert.ToInt32(lector["IdComentario"]), Convert.ToString(lector["AsuntoComentario"]), Convert.ToString(lector["MensajeComentario"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), PersistenciaFeedbackEvento.GetInstancia().BuscarMensajeFeedbackEvento(IdFeedback));
+                        listaComentariosFeedbackEvento.Add(ComentarioFeedbackEvento);
                     }
                 }
                 lector.Close();
@@ -320,66 +321,11 @@ namespace Persistencia.Clases_Trabajo
             {
                 conexion.Close();
             }
-            return listaFeedbackLugar;
-        }
-
-        public List<FeedbackLugar> ListarMensajesFeedbackPorLugarYUsuario(string NombreLugar, string CiUsuario)
-        {
-            MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            FeedbackLugar UnFeedbackLugar = null;
-            List<FeedbackLugar> listaFeedbackLugar = new List<FeedbackLugar>();
-
-            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackPorLugarYUsuario", conexion);
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pNombreLugar", NombreLugar);
-            comando.Parameters.AddWithValue("pCiUsuario", CiUsuario);
-
-            try
-            {
-                conexion.Open();
-                MySqlDataReader lector = comando.ExecuteReader();
-                if (lector.HasRows)
-                {
-                    while (lector.Read())
-                    {
-
-                        Usuario unUsuario = null;
-
-                        unUsuario = Persistencia.Clases_Trabajo.PersistenciaAdmin.GetInstancia().Buscar(CiUsuario);
-
-                        if (unUsuario == null)
-                        {
-                            unUsuario = Persistencia.Clases_Trabajo.PersistenciaCliente.GetInstancia().Buscar(CiUsuario);
-                        }
-                        else if (unUsuario == null)
-                        {
-                            unUsuario = Persistencia.Clases_Trabajo.PersistenciaOrganizador.GetInstancia().Buscar(CiUsuario);
-                        }
-                        else if (unUsuario == null)
-                        {
-                            unUsuario = Persistencia.Clases_Trabajo.PersistenciaDueño.GetInstancia().Buscar(CiUsuario);
-                        }
-
-                        UnFeedbackLugar = new FeedbackLugar(Convert.ToInt32(lector["IdFeedback"]), Convert.ToString(lector["NombreFeedback"]), Convert.ToString(lector["MensajeFeedback"]), unUsuario, Convert.ToDateTime(lector["FechaRealizado"]), Persistencia.Clases_Trabajo.PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar));
-                        listaFeedbackLugar.Add(UnFeedbackLugar);
-                    }
-                }
-                lector.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return listaFeedbackLugar;
+            return listaComentariosFeedbackEvento;
         }
 
 
 
         #endregion
-
     }
 }

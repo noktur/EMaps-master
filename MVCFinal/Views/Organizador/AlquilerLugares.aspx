@@ -341,12 +341,13 @@
                         <div class="col-md-6">
                             <h2 class="text-uppercase" style="font-size:1.6em;font-family:Lora;">Aqui puedes llenar los datos para el alquiler de el lugar elegido</h2>
                             <p>A continuacion podras ver un mapa de donde esta ubicado el lugar elegido.</p>
-                            <img class="img-responsive map-img" src="http://placehold.it/600x300">
+                           <%-- Aqui ira un mapa que muestre el lugar elegido con su respectivo marker e info --%>
+                                                     
+                           <div id="map">
                         </div>
+
                         <div id="contact" class="form-container">
                             <fieldset>
-                                <div id="message"></div>
-                                <form id="Form1">
                                     <div class="form-group">
                                         <div class='input-group date margin-bottom25' id='datetimepicker6'>
                                             <input type='datetime-local' class="form-control">
@@ -362,7 +363,6 @@
                                             <input class="btn btn-success" type="submit" value="Comprobar Disponibilidad" name="BtnDisponible" />
                                         </div>
                                     </div>
-                                </form>
                             </fieldset>
                         </div>
                     </div>
@@ -370,7 +370,24 @@
                 </div>
                 <!-- /.container -->
             </div>
-
+                </div>
+                 <section class="content-block contact-1 offwhite">
+                <div class="container text-center">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="underlined-title text-uppercase">
+                            <h1 style="font-size:1.5em; font-family:Constantia;">AQUI PODRA APRECIAR LAS AREAS DE EL LUGAR ALQUILADO</h1>
+                            <hr>
+                            <h2 style="font-size:1.0em;">A continuacion se desplegara un mapa con el plano del lugar seleccionado para que usted agregue a un lugar las areas deseadas de un evento a su plano</h2>
+                        </div>
+                        
+                        <%--aQUI debajo ira el plano para que el organizador mire las areas de un lugar --%>
+                        <div id="map1" class="map min-height-500px"></div>
+                        <!-- /.form-container -->
+                    </div>
+                    <!-- /.col-sm-10 -->
+                </div>
+                <!-- /.container -->
+            </section>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">

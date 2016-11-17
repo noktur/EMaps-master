@@ -8,13 +8,13 @@ namespace Logica.Interfaces
 {
     public interface ILogicaFeedbackLugar
     {
-        void AltaFeebackLugar(FeedbackLugar e);
-        void ModificarFeebackLugar(FeedbackLugar e);
-        void BajaFeedbackLugar(FeedbackLugar e);
-        FeedbackLugar BuscarFeedbackLugar(int IdFeedback);
-        List<FeedbackLugar> ListarFeedbackLugar();
-        List<FeedbackLugar> ListarFeedbackLugaresxUsuario(string CiUsuario);
-        List<FeedbackLugar> ListarFeedbackdeUnLugar(string NombreLugar);
-        List<FeedbackLugar> ListarFeedbackPorLugarYUsuario(string NombreLugar, string CiUsuario);
+        void AltaMensajeFeebackLugar(FeedbackLugar e);
+        void ModificarMensajeFeebackLugar(FeedbackLugar e);
+        void BajaMensajeFeedbackLugar(FeedbackLugar e);
+        FeedbackLugar BuscarMensajeFeedbackLugar(int IdFeedback);
+        List<FeedbackLugar> ListarMensajesFeedbackLugar();
+        List<FeedbackLugar> ListarMensajesFeedbackLugaresxUsuario(string CiUsuario);
+        List<FeedbackLugar> ListarMensajesFeedbackdeUnLugar(string NombreLugar);
+        List<FeedbackLugar> ListarMensajesFeedbackPorLugarYUsuario(string NombreLugar, string CiUsuario);
     }
 }

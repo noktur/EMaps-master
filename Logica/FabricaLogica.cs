@@ -20,6 +20,11 @@ namespace Logica
             return (LogicaArea.GetInstancia());
         }
 
+        public static ILogicaReserva getLogicaReserva()
+        {
+            return (LogicaReserva.GetInstancia());
+        }
+
         public static ILogicaEntrada getLogicaEntrada()
         {
             return (LogicaEntrada.GetInstancia());
@@ -29,6 +34,16 @@ namespace Logica
         {
             return (LogicaEvento.GetInstancia());
         }
+
+        public static ILogicaComentariosFeedbackEvento getLogicaComentariosFeedbackEvento()
+        {
+            return (LogicaComentariosFeedbackEvento.GetInstancia());
+        }
+        public static ILogicaComentariosFeedbackLugar getLogicaComentariosFeedbackLugar()
+        {
+            return (LogicaComentariosFeedbackLugar.GetInstancia());
+        }
+
 
         public static ILogicaFeedbackEvento getLogicaFeedbackEvento()
         {

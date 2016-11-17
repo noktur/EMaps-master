@@ -25,37 +25,37 @@ namespace Logica.ClasesTrabajo
         #endregion
 
 
-        public void AltaFeebackLugar(FeedbackLugar e)
+        public void AltaMensajeFeebackLugar(FeedbackLugar e)
         {
-            FabricaPersistencia.getPersistenciaFeedbackLugar().AltaFeebackLugar(e);
+            FabricaPersistencia.getPersistenciaFeedbackLugar().AltaMensajeFeebackLugar(e);
         }
-        public void ModificarFeebackLugar(FeedbackLugar e)
+        public void ModificarMensajeFeebackLugar(FeedbackLugar e)
         {
-            FabricaPersistencia.getPersistenciaFeedbackLugar().ModificarFeebackLugar(e);
+            FabricaPersistencia.getPersistenciaFeedbackLugar().ModificarMensajeFeebackLugar(e);
         }
-        public void BajaFeedbackLugar(FeedbackLugar e)
+        public void BajaMensajeFeedbackLugar(FeedbackLugar e)
         {
-            FabricaPersistencia.getPersistenciaFeedbackLugar().BajaFeedbackLugar(e);
+            FabricaPersistencia.getPersistenciaFeedbackLugar().BajaMensajeFeedbackLugar(e);
         }
-        public FeedbackLugar BuscarFeedbackLugar(int IdFeedback)
+        public FeedbackLugar BuscarMensajeFeedbackLugar(int IdFeedback)
         {
-            return FabricaPersistencia.getPersistenciaFeedbackLugar().BuscarFeedbackLugar(IdFeedback);
+            return FabricaPersistencia.getPersistenciaFeedbackLugar().BuscarMensajeFeedbackLugar(IdFeedback);
         }
-        public List<FeedbackLugar> ListarFeedbackLugar()
+        public List<FeedbackLugar> ListarMensajesFeedbackLugar()
         {
-            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarFeedbackLugar();
+            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarMensajesFeedbackLugar();
         }
-        public List<FeedbackLugar> ListarFeedbackLugaresxUsuario(string CiUsuario)
+        public List<FeedbackLugar> ListarMensajesFeedbackLugaresxUsuario(string CiUsuario)
         {
-            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarFeedbackLugaresxUsuario(CiUsuario);
+            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarMensajesFeedbackLugaresxUsuario(CiUsuario);
         }
-        public List<FeedbackLugar> ListarFeedbackdeUnLugar(string NombreLugar)
+        public List<FeedbackLugar> ListarMensajesFeedbackdeUnLugar(string NombreLugar)
         {
-            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarFeedbackdeUnLugar(NombreLugar);
+            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarMensajesFeedbackdeUnLugar(NombreLugar);
         }
-        public List<FeedbackLugar> ListarFeedbackPorLugarYUsuario(string NombreLugar, string CiUsuario)
+        public List<FeedbackLugar> ListarMensajesFeedbackPorLugarYUsuario(string NombreLugar, string CiUsuario)
         {
-            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarFeedbackPorLugarYUsuario(NombreLugar,CiUsuario);
+            return FabricaPersistencia.getPersistenciaFeedbackLugar().ListarMensajesFeedbackPorLugarYUsuario(NombreLugar,CiUsuario);
         }
 
     }

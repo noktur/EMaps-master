@@ -12,6 +12,12 @@
 
           //Declaramos las variables que vamos a user
           var map = null;
+          var geocoder = null;
+          var marker = null;
+          var infoWindow = null;
+          var address = null;
+          var latLng = null;
+          var country = null;
 
           jQuery(document).ready(function ()
           {
@@ -21,11 +27,10 @@
 
           });
 
+
+
           function initialize()
           {
-
-
-
               var latLng = new google.maps.LatLng(-34.397, -56.161792);
 
               //Definimos algunas opciones del mapa a crear
@@ -38,6 +43,70 @@
               map = new google.maps.Map(document.getElementById("mapa"), myOptions);
 
           }
+
+          function ListarLugares()
+          {
+              var jsonlist = '<%= (Session["LugaresMapaJson"] == null ? null : (string)Session["LugaresMapaJson"])%>';
+               var jsonconvertido = null;
+               if (jsonlist != "") {
+                   jsonconvertido = jQuery.parseJSON(jsonlist);
+
+                   $.each(jsonconvertido, function (i, item) {
+
+                       createMarker(item.Nombre, item.CoordenadaX, item.CoordenadaY)
+
+                       infoWindow = new google.maps.InfoWindow();
+
+                       google.maps.event.addListener(marker, 'click', function () { openInfoWindow(marker, name); });
+
+
+                       marcadores.push(marker);
+                       marker.setMap(map);
+
+                   });
+
+               }
+
+               else
+               {
+                   alert("No Hay lugares en la Base de Datos");
+               }
+
+           }
+
+           function createMarker(name, lat, lng) {
+               var marker = new google.maps.Marker({
+                   position: new google.maps.LatLng(lat, lng),
+                   map: map,
+                   draggable: false,
+               });
+
+
+           }
+
+           function openInfoWindow(marker, content) {
+               var markerLatLng = marker.getPosition();
+               infoWindow.setContent([
+               '<div >',
+               'Las coordenadas del <b>',
+               content,
+               '</b> son:<br/>',
+               markerLatLng.lat(),
+               ', ',
+               markerLatLng.lng(),
+               '<br/>O puedes hacer click en cualquier otro lado para cerrarme.',
+               '</div>'
+               ].join(''));
+               infoWindow.open(map, marker);
+           }
+
+
+           function closeInfoWindow() {
+               infoWindow.close();
+           }
+
+
+
 
           function IrController()
           {
@@ -53,6 +122,7 @@
                   dataType: 'json',
                   success: function ()
                   {
+
                   }
               });
           }
@@ -99,7 +169,9 @@
                     
 
                     </div>
-                    <div id="mapa" style="display:none" class="map min-height-500px"></div>
+                    <div id="mapa" style="display:none" class="map min-height-500px">
+
+                    </div>
                     <div id="contact" class="form-container">   
                         <% using (Html.BeginForm()) { %>     
                          <div class="row">

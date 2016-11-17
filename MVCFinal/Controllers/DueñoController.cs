@@ -104,9 +104,10 @@ namespace MVCFinal.Controllers
             Lugar.milistaCiudad = listaCiudad;
             Lugar.milistaLugar = listaLugar;
             Session["ListaCiudad"] = listaCiudad;
-            Session["ListaLugares"] = listaLugar; 
-
-
+            Session["ListaLugares"] = listaLugar;
+            string JsonLugares = JsonConvert.SerializeObject(Lugar.milistaLugar);
+            Session["LugaresMapaJson"] = JsonLugares;
+            
             return View(Lugar);
 
             }

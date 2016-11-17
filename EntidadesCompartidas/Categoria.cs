@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EntidadesCompartidas
 {
+    [DataContract]
     public class Categoria
     {
         #region Atributos
