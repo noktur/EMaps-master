@@ -37,8 +37,7 @@ namespace Persistencia.Clases_Trabajo
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pPrecio", e.Precio);
-            cmd.Parameters.AddWithValue("pIdEvento", e.EventoAsociado.IdEvento);
-            cmd.Parameters.AddWithValue("pCiCliente", e.UnCliente.CI);
+            cmd.Parameters.AddWithValue("pIdReserva", e.ReservaEvento.IdReserva);
             cmd.Parameters.AddWithValue("pCantidad", e.Cantidad);
             cmd.Parameters.AddWithValue("pFechaEmision", e.FechaEmision);
 
@@ -66,8 +65,7 @@ namespace Persistencia.Clases_Trabajo
 
             cmd.Parameters.AddWithValue("pIdEntrada", e.IdEntrada);
             cmd.Parameters.AddWithValue("pPrecio", e.Precio);
-            cmd.Parameters.AddWithValue("pIdEvento", e.EventoAsociado.IdEvento);
-            cmd.Parameters.AddWithValue("pCiCliente", e.UnCliente.CI);
+            cmd.Parameters.AddWithValue("pIdReserva", e.ReservaEvento.IdReserva);
             cmd.Parameters.AddWithValue("pCantidad", e.Cantidad);
             cmd.Parameters.AddWithValue("pFechaEmision", e.FechaEmision);
 
@@ -93,7 +91,8 @@ namespace Persistencia.Clases_Trabajo
             MySqlCommand cmd = new MySqlCommand("EliminarEntrada", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pIEvento", e.IdEntrada);
+            cmd.Parameters.AddWithValue("pIdEntrada", e.IdEntrada);
+            cmd.Parameters.AddWithValue("pIdReserva", e.ReservaEvento.IdReserva);
 
 
             try
@@ -127,7 +126,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnaEntrada = new Entrada(IdEntrada,Convert.ToDouble(oReader["Precio"]),PersistenciaCliente.GetInstancia().Buscar(Convert.ToString(oReader["CiCliente"])),Convert.ToInt32(oReader["Cantidad"]),PersistenciaEvento.GetInstancia().BuscarEvento(Convert.ToInt32(oReader["IdEvento"])),Convert.ToDateTime(oReader["FechaEmision"]));                   
+                    UnaEntrada = new Entrada(IdEntrada,Convert.ToDouble(oReader["Precio"]),PersistenciaReserva.GetInstancia().BuscarReserva(Convert.ToInt32(oReader["IdReserva"])),Convert.ToInt32(oReader["Cantidad"]),Convert.ToDateTime(oReader["FechaEmision"]));                   
                 }
 
                 oReader.Close();
@@ -160,7 +159,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnaEntrada = new Entrada(Convert.ToInt32(lector["IdEntrada"]), Convert.ToDouble(lector["Precio"]), PersistenciaCliente.GetInstancia().Buscar(Convert.ToString(lector["CiCliente"])), Convert.ToInt32(lector["Cantidad"]), PersistenciaEvento.GetInstancia().BuscarEvento(Convert.ToInt32(lector["IdEvento"])), Convert.ToDateTime(lector["FechaEmision"]));                   
+                        UnaEntrada = new Entrada(Convert.ToInt32(lector["IdEntrada"]), Convert.ToDouble(lector["Precio"]),PersistenciaReserva.GetInstancia().BuscarReserva(Convert.ToInt32(lector["IdReserva"])), Convert.ToInt32(lector["Cantidad"]), Convert.ToDateTime(lector["FechaEmision"]));                   
                         listaEntrada.Add(UnaEntrada);
                     }
                 }
@@ -177,75 +176,6 @@ namespace Persistencia.Clases_Trabajo
             return listaEntrada;
         }
 
-        public List<Entrada> ListarEntradasPorCliente(string CiCliente)
-        {
-            MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            Entrada UnaEntrada = null;
-            List<Entrada> listaEntrada = new List<Entrada>();
-
-            MySqlCommand comando = new MySqlCommand("ListarEntradasPorCliente", conexion);
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pCiCliente", CiCliente );
-
-            try
-            {
-                conexion.Open();
-                MySqlDataReader lector = comando.ExecuteReader();
-                if (lector.HasRows)
-                {
-                    while (lector.Read())
-                    {
-                        UnaEntrada = new Entrada(Convert.ToInt32(lector["IdEntrada"]), Convert.ToDouble(lector["Precio"]), PersistenciaCliente.GetInstancia().Buscar(CiCliente), Convert.ToInt32(lector["Cantidad"]), PersistenciaEvento.GetInstancia().BuscarEvento(Convert.ToInt32(lector["IdEvento"])), Convert.ToDateTime(lector["FechaEmision"]));
-                        listaEntrada.Add(UnaEntrada);
-                    }
-                }
-                lector.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return listaEntrada;
-        }
-
-        public List<Entrada> ListarEntradasPorEvento(int IdEvento)
-        {
-            MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            Entrada UnaEntrada = null;
-            List<Entrada> listaEntrada = new List<Entrada>();
-
-            MySqlCommand comando = new MySqlCommand("ListarEntradasPorEvento", conexion);
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pIdEvento", IdEvento );
-
-            try
-            {
-                conexion.Open();
-                MySqlDataReader lector = comando.ExecuteReader();
-                if (lector.HasRows)
-                {
-                    while (lector.Read())
-                    {
-                        UnaEntrada = new Entrada(Convert.ToInt32(lector["IdEntrada"]), Convert.ToDouble(lector["Precio"]), PersistenciaCliente.GetInstancia().Buscar(Convert.ToString(lector["CiCliente"])), Convert.ToInt32(lector["Cantidad"]), PersistenciaEvento.GetInstancia().BuscarEvento(IdEvento), Convert.ToDateTime(lector["FechaEmision"]));
-                        listaEntrada.Add(UnaEntrada);
-                    }
-                }
-                lector.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return listaEntrada;
-        }
 
        #endregion
     }

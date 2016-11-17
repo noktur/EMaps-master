@@ -13,7 +13,5 @@ namespace Logica.Interfaces
         void BajaEntrada(Entrada e);
         Entrada BuscarEntrada(int IdEntrada);
         List<Entrada> ListarEntradasOrdenFecha();
-        List<Entrada> ListarEntradasPorCliente(string CiCliente);
-        List<Entrada> ListarEntradasPorEvento(int IdEvento);
     }
 }

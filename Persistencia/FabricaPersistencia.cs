@@ -45,10 +45,26 @@ namespace Persistencia
             return (PersistenciaEntrada.GetInstancia());
         }
 
+        public static IPersistenciaReserva getPersistenciaReserva()
+        {
+            return (PersistenciaReserva.GetInstancia());
+        }
+
         public static IPersistenciaEvento getPersistenciaEvento()
         {
             return (PersistenciaEvento.GetInstancia());
         }
+
+        public static IPersistenciaComentariosFeedbackEvento getPersistenciaComentariosFeedbakEvento()
+        {
+            return (PersistenciaComentariosFeedbackEvento.GetInstancia());
+        }
+
+        public static IPersistenciaComentariosFeedbackLugar getPersistenciaComentariosFeedbakLugar()
+        {
+            return (PersistenciaComentariosFeedbackLugar.GetInstancia());
+        }
+
 
         public static IPersistenciaFeedbackEvento getPersistenciaFeedbakEvento()
         {

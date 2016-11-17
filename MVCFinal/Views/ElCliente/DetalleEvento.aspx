@@ -11,8 +11,12 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <div id="map2" class="map min-height-500px"></div>
+        </section> 
+        <%-- aqui ira el plano del evento con sus areas y demas   --%>
+
+        <div id="PlanoEvento" class="map min-height-500px">
+
+        </div>
         <section class="content-block content-1-8">
             <div class="container">
                 <ul class="nav nav-tabs text-center" role="tablist" id="myTab" style="border-bottom: 3px groove gray;">
@@ -89,7 +93,7 @@
                         <div class="row">
                             <!-- /.col -->
                             <div class="col-sm-10 col-sm-offset-1">
-                                <div id="mapa" class="map min-height-500px"></div>
+                                <div id="map" class="map min-height-500px"></div>
                             </div>
                         </div>
                         <!-- /.row -->
@@ -107,8 +111,6 @@
                                 </div>
                                 <p class="orange" style="font-size:0.9em;font-family:constantia;">&nbsp;Aqui podra elegir como deseea llegar a dicho evento </p>
                                 <div id="contact2" class="form-container">
-                                    <div id="message2"></div>
-                                    <form method="post" action="js/contact-form.php" name="contactform" id="contactform2">
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
@@ -124,7 +126,6 @@
                                             </div>
                                         </div>
                                         <!-- /.row -->
-                                    </form>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="map min-height-500px"></div>                                     

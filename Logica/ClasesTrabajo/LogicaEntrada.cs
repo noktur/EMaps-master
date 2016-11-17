@@ -41,13 +41,5 @@ namespace Logica.ClasesTrabajo
         {
             return FabricaPersistencia.getPersistenciaEntrada().ListarEntradasOrdenFecha();
         }
-        public List<Entrada> ListarEntradasPorCliente(string CiCliente)
-        {
-            return FabricaPersistencia.getPersistenciaEntrada().ListarEntradasPorCliente(CiCliente);
-        }
-        public List<Entrada> ListarEntradasPorEvento(int IdEvento)
-        {
-            return FabricaPersistencia.getPersistenciaEntrada().ListarEntradasPorEvento(IdEvento);
-        }
     }
 }

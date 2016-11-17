@@ -29,10 +29,10 @@ namespace Persistencia
 
         #region Operaciones
 
-        public void AltaFeebackEvento(FeedbackEvento e)
+        public void AltaMensajeFeebackEvento(FeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AltaFeedbackEvento", con);
+            MySqlCommand cmd = new MySqlCommand("AltaMensajeFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pNombreFeedback", e.NombreFeedback);
@@ -57,10 +57,10 @@ namespace Persistencia
             }
         }
 
-        public void ModificarFeebackEvento(FeedbackEvento e)
+        public void ModificarMensajeFeebackEvento(FeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("ModificarFeedbackEvento", con);
+            MySqlCommand cmd = new MySqlCommand("ModificarMensajeFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackEvento);
@@ -86,10 +86,10 @@ namespace Persistencia
             }
         }
 
-        public void BajaFeedbackEvento(FeedbackEvento e)
+        public void BajaMensajeFeedbackEvento(FeedbackEvento e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("EliminarFeedbackEvento", con);
+            MySqlCommand cmd = new MySqlCommand("EliminarMensajeFeedbackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pIdFeedback", e.IdFeedbackEvento);
@@ -109,12 +109,12 @@ namespace Persistencia
             }
         }
 
-        public FeedbackEvento BuscarFeedbackEvento(int IdFeedback)
+        public FeedbackEvento BuscarMensajeFeedbackEvento(int IdFeedback)
         {
             FeedbackEvento UnFeedbackEvento = null;
 
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("BuscarFeebackEvento", con);
+            MySqlCommand cmd = new MySqlCommand("BuscarMensajeFeebackEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
             
             cmd.Parameters.AddWithValue("pIdFeedback", IdFeedback);
@@ -164,13 +164,13 @@ namespace Persistencia
             return UnFeedbackEvento;
         }
 
-        public List<FeedbackEvento> ListarFeedbackEvento()
+        public List<FeedbackEvento> ListarMensajesFeedbackEvento()
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
             FeedbackEvento UnFeedbackEvento = null;
             List<FeedbackEvento> listaFeedbackEvento = new List<FeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarFeedbackEvento", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackEvento", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
 
             try
@@ -216,13 +216,13 @@ namespace Persistencia
             return listaFeedbackEvento;
         }
 
-        public List<FeedbackEvento> ListarFeedbackEventoxUsuario(string CiUsuario)
+        public List<FeedbackEvento> ListarMensajesFeedbackEventoxUsuario(string CiUsuario)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
             FeedbackEvento UnFeedbackEvento = null;
             List<FeedbackEvento> listaFeedbackEvento = new List<FeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarFeedbackEventoxUsuario", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackEventoxUsuario", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("pCiUsuario", CiUsuario);
 
@@ -269,13 +269,13 @@ namespace Persistencia
             return listaFeedbackEvento;
         }
 
-        public List<FeedbackEvento> ListarFeedbackPorEvento(int IdEvento)
+        public List<FeedbackEvento> ListarMensajesFeedbackPorEvento(int IdEvento)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
             FeedbackEvento UnFeedbackEvento = null;
             List<FeedbackEvento> listaFeedbackEvento = new List<FeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarFeedbackPorEvento", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarMensajesFeedbackPorEvento", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("pIdEvento", IdEvento);
 
@@ -322,13 +322,13 @@ namespace Persistencia
             return listaFeedbackEvento;
         }
 
-        public List<FeedbackEvento> ListarFeedbackPorEventoYUsuario(int IdEvento,string CiUsuario)
+        public List<FeedbackEvento> ListarMensajesFeedbackPorEventoYUsuario(int IdEvento,string CiUsuario)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
             FeedbackEvento UnFeedbackEvento = null;
             List<FeedbackEvento> listaFeedbackEvento = new List<FeedbackEvento>();
 
-            MySqlCommand comando = new MySqlCommand("ListarFeedbackPorEventoYUsuario", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarMensajesPorEventoYUsuario", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("pIdEvento", IdEvento);
             comando.Parameters.AddWithValue("pCiUsuario", CiUsuario);

@@ -174,13 +174,11 @@ create table Entrada
 ( 
 IdEntrada int AUTO_INCREMENT not null,
 Precio double not null,
-IdEvento int not null,
-CiCliente varchar(30) not null,
+IdReserva int not null,
 Cantidad int not null,
 FechaEmision timestamp not null,
-foreign key (IdEvento) references Evento (IdEvento),
-foreign key (CiCliente) references Clientes(CiCliente),
-primary key(IdEntrada,IdEvento,CiCliente)
+foreign key (IdReserva) references Reserva (IdReserva),
+primary key(IdEntrada,IdReserva)
 );
 
 
@@ -192,7 +190,7 @@ Disponibilidad boolean not null default 0,
 primary key(IdEntrada,IdMedioPago)
 );
 
-create table FeedbackLugar
+create table MensajeFeedbackLugar
 ( 
 IdFeedback int  AUTO_INCREMENT,
 NombreFeedback varchar(30),
@@ -205,7 +203,7 @@ foreign key (NombreLugar) references Lugar(NombreLugar),
 primary key(IdFeedback,CiUsuario,NombreLugar)
 );
 
-create table FeedbackEvento
+create table MensajeFeedbackEvento
 ( 
 IdFeedback int  AUTO_INCREMENT,
 NombreFeedback varchar(30),
@@ -216,6 +214,32 @@ IdEvento int,
 foreign key (CiUsuario) references Usuarios(Ci),
 foreign key (IdEvento) references Evento(IdEvento),
 primary key(IdFeedback,CiUsuario,IdEvento)
+);
+
+create table ComentarioFeedbackLugar
+( 
+IdComentario int AUTO_INCREMENT,
+IdFeedback int ,
+AsuntoComentario varchar(30),
+MensajeComentario varchar(100),
+CiUsuario varchar(30),
+FechaRealizado timestamp,
+foreign key (CiUsuario) references Usuarios(Ci),
+foreign key (IdFeedback) references MensajeFeedbackLugar(IdFeedback),
+primary key(IdComentario,CiUsuario,IdFeedback)
+);
+
+create table ComentarioFeedbackEvento
+( 
+IdComentario int  AUTO_INCREMENT,
+IdFeedback int ,
+CiUsuario varchar(30),
+AsuntoComentario varchar(30),
+MensajeComentario varchar(100),
+FechaRealizado timestamp,
+foreign key (CiUsuario) references Usuarios(Ci),
+foreign key (IdFeedback) references MensajeFeedbackEvento(IdFeedback),
+primary key(IdComentario,CiUsuario,IdFeedback)
 );
 
 
@@ -1073,6 +1097,8 @@ SELECT *
 FROM clientes
 join Reserva
 on clientes.CiCliente=Reserva.ClienteReserva
+join entrada
+on reserva.IdReserva=entrada.IdReserva
 where Reserva.ClienteReserva=pCiCliente and evento.EstadoReserva=1
 order by  UNIX_TIMESTAMP(reserva.FechaEmision) desc;
 END//
@@ -1084,6 +1110,8 @@ SELECT *
 FROM Evento
 join reserva
 on evento.IdEvento=reserva.EventoReservado
+join entrada 
+on reserva.IdReserva=entrada.IdReserva
 where reserva.EventoReservado=pIdEvento and evento.EstadoReserva=1
 order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
 END//
@@ -1103,23 +1131,23 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS ENTRADA
 
 DELIMITER //
-CREATE PROCEDURE AltaEntrada (pPrecio double,pIdEvento int,pCiCliente varchar(30),pCantidad int,pFechaEmision timestamp)
+CREATE PROCEDURE AltaEntrada (pPrecio double,pIdReserva int,pCantidad int,pFechaEmision timestamp)
 BEGIN
-INSERT INTO Entrada(IdEntrada,Precio,IdEvento,CiCliente,Cantidad,FechaEmision) VALUES(0,pPrecio,pIdEvento,pCiCliente,pCantidad,pFechaEmision);
+INSERT INTO Entrada(IdEntrada,Precio,IdReserva,Cantidad,FechaEmision) VALUES(0,pPrecio,pIdReserva,pCantidad,pFechaEmision);
 END//
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarEntrada (pIdEntrada int,pPrecio double,pIdEvento int,pCiCliente varchar(30),pCantidad int,pFechaEmision timestamp)
+CREATE PROCEDURE ModificarEntrada (pIdEntrada int,pPrecio double,pIdReserva int,pCantidad int,pFechaEmision timestamp)
 BEGIN
-UPDATE Entrada SET Precio=pPrecio,IdEvento=pIdEvento,CiCliente=pCiCliente,Cantidad=pCantidad,FechaEmision=pFechaEmision WHERE IdEntrada=pIdEntrada;
+UPDATE Entrada SET Precio=pPrecio,IdReserva=pIdReserva,Cantidad=pCantidad,FechaEmision=pFechaEmision WHERE IdEntrada=pIdEntrada;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarEntrada (pIdEntrada int,pIdEvento int)
+CREATE PROCEDURE EliminarEntrada (pIdEntrada int,pIdReserva int)
 BEGIN
-delete from Entrada where IdEntrada=pIdEntrada and entrada.IdEvento=pIdEvento;
+delete from Entrada where IdEntrada=pIdEntrada and entrada.IdReserva=pIdReserva;
 END//
 DELIMITER;
 
@@ -1141,178 +1169,333 @@ order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
 END//
 DELIMITER;
 
+-- DELIMITER //
+-- CREATE PROCEDURE ListarEntradasPorCliente(pCiCliente varchar(30))
+-- BEGIN
+-- SELECT *
+-- FROM clientes
+-- join reserva
+-- on clientes.CiCliente=reserva.ClienteReserva
+-- join Entrada
+-- on reserva.IdReserva=entrada.IdReserva
+-- where reserva.ClienteReserva=pCiCliente
+-- order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
+-- END//
+-- 
+-- DELIMITER //
+-- CREATE PROCEDURE ListarEntradasPorEvento(pIdEvento int)
+-- BEGIN
+-- SELECT *
+-- FROM Evento
+-- join reserva
+-- on evento.IdEvento=reserva.EventoReservado
+-- join entrada
+-- on reserva.IdReserva=entrada.IdReserva
+-- where reserva.EventoReservado=pIdEvento
+-- order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
+-- END//
+-- 
+
+-- PROCEDIMIENTOS ALMACENADOS MensajesFeedbackLugar
+
 DELIMITER //
-CREATE PROCEDURE ListarEntradasPorCliente(pCiCliente varchar(30))
+CREATE PROCEDURE AltaMensajeFeedbackLugar (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pNombreLugar varchar(30))
 BEGIN
-SELECT *
-FROM clientes
-join entrada
-on clientes.CiCliente=entrada.CiCliente
-where entrada.CiCliente=pCiCliente
-order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
+INSERT INTO Mensajefeedbacklugar(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,NombreLugar) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pNombreLugar);
 END//
 
-DELIMITER //
-CREATE PROCEDURE ListarEntradasPorEvento(pIdEvento int)
-BEGIN
-SELECT *
-FROM Evento
-join entrada
-on evento.IdEvento=entrada.IdEvento
-where entrada.IdEvento=pIdEvento
-order by  UNIX_TIMESTAMP(entrada.FechaEmision) desc;
-END//
-
-
--- PROCEDIMIENTOS ALMACENADOS FeedbackLugar
 
 DELIMITER //
-CREATE PROCEDURE AltaFeedbackLugar (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pNombreLugar varchar(30))
-BEGIN
-INSERT INTO feedbacklugar(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,NombreLugar) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pNombreLugar);
-END//
-
-
-DELIMITER //
-CREATE PROCEDURE ModificarFeedbackLugar (IdFeedback int,pNombreFeedback varchar(30),pMensaje varchar(100),pCiUsuario varchar(30),pFechaRealizado timestamp,pNombreLugar varchar(30))
+CREATE PROCEDURE ModificarMensajeFeedbackLugar (IdFeedback int,pNombreFeedback varchar(30),pMensaje varchar(100),pCiUsuario varchar(30),pFechaRealizado timestamp,pNombreLugar varchar(30))
 begin
-UPDATE feedbacklugar SET NombreFeedback=pNombreFeedback,MensajeFeedback=pMensaje,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado,NombreLugar=pNombreLugar WHERE IdFeedback=pIdFeedback;
+UPDATE Mensajefeedbacklugar SET NombreFeedback=pNombreFeedback,MensajeFeedback=pMensaje,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado,NombreLugar=pNombreLugar WHERE IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarFeedbackLugar(pIdFeedback int)
+CREATE PROCEDURE EliminarMensajeFeedbackLugar(pIdFeedback int)
 BEGIN
-delete from feedbacklugar where IdFeedback=pIdFeedback;
+delete from ComentarioFeedbackLugar where IdFeedback=pIdFeedback;
+delete from Mensajefeedbacklugar where IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE BuscarFeebackLugar(pIdFeedback int)
-BEGIN
-SELECT *
-FROM feedbacklugar
-WHERE feedbacklugar.IdFeedback=pIdFeedback;
-END//
-DELIMITER;
-
-DELIMITER //
-CREATE PROCEDURE ListarFeedbackLugaresxUsuario(pCiUsuario varchar(30))
+CREATE PROCEDURE BuscarMensajeFeebackLugar(pIdFeedback int)
 BEGIN
 SELECT *
-FROM feedbacklugar
-where feedbacklugar.CiUsuario=pCiUsuario;
+FROM Mensajefeedbacklugar
+WHERE Mensajefeedbacklugar.IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackLugar()
+CREATE PROCEDURE ListarMensajesFeedbackLugaresxUsuario(pCiUsuario varchar(30))
 BEGIN
 SELECT *
-FROM feedbacklugar;
+FROM comentariofeedbacklugar join mensajefeedbacklugar
+on comentariofeedbacklugar.IdFeedback=mensajefeedbacklugar.IdFeedback
+where Mensajefeedbacklugar.CiUsuario=pCiUsuario;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarMensajesFeedbackLugar()
+BEGIN
+SELECT *
+FROM comentariofeedbacklugar join mensajefeedbacklugar
+on comentariofeedbacklugar.IdFeedback= mensajefeedbacklugar.IdFeedback;
 END//
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackdeUnLugar(pNombreLugar varchar(30))
+CREATE PROCEDURE ListarMensajesFeedbackdeUnLugar(pNombreLugar varchar(30))
 BEGIN
 SELECT *
 FROM Lugar
-join feedbacklugar
-on lugar.NombreLugar= feedbacklugar.NombreLugar
-where feedbacklugar.NombreLugar=pNombreLugar
-order by  UNIX_TIMESTAMP(feedbacklugar.FechaRealizado) desc;
+join Mensajefeedbacklugar
+on lugar.NombreLugar= mensajefeedbacklugar.NombreLugar
+join comentariofeedbacklugar
+on mensajefeedbacklugar.IdFeedback= comentariofeedbacklugar.IdFeedback
+where Mensajefeedbacklugar.NombreLugar=pNombreLugar
+order by  UNIX_TIMESTAMP(Mensajefeedbacklugar.FechaRealizado) desc;
 END//
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackPorLugarYUsuario(pNombreLugar varchar(30),pCiUsuario varchar(30))
+CREATE PROCEDURE ListarMensajesFeedbackPorLugarYUsuario(pNombreLugar varchar(30),pCiUsuario varchar(30))
 BEGIN
 SELECT *
 FROM Lugar
-join feedbacklugar
-on lugar.NombreLugar= feedbacklugar.NombreLugar
-join usuarios 
-on feedbacklugar.CiUsuario=usuarios.Ci
-where feedbacklugar.NombreLugar=pNombreLugar and feedbacklugar.CiUsuario=pCiUsuario
-order by  UNIX_TIMESTAMP(feedbacklugar.FechaRealizado) desc;
+join mensajefeedbacklugar
+on lugar.NombreLugar= mensajefeedbacklugar.NombreLugar
+join comentariofeedbacklugar
+on mensajefeedbacklugar.IdFeedback= comentariofeedbacklugar.IdFeedback
+where Mensajefeedbacklugar.NombreLugar=pNombreLugar and Mensajefeedbacklugar.CiUsuario=pCiUsuario
+order by  UNIX_TIMESTAMP(Mensajefeedbacklugar.FechaRealizado) desc;
 END//
 
--- PROCEDIMIENTOS ALMACENADOS FeedbackEvento
+-- PROCEDIMIENTOS ALMACENADOS MensajesFeedbackEvento
 
 DELIMITER //
-CREATE PROCEDURE AltaFeedbackEvento (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
+CREATE PROCEDURE AltaMensajeFeedbackEvento (pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
 BEGIN
-INSERT INTO feedbackEvento(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,IdEvento) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pIdEvento);
+INSERT INTO MensajefeedbackEvento(IdFeedback,NombreFeedback,CiUsuario,MensajeFeedback,FechaRealizado,IdEvento) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado,pIdEvento);
 END//
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarFeedbackEvento (pIdFeedback int,pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
+CREATE PROCEDURE ModificarMensajeFeedbackEvento (pIdFeedback int,pNombreFeedback varchar(30),pCiUsuario varchar(30),pMensaje varchar(100),pFechaRealizado timestamp,pIdEvento int)
 begin
-UPDATE feedbackEvento SET NombreFeedback=pNombreFeedback,CiUsuario=pCiUsuario,MensajeFeedback=pMensaje,FechaRealizado=pFechaRealizado,IdEvento=pIdEvento WHERE IdFeedback=pIdFeedback;
+UPDATE mensajefeedbackevento SET NombreFeedback=pNombreFeedback,CiUsuario=pCiUsuario,MensajeFeedback=pMensaje,FechaRealizado=pFechaRealizado,IdEvento=pIdEvento WHERE IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarFeedbackEvento (pIdFeedback int)
+CREATE PROCEDURE EliminarMensajeFeedbackEvento (pIdFeedback int)
 BEGIN
-delete from feedbackEvento where IdFeedback=pIdFeedback;
+delete from comentariofeedbackevento where IdFeedback=pIdFeedback;
+delete from mensajefeedbackEvento where IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE BuscarFeebackEvento(pIdFeedback int)
-BEGIN
-SELECT *
-FROM feedbackevento
-WHERE feedbackEvento.IdFeedback=pIdFeedback;
-END//
-DELIMITER;
-
-DELIMITER //
-CREATE PROCEDURE ListarFeedbackEventoxUsuario(pCiUsuario varchar(30))
+CREATE PROCEDURE BuscarMensajeFeebackEvento(pIdFeedback int)
 BEGIN
 SELECT *
-FROM feedbackevento
-where feedbackevento.CiUsuario=pCiUsuario
-order by  UNIX_TIMESTAMP(feedbackevento.FechaRealizado) desc;
+FROM Mensajefeedbackevento
+WHERE mensajefeedbackEvento.IdFeedback=pIdFeedback;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackEvento()
+CREATE PROCEDURE ListarMensajesFeedbackEventoxUsuario(pCiUsuario varchar(30))
 BEGIN
 SELECT *
-FROM feedbackevento
-order by  UNIX_TIMESTAMP(feedbackevento.FechaRealizado) desc;
+FROM comentariofeedbackevento join mensajefeedbackevento
+on comentariofeedbackevento.IdFeedback= mensajefeedbackevento.IdFeedback
+where mensajefeedbackevento.CiUsuario=pCiUsuario
+order by  UNIX_TIMESTAMP(mensajefeedbackevento.FechaRealizado) desc;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarMensajesFeedbackEvento()
+BEGIN
+SELECT *
+FROM comentariofeedbackevento join mensajefeedbackevento
+on comentariofeedbackevento.IdFeedback= comentariofeedbackevento.IdFeedback
+order by  UNIX_TIMESTAMP(mensajefeedbackevento.FechaRealizado) desc;
 END//
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackPorEvento(pIdEvento int)
+CREATE PROCEDURE ListarMensajesFeedbackPorEvento(pIdEvento int)
 BEGIN
 SELECT *
 FROM Evento
-join feedbackevento
-on evento.IdEvento= feedbackevento.IdEvento
-where feedbackevento.IdEvento=pIdEvento
-order by  UNIX_TIMESTAMP(feedbackevento.FechaRealizado) desc;
+join mensajefeedbackevento
+on evento.IdEvento= mensajefeedbackevento.IdEvento
+join comentariofeedbackevento
+on mensajefeedbackevento.IdFeedback= comentariofeedbackevento.IdFeedback
+where mensajefeedbackevento.IdEvento=pIdEvento
+order by  UNIX_TIMESTAMP(mensajefeedbackevento.FechaRealizado) desc;
 END//
 
 DELIMITER //
-CREATE PROCEDURE ListarFeedbackPorEventoYUsuario(pIdEvento int,pCiUsuario varchar(30))
+CREATE PROCEDURE ListarMensajesFeedbackPorEventoYUsuario(pIdEvento int,pCiUsuario varchar(30))
 BEGIN
 SELECT *
 FROM evento
-join feedbackevento
-on evento.IdEvento= feedbackevento.IdEvento
-join usuarios 
-on feedbackevento.CiUsuario=usuarios.Ci
-where feedbackevento.IdEvento=pIdEvento and feedbackevento.CiUsuario=pCiUsuario
-order by  UNIX_TIMESTAMP(feedbackevento.FechaRealizado) desc;
+join mensajefeedbackevento
+on evento.IdEvento= mensajefeedbackevento.IdEvento
+join comentariofeedbackevento
+on mensajefeedbackevento.IdFeedback= comentariofeedbackevento.IdFeedback
+where mensajefeedbackevento.IdEvento=pIdEvento and mensajefeedbackevento.CiUsuario=pCiUsuario
+order by  UNIX_TIMESTAMP(mensajefeedbackevento.FechaRealizado) desc;
 END//
+
+
+-- PROCEDIMIENTOS ALMACENADOS ComentariosFeedbackLugar
+
+DELIMITER //
+CREATE PROCEDURE AltaComentarioFeedbackLugar(pIdFeedback int ,pAsunto varchar(30),pMensajeComentario varchar(30),pCiUsuario varchar(100),pFechaRealizado timestamp)
+BEGIN
+INSERT INTO comentariofeedbacklugar(IdComentario,IdFeedback,AsuntoComentario,MensajeComentario,CiUsuario,FechaRealizado) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado);
+END//
+
+
+DELIMITER //
+CREATE PROCEDURE ModificarComentarioFeedbackLugar(pIdComentario int,pIdFeedback int ,pAsunto varchar(30),pMensajeComentario varchar(30),pCiUsuario varchar(100),pFechaRealizado timestamp)
+begin
+UPDATE comentariofeedbacklugar SET AsuntoComentario=pAsunto,MensajeComentario=pMensajeComentario,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado WHERE IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE EliminarComentarioFeedbackLugar(pIdComentario int)
+BEGIN
+delete from ComentarioFeedbackLugar where IdComentario=pIdComentario;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE BuscarComentariodeUnMensajeFeebackLugar(pIdComentario int,pIdFeedback int)
+BEGIN
+SELECT *
+FROM comentariofeedbacklugar
+WHERE comentariofeedbacklugar.IdComentario=pIdComentario and comentariofeedbacklugar.IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosFeedbackLugaresxUsuario(pCiUsuario varchar(30))
+BEGIN
+SELECT *
+FROM comentariofeedbacklugar join mensajefeedbacklugar
+on comentariofeedbacklugar.IdFeedback=mensajefeedbacklugar.IdFeedback
+where Comentariofeedbacklugar.CiUsuario=pCiUsuario;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosFeedbackLugar()
+BEGIN
+SELECT *
+FROM comentariofeedbacklugar join mensajefeedbacklugar
+on comentariofeedbacklugar.IdFeedback= mensajefeedbacklugar.IdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosdeUnMensajeFeedbackLugar(pIdFeedback int)
+BEGIN
+SELECT *
+FROM comentariofeedbacklugar join mensajefeedbacklugar
+on comentariofeedbacklugar.IdFeedback= mensajefeedbacklugar.IdFeedback
+where comentariofeedbacklugar.IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosFeedbackPorLugarYUsuario(pNombreLugar varchar(30),pCiUsuario varchar(30))
+BEGIN
+SELECT *
+FROM Lugar
+join mensajefeedbacklugar
+on lugar.NombreLugar= mensajefeedbacklugar.NombreLugar
+join comentariofeedbacklugar
+on mensajefeedbacklugar.IdFeedback= comentariofeedbacklugar.IdFeedback
+where Mensajefeedbacklugar.NombreLugar=pNombreLugar and comentariofeedbacklugar.CiUsuario=pCiUsuario
+order by  UNIX_TIMESTAMP(comentariofeedbacklugar.FechaRealizado) desc;
+END//
+
+-- PROCEDIMIENTOS ALMACENADOS ComentariosFeedbackEvento
+
+DELIMITER //
+CREATE PROCEDURE AltaComentarioFeedbackEvento(pIdFeedback int ,pAsunto varchar(30),pMensajeComentario varchar(30),pCiUsuario varchar(100),pFechaRealizado timestamp)
+BEGIN
+INSERT INTO comentariofeedbackEvento(IdComentario,IdFeedback,AsuntoComentario,MensajeComentario,CiUsuario,FechaRealizado) VALUES(0,pNombreFeedback,pCiUsuario,pMensaje,pFechaRealizado);
+END//
+
+
+DELIMITER //
+CREATE PROCEDURE ModificarComentarioFeedbackEvento(pIdComentario int,pIdFeedback int ,pAsunto varchar(30),pMensajeComentario varchar(30),pCiUsuario varchar(100),pFechaRealizado timestamp)
+begin
+UPDATE comentariofeedbackevento SET AsuntoComentario=pAsunto,MensajeComentario=pMensajeComentario,CiUsuario=pCiUsuario,FechaRealizado=pFechaRealizado WHERE IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE EliminarComentarioFeedbackEvento(pIdComentario int)
+BEGIN
+delete from ComentarioFeedbackEvento where IdComentario=pIdComentario;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE BuscarComentariodeUnMensajeFeebackEvento(pIdComentario int,pIdFeedback int)
+BEGIN
+SELECT *
+FROM comentariofeedbackevento
+WHERE comentariofeedbackevento.IdComentario=pIdComentario and comentariofeedbackevento.IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosFeedbackEventoxUsuario(pCiUsuario varchar(30))
+BEGIN
+SELECT *
+FROM comentariofeedbackevento join mensajefeedbackevento
+on comentariofeedbackevento.IdFeedback=mensajefeedbackevento.IdFeedback
+where Comentariofeedbackevento.CiUsuario=pCiUsuario;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosFeedbackEvento()
+BEGIN
+SELECT *
+FROM comentariofeedbackevento join mensajefeedbackevento
+on comentariofeedbackevento.IdFeedback= mensajefeedbackevento.IdFeedback;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE ListarComentariosdeUnMensajeFeedbackEvento(pIdFeedback int)
+BEGIN
+SELECT *
+FROM comentariofeedbackevento join mensajefeedbackevento
+on comentariofeedbackevento.IdFeedback= mensajefeedbackevento.IdFeedback
+where comentariofeedbackevento.IdFeedback=pIdFeedback;
+END//
+DELIMITER;
+
+
+
+
 
 -- PROCEDIMIENTOS ALMACENADOS CATEGORIA
 
@@ -1333,3 +1516,4 @@ FROM categoria;
 END//
 
 call AltaCliente('a','matiasmelfi','la','aasdasd','asdasd@fasdasd')
+create table ComentarioFeedbackLugar (  IdComentario int AUTO_INCREMENT, IdFeedback int not null, AsuntoComentario varchar(30), MensajeComentario varchar(100), CiUsuario varchar(30), FechaRealizado timestamp, foreign key (CiUsuario) references Usuarios(Ci), foreign key (IdFeedback) references Feedback(IdFeedback), primary key(IdComentario,CiUsuario,IdFeedback) )

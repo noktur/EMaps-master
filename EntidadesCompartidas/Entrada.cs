@@ -14,9 +14,8 @@ namespace EntidadesCompartidas
 
          private int _IdEntrada; 
          private double _Precio;
-         private Cliente _UnCliente;
+         private Reserva _ReservaEvento;
          private int _Cantidad;
-         private Evento _EventoAsociado;
          private DateTime _FechaEmision;
 
          
@@ -58,10 +57,10 @@ namespace EntidadesCompartidas
         }
 
          [DataMember]
-         public Cliente UnCliente
+         public Reserva ReservaEvento
          {
-             get { return _UnCliente; }
-             set { _UnCliente = value; }
+             get { return _ReservaEvento; }
+             set { _ReservaEvento = value; }
          }
 
 
@@ -71,26 +70,18 @@ namespace EntidadesCompartidas
              get { return _FechaEmision; }
              set { _FechaEmision = value; }
          }
-
-         [DataMember]
-         public Evento EventoAsociado
-         {
-             get { return _EventoAsociado; }
-             set { _EventoAsociado = value; }
-         }
          
 
          #endregion
 
          #region Constructores
          
-         public Entrada(int pIdEntrada,double  pPrecio,Cliente pUnCliente,int pCantidad, Evento pEventoAsociado,DateTime pFechaEmision)
+        public Entrada(int pIdEntrada,double  pPrecio,Reserva pUnaReserva,int pCantidad,DateTime pFechaEmision)
          {
              IdEntrada = pIdEntrada;
              Precio = pPrecio;
-             UnCliente = pUnCliente;
+             ReservaEvento = pUnaReserva;
              Cantidad = pCantidad;
-             EventoAsociado = pEventoAsociado;
              FechaEmision = pFechaEmision;
          }
 
@@ -98,9 +89,8 @@ namespace EntidadesCompartidas
          {
              IdEntrada = 0;
              Precio = 0.0;
-             UnCliente = null;
+             ReservaEvento = null;
              Cantidad = 0;
-             EventoAsociado = null;
              FechaEmision = DateTime.Today;
          }
 

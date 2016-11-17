@@ -18,6 +18,7 @@
              //Asignamos al evento click del boton la funcion codeAddress
              //Inicializamos la función de google maps una vez el DOM este cargado
              initialize();
+             ListarAreas();
 
          });
 
@@ -79,7 +80,7 @@
 
              }
              else {
-                 alert("No Hay Paises en la Base de Datos");
+                 alert("No Hay areas en la Base de Datos");
              }
 
          }
