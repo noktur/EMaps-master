@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<!DOCTYPE html>
 <html>
     <head>
         <title>Landing Page - Ubicatrex</title>
@@ -85,7 +84,7 @@
                             <div class="carousel-caption">
                                 <h1>BIENVENIDO A UBICATREX</h1>
                                 <p>LA OPORTUNIDAD DE DESCUBRIR Y ORGANIZAR SUS EVENTOS</p>
-                                <p><a class="btn btn-lg btn-green" href="#" role="button" style="margin: 20px;">Registrese</a> 
+                                <p><a class="btn btn-lg btn-green" href="../RegistroA/RegistroAdmin.aspx" role="button" style="margin: 20px;">Registrese</a> 
                                 	<a class="btn btn-lg btn-orange" href="#" role="button">Contactenos</a></p>
                             </div>
                         </div>

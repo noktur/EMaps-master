@@ -98,6 +98,7 @@ namespace MVCFinal.Controllers
             try
             { 
 
+
             List<EntidadesCompartidas.Ciudad> listaCiudad = Logica.FabricaLogica.getLogicaUbicacion().ListarCiudades();
             List<EntidadesCompartidas.Lugar> listaLugar = Logica.FabricaLogica.getLogicaLugar().ListarLugares();
 

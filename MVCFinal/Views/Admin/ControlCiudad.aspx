@@ -28,15 +28,17 @@
             <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
                 <% using (Html.BeginForm())
                        { %>  
-                     <input type="text" class="form-control hidden" autocomplete="off" id="NombreCiudad" name="NombreCiudad" />
+                     <input type="text" class="form-control hidden" id="NombreCiudad" name="NombreCiudad" />
                     <input type="text" class="form-control hidden" id="NombrePais" name="NombrePais" >
                     <input type="text" class="form-control hidden" id="CoordenadaX" name="CoordenadaX" >
                     <input type="text" class="form-control hidden" id="CoordenadaY" name="CoordenadaY">
                     <p class="form-control-static pad-bottom0 margin-bottom0 white" style=" font-family:Satisfy ; font-size:1.5em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
-                    <% } %>
+                    <input class="btn btn-outline btn-outline-xl outline-light black bg-tan" type="submit" name="action" value="Guardar"/>
                 
-                <button class="btn btn-outline btn-outline-xl outline-light black bg-tan" type="submit">Enviar Datos</button>
                 
+                  <% } %>
+                
+              
             </div>
            
            
@@ -179,7 +181,7 @@
                 autocomplete = new google.maps.places.Autocomplete(
          /** @type {!HTMLInputElement} */
                     (
-             document.getElementById('NombreCiudad')), {
+             document.getElementById('NombreCiudad1')), {
                  types: ['(cities)'],
                  componentRestrictions: countryRestrict
              }
@@ -243,15 +245,15 @@
 
         function BuscarCiudad() {
             // Obtenemos la dirección y la asignamos a una variable
-            address = $('#NombreCiudad').val();
-
-
-
+            address = $('#NombreCiudad1').val();
+            
             // Creamos el Objeto Geocoder
             geocoder = new google.maps.Geocoder();
             // Hacemos la petición indicando la dirección e invocamos la función
             // geocodeResult enviando todo el resultado obtenido
             geocoder.geocode({ 'address': address }, geocodeResult);
+
+
         };
 
         function openInfoWindow(marker, content) {
@@ -297,7 +299,7 @@
 
                 var short_name = result[0].address_components.short_name;
                 updatePosition(marker.getPosition());
-                jQuery('#NombreCiudad').val(address);
+                jQuery('#NombreCiudad').val(short_name);
 
             } else {
                 // En caso de no haber resultados o que haya ocurrido un error

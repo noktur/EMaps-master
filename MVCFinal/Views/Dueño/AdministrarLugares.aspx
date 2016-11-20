@@ -142,7 +142,7 @@
                         <h2>aqui usted puede administrar sus lugares<br></h2>
                     </div>
                     <p>Dentro de esta pagina usted podra ver el registro de sus lugares alquilados, reservados, crear un nuevo lugar, subir una galeria de imagenes&nbsp;a su edificio &nbsp;y adjuntar el plano de su sitio,<br></p>
-                    <% if(Session["ListaCiudad"] == null) 
+                    <% if((Session["ListaCiudad"] == null) || (Model.milistaCiudad.Count <= 0)) 
                        { %>
                     <div class="row">
                          <div class="form-group">

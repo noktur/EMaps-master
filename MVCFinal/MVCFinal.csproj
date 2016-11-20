@@ -162,7 +162,8 @@
     <Compile Include="Models\CiudadModel.cs" />
     <Compile Include="Models\EventoModel.cs" />
     <Compile Include="Models\FeebackAdminModel.cs" />
-    <Compile Include="Models\FeebackOrganizadorModel.cs" />
+    <Compile Include="Models\FeedbackOrganizadorModel.cs" />
+    <Compile Include="Models\FeedbackDueñoModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LugarModel.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Content\css\Register.css" />
     <Content Include="Content\css\resetRegister.css" />
     <Content Include="Content\css\style-library-1.css" />
+    <Content Include="Content\css\templatemo_style.css" />
     <Content Include="Content\images\600x800.gif" />
     <Content Include="Content\images\background.png" />
     <Content Include="Content\images\battery.png" />
@@ -715,7 +717,6 @@
     <Content Include="Views\Login\LoginUsuario.aspx" />
     <Content Include="Views\RegistroA\RegistroAdmin.aspx" />
     <Content Include="web.config" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\MasterDueño.Master" />
     <Content Include="Views\Shared\MasterOrganizador.Master" />
     <Content Include="Views\Shared\MasterCliente.Master" />
@@ -730,6 +731,7 @@
     <None Include="Service References\Maps\ServicioEvento2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Web.config" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

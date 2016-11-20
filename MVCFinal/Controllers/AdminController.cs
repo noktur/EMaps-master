@@ -12,7 +12,54 @@ namespace MVCFinal.Controllers
     public class AdminController : Controller
     {
         //
+
+        public static EntidadesCompartidas.Ciudad convertirModelCiudad(MVCFinal.Models.CiudadModel model)
+        {
+            Maps.IServicioEvento _ServicioWCF = new ServicioEventoClient();
+            EntidadesCompartidas.Ciudad p = new EntidadesCompartidas.Ciudad();
+
+            p.Nombre = model.NombreCiudad;
+            p.CoordenadaX = model.CoordenadaX;
+            p.CoordenadaY = model.CoordenadaY;
+            p.UnPais = _ServicioWCF.BuscarPais(model.NombrePais);
+
+            return p;
+        }
+
+
         // GET: /Admin/
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar")]
+        public ActionResult Guardar(FormCollection collection)
+        {
+            try
+            {
+                PaisModel Pais = (PaisModel)Session["PaisActual"];
+                
+
+                MVCFinal.Models.CiudadModel Ciudad = new Models.CiudadModel();
+
+                Ciudad.NombrePais = Convert.ToString(collection["NombrePais"]);
+                Ciudad.NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
+                Ciudad.CoordenadaX = float.Parse(collection["CoordenadaX"], System.Globalization.CultureInfo.InvariantCulture);
+                Ciudad.CoordenadaY = float.Parse(collection["CoordenadaY"], System.Globalization.CultureInfo.InvariantCulture);
+
+                CreoServicio().AltaUbicacion(convertirModelCiudad(Ciudad));
+
+                string JsonPais = JsonConvert.SerializeObject(Pais);
+                Session["Pais"] = JsonPais;
+
+                Session["CiudadActual"] =Ciudad;
+
+                return RedirectToAction("ControlCiudad", "Admin");
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         public ActionResult ControlEventos()
         {
@@ -70,13 +117,16 @@ namespace MVCFinal.Controllers
         [HttpGet]
         public ActionResult ControlPaises()
         {
+           
+            
+            PaisModel pais = new PaisModel();
 
             try
             {
 
 
                 List<EntidadesCompartidas.Pais> lista = CreoServicio().ListarPais().ToList();
-                PaisModel pais = new PaisModel();
+               
 
                 
 
@@ -161,7 +211,7 @@ namespace MVCFinal.Controllers
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Enviar Datos")]
-        public ActionResult Guardar(FormCollection collection)
+        public ActionResult  EnviarDatos(FormCollection collection)
         {
 
             try
@@ -225,6 +275,28 @@ namespace MVCFinal.Controllers
         }
 
 
+
+        [HttpGet]
+        public ActionResult ModificarPais(string NombrePais)
+        {
+            string valor1 = "";
+            valor1 = NombrePais;
+
+            try
+            {
+
+
+
+
+                return View();
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Eliminar")]
         public ActionResult Eliminar(FormCollection coleccion)
@@ -265,7 +337,35 @@ namespace MVCFinal.Controllers
 
         public ActionResult ControlFeedbacks()
         {
-            return View();
+            if (Session["Admin"] == null)
+            {
+                RedirectToAction("Portada,Index");
+            }
+            else
+            {
+
+                FeebackAdminModel feedback = new FeebackAdminModel();
+
+                try
+                {
+
+                    List<EntidadesCompartidas.FeedbackEvento> lista = Logica.FabricaLogica.getLogicaFeedbackEvento().ListarMensajesFeedbackEvento();
+
+                    feedback.listaFeedback = lista;
+
+                    Session["ControlAdminListaFeedback"] = lista;
+                    return View(feedback);
+
+                }
+                catch
+                {
+                    return View();
+                }          
+
+            }
+
+
+            return RedirectToAction("Portada,Index");
         }
 
     }
