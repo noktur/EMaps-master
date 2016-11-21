@@ -57,7 +57,7 @@
                     <div class="col-sm-6 col-xs-12 content pull-left">
                         <h3 style=" font-family:Grand Hote;">UN IMPULSO A GENERAR FONDOS CON SUS LUGARES</h3>
                         <p>Con nuestro sistema usted podra gestionar cada lugar que quiera alquilar, crear, asi como poder disponer de ciertas ventajas que brinda a la hora de controlar la actualizacion de los estados en que se encuentran sus sitios. Proceda a continuacion a descubrir nuestros servicios.</p>
-                        <a href="#" class="btn btn-outline btn-outline outline-dark">Ir a Administrar Sitios</a>
+                        <a href="AdministrarLugares.aspx" class="btn btn-outline btn-outline outline-dark">Ir a Administrar Sitios</a>
                     </div>
                 </div>
                 <!-- /.row-->

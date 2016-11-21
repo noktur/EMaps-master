@@ -29,7 +29,7 @@
                         <a href="#tab1" role="tab" data-toggle="tab">Listado feedbacks por lugar</a>
                     </li>
                     <li>
-                        <a href="#tab2" role="tab" data-toggle="tab">Listado de &nbsp;feedback por cliente</a>
+                        <a href="#tab2" role="tab" data-toggle="tab">Listado de feedback por cliente</a>
                     </li>
                     <li>
                         <a href="#tab3" role="tab" data-toggle="tab">Respuestas a feedback</a>
@@ -60,25 +60,7 @@
                                             <td>
                                                 <button type="submit" class="btn btn-default btn-sm" value="ENVIAR" name="ENVIAR">ELEGIR</button>
                                             </td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td> 
-                                            <td>Jacob</td> 
-                                            <td>Thornton</td> 
-                                            <td>@fat</td> 
-                                            <td>
-                                                <button type="button" class="btn btn-default btn-sm">ELEGIR</button>
-                                            </td>
-                                        </tr>                                         
-                                        <tr> 
-                                            <td>3</td> 
-                                            <td>Larry</td> 
-                                            <td>the Bird</td> 
-                                            <td>@twitter</td> 
-                                            <td>
-                                                <button type="button" class="btn btn-default btn-sm">ELEGIR</button>
-                                            </td>
-                                        </tr>                                         
+                                        </tr>                                      
                                     </tbody>
                                 </table>
                                     </div>
@@ -134,25 +116,7 @@
                                             <td>
                                                 <button type="submit" class="btn btn-default btn-sm" value="ENVIAR" name="ENVIAR">SELECCIONAR</button>
                                             </td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td> 
-                                            <td>Jacob</td> 
-                                            <td>Thornton</td> 
-                                            <td>@fat</td> 
-                                            <td>
-                                                <button type="button" class="btn btn-default btn-sm">Seleccionar</button>
-                                            </td>
-                                        </tr>                                         
-                                        <tr> 
-                                            <td>3</td> 
-                                            <td>Larry</td> 
-                                            <td>the Bird</td> 
-                                            <td>@twitter</td> 
-                                            <td>
-                                                <button type="button" class="btn btn-default btn-sm">Seleccionar</button>
-                                            </td>
-                                        </tr>                                         
+                                        </tr>                                                                            
                                     </tbody>
                                 </table>
                                 </div>

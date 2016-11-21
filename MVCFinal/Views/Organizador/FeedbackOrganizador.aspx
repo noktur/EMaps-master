@@ -18,6 +18,13 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
                             <div class="row">
+                                 <div class="col-md-5 col-sm-6">
+                                    <p style=" font-size:1.2em;font-family:open ">Aqui eliga el lugar deseado y el sistema filtrara dicha eleccion a la lista para ser mostrada luego.</p>
+                                    <select class="form-control"> 
+                                        <option>1</option>                                                                                 
+                                    </select>
+                                    
+                                </div>
                                 <!-- /.col -->
                                 <div class="col-md-5 col-md-offset-1 col-sm-6 bg-offwhite">
                                     <div class="table-responsive">
@@ -62,15 +69,6 @@
                                         </tbody>
                                     </table>
                                         </div>
-                                </div>
-                                <div class="col-md-5 col-sm-6">
-                                    <h3></h3>
-                                    <select class="form-control"> 
-                                        <option>1</option>                                         
-                                        <option>2</option>                                         
-                                        <option>3</option>                                         
-                                    </select>
-                                    <p style=" font-size:1.2em;font-family:open ">Aqui eliga el lugar deseado y el sistema filtrara dicha eleccion a la lista para ser mostrada luego.</p>
                                 </div>
                                 <!-- /.col -->
                             </div>

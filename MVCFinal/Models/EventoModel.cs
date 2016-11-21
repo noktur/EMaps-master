@@ -18,5 +18,17 @@ namespace MVCFinal.Models
         public LugarModel UnLugar { get; set; }
         public List<Entrada> EntradasEvento { get; set; }
         public Categoria ClasificacionEvento { get; set; }
+
+        public List<Evento> milista { get; set; }
+
+        public List<Categoria> listaCategorias { get; set; }
+
+        public List<Alquiler> listalugaresAlquilados { get; set; }
+
+        public Organizador OrganizadorEvento { get; set; }
+
+        private EntidadesCompartidas.Entrada entrada { get; }
+
+        public double PrecioEntradas { get { return entrada.Precio; } set { } }
     }
 }

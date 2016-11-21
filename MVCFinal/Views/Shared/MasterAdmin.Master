@@ -18,10 +18,10 @@
         <link href="../../Content/css/blocks.css" rel="stylesheet">
         <link href="../../Content/css/custom.css" rel="stylesheet">
 
-         <script type="text/javascript" src="../../Content/js/jquery-1.11.1.min.js"></script>         
+         <script type="text/javascript" src="../../Scripts/jquery-2.2.3.js"></script>   
+        <script type="text/javascript" src="../../Scripts/jquery-2.2.3.min.js"></script>         
         <script type="text/javascript" src="../../Content/js/bootstrap.min.js"></script>         
-        <script type="text/javascript" src="../../Content/js/plugins.js"></script>
-        <script type="text/javascript" src="../../Content/js/bskit-scripts.js"></script>   
+        <script type="text/javascript" src="../../Content/js/plugins.js"></script>   
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->         
         <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>

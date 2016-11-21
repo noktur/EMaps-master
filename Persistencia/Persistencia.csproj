@@ -48,6 +48,7 @@
     <Compile Include="Clases Trabajo\PersistenciaArea.cs" />
     <Compile Include="Clases Trabajo\PersistenciaCiudad.cs" />
     <Compile Include="Clases Trabajo\PersistenciaCliente.cs" />
+    <Compile Include="Clases Trabajo\PersistenciaComentariosFeedbackEvento.cs" />
     <Compile Include="Clases Trabajo\PersistenciaDueño.cs" />
     <Compile Include="Clases Trabajo\PersistenciaEntrada.cs" />
     <Compile Include="Clases Trabajo\PersistenciaEvento.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Clases Trabajo\PersistenciaOrganizador.cs" />
     <Compile Include="Clases Trabajo\PersistenciaPais.cs" />
     <Compile Include="Clases Trabajo\PersistenciaPunto.cs" />
+    <Compile Include="Clases Trabajo\PersistenciaReserva.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="FabricaPersistencia.cs" />
     <Compile Include="Interfaces\IPersistenciaAdmin.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Interfaces\IPersistenciaArea.cs" />
     <Compile Include="Interfaces\IPersistenciaCiudad.cs" />
     <Compile Include="Interfaces\IPersistenciaCliente.cs" />
+    <Compile Include="Interfaces\IPersistenciaComentariosFeedbackEvento.cs" />
+    <Compile Include="Interfaces\IPersistenciaComentariosFeedbackLugar.cs" />
     <Compile Include="Interfaces\IPersistenciaDueño.cs" />
     <Compile Include="Interfaces\IPersistenciaEntrada.cs" />
     <Compile Include="Interfaces\IPersistenciaEvento.cs" />
@@ -75,6 +79,8 @@
     <Compile Include="Interfaces\IPersistenciaPais.cs" />
     <Compile Include="Interfaces\IPersistenciaPunto.cs" />
     <Compile Include="Clases Trabajo\PersistenciaFeedbackEvento.cs" />
+    <Compile Include="Interfaces\IPersistenciaReserva.cs" />
+    <Compile Include="PersistenciaComentariosFeedbackLugar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterCliente.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterCliente.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.DetalleEventoModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
-
-     <section id="content-3-7" class="content-block content-3-7 bg-river pad-bottom10 pad20" data-pg-collapsed>
+    <form id="fomulario" runat="server">
+    <section id="content-3-7" class="content-block content-3-7 bg-river pad-bottom10 pad20" data-pg-collapsed>
             <div class="container pad-bottom0 pad0 margin-top0">
                 <div class="col-sm-12">
                     <div class="underlined-title">
@@ -11,8 +11,12 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <div id="map2" class="map min-height-500px"></div>
+        </section> 
+        <%-- aqui ira el plano del evento con sus areas y demas   --%>
+
+        <div id="PlanoEvento" class="map min-height-500px">
+
+        </div>
         <section class="content-block content-1-8">
             <div class="container">
                 <ul class="nav nav-tabs text-center" role="tablist" id="myTab" style="border-bottom: 3px groove gray;">
@@ -41,39 +45,28 @@
                                 </div>
                                 <p class="orange margin-top0 margin-bottom45 pad0" style="font-size:0.9em;font-family:constantia;">Aqui usted podra agregar los datos y el mensaje que desee solicitar sobre un evento el cual sera enviado al instante para su rapida respuesta.</p>
                                 <div id="contact1" class="form-container">
-                                    <div id="message1"></div>
-                                    <form method="post" action="js/contact-form.php" name="contactform" id="contactform1">
+                                    <% using (Html.BeginForm()) { %>
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="name" id="name1" type="text" value="" placeholder="Name" class="form-control">
+                                                    <input name="NombreFeeback" id="NombreFeeback" type="text"  placeholder="Ingrese el asunto" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="email" id="email1" type="text" value="" placeholder="Email" class="form-control">
-                                                </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="phone" id="phone1" type="text" value="" placeholder="Phone" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- /.row -->
                                         <div class="form-group">
-                                            <textarea name="comments" id="comments1" class="form-control" rows="3" placeholder="Message"></textarea>
-                                            <p class="small text-muted"><span class="guardsman">* All fields are required.</span> Once we receive your message we will respond as soon as possible.</p>
+                                            <textarea name="Mensaje" id="Mensaje" class="form-control" rows="3" placeholder="Ingrese el mensaje"></textarea>
                                         </div>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-info" type="submit" id="cf-submit1" name="submit">Enviar</button>
+                                            <input class="btn btn-info" type="submit" id="cf-submit1" name="submit" value="Enviar" />
                                         </div>
-                                    </form>
+                                    <% } %>
                                 </div>
                                 <!-- /.form-container -->
                             </div>
                         </div>
                     </div>
+                    <% if(Session["EventoElegido"] != null) {  %>
                     <div class="tab-pane fade" id="tab2" style="border-bottom:5px groove gray" data-pg-collapsed>
                         <div class="row">
                             <div class="col-md-offset-1 col-md-10">
@@ -82,49 +75,31 @@
                                     <hr class="text-left">
                                     <h2 class="text-left">realize la reservacion del evento elegido al instante</h2>
                                 </div>
-                                <p class="orange" style="font-size:0.9em;font-family:constantia;">Aqui podra agregar los datos pertinentes a la reservacion de una asisitencia a dicho evento </p>
+                                <p>El evento se realiza desde el <%= Model.EventoActual.FechaInicio %> al <%= Model.EventoActual.FechaFin %></p>
+                                <p> Elige la fecha en la cual desee realizar su reserva </p>
+                                <% using(Html.BeginForm()) { %>
                                 <div id="contact" class="form-container">
-                                    <div id="message"></div>
-                                    <form method="post" action="js/contact-form.php" name="contactform" id="contactform">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="name" id="name" type="text" value="" placeholder="Name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="email" id="email" type="text" value="" placeholder="Email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group" style="border-top:2px groove gray;border-bottom:2px groove gray">
-                                                    <input name="phone" id="phone" type="text" value="" placeholder="Phone" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                        <div class="form-group">
-                                            <textarea name="comments" id="comments" class="form-control" rows="3" placeholder="Message"></textarea>
-                                            <p class="small text-muted"><span class="guardsman">* All fields are required.</span> Once we receive your message we will respond as soon as possible.</p>
+                                     <div class="form-group ">
+                                            <input class="form-control" type="text" id="FechaReserva" name="FechaReserva" />
                                         </div>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-info" type="submit" id="cf-submit" name="submit">Enviar</button>
+                                            <input class="btn btn-info" type="submit" id="cf-submit" name="submit" value="Realizar Reservacion" />
                                         </div>
-                                    </form>
                                 </div>
+                                <% } %>
                                 <!-- /.form-container -->
                             </div>
                         </div>
                         <div class="row">
                             <!-- /.col -->
                             <div class="col-sm-10 col-sm-offset-1">
-                                <div class="map min-height-500px"></div>
+                                <div id="map" class="map min-height-500px"></div>
                             </div>
                         </div>
                         <!-- /.row -->
                         <!-- /.row -->
                     </div>
+                    <% } %>
                     <!-- /#tab2 -->
                     <div class="tab-pane fade" id="tab3" style="border-bottom:5px groove gray" data-pg-collapsed>
                         <div class="row">
@@ -136,8 +111,6 @@
                                 </div>
                                 <p class="orange" style="font-size:0.9em;font-family:constantia;">&nbsp;Aqui podra elegir como deseea llegar a dicho evento </p>
                                 <div id="contact2" class="form-container">
-                                    <div id="message2"></div>
-                                    <form method="post" action="js/contact-form.php" name="contactform" id="contactform2">
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
@@ -153,7 +126,6 @@
                                             </div>
                                         </div>
                                         <!-- /.row -->
-                                    </form>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="map min-height-500px"></div>                                     
@@ -167,6 +139,7 @@
                         <!-- /.row -->
                     </div>
                     <!-- /#tab3 -->
+                    <% if(Session["EventoElegido"] != null) { %>
                     <div class="tab-pane fade" id="tab4">
                         <div class="row">
                             <div class="col-md-12 col-md-offset-0">
@@ -180,9 +153,9 @@
                                             <div class="col-md-3 col-sm-6 team-member-wrap" data-pg-collapsed>
                                                 <div class="team-member" data-pg-collapsed>
                                                     <div class="team-details">
-                                                        <h4 class="member-name">Nombre Evento</h4>
-                                                        <p class="position">Diraccion&nbsp;</p>
-                                                        <p>Descripcion Evento: </p>
+                                                        <h4 class="member-name"><%= Model.EventoActual.NombreEvento %></h4>
+                                                        <p class="position"><%= Model.EventoActual.UnLugar.Direccion %>&nbsp;</p>
+                                                        <p><%= Model.EventoActual.Descripcion %>: </p>
                                                         <ul class="social social-dark" data-pg-collapsed="">
                                                             <li>
                                                                 <a href="#"><i class="fa fa-2x fa-facebook"></i></a>
@@ -201,9 +174,9 @@
                                             <div class="col-md-3 col-sm-6 team-member-wrap">
                                                 <div class="team-member">
                                                     <div class="team-details">
-                                                        <h4 class="member-name">Lugar Realizado</h4>
-                                                        <p class="position">Ciudad , Pais</p>
-                                                        <p>Descripcion Lugar: </p>
+                                                        <h4 class="member-name"><%= Model.EventoActual.UnLugar.Nombre %></h4>
+                                                        <p class="position"><%= Model.EventoActual.UnLugar.UbicacionLugar.Nombre %> ,<%= Model.EventoActual.UnLugar.UbicacionLugar.UnPais.Nombre %> </p>
+                                                        <p><%= Model.EventoActual.UnLugar.Descripcion %>: </p>
                                                         <ul class="social social-dark">
                                                             <li>
                                                                 <a href="#"><i class="fa fa-2x fa-twitter"></i></a>
@@ -222,9 +195,8 @@
                                             <div class="col-md-3 col-sm-6 team-member-wrap" data-pg-collapsed>
                                                 <div class="team-member">
                                                     <div class="team-details">
-                                                        <h4 class="member-name">Organizador</h4>
-                                                        <p class="position">Email:&nbsp;</p>
-                                                        <p>Fecha Nacimiento:</p>
+                                                        <h4 class="member-name"><%= Model.EventoActual.OrganizadorEvento.Nombre %></h4>
+                                                        <p class="position"><%= Model.EventoActual.OrganizadorEvento.Email %>:&nbsp;</p>
                                                         <ul class="social social-dark" data-pg-collapsed="">
                                                             <li>
                                                                 <a href="#"><i class="fa fa-2x fa-facebook"></i></a>
@@ -247,8 +219,8 @@
                                                 <div class="team-member" data-pg-collapsed>
                                                     <div class="team-details">
                                                         <h4 class="member-name">Duracion</h4>
-                                                        <p class="position">Fecha Inicio: </p>
-                                                        <p>Fecha Fin:</p>
+                                                        <p class="position"><%= Model.EventoActual.FechaInicio %>: </p>
+                                                        <p><%= Model.EventoActual.FechaFin %>:</p>
                                                         <ul class="social social-dark">
                                                             <li>
                                                                 <a href="#"><i class="fa fa-2x fa-facebook"></i></a>
@@ -274,13 +246,14 @@
                         </div>
                         <!-- /.row -->
                     </div>
+                    <% } %>
                     <!-- /#tab4 -->
                 </div>
                 <!-- /.tab-content -->
             </div>
             <!-- /.container -->
         </section>
-
+    </form>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">

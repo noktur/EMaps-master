@@ -1,8 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.CiudadModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
-
-
 
     <form id="form" runat="server">
   <section class="content-block content-2-3 bg-turquoise" style="border-bottom-right-radius:55px;border-bottom-left-radius:55px">
@@ -16,9 +14,9 @@
                         <% using (Html.BeginForm())
                        { %>   
 
-                        <input type="text" class="form-control black" id="NombreCiudad" name="NombreCiudad" placeholder="Ingrese la ciudad">
+                        <input type="text" class="form-control black" id="NombreCiudad1" name="NombreCiudad1" placeholder="Ingrese la ciudad">
                        <% } %> 
-                        <span class="input-group-btn"><button class="btn bg-marina"  type="submit">Buscar</button></span>
+                        <span class="input-group-btn"><button class="btn bg-marina" onclick="BuscarCiudad()" type="button">Buscar</button></span>
                     </div>
                     <!-- /.input-group -->
                 </div>
@@ -29,10 +27,11 @@
         <section id="content-2-6" class="content-block content-2-6 margin-top0 pad0 pad-bottom0 bg-turquoise">
             <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
                 <% using (Html.BeginForm())
-                       { %>   
-                    <input type="text" class="form-control hidden" id="NombrePais" >
-                    <input type="text" class="form-control hidden" id="CoordenadaX" >
-                    <input type="text" class="form-control hidden" id="CoordenadaY">
+                       { %>  
+                     <input type="text" class="form-control hidden" autocomplete="off" id="NombreCiudad" name="NombreCiudad" />
+                    <input type="text" class="form-control hidden" id="NombrePais" name="NombrePais" >
+                    <input type="text" class="form-control hidden" id="CoordenadaX" name="CoordenadaX" >
+                    <input type="text" class="form-control hidden" id="CoordenadaY" name="CoordenadaY">
                     <p class="form-control-static pad-bottom0 margin-bottom0 white" style=" font-family:Satisfy ; font-size:1.5em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
                     <% } %>
                 
@@ -44,6 +43,69 @@
             <!-- /.container -->
             
         </section>
+         <%       if (Model == null) 
+                 {     %>
+        <section id="content-4-7" class="content-block content-3-7 " style="display:none" data-pg-collapsed>
+        <div class="container" style="display:none">
+            </div>
+            </section>
+            <% }
+               else 
+               {   %>
+        <section id="content-3-7" class="content-block content-3-7 " data-pg-collapsed>
+    <div class="container">
+        <div class="col-sm-12">
+            <div class="underlined-title" data-pg-collapsed>
+                <h1 style=" font-family:Constantia; font-size:1.9em;">AQUI SE ENCUENTRAN LOS PAISES REGISTRADOS&nbsp;</h1>
+                <hr>
+                <h2>usted podra modificar o eliminar los datos de un pais seleccionando el correspondiente en la tabla que se encuentra debajo</h2>
+            </div>
+        </div>
+        <div class="col-md-12 col-md-offset-0"> 
+            <div class="table-responsive bg-offwhite deepocean" style=" border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:25px ">
+                <table class="table margin-top0 margin-bottom0 bg-offwhite"> 
+                    <thead> 
+                        <tr> 
+                            <th>#</th> 
+                            <th>Codigo</th> 
+                            <th>Nombre</th> 
+                            <th>CoordenadaX</th> 
+                            <th>CoordenadaY</th> 
+                            <th> Modificar</th>
+                            <th> Eliminar</th>
+                        </tr>                         
+                    </thead>   
+                     <% using (Html.BeginForm())
+                       { %>                    
+                    <tbody> 
+                       
+                         <% 
+                             
+                            foreach(var item in Model.milista)
+                            {%> 
+                        <tr>                                    
+                            <td></td>      
+                            <td><%=item.UnPais.Nombre%></td> 
+                            <td><%= item.Nombre%></td> 
+                            <td><%= item.CoordenadaX%></td> 
+                            <td><%= item.CoordenadaY%></td>                          
+                            <td>       
+                             <%= Html.ActionLink("ModificarCiudad", "ControlPaises", "Admin", new { NombreCiudad = item.Nombre }, new { @class = "btn btn-default btn-sm" })%>                
+                            </td>                             
+                            <td>                               
+                            </td>                  
+                        </tr> 
+                         <% } %>                                 
+                    </tbody>
+                                 
+                    <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+            </section>
+            <% } %>
+
         </form>
 
 </asp:Content>
@@ -92,7 +154,8 @@
             Pais = '<%=Session["Pais"]%>';
             var PaisJson = null;
 
-            if (Pais != null) {
+            if (Pais != null)
+            {
                 PaisJson = jQuery.parseJSON(Pais);
 
                 latLng = new google.maps.LatLng(PaisJson.CoordenadaX, PaisJson.CoordenadaY);
@@ -127,7 +190,7 @@
 
             }
             else {
-                alert("No se encontro el pais en la Base de Datos");
+                alert("No se encontro la ciudad en la Base de Datos");
             }
 
         }

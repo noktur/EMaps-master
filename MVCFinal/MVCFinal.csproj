@@ -47,6 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -142,6 +143,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
+    <Compile Include="Models\DetalleEventoModel.cs" />
     <Compile Include="Controllers\DueñoController.cs" />
     <Compile Include="Controllers\ElClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
@@ -159,12 +161,16 @@
     </Compile>
     <Compile Include="Models\CiudadModel.cs" />
     <Compile Include="Models\EventoModel.cs" />
+    <Compile Include="Models\FeebackAdminModel.cs" />
+    <Compile Include="Models\FeebackOrganizadorModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LugarModel.cs" />
     <Compile Include="Models\MapaModel.cs" />
     <Compile Include="Models\PaisModel.cs" />
-    <Compile Include="Models\RegistroAdmin.cs" />
+    <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\PlanoModel.cs" />
+    <Compile Include="Models\PrincipalClienteModel.cs" />
     <Compile Include="Models\RegistroCliente.cs" />
     <Compile Include="Models\RegistroDueño.cs" />
     <Compile Include="Models\RegistroOrganizador.cs" />
@@ -701,7 +707,6 @@
     <Content Include="Views\Organizador\AlquilerLugares.aspx" />
     <Content Include="Views\Organizador\FeedbackOrganizador.aspx" />
     <Content Include="Views\Organizador\Geolocalizacion.aspx" />
-    <Content Include="Views\Organizador\MuestreoLugares.aspx" />
     <Content Include="Views\Organizador\Principal.aspx" />
     <Content Include="Views\Organizador\PublicacionEventos.aspx" />
     <Content Include="Views\Pais\Index.aspx" />
@@ -710,6 +715,11 @@
     <Content Include="Views\Login\LoginUsuario.aspx" />
     <Content Include="Views\RegistroA\RegistroAdmin.aspx" />
     <Content Include="web.config" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\MasterDueño.Master" />
+    <Content Include="Views\Shared\MasterOrganizador.Master" />
+    <Content Include="Views\Shared\MasterCliente.Master" />
+    <Content Include="Views\Shared\MasterAdmin.Master" />
     <None Include="Service References\Maps\ServicioEvento.wsdl" />
     <None Include="Service References\Maps\ServicioEvento.xsd">
       <SubType>Designer</SubType>
@@ -720,11 +730,6 @@
     <None Include="Service References\Maps\ServicioEvento2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\MasterDueño.Master" />
-    <Content Include="Views\Shared\MasterOrganizador.Master" />
-    <Content Include="Views\Shared\MasterCliente.Master" />
-    <Content Include="Views\Shared\MasterAdmin.Master" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

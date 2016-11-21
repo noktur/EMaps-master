@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="ClasesTrabajo\LogicaAlquiler.cs" />
     <Compile Include="ClasesTrabajo\LogicaArea.cs" />
+    <Compile Include="ClasesTrabajo\LogicaComentariosFeedbackEvento.cs" />
+    <Compile Include="ClasesTrabajo\LogicaComentariosFeedbackLugar.cs" />
     <Compile Include="ClasesTrabajo\LogicaEntrada.cs" />
     <Compile Include="ClasesTrabajo\LogicaEvento.cs" />
     <Compile Include="ClasesTrabajo\LogicaFeedbackEvento.cs" />
@@ -48,11 +50,14 @@
     <Compile Include="ClasesTrabajo\LogicaLugar.cs" />
     <Compile Include="ClasesTrabajo\LogicaMapa.cs" />
     <Compile Include="ClasesTrabajo\LogicaPunto.cs" />
+    <Compile Include="ClasesTrabajo\LogicaReserva.cs" />
     <Compile Include="ClasesTrabajo\LogicaUbicacion.cs" />
     <Compile Include="ClasesTrabajo\LogicaUsuario.cs" />
     <Compile Include="FabricaLogica.cs" />
     <Compile Include="Interfaces\ILogicaAlquiler.cs" />
     <Compile Include="Interfaces\ILogicaArea.cs" />
+    <Compile Include="Interfaces\ILogicaComentariosFeedbackEvento.cs" />
+    <Compile Include="Interfaces\ILogicaComentariosFeedbackLugar.cs" />
     <Compile Include="Interfaces\ILogicaEntrada.cs" />
     <Compile Include="Interfaces\ILogicaEvento.cs" />
     <Compile Include="Interfaces\ILogicaFeedbackEvento.cs" />
@@ -60,6 +65,7 @@
     <Compile Include="Interfaces\ILogicaLugar.cs" />
     <Compile Include="Interfaces\ILogicaMapa.cs" />
     <Compile Include="Interfaces\ILogicaPunto.cs" />
+    <Compile Include="Interfaces\ILogicaReserva.cs" />
     <Compile Include="Interfaces\ILogicaUbicacion.cs" />
     <Compile Include="Interfaces\ILogicaUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

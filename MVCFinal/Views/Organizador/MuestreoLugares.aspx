@@ -24,7 +24,7 @@
                 <div class="container text-center">
                     <div class="col-sm-10 col-sm-offset-1">
                         <div class="underlined-title text-uppercase">
-                            <h1 style="font-size:1.5em; font-family:Constantia;">AQUI EDITE LAS AREAS DE UN EVENTO</h1>
+                            <h1 style="font-size:1.5em; font-family:Constantia;">AQUI PODRA APRECIAR LAS AREAS DE UN LUGAR</h1>
                             <hr>
                             <h2 style="font-size:1.0em;">A continuacion se desplegara un mapa con el plano del lugar seleccionado para que usted agregue a un lugar las areas deseadas de un evento a su plano</h2>
                         </div>

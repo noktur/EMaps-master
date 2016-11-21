@@ -25,37 +25,37 @@ namespace Logica.ClasesTrabajo
 
         #endregion
 
-        public void AltaFeebackEvento(FeedbackEvento e)
+        public void AltaMensajeFeebackEvento(FeedbackEvento e)
         {
-            FabricaPersistencia.getPersistenciaFeedbakEvento().AltaFeebackEvento(e);
+            FabricaPersistencia.getPersistenciaFeedbakEvento().AltaMensajeFeebackEvento(e);
         }
-        public void ModificarFeebackEvento(FeedbackEvento e)
+        public void ModificarMensajeFeebackEvento(FeedbackEvento e)
         {
-            FabricaPersistencia.getPersistenciaFeedbakEvento().ModificarFeebackEvento(e);
+            FabricaPersistencia.getPersistenciaFeedbakEvento().ModificarMensajeFeebackEvento(e);
         }
-        public void BajaFeedbackEvento(FeedbackEvento e)
+        public void BajaMensajeFeedbackEvento(FeedbackEvento e)
         {
-            FabricaPersistencia.getPersistenciaFeedbakEvento().BajaFeedbackEvento(e);
+            FabricaPersistencia.getPersistenciaFeedbakEvento().BajaMensajeFeedbackEvento(e);
         }
-        public FeedbackEvento BuscarFeedbackEvento(int IdFeedback)
+        public FeedbackEvento BuscarMensajeFeedbackEvento(int IdFeedback)
         {
-            return FabricaPersistencia.getPersistenciaFeedbakEvento().BuscarFeedbackEvento(IdFeedback);
+            return FabricaPersistencia.getPersistenciaFeedbakEvento().BuscarMensajeFeedbackEvento(IdFeedback);
         }
-        public List<FeedbackEvento> ListarFeedbackEvento()
+        public List<FeedbackEvento> ListarMensajesFeedbackEvento()
         {
-            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarFeedbackEvento();
+            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarMensajesFeedbackEvento();
         }
-        public List<FeedbackEvento> ListarFeedbackEventoxUsuario(string CiUsuario)
+        public List<FeedbackEvento> ListarMensajesFeedbackEventoxUsuario(string CiUsuario)
         {
-            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarFeedbackEventoxUsuario(CiUsuario);
+            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarMensajesFeedbackEventoxUsuario(CiUsuario);
         }
-        public List<FeedbackEvento> ListarFeedbackPorEvento(int IdEvento)
+        public List<FeedbackEvento> ListarMensajesFeedbackPorEvento(int IdEvento)
         {
-            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarFeedbackPorEvento(IdEvento);
+            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarMensajesFeedbackPorEvento(IdEvento);
         }
-        public List<FeedbackEvento> ListarFeedbackPorEventoYUsuario(int IdEvento, string CiUsuario)
+        public List<FeedbackEvento> ListarMensajesFeedbackPorEventoYUsuario(int IdEvento, string CiUsuario)
         {
-            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarFeedbackPorEventoYUsuario(IdEvento,CiUsuario);
+            return FabricaPersistencia.getPersistenciaFeedbakEvento().ListarMensajesFeedbackPorEventoYUsuario(IdEvento,CiUsuario);
         }
 
     }
