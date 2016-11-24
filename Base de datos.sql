@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS SistemaEventos ;
+﻿DROP DATABASE IF EXISTS SistemaEventos ;
 
 CREATE database IF NOT EXISTS SistemaEventos ;
 
@@ -878,6 +878,19 @@ DELIMITER //
 CREATE PROCEDURE AltaFotosLugar (pNombreFoto varchar(30),pFoto varbinary(300),pNombreLugar varchar(30))
 BEGIN
 INSERT INTO FotosLugar(NombreFoto,Foto,NombreLugar) VALUES(pNombreFoto,pFoto,pNombreLugar);
+END//
+
+DELIMITER //
+CREATE PROCEDURE EliminarFotosLugar (pNombreFoto varchar(30),pNombreLugar varchar(30))
+BEGIN
+Delete from FotosLugar
+where NombreFoto = pNombreFoto and NombreLugar = pNombreLugar;
+END//
+
+CREATE PROCEDURE ListarFotosLugar (pNombreLugar varchar(30))
+BEGIN
+Select * from FotosLugar
+where NombreLugar = pNombreLugar;
 END//
 
 -- PROCEDIMIENTOS ALMACENADOS AREAS
