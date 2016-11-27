@@ -285,9 +285,39 @@
              jQuery('#CoordenadaY').val(latLng.lng());
          }
 
-         function capacidadmayor() {
-             if (this.val() < 0)
-             { this.val(0);}
+
+         function showPicture(input) {
+             //$("#OriginalPreviewFondo2").attr('style', 'display:none;');
+             $("#preview").attr('style', '');
+             ImageFondo2Aux = input;
+         }
+
+         function showerrorfondo(response) {
+             document.getElementById('lblRespuestaFondo').innerHTML = response['message'];
+         }
+
+         function obtenerImagenFondo() {
+             var data = new FormData();
+             var files = $("#uploadFondoInput").get(0).files;
+             if (files.length > 0) {
+                 data.append("Images", files[0]);
+             }
+             $.ajax({
+                 contentType: false,
+                 processData: false,
+                 dataType: "json",
+                 accept: "json",
+                 type: "POST",
+                 url: "<%=Url.Action("GuardarImagenFondo")%>",
+                 data: data,
+                 success: function (json) {
+                     showerrorfondo(json)
+                 },
+                 error: function (response) {
+                     showerrorfondo(response)
+                 }
+             });
+
          }
 
            </script> 
@@ -343,7 +373,7 @@
                                <input name="NombreCiudad" id="NombreCiudad" disabled="disabled" type="text" value="" placeholder="Ubicacion Ciudad......" class="form-control" /> 
                           </div>
                             <div class="form-group">
-                                        <input name="Capacidad" id="Capacidad" type="number" class="form-control"/>     
+                                        <input name="Capacidad" id="Capacidad" min="0" type="number" class="form-control"/>     
                                       
                                 </div>      
                              <div class="form-group">
@@ -380,7 +410,7 @@
         <section id="content-2-10" class="content-2-10 content-block pad10">
             <div class="container bg-white border-box">
                 <div class="col-md-8 col-xs-12 pull-left">
-                    <h3><input type="file" class="form-control"></h3>
+                    <h3><input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png" onchange="showPicture(input)" class="form-control"/></h3>
                     <h2 style=" font-size:1.5em;font-family:Roboto" class="deepocean text-center text-uppercase">Aqui puede subir el plano de su lugar si lo desea</h2>
                 </div>
                 <div class="col-md-3 col-xs-12 pull-right">
