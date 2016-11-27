@@ -134,18 +134,16 @@
 
              google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {
 
-                 if (event.type == google.maps.drawing.OverlayType.POLYGON)
-                 {
+                 if (event.type == google.maps.drawing.OverlayType.POLYGON) {
 
 
-                     var vertices= event.overlay.getPath();
+                     var vertices = event.overlay.getPath();
                      var xy;
                      var lat;
                      var lng;
 
                      // iterar sobre los vertices del poligono.
-                     for (var i = 0; i < vertices.getLength(); i++)
-                     {
+                     for (var i = 0; i < vertices.getLength() ; i++) {
 
                          xy = vertices.getAt(i);
 
@@ -154,7 +152,7 @@
                          lng = xy.lng;
 
 
-                        
+
                      }
 
 
@@ -184,7 +182,7 @@
                  }
              });
 
-
+         }
 
 
          function initialize()

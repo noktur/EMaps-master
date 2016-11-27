@@ -531,7 +531,7 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE EliminarPais (pNombre varchar(30))
 BEGIN
-UPDATE Ubicacion SET Ubicacion.Eliminado=1  WHERE Pais.NombrePais=pNombre;
+UPDATE Ubicacion SET Ubicacion.Eliminado=1  WHERE ubicacion.Nombre=pNombre;
 END//
 DELIMITER;
 
@@ -580,7 +580,8 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE EliminarCiudad (pNombreCiudad varchar(30),pNombrePais varchar(30))
 BEGIN
-UPDATE Ubicacion SET Eliminado=1 WHERE Ciudad.NombreCiudad=pNombreCiudad and Ciudad.NombrePais=pNombrePais;
+UPDATE Ubicacion SET Eliminado=1 WHERE Ubicacion.Nombre=pNombreCiudad;
+UPDATE Ubicacion SET Eliminado=1 WHERE Ubicacion.Nombre=pNombrePais;
 END//
 DELIMITER;
 
@@ -588,10 +589,10 @@ DELIMITER //
 CREATE PROCEDURE BuscarCiudad(pNombre varchar(30))
 BEGIN
 SELECT *
-FROM Ubicacion join Pais 
-ON Ubicacion.Nombre=Pais.NombrePais
-join Ciudad 
-ON Pais.NombrePais=Ciudad.NombreCiudad
+FROM Ubicacion join Ciudad
+ON Ubicacion.Nombre=Ciudad.NombreCiudad
+join Pais
+ON Ciudad.NombrePais=Pais.NombrePais
 WHERE Ciudad.NombreCiudad=pNombre and  Ubicacion.Eliminado=0;
 END //
 DELIMITER;
@@ -600,13 +601,15 @@ DELIMITER //
 CREATE PROCEDURE ListarCiudades()
 BEGIN
 SELECT *
-FROM Ubicacion join Pais 
-ON Ubicacion.Nombre=Pais.NombrePais
-join Ciudad 
-ON Pais.NombrePais=Ciudad.NombreCiudad
+FROM Ubicacion join ciudad
+ON Ubicacion.Nombre=ciudad.NombreCiudad
+join pais
+ON ciudad.NombrePais=pais.NombrePais
 WHERE Ubicacion.Eliminado=0;
 END//
 DELIMITER;
+
+
 
 DELIMITER //
 CREATE PROCEDURE ListarCiudadesdePais(pNombrePais varchar(30))
@@ -1513,7 +1516,8 @@ CREATE PROCEDURE ListarCategorias()
 BEGIN
 SELECT *
 FROM categoria;
-END//
+END // 
 
-call AltaCliente('a','matiasmelfi','la','aasdasd','asdasd@fasdasd')
-create table ComentarioFeedbackLugar (  IdComentario int AUTO_INCREMENT, IdFeedback int not null, AsuntoComentario varchar(30), MensajeComentario varchar(100), CiUsuario varchar(30), FechaRealizado timestamp, foreign key (CiUsuario) references Usuarios(Ci), foreign key (IdFeedback) references Feedback(IdFeedback), primary key(IdComentario,CiUsuario,IdFeedback) )
+call BuscarCiudad('Montevideo');
+
+

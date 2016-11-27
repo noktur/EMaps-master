@@ -18,7 +18,7 @@
                         </div>  
                     <div class="col-md-4 contact_right">
                        
-                        <p>Aqui puede buscar un pais para luego ser agregado .</p>
+                        <p>Aqui puede buscar un pais para luego ser agregado.</p>
                             <% using(Html.BeginForm()) { %>
                             <div id="elementosBuscar" class="input-group">
                                 <input type="text" class="form-control" name="NombrePais1" id="NombrePais1"  />
@@ -26,17 +26,19 @@
                                    </div>
                          
                             <div class="form-group">
-                                <input type="text" class="form-control" name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
+                                <input type="text" class="form-control"  name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" disabled="disabled" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
+                                <input type="text" class="form-control" readonly="readonly" name="CodPais" id="CodPais" placeholder="Codigo Pais..."  />
                             </div>
-                            <span class="fa-map-marker"></span>
                             <div class="form-group">
-                                <input type="text" class="form-control" disabled="disabled" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
+                                <input type="text" class="form-control" readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
                             </div>
-                            <input type="submit" id="Guardar" class="btn btn-orange pull-right" name="action" value="Guardar"/>
-                        <input type="submit" id="Eliminar" class="btn btn-orange pull-right" name="action" value="Eliminar"/>
+                            <div class="form-group">
+                                <input type="text" class="form-control" readonly="readonly" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
+                            </div>
+                            <input type="submit" id="Guardar" class="btn btn-orange pull-right" name="action" value="Enviar Datos"/>
+                        <input type="submit" id="Eliminar" class="btn btn-orange pull-right" name="action" value="Eliminar" />
                      <% } %>   	
                     </div>
                 </div><!-- /.row -->
@@ -76,7 +78,8 @@
         {
             //Asignamos al evento click del boton la funcion codeAddress
             //Inicializamos la función de google maps una vez el DOM este cargado
-            initialize();
+           
+           
             botonEliminar=document.getElementById("Eliminar");
             botonEliminar.style.display='none';
             botonGuardar=document.getElementById("Guardar");
@@ -88,7 +91,7 @@
             var input = document.getElementById('NombrePais1');
 
             autocomplete = new google.maps.places.Autocomplete(input);
-
+            initialize();
             Listar();
         });
         
@@ -224,6 +227,10 @@
                 marker = new google.maps.Marker(markerOptions);
                 marker.setMap(map);
                 updatePosition(marker.getPosition());
+
+                var inputNombrePais1 = document.getElementById("elementosBuscar");
+                inputNombrePais1.style.display = 'none';
+
 
                 var inputNombrePais = document.getElementById("NombrePais");
                 inputNombrePais.style.display = '';

@@ -16,9 +16,11 @@ namespace MVCFinal.Models
         public string Descripcion { get; set; }
         public int  Capacidad { get; set; }
 
-        private Ciudad Ubicacion  { get; set; }
+        public Ciudad Ciudad  { get; set; }
 
-        public string NombreCiudad { get{ return Ubicacion.Nombre; } set{}}
+        public string CodPais { get { return Ciudad.UnPais.CodPais; } set { } }
+
+        public string NombreCiudad { get{ return Ciudad.Nombre; } set{}}
 
         private Mapa Mapa { get; set; }
 

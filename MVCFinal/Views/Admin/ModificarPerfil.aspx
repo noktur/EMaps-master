@@ -10,14 +10,14 @@
                     </div>
                     <p class="offwhite text-left margin-top20 pad-bottom20">En este modulo usted podra modificar los datos de su perfil en caso que lo solicite.</p>
                     <form id="formulario" runat="server"> 
-                        <%  if(Session["Admin"] != null) { %>
+                        <% if(Model != null) { %>
                         <% using (Html.BeginForm()) 
                            { %>
                         <!-- /.form-group -->
                         <div class="form-group">
                             <label class="col-md-3 text-left">Cedula Identidad</label>
                             <div class="col-md-7">
-                                <input type="text" name="Ci" id="Ci" placeholder="<%= Model.Ci %>" value="<%= Model.Ci  %>"  class="form-control" disabled="disabled">
+                                <input type="text" name="Ci" id="Ci" placeholder="<%= Model.Ci %>"  class="form-control" readonly="readonly">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Nombre Completo</label>
                             <div class="col-md-7">
-                                <input type="text" name="Nombre" id="Nombre" placeholder="<%= Model.Nombre %>" value="<%= Model.Nombre %>" class="form-control">
+                                <input type="text" name="Nombre" id="Nombre" placeholder="<%= Model.Nombre %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Contraseña</label>
                             <div class="col-md-7">
-                                <input type="text" name="Password" id="Password" placeholder="<%= Model.Password %>" value="<%= Model.Password %>" class="form-control">
+                                <input type="password" name="Password" id="Password" placeholder="<%= Model.Password %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Email Address</label>
                             <div class="col-md-7">
-                                <input type="text" name="Email" id="Email" placeholder="<%= Model.Email %>" value="<%= Model.Email %>" class="form-control">
+                                <input type="email" name="Email" id="Email" placeholder="<%= Model.Email %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">User Login</label>
                             <div class="col-md-7">
-                                <input type="text" name="Usuario" id="Usuario" placeholder="<%= Model.Usuario %>" value="<%= Model.Usuario %>"  class ="form-control">
+                                <input type="text" name="Usuario" id="Usuario" placeholder="<%= Model.Usuario %>"  class ="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -57,7 +57,7 @@
                         <!-- /.form-group -->
                         <div class="form-group">
                             <div class="col-md-7 col-md-push-3">
-                                <input type="submit" class="btn btn-primary" value="Save Changes"/>
+                                <input type="submit" class="btn btn-primary" name="action" value="Save Changes"/>
                                 &nbsp;
                                 <input type="submit" class="btn btn-default" value="Cancel"/>
                             </div>                             
@@ -74,4 +74,42 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+     <script type="text/javascript">
+
+         jQuery(document).ready(function () {
+
+             LLenarCampos();
+
+         });
+
+
+         function LLenarCampos()
+         {
+             var Admin;
+             Admin = '<%=(Session["AdminJson"] == null ? null : (string)Session["AdminJson"])%>';
+             var AdminJson = null;
+
+             if (Admin != null)
+             {
+                 AdminJson = jQuery.parseJSON(Admin);
+
+                 jQuery('#Ci').val(AdminJson.Ci);
+                 jQuery('#Email').val(AdminJson.Email);
+                 jQuery('#Nombre').val(AdminJson.Nombre);
+                 jQuery('#Password').val(AdminJson.Password);
+                 jQuery('#Usuario').val(AdminJson.Usuario);
+
+             }
+             else
+             {
+                 alert("No se encontro el admin")
+             }
+
+         }
+
+</script>
+
 </asp:Content>
+
+

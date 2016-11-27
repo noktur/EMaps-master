@@ -3,6 +3,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
+    <script type="text/javascript">
+
+        function SeleccionarLugar()
+        {
+
+            var NombreLugar = $("#select").val();
+
+      $.ajax({
+                url:'/Dueño/SeleccionarLugar',
+                type:"post",
+                data:NombreLugar,
+                success: function(data)
+                {
+
+                }
+
+
+            });
+        }
+
+
+        </script>
+
+
 
 </asp:Content>
 
@@ -13,7 +37,7 @@
                 <div class="container text-center">
                     <h2>Trust in a team that's with you all the way</h2>
                     <h1>AQUI USTED PODRA ORGANIZAR SUS FEEDBACK , STEP BY STEP</h1>
-                    <a href="FeedbackDueño.aspx">FeedbackDueño.aspx</a>
+                    <a href="FeedbackDueño.aspx"></a>
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <div class="col-md-6">
 </div>
@@ -76,8 +100,9 @@
                             <% if(Session["ListaLugaresPropios"] != null) { %>
                             <div class="col-md-5 col-sm-6">
                                 <h3></h3>
-                                <% foreach(var item in Model.listalugaresPropios) { %>
-                                <select class="form-control" data-pg-collapsed=""> 
+                                <% foreach(var item in Model.listalugaresPropios) 
+                                   { %>
+                                <select id="select" onchange="SeleccionarLugar()" class="form-control" data-pg-collapsed=""> 
                                     <option value="<%= item.Nombre %>"><%= item.Nombre %>,<%= item.Descripcion %></option>                                                                        
                                 </select>
                                 <% } %>

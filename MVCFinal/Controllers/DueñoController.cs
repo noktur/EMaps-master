@@ -1,4 +1,5 @@
-﻿using MVCFinal.Maps;
+﻿using Logica;
+using MVCFinal.Maps;
 using MVCFinal.Models;
 using Newtonsoft.Json;
 using System;
@@ -31,7 +32,21 @@ namespace MVCFinal.Controllers
             return _ServicioWCF;
         }
 
+       
+        [HttpPost]
+        public ActionResult SeleccionarLugar(string NombreLugar)
+        {
+            try
+            {
 
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        
 
         public ActionResult Index()
         {
@@ -83,12 +98,28 @@ namespace MVCFinal.Controllers
         }
 
         [HttpPost]
-        public ActionResult CiudadObtenida(string Ciudad)
+        public ActionResult CiudadObtenida(String[] nombre)
         {
 
-            return View();
-        }
+            List<String> a = nombre.ToList();
 
+            string ciudad = "";
+
+            ciudad = nombre[0].ToString();
+
+            LugarModel lugar = new LugarModel();
+
+            lugar.Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(ciudad);
+
+            Session["Ciudad"] = lugar.Ciudad;
+
+            string JsonCiudad = JsonConvert.SerializeObject(lugar.Ciudad);
+            Session["CiudadJson"] = JsonCiudad;
+
+            return Json(JsonCiudad,JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpGet]
         public ActionResult AdministrarLugares()
         {
 
@@ -97,7 +128,6 @@ namespace MVCFinal.Controllers
 
             try
             { 
-
 
             List<EntidadesCompartidas.Ciudad> listaCiudad = Logica.FabricaLogica.getLogicaUbicacion().ListarCiudades();
             List<EntidadesCompartidas.Lugar> listaLugar = Logica.FabricaLogica.getLogicaLugar().ListarLugares();

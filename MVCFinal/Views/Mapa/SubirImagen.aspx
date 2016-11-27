@@ -55,7 +55,8 @@
             document.getElementById('lblRespuestaFondo').innerHTML = response['message'];
         }
 
-        function obtenerImagenFondo() {
+        function obtenerImagenFondo()
+        {
              var data = new FormData();
              var files = $("#uploadFondoInput").get(0).files;
              if (files.length > 0) {
@@ -69,10 +70,12 @@
                  type: "POST",
                  url: "<%=Url.Action("GuardarImagenFondo")%>",
                  data: data,
-                 success: function (json) {
+                 success: function (json)
+                 {
                      showerrorfondo(json)
                  },
-                 error: function (response) {
+                 error: function (response)
+                 {
                      showerrorfondo(response)
                  }
              });

@@ -3,110 +3,49 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
 
     <form id="form" runat="server">
-  <section class="content-block content-2-3 bg-turquoise" style="border-bottom-right-radius:55px;border-bottom-left-radius:55px">
+   <div id="templatemo-contact" style="padding-bottom:30px">
             <div class="container">
-                
-                <div class="col-sm-7 pull-left">
-                    <h2 class="text-uppercase" style=" font-family:Satisfy ; font-size:1.3em;">Luego de que el sistema logro guardar el pais se recomienda enlazar la ciudad &nbsp;que desea agregar a el pais correspondiente</h2>
-                </div>
-                <div class="col-sm-4 pull-right">
-                    <div class="input-group">
-                        <% using (Html.BeginForm())
-                       { %>   
-
-                        <input type="text" class="form-control black" id="NombreCiudad1" name="NombreCiudad1" placeholder="Ingrese la ciudad">
-                       <% } %> 
-                        <span class="input-group-btn"><button class="btn bg-marina" onclick="BuscarCiudad()" type="button">Buscar</button></span>
+                <div class="row">
+                    <div class="templatemo-line-header head_contact">
+                        <div class="text-center">
+                            <hr class="team_hr team_hr_left hr_gray"/><span class="txt_darkgrey">CIUDADES</span>
+                            <hr class="team_hr team_hr_right hr_gray"/>
+                        </div>
                     </div>
-                    <!-- /.input-group -->
-                </div>
-            </div>
-            <!-- /.container -->
-        </section>
-        <div id="mapa" class="map min-height-500px"></div>
-        <section id="content-2-6" class="content-block content-2-6 margin-top0 pad0 pad-bottom0 bg-turquoise">
-            <div class="container text-center margin-top0 pad-bottom0 margin-bottom0 pad0 black">
-                <% using (Html.BeginForm())
-                       { %>  
-                     <input type="text" class="form-control hidden" id="NombreCiudad" name="NombreCiudad" />
-                    <input type="text" class="form-control hidden" id="NombrePais" name="NombrePais" >
-                    <input type="text" class="form-control hidden" id="CoordenadaX" name="CoordenadaX" >
-                    <input type="text" class="form-control hidden" id="CoordenadaY" name="CoordenadaY">
-                    <p class="form-control-static pad-bottom0 margin-bottom0 white" style=" font-family:Satisfy ; font-size:1.5em;">Luego de encontrado el pais puede enviar los datos a almacenar y enlazar esos datos con una ciudad .</p>
-                    <input class="btn btn-outline btn-outline-xl outline-light black bg-tan" type="submit" name="action" value="Guardar"/>
-                
-                
-                  <% } %>
-                
-              
-            </div>
-           
-           
-            <!-- /.container -->
-            
-        </section>
-         <%       if (Model == null) 
-                 {     %>
-        <section id="content-4-7" class="content-block content-3-7 " style="display:none" data-pg-collapsed>
-        <div class="container" style="display:none">
-            </div>
-            </section>
-            <% }
-               else 
-               {   %>
-        <section id="content-3-7" class="content-block content-3-7 " data-pg-collapsed>
-    <div class="container">
-        <div class="col-sm-12">
-            <div class="underlined-title" data-pg-collapsed>
-                <h1 style=" font-family:Constantia; font-size:1.9em;">AQUI SE ENCUENTRAN LOS PAISES REGISTRADOS&nbsp;</h1>
-                <hr>
-                <h2>usted podra modificar o eliminar los datos de un pais seleccionando el correspondiente en la tabla que se encuentra debajo</h2>
-            </div>
-        </div>
-        <div class="col-md-12 col-md-offset-0"> 
-            <div class="table-responsive bg-offwhite deepocean" style=" border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:25px ">
-                <table class="table margin-top0 margin-bottom0 bg-offwhite"> 
-                    <thead> 
-                        <tr> 
-                            <th>#</th> 
-                            <th>Codigo</th> 
-                            <th>Nombre</th> 
-                            <th>CoordenadaX</th> 
-                            <th>CoordenadaY</th> 
-                            <th> Modificar</th>
-                            <th> Eliminar</th>
-                        </tr>                         
-                    </thead>   
-                     <% using (Html.BeginForm())
-                       { %>                    
-                    <tbody> 
+                    <div class="col-md-8">
+                        <div style="height:378px; width:100%;" class="templatemo-contact-map" id="mapa">
+                            
+                      </div>
+                        </div>  
+                    <div class="col-md-4 contact_right">
                        
-                         <% 
-                             
-                            foreach(var item in Model.milista)
-                            {%> 
-                        <tr>                                    
-                            <td></td>      
-                            <td><%=item.UnPais.Nombre%></td> 
-                            <td><%= item.Nombre%></td> 
-                            <td><%= item.CoordenadaX%></td> 
-                            <td><%= item.CoordenadaY%></td>                          
-                            <td>       
-                             <%= Html.ActionLink("ModificarCiudad", "ControlPaises", "Admin", new { NombreCiudad = item.Nombre }, new { @class = "btn btn-default btn-sm" })%>                
-                            </td>                             
-                            <td>                               
-                            </td>                  
-                        </tr> 
-                         <% } %>                                 
-                    </tbody>
-                                 
-                    <% } %>
-                </table>
-            </div>
-        </div>
-    </div>
-            </section>
-            <% } %>
+                        <p>Aqui puede buscar una ciudad para luego agregar.</p>
+                            <% using(Html.BeginForm()) { %>
+                            <div id="elementosBuscar" class="input-group">
+                                <input type="text" class="form-control" name="NombreCiudad1" id="NombreCiudad1"  />
+                                <span class="input-group-btn"><button class="btn btn-info" onclick="BuscarCiudad()"  type="button">Buscar</button></span>
+                                   </div>
+                          <div class="form-group">
+                                <input type="text" class="form-control" name="NombreCiudad" id="NombreCiudad" placeholder="Nombre Ciudad..." />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" readonly="readonly" name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
+                            </div>
+                            <span class="fa-map-marker"></span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" readonly="readonly" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
+                            </div>
+                            <input type="submit" id="Guardar" class="btn btn-orange pull-right" name="action" value="Guardar"/>
+                        <input type="submit" id="Eliminar" class="btn btn-orange pull-right" name="action" value="Dar de Baja"/>
+                     <% } %>   	
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /#templatemo-contact -->
+        
 
         </form>
 
@@ -122,10 +61,14 @@
         var map = null;
         var geocoder = null;
         var marker = null;
-        var infoWindow = null;
-        var address = null;
+        var infoWindow;
+        var address;
         var latLng = null;
+        var marcadoresBD = [];
         var country = null;
+        var posi;
+        var botonEliminar;
+        var botonGuardar;
         var autocomplete;
         var countryRestrict;
 
@@ -136,6 +79,16 @@
         jQuery(document).ready(function () {
             //Asignamos al evento click del boton la funcion codeAddress
             //Inicializamos la función de google maps una vez el DOM este cargado
+
+            botonEliminar = document.getElementById("Eliminar");
+            botonEliminar.style.display = 'none';
+            botonGuardar = document.getElementById("Guardar");
+            botonGuardar.style.display = 'none';
+
+            var inputNombreCiudad = document.getElementById("NombreCiudad");
+            inputNombreCiudad.style.display = 'none';
+
+
             initialize();
             Listar();
 
@@ -153,7 +106,7 @@
             geocoder = new google.maps.Geocoder();
 
             var Pais;
-            Pais = '<%=Session["Pais"]%>';
+            Pais = '<%=(Session["Pais"] == null ? null : (string)Session["Pais"])%>';
             var PaisJson = null;
 
             if (Pais != null)
@@ -186,25 +139,12 @@
                  componentRestrictions: countryRestrict
              }
                     );
-                places = new google.maps.places.PlacesService(map);
-
 
 
             }
             else {
                 alert("No se encontro la ciudad en la Base de Datos");
             }
-
-        }
-
-
-        function createMarker(name, lat, lng) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map,
-                draggable: false,
-            });
-
 
         }
 
@@ -222,16 +162,65 @@
                 jsonconvertido = jQuery.parseJSON(jsonlist);
 
                 $.each(jsonconvertido, function (i, item) {
-
-                    createMarker(item.NombreCiudad, item.CoordenadaX, item.CoordenadaY)
-
-                    infoWindow = new google.maps.InfoWindow();
-
-                    google.maps.event.addListener(marker, 'click', function () { openInfoWindow(marker, name); });
+                    
+                    var posi = new google.maps.LatLng(item.CoordenadaX, item.CoordenadaY);
 
 
-                    marcadores.push(marker);
-                    marker.setMap(map);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        titulo:item.Nombre,
+                        position: posi,
+                        draggable: false
+
+                    });
+
+                    marcadoresBD.push(marker);
+
+
+                    google.maps.event.addListener(map, 'click', function () {
+                        closeInfoWindow();
+
+                        botonGuardar = document.getElementById("Guardar");
+                        botonGuardar.style.display = '';
+                        botonGuardar.style.visibility = 'visible';
+                        botonEliminar = document.getElementById("Eliminar");
+                        botonEliminar.style.display = 'none';
+                        var inputCiudad1 = document.getElementById("elementosBuscar");
+                        inputCiudad1.style.display = '';
+                        inputCiudad1.style.visibility = 'visible';
+                        var inputNombreCiudad = document.getElementById("NombreCiudad");
+                        inputNombreCiudad.style.display = 'none';
+                        jQuery('#NombreCiudad').val('');
+                        jQuery('#NombrePais').val('');
+                        jQuery('#CoordenadaX').val('');
+                        jQuery('#CoordenadaY').val('');
+
+                    });
+                    
+                    
+                    google.maps.event.addListener(marker, 'click', function () {
+                        openInfoWindow(marker, item.Nombre);
+
+                        botonGuardar = document.getElementById("Guardar");
+                        botonGuardar.style.display = 'none';
+                        botonEliminar = document.getElementById("Eliminar");
+                        botonEliminar.style.display = '';
+                        botonEliminar.style.visibility = 'visible';
+                        var inputNombreCiudad1 = document.getElementById("elementosBuscar");
+                        inputNombreCiudad1.style.display = 'none';
+                        var inputNombreCiudad = document.getElementById("NombreCiudad");
+                        inputNombreCiudad.style.display = '';
+                        inputNombreCiudad.style.visibility = 'visible';
+
+                        jQuery('#NombreCiudad').val(item.Nombre);
+                        jQuery('#NombrePais').val(item.UnPais.Nombre);
+                        jQuery('#CoordenadaX').val(item.CoordenadaX);
+                        jQuery('#CoordenadaY').val(item.CoordenadaY);
+
+
+                    });
+
+
 
                 });
 
@@ -260,7 +249,7 @@
             var markerLatLng = marker.getPosition();
             infoWindow.setContent([
             '<div >',
-            'Las coordenadas del <b>',
+            'Las coordenadas de la Ciudad de <b>',
             content,
             '</b> son:<br/>',
             markerLatLng.lat(),
@@ -297,9 +286,23 @@
                 marker = new google.maps.Marker(markerOptions);
                 marker.setMap(map);
 
-                var short_name = result[0].address_components.short_name;
+
+                var inputNombrePais1 = document.getElementById("elementosBuscar");
+                inputNombrePais1.style.display = 'none';
+
+                var inputNombreCiudad = document.getElementById("NombreCiudad");
+                inputNombreCiudad.style.display = '';
+                inputNombreCiudad.style.visibility = 'visible';
+
                 updatePosition(marker.getPosition());
-                jQuery('#NombreCiudad').val(short_name);
+               
+                jQuery('#NombreCiudad').val(results[0].address_components[0].short_name);
+
+
+                botonGuardar = document.getElementById("Guardar");
+                botonGuardar.style.display = '';
+                botonGuardar.style.visibility = 'visible';
+
 
             } else {
                 // En caso de no haber resultados o que haya ocurrido un error
@@ -313,7 +316,8 @@
 
 
         //funcion que simplemente actualiza los campos del formulario
-        function updatePosition(latLng) {
+        function updatePosition(latLng)
+        {
 
             jQuery('#CoordenadaX').val(latLng.lat());
             jQuery('#CoordenadaY').val(latLng.lng());

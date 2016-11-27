@@ -22,13 +22,14 @@
                                     <% foreach(var item in Model.listaFeedback) { %>
                                     <tr> 
                                         <td></td> 
+                                        <td class="hidden"><%= item.IdFeedbackEvento %></td> 
                                         <td><%= item.NombreFeedback %></td> 
                                         <td><%= item.Mensaje %></td> 
                                         <td><%= item.UsuarioFeedback %></td> 
                                         <td><%= item.EventoFeedback.NombreEvento %></td> 
                                         <td><%= item.FechaRealizado  %></td> 
                                         <td>
-                                            <input type="submit" class="btn btn-default btn-sm" value="ELEGIR" name="ENVIAR" />
+                                            <%= Html.ActionLink("Elegir", "ElegirFeedback", "Admin", new { IdFeedback = item.IdFeedbackEvento }, new { @class="btn btn-default btn-sm"})%>
                                         </td>
                                     </tr>   
                                     <% } %>                           
@@ -91,7 +92,7 @@
                                             <p class="form-control-static text-uppercase marina"><%= Model.FeedbackSeleccionado.EventoFeedback.Descripcion %></p>
                                             <p class="form-control-static text-uppercase  marina"><%= Model.FeedbackSeleccionado.EventoFeedback.FechaInicio %></p>
                                             <p class="form-control-static text-uppercase marina"><%= Model.FeedbackSeleccionado.EventoFeedback.FechaFin %></p>
-                                            <p class="form-control-static text-uppercase marina"><%= Model.FeedbackSeleccionado.EventoFeedback.CategoriaEvento %></p>
+                                            <p class="form-control-static text-uppercase marina"><%= Model.FeedbackSeleccionado.EventoFeedback.CategoriaEvento.NombreCategoria %></p>
                                         </div>
                                     </div>
                                     <!-- /.panel-body -->
@@ -107,7 +108,8 @@
                                 <div id="content4" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="form-group"> 
-                                            <% foreach(var item in Model.listaComentariosFeedback) { %>
+                                            <% foreach(var item in Model.listaComentariosFeedback) 
+                                               { %>
                                             <p class="form-control-static text-uppercase marina">El Asunto de el comentarios es <%= item.AsuntoComentario %></p>
                                             <p class="form-control-static text-uppercase marina">Su comentario es <%= item.Comentario %></p>
                                             <p class="form-control-static text-uppercase  marina">Fue realizado por el usuario <%= item.UsuarioComentario.Nombre%></p>

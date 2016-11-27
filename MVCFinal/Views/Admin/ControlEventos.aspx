@@ -34,6 +34,8 @@
                             foreach(var item in Model.milista)
                             { %> 
                                     <tr class="pad0 pad-bottom0 margin-top0 margin-bottom0"> 
+                                        <td></td>
+                                        <td class="hidden"><%= item.IdEvento %></td>
                                         <td><%= item.NombreEvento %></td> 
                                         <td><%= item.CategoriaEvento %></td> 
                                         <td><%= item.FechaInicio %></td> 
@@ -41,7 +43,7 @@
                                         <td><%= item.Descripcion %></td> 
                                         <td><%= item.OrganizadorEvento %></td> 
                                         <td>
-                                            <button type="submit" class="btn btn-default btn-sm" value="ENVIAR" name="ENVIAR">SELECCIONAR</button>
+                                            <%= Html.ActionLink("Seleccionar", "SeleccionarEvento", "Admin", new { IdEvento = item.IdEvento}, new { @class="btn btn-default btn-sm" })%>
                                         </td>
                                     </tr>
                                     <% } %>                                     
@@ -71,18 +73,24 @@
                 <div class="row">
                     <div class="col-xs-12 content col-sm-offset-6 col-sm-8">
                         <h3 class="offwhite text-uppercase" style=" font-family:Grand Hote;">Aqui se detallara la informacion sobre el evento</h3>
-                        <p class="white">A continuacion se desplegar el evento seleccionado para que usted pueda administrarlo en caso de cancelacion, expiracion o modificacion expresa del usuario.</p>
+                        <p class="white">A continuacion se desplegara el evento seleccionado.</p>
                         <div class="col-md-offset-0 text-center col-md-6">
                             <div class="form-group"> 
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.NombreEvento %></p>
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.Descripcion %></p>
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.FechaInicio %></p>
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.FechaFin %></p>
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.ClasificacionEvento %></p>
-                                <p class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red"><%= Model.OrganizadorEvento.Nombre %></p>
-                                <button type="button" class="btn btn-danger"> Eliminar</button>
-                                <button type="button" class="btn btn-warning" style="margin-left:5px;">Modificar</button>
-                            </div>                             
+                                <% using(Html.BeginForm()) { %>
+                                <p>Descripcion Evento: </p>
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%=Model.Descripcion %>"/>
+                                <p>Nombre Evento: </p>                           
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%=Model.NombreEvento %>">
+                                <p>Fecha Inicio: </p>
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%= Model.FechaInicio %>"/>
+                                <p>Fecha Fin: </p>
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%= Model.FechaFin %>"/>
+                                <p>Categoria: </p>
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%= Model.ClasificacionEvento %>">
+                                <p>Organizador: </p>
+                                <input type="text" class="form-control-static offwhite text-uppercase" style="border-bottom:5px groove red" placeholder="<%= Model.OrganizadorEvento.Nombre %>"/>
+                           <% } %>
+                                 </div>                             
                         </div>
                     </div>
                 </div>
