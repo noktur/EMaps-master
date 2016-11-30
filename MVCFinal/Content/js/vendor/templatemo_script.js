@@ -29,8 +29,9 @@ jQuery(function($) {
             e.preventDefault(); 
             var linkId = $(this).attr('href');
             scrollTo(linkId);
-            if($('.navbar-toggle').is(":visible") == true){
-                $('.navbar-collapse').collapse('toggle');
+            if ($('#toogle').is(":visible") == true)
+            {
+                $('#templatemo-nav-bar').collapse('#toogle');
             }
             $(this).blur();
             return false;

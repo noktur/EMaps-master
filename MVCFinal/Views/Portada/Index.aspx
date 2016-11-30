@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LoginModel>" %>
 
 <!DOCTYPE html> 
 <html lang="en"> 
@@ -26,22 +26,42 @@
         <![endif]-->         
     </head>     
     <body> 
-        <div class="templatemo-top-bar" id="templatemo-top"> 
-            <div class="container"> 
-                <div class="subheader"> 
-                    <div id="phone" class="pull-left"> 
-                        <img src="../../Content/images/phone.png" alt="phone" /> 
-                        598-080-0110
-                    </div>                     
-                    <div id="email" class="pull-right"> 
-                        <img src="../../Content/images/email.png" alt="email" /> 
-                        info@ubicatrex.com
+        <nav class="navbar navbar-inverse">                   
+                  
+    <div class="container">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class=" navbar-brand" href="#"><img height="40" width="40" src="../../Content/images/pgblocks-logo-white.png" /></a>
+                        
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form id="form1" runat="server" class="navbar-form navbar-right">
+                  <% using (Html.BeginForm())
+                       { %>   
+                <div class="form-group" style="padding-left:10px">
+              <span class="form-group-addon"><i class="icon_profile" style="color:white"></i></span>
+              <input type="text"  class="form-control" placeholder="Username" name="Usuario" >
+            </div>
+            <div class="form-group" style="padding-left:10px">
+                <span class="form-group-addon"><i class="icon_key_alt" style="color:white"></i></span>
+                <input type="password"  class="form-control" placeholder="Password" name="Password">
+            </div>
+                <div class="form-group" style="padding-top:17px; padding-left:10px">
+                <input type="submit" class="btn btn-success" value="SIGN IN" name="action">
+               <a style="margin-left:10px" href="../RegistroA/RegistroAdmin.aspx"> <input class=" btn btn-orange" type="button"  name="action" value="SIGNUP"></a>
                     </div>
-                              
-                </div>
-                                 
-            </div>             
-        </div>      
+                <% } %>
+            </form>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</nav>   
     
         <div class="templatemo-top-menu"> 
             <div class="container"> 
@@ -49,7 +69,7 @@
                 <div class="navbar navbar-default" role="navigation"> 
                     <div class="container"> 
                         <div class="navbar-header"> 
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+                            <button type="button" id="toogle" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
                                 <span class="sr-only">Toggle navigation</span> 
                                 <span class="icon-bar"></span> 
                                 <span class="icon-bar"></span> 
@@ -74,28 +94,6 @@
                                     <a href="#templatemo-contact">CONTACTO</a>
                                 </li>    
                                       
-                 <li class="dropdown"> 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">LOGIN <b class="caret"></b></a> 
-    <ul class=" dropdown-menu" >      
-            <li class=" col-md-12" style="min-width:300px">
-                <h1 class="lead">Aqui ingrese sus datos</h1>
-                <div class="input-group" style="padding-bottom:10px; padding-top:10px;">
-              <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" class="form-control" placeholder="Username" name="Usuario"  autofocus>
-            </div>           
-              <div class="input-group" style="padding-bottom:10px; padding-top:10px;">
-                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="Password" name="Password">
-            </div>     
-                <div class="form-group">
-                
-            </div>                         
-                <div class="text-center">           
-                    <button type="submit"  class="btn btn-danger">LOGIN</button>   
-                    </div>                   
-            </li>         
-        </ul>     
-            </li>
                                  
                                                   
                             </ul>                             

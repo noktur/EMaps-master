@@ -11,6 +11,9 @@ namespace MVCFinal.Models
 {
     public class LugarModel
     {
+        public EntidadesCompartidas.Mapa MapaActual { get; set; }
+
+        public EntidadesCompartidas.Lugar LugarActual { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
@@ -18,15 +21,17 @@ namespace MVCFinal.Models
 
         public Ciudad Ciudad  { get; set; }
 
-        public string CodPais { get { return Ciudad.UnPais.CodPais; } set { } }
-
-        public string NombreCiudad { get{ return Ciudad.Nombre; } set{}}
+        public string NombreCiudad { get; set; }
 
         private Mapa Mapa { get; set; }
 
-        public int IdMapa { get { return Mapa.IdMapa; } set { } }
+        public int IdMapa { get; set; }
 
-        public byte[] Imagen { get { return Mapa.Imagen; } set { } }
+        public byte[] Imagen { get; set; }
+
+        public string NombreMapa { get; set; }
+
+        public string ExtensionFoto { get; set; }
         
         public float CoordenadaX { get; set; }
 

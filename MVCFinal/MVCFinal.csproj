@@ -148,7 +148,6 @@
     <Compile Include="Controllers\ElClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LugarController.cs" />
     <Compile Include="Controllers\MapaController.cs" />
     <Compile Include="Controllers\MultiButtonAttribute.cs" />
@@ -731,7 +730,6 @@
     <Content Include="Views\Pais\Index.aspx" />
     <Content Include="Views\Portada\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Login\LoginUsuario.aspx" />
     <Content Include="Views\RegistroA\RegistroAdmin.aspx" />
     <Content Include="web.config" />
     <Content Include="Views\Shared\MasterDueño.Master" />

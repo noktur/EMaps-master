@@ -114,152 +114,115 @@ namespace MVCFinal.Controllers
 
             lugar.Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(ciudad);
 
-            Session["Ciudad"] = lugar.Ciudad;
-
             string JsonCiudad = JsonConvert.SerializeObject(lugar.Ciudad);
             Session["CiudadJson"] = JsonCiudad;
 
+           
+
             return Json(JsonCiudad,JsonRequestBehavior.AllowGet);
+
         }
 
 
-         [HttpPost]
-        public JsonResult GuardarImagenFondo() 
-         {
-            int largoKeys = 0;
-            largoKeys = System.Web.HttpContext.Current.Request.Files.AllKeys.Length;
-            string res = "";
-            Usuario usr = null;//new Usuario(); //setear usuario
+        // [HttpPost]
+        //public JsonResult GuardarImagenFondo() 
+        // {
+        //    int largoKeys = 0;
+        //    largoKeys = System.Web.HttpContext.Current.Request.Files.AllKeys.Length;
+        //    string res = "";
+        //    Usuario usr = null;//new Usuario(); //setear usuario
 
-            Image b = null;
-            if (largoKeys > 0) {
-                string pathForSaving = RutaImagenesGuardar;
-                if (System.Web.HttpContext.Current.Request.Form.Keys.Count == 2) {
-                }
-                var pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
-                string exttension = System.IO.Path.GetExtension(pic.FileName);
-                string nombreimagen = ""; //TODO: Obtener nombre del usuario en session para darle nombre al mapa
-                Random rdm = new Random();
-                int numRdm = rdm.Next(0, 999);
-                nombreimagen += "_" + numRdm.ToString();
-                string x = "0";
-                string y = "0";
-                string imagenPath;
-                if (exttension != ".png") {
-                    try {
-                        nombreimagen += ".jpg";
-                        string originalPicTemp = RutaImagenesGuardar;//Temp + "temp\\l\\";
-                        pic.SaveAs(originalPicTemp + nombreimagen);
-                        originalPicTemp = originalPicTemp + nombreimagen;
-                        imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
-                        img.isPng = false;
-                        img.setPaths(null, null);//aca deberiamos setear si precisamos distintos tamaños
-                        imagenPath = originalPicTemp;
-                    } 
-                    catch (Exception ex) 
-                    {
-                        res = ex.Message;
-                    }
-                } else 
-                {
-                    try {
-                        nombreimagen += ".png";
-                        string originalPicTemp = RutaImagenesGuardar;// + "temp\\l\\";
-                        if (!Directory.Exists(originalPicTemp))
-                            Directory.CreateDirectory(originalPicTemp);
-                        pic.SaveAs(originalPicTemp + nombreimagen);
-                        originalPicTemp = originalPicTemp + nombreimagen;
-                        imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
-                        img.isPng = true;
-                        img.setPaths(null, null);
-                        imagenPath = originalPicTemp;
-                    } catch (Exception ex) {
-                        res = ex.Message;
-                    }
-                }
-            }
-            return Json(new { message = res }, "text/html");
-        }
+        //    Image b = null;
+        //    if (largoKeys > 0) {
+        //        string pathForSaving = RutaImagenesGuardar;
+        //        if (System.Web.HttpContext.Current.Request.Form.Keys.Count == 2) {
+        //        }
+        //        var pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
+        //        string exttension = System.IO.Path.GetExtension(pic.FileName);
+        //        string nombreimagen = ""; //TODO: Obtener nombre del usuario en session para darle nombre al mapa
+        //        Random rdm = new Random();
+        //        int numRdm = rdm.Next(0, 999);
+        //        nombreimagen += "_" + numRdm.ToString();
+        //        string x = "0";
+        //        string y = "0";
+        //        string imagenPath;
+        //        if (exttension != ".png") {
+        //            try {
+        //                nombreimagen += ".jpg";
+        //                string originalPicTemp = RutaImagenesGuardar;//Temp + "temp\\l\\";
+        //                pic.SaveAs(originalPicTemp + nombreimagen);
+        //                originalPicTemp = originalPicTemp + nombreimagen;
+        //                imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
+        //                img.isPng = false;
+        //                img.setPaths(null, null);//aca deberiamos setear si precisamos distintos tamaños
+        //                imagenPath = originalPicTemp;
+        //            } 
+        //            catch (Exception ex) 
+        //            {
+        //                res = ex.Message;
+        //            }
+        //        } else 
+        //        {
+        //            try {
+        //                nombreimagen += ".png";
+        //                string originalPicTemp = RutaImagenesGuardar;// + "temp\\l\\";
+        //                if (!Directory.Exists(originalPicTemp))
+        //                    Directory.CreateDirectory(originalPicTemp);
+        //                pic.SaveAs(originalPicTemp + nombreimagen);
+        //                originalPicTemp = originalPicTemp + nombreimagen;
+        //                imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
+        //                img.isPng = true;
+        //                img.setPaths(null, null);
+        //                imagenPath = originalPicTemp;
+        //            } catch (Exception ex) {
+        //                res = ex.Message;
+        //            }
+        //        }
+        //    }
+        //    return Json(new { message = "" }, "text/html");
+        //}
 
     
-
-    [Serializable]
-    public class imageForCropping {
-        //public System.Web.HttpPostedFile pic;
-        public string originalPicTemp;
-        public string pathForSaving;
-        public Usuario usr;
-        public string x;
-        public string y;
-        public Image b;
-        public string res;
-        public string pathForSaving400x300;
-        public string pathForSaving1280x220;
-        public bool isPng;
-
-
-        public imageForCropping() {
-            originalPicTemp = null;
-            pathForSaving = null;
-            usr = null;
-            x = null;
-            y = null;
-            b = null;
-            res = null;
-            pathForSaving400x300 = null;
-            pathForSaving1280x220 = null;
-
-        }
-
-        public imageForCropping(string pic1, string pathForSaving1, Usuario usr1, string x1, string y1, Image b1, string res1) {
-            originalPicTemp = pic1;
-            pathForSaving = pathForSaving1;
-            usr = usr1;
-            x = x1;
-            y = y1;
-            b = b1;
-            res = res1;
-        }
-
-        public void setPaths(string p400x300, string p1280x220) { //aca podemos setear los tamaños
-            this.pathForSaving400x300 = p400x300;
-            this.pathForSaving1280x220 = p1280x220;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        [HttpGet]
-        public ActionResult AdministrarLugares()
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar")]
+        public ActionResult Guardar(FormCollection collection)
         {
-
-             MVCFinal.Models.CiudadModel Ciudad = new CiudadModel();
-            MVCFinal.Models.LugarModel Lugar=new LugarModel();
-
             try
-            { 
+            {
 
-            List<EntidadesCompartidas.Ciudad> listaCiudad = Logica.FabricaLogica.getLogicaUbicacion().ListarCiudades();
-            List<EntidadesCompartidas.Lugar> listaLugar = Logica.FabricaLogica.getLogicaLugar().ListarLugares();
+                EntidadesCompartidas.Dueño dueño = new Dueño();
+                dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
 
-            Lugar.milistaCiudad = listaCiudad;
-            Lugar.milistaLugar = listaLugar;
-            Session["ListaCiudad"] = listaCiudad;
-            Session["ListaLugares"] = listaLugar;
-            string JsonLugares = JsonConvert.SerializeObject(Lugar.milistaLugar);
-            Session["LugaresMapaJson"] = JsonLugares;
-            
-            return View(Lugar);
+                LugarModel Lugar = new LugarModel();
+                EntidadesCompartidas.Lugar l = new EntidadesCompartidas.Lugar();
+
+                Lugar.Nombre = Convert.ToString(collection["Nombre"]);
+                Lugar.Direccion= Convert.ToString(collection["Direccion"]);
+                Lugar.Capacidad = Convert.ToInt32(collection["Capacidad"]);
+                Lugar.NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
+
+                EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(Lugar.NombreCiudad);
+
+                Lugar.Descripcion = Convert.ToString(collection["Descripcion"]);
+                Lugar.CoordenadaX = float.Parse(collection["CoordenadaX"], System.Globalization.CultureInfo.InvariantCulture);
+                Lugar.CoordenadaY = float.Parse(collection["CoordenadaY"], System.Globalization.CultureInfo.InvariantCulture);
+
+
+
+                l.Nombre = Lugar.Nombre;
+                l.Direccion = Lugar.Direccion;
+                l.Capacidad = Lugar.Capacidad;
+                l.UbicacionLugar = Ciudad;
+                l.Descripcion = Lugar.Descripcion;
+                l.CoordenadaX = Lugar.CoordenadaX;
+                l.CoordenadaY = Lugar.CoordenadaY;
+                l.DueñoLugar = dueño;
+
+                Logica.FabricaLogica.getLogicaLugar().AltaLugar(l);
+
+                Session["LugarActual"] = l;
+
+                return View("AdministrarLugares");
 
             }
             catch
@@ -267,11 +230,72 @@ namespace MVCFinal.Controllers
                 return View();
             }
 
+    }
+
+
+            [HttpGet]
+         public ActionResult AdministrarLugares()
+        {
+               
+                try
+                {
+                    MVCFinal.Models.CiudadModel Ciudad = new CiudadModel();
+                    MVCFinal.Models.LugarModel Lugar = new LugarModel();
+                    EntidadesCompartidas.Dueño dueño = null;
+
+
+                        dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
+
+
+                        List<EntidadesCompartidas.Ciudad> listaCiudad = Logica.FabricaLogica.getLogicaUbicacion().ListarCiudades();
+                        List<EntidadesCompartidas.Lugar> listaLugar = Logica.FabricaLogica.getLogicaLugar().ListarLugares();
+
+                        Lugar.milistaCiudad = listaCiudad;
+                        Lugar.milistaLugar = listaLugar;
+                        Session["ListaCiudad"] = Lugar.milistaCiudad;
+                        Session["ListaLugares"] = Lugar.milistaLugar;
+                        string JsonLugares = JsonConvert.SerializeObject(Lugar.milistaLugar);
+                        Session["LugaresMapaJson"] = JsonLugares;
+                        string JsonCiudades = JsonConvert.SerializeObject(listaCiudad);
+                        Session["CiudadesJson"] = JsonCiudades;
+
+                        
+                    return View(Lugar);
+
+            }
+            catch
+            {
+                return View();
+            }        
         }
 
 
+            public ActionResult SubirPlano(HttpPostedFileBase image)
+            {
+                LugarModel model = new LugarModel();
 
 
+                EntidadesCompartidas.Mapa miMapa = new Mapa();
+
+                if (image != null)
+                {
+                    miMapa.Extension = Path.GetExtension(image.FileName);
+                    
+                    int length = image.ContentLength;
+                    byte[] buffer = new byte[length];
+                    image.InputStream.Read(buffer, 0, length);
+                    miMapa.Imagen = buffer;
+                    miMapa.Nombre =image.FileName.Substring(0,image.FileName.LastIndexOf('.'));
+                    miMapa.LugarAsociado =(EntidadesCompartidas.Lugar)Session["LugarActual"];
+                }
+
+                model.MapaActual = miMapa;
+
+                FabricaLogica.getLogicaMapa().AltaMapa(miMapa);
+
+
+                return View("AdministrarLugares",model);
+            }
 
 
 

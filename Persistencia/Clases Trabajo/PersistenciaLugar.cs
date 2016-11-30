@@ -41,7 +41,6 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pCapacidad", l.Capacidad);
             cmd.Parameters.AddWithValue("pDescripcion", l.Descripcion);
             cmd.Parameters.AddWithValue("pNombreUbicacion", l.UbicacionLugar.Nombre);
-            cmd.Parameters.AddWithValue("pIdMapa", l.MapaLugar.IdMapa);
             cmd.Parameters.AddWithValue("pCordX", l.CoordenadaX);
             cmd.Parameters.AddWithValue("pCordY", l.CoordenadaY);
             cmd.Parameters.AddWithValue("pCiDueño", l.DueñoLugar.CI);
@@ -74,7 +73,6 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pCapacidad", l.Capacidad);
             cmd.Parameters.AddWithValue("pDescripcion", l.Descripcion);
             cmd.Parameters.AddWithValue("pNombreUbicacion", l.UbicacionLugar.Nombre);
-            cmd.Parameters.AddWithValue("pIdMapa", l.MapaLugar.IdMapa);
             cmd.Parameters.AddWithValue("pCiDueño", l.DueñoLugar.CI);
 
 
@@ -109,7 +107,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnLugar = new Lugar(NombreLugar, (string)oReader["Direccion"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)oReader["UbicacionCiudad"]), PersistenciaMapa.GetInstancia().BuscarMapa((int)oReader["IdMapa"]), Convert.ToSingle(oReader["CordX"]), Convert.ToSingle(oReader["CordY"]),PersistenciaDueño.GetInstancia().Buscar((string)oReader["CiDueño"]));
+                    UnLugar = new Lugar(NombreLugar, (string)oReader["Direccion"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)oReader["UbicacionCiudad"]), Convert.ToSingle(oReader["CordX"]), Convert.ToSingle(oReader["CordY"]),PersistenciaDueño.GetInstancia().Buscar((string)oReader["CiDueño"]));
                 }
                 oReader.Close();
             }
@@ -165,7 +163,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)lector["UbicacionCiudad"]), PersistenciaMapa.GetInstancia().BuscarMapa((int)lector["IdMapa"]), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
+                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)lector["UbicacionCiudad"]), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
                         listaLugar.Add(UnLugar);
                     }
                 }
@@ -199,7 +197,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)lector["UbicacionCiudad"]), PersistenciaMapa.GetInstancia().BuscarMapa((int)lector["IdMapa"]), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
+                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)lector["UbicacionCiudad"]),Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
                         listaLugar.Add(UnLugar);
                     }
                 }
@@ -234,7 +232,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"],PersistenciaCiudad.GetInstancia().BuscarCiudad(pNombreCiudad), PersistenciaMapa.GetInstancia().BuscarMapa((int)lector["IdMapa"]), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
+                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"],PersistenciaCiudad.GetInstancia().BuscarCiudad(pNombreCiudad), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)lector["CiDueño"]));
                         listaLugar.Add(UnLugar);
                     }
                 }
@@ -269,7 +267,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad(Convert.ToString(lector["UbicacionCiudad"])), PersistenciaMapa.GetInstancia().BuscarMapa((int)lector["IdMapa"]), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar(pCiDueño));
+                        UnLugar = new Lugar((string)lector["NombreLugar"], (string)lector["Direccion"], (string)lector["Descripcion"], (int)lector["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad(Convert.ToString(lector["UbicacionCiudad"])), Convert.ToSingle(lector["CordX"]), Convert.ToSingle(lector["CordY"]), PersistenciaDueño.GetInstancia().Buscar(pCiDueño));
                         listaLugar.Add(UnLugar);
                     }
                 }
@@ -286,38 +284,7 @@ namespace Persistencia.Clases_Trabajo
             return listaLugar;
         }
 
-        public Lugar BuscarMapaLugar(string NombreLugar,int IdMapa)
-        {
-            Lugar UnLugar = null;
-
-            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("BuscarLugar", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("pNombreLugar", NombreLugar);
-            cmd.Parameters.AddWithValue("pIdMapa", IdMapa);
-
-
-            try
-            {
-                con.Open();
-                MySqlDataReader oReader = cmd.ExecuteReader();
-                if (oReader.HasRows)
-                {
-                    oReader.Read();
-                    UnLugar = new Lugar(NombreLugar, (string)oReader["Direccion"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], PersistenciaCiudad.GetInstancia().BuscarCiudad((string)oReader["UbicacionCiudad"]), PersistenciaMapa.GetInstancia().BuscarMapa(IdMapa), Convert.ToSingle(oReader["CordX"]), Convert.ToSingle(oReader["CordY"]), PersistenciaDueño.GetInstancia().Buscar((string)oReader["CiDueño"]));
-                }
-                oReader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Error con la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return UnLugar;
-        }
+        
 
 
         #endregion

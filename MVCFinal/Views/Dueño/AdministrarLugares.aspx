@@ -21,56 +21,31 @@
          var Ciudad;
          
 
-         function BuscarCiudad(NombreCiudad)
+
+        
+         function CargarSelect()
          {
-             // Obtenemos la dirección y la asignamos a una variable
-             var ciudad=NombreCiudad;
+             var ciudades = '<%= Session["CiudadesJson"]%>';
 
-             // Creamos el Objeto Geocoder
-             geocoder = new google.maps.Geocoder();
-             // Hacemos la petición indicando la dirección e invocamos la función
-             // geocodeResult enviando todo el resultado obtenido
-             geocoder.geocode({ 'address': ciudad }, geocodeResult2);
-
-         };
-
-         function geocodeResult2(results, status) {
+             var jsonconvertido = null;
+             if (ciudades != "")
+             {
 
 
-             // Verificamos el estatus
-             if (status == 'OK') {
-                 // Si hay resultados encontrados, centramos y repintamos el mapa
-                 // esto para eliminar cualquier pin antes puesto
-                 var cityB = new google.maps.LatLngBounds(results[0].geometry.viewport.getSouthWest(),
-                     results[0].geometry.viewport.getNorthEast());
+                 jsonconvertido = jQuery.parseJSON(ciudades);
 
-                 // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
-                 // Dibujamos un marcador con la ubicación del primer resultado obtenido
-               var centro= results[0].geometry.location;
-               
-                
-               var cities = results[0].address_components[0].short_name;
+                 var select = document.getElementById("seleccion");
 
-               var options = {
-                   bounds:cityB,
-                   types: ['geocode'],
-                    componentRestrictions: { country: results[0].address_components[2].short_name},
-                    center: centro,
-                };
+                 select.options[i] = new Option("Seleccione una Ciudad");
+                 for (var i = 0; i < jsonconvertido.length; i++)
+                 {
+                     
+                     select.options[i] = new Option(jsonconvertido[i].Nombre,jsonconvertido[i].Nombre);
+                 }
 
-                
 
-                var input = document.getElementById('Direccion1');
-
-                 var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-             } else {
-                 // En caso de no haber resultados o que haya ocurrido un error
-                 // lanzamos un mensaje con el error
-                 alert("Geocoding no tuvo éxito debido a: " + status);
              }
          }
-
 
 
 
@@ -115,13 +90,9 @@
 
                  updatePosition(marker.getPosition());
 
-                 jQuery('#NombreCiudad').val(results[0].address_components[0].short_name);
+                 jQuery('#Direccion').val(results[0].address_components[0].short_name);
 
-
-                 botonGuardar = document.getElementById("Guardar");
-                 botonGuardar.style.display = '';
-                 botonGuardar.style.visibility = 'visible';
-
+                 
 
              } else {
                  // En caso de no haber resultados o que haya ocurrido un error
@@ -137,8 +108,9 @@
          jQuery(document).ready(function () {
              //Asignamos al evento click del boton la funcion codeAddress
              //Inicializamos la función de google maps una vez el DOM este cargado
+             CargarSelect();
              initialize();
-             
+            
 
 
          });
@@ -146,8 +118,11 @@
 
          function RecuperarCiudad(cc)
          {
-             geocoder = new google.maps.Geocoder();
+             var geocoder = null;
+             geocoder= new google.maps.Geocoder();
 
+            
+            
              Ciudad = cc;
             var CiudadJson = null;
 
@@ -156,9 +131,52 @@
                 CiudadJson = jQuery.parseJSON(Ciudad);
 
                 jQuery('#NombreCiudad').val(CiudadJson.Nombre);
-                jQuery('#CodPais').val(CiudadJson.UnPais.CodPais);
 
-                BuscarCiudad(CiudadJson.Nombre);
+
+                var ciudad = CiudadJson.Nombre;
+
+                // Creamos el Objeto Geocoder
+                geocoder = new google.maps.Geocoder();
+                // Hacemos la petición indicando la dirección e invocamos la función
+                // geocodeResult enviando todo el resultado obtenido
+                geocoder.geocode({ 'address': ciudad }, geocodeResult2);
+
+
+                function geocodeResult2(results, status)
+                {
+
+                    // Verificamos el estatus
+                    if (status == 'OK') {
+                        // Si hay resultados encontrados, centramos y repintamos el mapa
+                        // esto para eliminar cualquier pin antes puesto
+                        var cityB = new google.maps.LatLngBounds(results[0].geometry.viewport.getSouthWest(),
+                            results[0].geometry.viewport.getNorthEast());
+
+                        // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
+                        // Dibujamos un marcador con la ubicación del primer resultado obtenido
+                        var centro = results[0].geometry.location;
+
+
+                        var options = {
+                            bounds: cityB,
+                            types: ['geocode'],
+                            componentRestrictions: { country: CiudadJson.UnPais.CodPais },
+                            center: centro,
+                        };
+
+
+
+                        var input = document.getElementById('Direccion1');
+
+                        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+                    } else {
+                        // En caso de no haber resultados o que haya ocurrido un error
+                        // lanzamos un mensaje con el error
+                        alert("Geocoding no tuvo éxito debido a: " + status);
+                    }
+                }
+
         
 
             }
@@ -254,7 +272,27 @@
 
 
 
-          $('#seleccion').on('change', function () {
+          $('#Guardar').on('click', function ()
+          {
+
+              var nombreCiudad = document.getElementsByName("NombreCiudad");
+              var direccion = document.getElementsByName("Direccion");
+              var coordenadaX = document.getElementsByName("CoordenadaX");
+              var coordenadaY = document.getElementsByName("CoordenadaY");
+              var Nombre = document.getElementsByName("Nombre");
+              var Capacidad = document.getElementsByName("Capacidad");
+              var Descripcion = document.getElementsByName("Descripcion");
+
+              
+
+
+          });
+
+
+
+
+          $('#seleccion').on('change', function ()
+          {
 
               var nombreCiudad = document.getElementById("seleccion");
 
@@ -326,7 +364,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      
-    <form id="form1" runat="server">
+    <form id="form1" runat="server"> 
     <div data-spy="scroll" data-target="nav">     
         <section class="content-block contact-1">
             
@@ -345,18 +383,16 @@
                      </div>                  
                     </div>
                     <div class="col-md-4 right">
-                     <% if(Model.milistaCiudad.Count > 0)
-                       { %>                  
-                         <div class="form-group">                                               
-                        <select id="seleccion"  class="form-control" name="seleccion">                            
-                            <option value="0">Seleccione una ciudad</option>  
-                            <% foreach(var item in Model.milistaCiudad ) { %>  
-                           <option value="<%= item.Nombre %>"> <%= item.Nombre %> </option>   
-                              <% } %>                                                                                     
+                        <div id="Esconder">               
+                         <div class="form-group">  
+                                                                        
+                        <select id="seleccion"  class="form-control" name="seleccion">
+                                                       
+                            <option value="0">Seleccione una ciudad</option>                                                                                      
                             </select>
-                                    
+                             
                           </div>
-                        <div class="form-group">
+                        <div class="form-group" id="DivDireccion">
                             <p>Aqui podra ingresar la direccion a buscar en la ciudad correspondiente </p>
                              <div id="elementosBuscar" class="input-group">
                                 <input type="text" class="form-control" name="Direccion1" id="Direccion1"  />
@@ -364,18 +400,27 @@
                                    </div>
                             </div>
 
-                    <% } %>                   
-                            
+                           </div>
+                           
+                      
                                  
                         <% using (Html.BeginForm()) { %>
-                         
+                          
                         <div class="form-group">
-                               <input name="NombreCiudad" id="NombreCiudad" disabled="disabled" type="text" value="" placeholder="Ubicacion Ciudad......" class="form-control" /> 
+                               <input name="Direccion" id="Direccion" type="text" class="form-control hidden" /> 
                           </div>
+
+                        <div class="form-group">
+                               <input name="NombreCiudad" id="NombreCiudad" type="text"  class="form-control hidden" /> 
+                          </div>
+                        <div class="form-group">
+                                        <input name="Nombre" id="Nombre" type="text" placeholder="Ingrese el nombre ......" class="form-control"/>     
+                                      
+                                </div>  
                             <div class="form-group">
                                         <input name="Capacidad" id="Capacidad" min="0" type="number" class="form-control"/>     
                                       
-                                </div>      
+                                </div>   
                              <div class="form-group">
                                 <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion....."></textarea>
                             </div>
@@ -384,23 +429,22 @@
                                         <input name="CoordenadaX" id="CoordenadaX" type="text" value="" placeholder="Coordenada X..." class="form-control no-shadow" />
                                      </div>
                                      <div class="form-group hidden">
-                                        <input name="CoordenadaX" id="CoordenadaY" type="text" value="" placeholder="Coordenada Y..." class="form-control no-shadow" />
+                                        <input name="CoordenadaY" id="CoordenadaY" type="text" value="" placeholder="Coordenada Y..." class="form-control no-shadow" />
                                     
                                      </div> 
-
-                                    <div class="form-group hidden">
-                                        <input name="CodPais" id="CodPais" type="text" value="" placeholder="Codigo Pais..." class="form-control no-shadow" />
-                                    
-                                     </div> 
-                        <% } %>
+                             <div class=" col-md-12 text-center">                      
+                            <!-- /.row -->
+                                <input class="btn btn-primary text-center" type="submit" value="Guardar" name="action"/>
+                            </div>
                               
+                       
+                             <% } %>
+                         
+                             
                             </div>
                 </div>
-                <div class=" col-md-12 text-center">                      
-                            <!-- /.row -->
-                                <input class="btn btn-primary text-center" type="submit" id="cf-send" value="Enviar" name="action"/>
-                            </div>
-                 
+               
+                  
                 </div>
                     <!-- /.form-container -->
                 <!-- /.col-sm-10 -->
@@ -409,16 +453,20 @@
         </section>
         <section id="content-2-10" class="content-2-10 content-block pad10">
             <div class="container bg-white border-box">
+                 <% using (Html.BeginForm("SubirPlano", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+                    {  %>
                 <div class="col-md-8 col-xs-12 pull-left">
-                    <h3><input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png" onchange="showPicture(input)" class="form-control"/></h3>
+                    <h3><input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png" class="form-control"/></h3>
                     <h2 style=" font-size:1.5em;font-family:Roboto" class="deepocean text-center text-uppercase">Aqui puede subir el plano de su lugar si lo desea</h2>
                 </div>
                 <div class="col-md-3 col-xs-12 pull-right">
                     <button class="btn btn-primary btn-lg" style="background-color:blue;" type="submit" id="cf-submit" name="submit">Subir Plano</button>
                 </div>
+                <% } %>
             </div>
         </section>
-    </div>   
-      </form>  
+    </div>  
+       </form> 
+       
     
 </asp:Content>
