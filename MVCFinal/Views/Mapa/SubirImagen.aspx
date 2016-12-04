@@ -55,7 +55,8 @@
             document.getElementById('lblRespuestaFondo').innerHTML = response['message'];
         }
 
-        function obtenerImagenFondo() {
+        function obtenerImagenFondo()
+        {
              var data = new FormData();
              var files = $("#uploadFondoInput").get(0).files;
              if (files.length > 0) {
@@ -69,10 +70,12 @@
                  type: "POST",
                  url: "<%=Url.Action("GuardarImagenFondo")%>",
                  data: data,
-                 success: function (json) {
+                 success: function (json)
+                 {
                      showerrorfondo(json)
                  },
-                 error: function (response) {
+                 error: function (response)
+                 {
                      showerrorfondo(response)
                  }
              });
@@ -84,7 +87,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <div>
      <input type="file" id="upload" name="upload" accept="image/gif, image/jpeg, image/png" onchange="showPicture(input)"/>
-    <img id="preview" src="" onload="initializeguillotineFondo2()" style="width: 300px; height: 300px"/>
+    <img id="preview" src="#" onload="initializeguillotineFondo2()" style="width: 300px; height: 300px"/>
     <label id="lblRespuestaFondo"></label>
 </div>
 </asp:Content>

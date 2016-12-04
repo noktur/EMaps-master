@@ -82,7 +82,7 @@
     <Compile Include="Interfaces\IPersistenciaPunto.cs" />
     <Compile Include="Clases Trabajo\PersistenciaFeedbackEvento.cs" />
     <Compile Include="Interfaces\IPersistenciaReserva.cs" />
-    <Compile Include="PersistenciaComentariosFeedbackLugar.cs" />
+    <Compile Include="Clases Trabajo\PersistenciaComentariosFeedbackLugar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace MVCFinal.Controllers
 
                     EntidadesCompartidas.Organizador Organizaor = (EntidadesCompartidas.Organizador)Session["Organizador"];
 
-                    FeebackOrganizadorModel miModel = new FeebackOrganizadorModel();
+                    FeedbackOrganizadorModel miModel = new FeedbackOrganizadorModel();
 
                     try
                     {

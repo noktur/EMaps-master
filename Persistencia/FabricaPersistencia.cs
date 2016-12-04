@@ -15,6 +15,11 @@ namespace Persistencia
             return (PersistenciaAdmin.GetInstancia());
         }
 
+        public static IPersistenciaFotosLugar getPersistenciaFotosLugar()
+        {
+            return (PersistenciaFotosLugar.getInstancia());
+        }
+
         public static IPersistenciaAlquiler getPersistenciaAlquiler()
         {
             return (PersistenciaAlquiler.GetInstancia());
@@ -99,11 +104,6 @@ namespace Persistencia
         public static IPersistenciaPunto getPersistenciaPunto()
         {
             return (PersistenciaPunto.GetInstancia());
-        }
-
-        public static IPersistenciaFotosLugar getPersistenciaFotosLugar()
-        {
-            return PersistenciaFotosLugar.getInstancia();
         }
     }
 }

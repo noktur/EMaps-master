@@ -9,6 +9,7 @@ namespace EntidadesCompartidas
     {
         private String _nombreFoto;
         private byte[] _imagen;
+        private String _extension;
 
          #region 
 
@@ -31,18 +32,29 @@ namespace EntidadesCompartidas
             set { _imagen = value; }
         }
 
+        public String Extension
+        {
+            get { return _extension; }
+            set
+            {
+                _extension = value;
+            }
+        }
+
         #endregion
 
         #region Constructores
 
-        public FotosLugar(String fNombre, byte[] fImagen)
+        public FotosLugar(String fNombre, byte[] fImagen,String pExtension)
         {
             NombreFoto = fNombre;
             Imagen = fImagen;
+            Extension = pExtension;
         }
 
         public FotosLugar()
         {
+            Extension = "";
             NombreFoto = "aaa";
             Imagen = null;
         }

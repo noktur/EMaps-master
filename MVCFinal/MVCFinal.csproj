@@ -148,7 +148,6 @@
     <Compile Include="Controllers\ElClienteController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LugarController.cs" />
     <Compile Include="Controllers\MapaController.cs" />
     <Compile Include="Controllers\MultiButtonAttribute.cs" />
@@ -162,7 +161,8 @@
     <Compile Include="Models\CiudadModel.cs" />
     <Compile Include="Models\EventoModel.cs" />
     <Compile Include="Models\FeebackAdminModel.cs" />
-    <Compile Include="Models\FeebackOrganizadorModel.cs" />
+    <Compile Include="Models\FeedbackOrganizadorModel.cs" />
+    <Compile Include="Models\FeedbackDueñoModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LugarModel.cs" />
@@ -199,7 +199,9 @@
     <Content Include="Content\css\customDueño.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\css\demo.css" />
+    <Content Include="Content\css\demos\bootstrap.css" />
     <Content Include="Content\css\demos\sliders.css" />
+    <Content Include="Content\css\demos\templatemo_style.css" />
     <Content Include="Content\css\demos\ui-buttons.css" />
     <Content Include="Content\css\demos\ui-notifications.css" />
     <Content Include="Content\css\elegant-icons-style.css" />
@@ -213,6 +215,7 @@
     <Content Include="Content\css\Register.css" />
     <Content Include="Content\css\resetRegister.css" />
     <Content Include="Content\css\style-library-1.css" />
+    <Content Include="Content\css\templatemo_style.css" />
     <Content Include="Content\images\600x800.gif" />
     <Content Include="Content\images\background.png" />
     <Content Include="Content\images\battery.png" />
@@ -233,6 +236,7 @@
     <Content Include="Content\images\header-3-bg.jpg" />
     <Content Include="Content\images\leaf.png" />
     <Content Include="Content\images\location.png" />
+    <Content Include="Content\images\Logo.png" />
     <Content Include="Content\images\low-poly-1.jpg" />
     <Content Include="Content\images\low-poly-2.jpg" />
     <Content Include="Content\images\map-pin.png" />
@@ -249,6 +253,7 @@
     <Content Include="Content\images\partner-logos\logo-less.png" />
     <Content Include="Content\images\partner-logos\logo-sass.png" />
     <Content Include="Content\images\partner-logos\logo-yeoman.png" />
+    <Content Include="Content\images\pgblocks-logo-nostrap.png" />
     <Content Include="Content\images\pgblocks-logo-white.png" />
     <Content Include="Content\images\pgblocks-symbol-1.jpg" />
     <Content Include="Content\images\pgblocks-symbol-2.jpg" />
@@ -564,9 +569,17 @@
     <Content Include="Content\js\plugins.js" />
     <Content Include="Content\js\plugins.min.js" />
     <Content Include="Content\js\respond.min.js" />
-    <Content Include="Content\js\stickUp.min.js" />
+    <Content Include="Content\js\vendor\animate.css" />
+    <Content Include="Content\js\vendor\bootstrap.js" />
+    <Content Include="Content\js\vendor\bootstrap.min.js" />
     <Content Include="Content\js\vendor\jquery-1.11.0.min.js" />
+    <Content Include="Content\js\vendor\jquery-1.11.1.min.js" />
+    <Content Include="Content\js\vendor\jquery.min.js" />
     <Content Include="Content\js\vendor\modernizr-2.6.1-respond-1.1.0.min.js" />
+    <Content Include="Content\js\vendor\npm.js" />
+    <Content Include="Content\js\vendor\stickUp.min.js" />
+    <Content Include="Content\js\vendor\templatemo_misc.css" />
+    <Content Include="Content\js\vendor\templatemo_script.js" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\next.png" />
     <Content Include="Content\plugins.js" />
@@ -634,6 +647,10 @@
     <Content Include="Content\fonts\flexslider-icon.ttf" />
     <Content Include="Content\fonts\flexslider-icon.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\css\demos\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\demos\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\demos\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\css\demos\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Content\img\bg-1.jpg" />
@@ -678,6 +695,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\Register.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="Service References\Maps\ServicioEvento.disco" />
     <None Include="Service References\Maps\configuration91.svcinfo" />
@@ -712,10 +730,8 @@
     <Content Include="Views\Pais\Index.aspx" />
     <Content Include="Views\Portada\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Login\LoginUsuario.aspx" />
     <Content Include="Views\RegistroA\RegistroAdmin.aspx" />
     <Content Include="web.config" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\MasterDueño.Master" />
     <Content Include="Views\Shared\MasterOrganizador.Master" />
     <Content Include="Views\Shared\MasterCliente.Master" />
@@ -730,6 +746,7 @@
     <None Include="Service References\Maps\ServicioEvento2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Web.config" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

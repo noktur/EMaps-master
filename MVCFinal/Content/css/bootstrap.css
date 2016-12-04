@@ -903,6 +903,8 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+    top: 0px;
+    left: 0px;
 }
 
 .col-xs-1,
@@ -1983,6 +1985,9 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 15px;
+    top: 0px;
+    left: 0px;
+    margin-top: 0px;
 }
 
 .radio,
@@ -5262,6 +5267,20 @@ a.list-group-item.active > .badge,
   .jumbotron .h1 {
     font-size: 63px;
   }
+}
+
+    @media  ( max-width: 768px) 
+     {
+	 h1 {
+		width: 100%;
+	}
+}
+
+      @media  ( max-width: 768px) 
+     {
+	 p {
+		width: 100%;
+	}
 }
 
 .thumbnail {
