@@ -100,5 +100,10 @@ namespace Persistencia
         {
             return (PersistenciaPunto.GetInstancia());
         }
+
+        public static IPersistenciaFotosLugar getPersistenciaFotosLugar()
+        {
+            return PersistenciaFotosLugar.getInstancia();
+        }
     }
 }

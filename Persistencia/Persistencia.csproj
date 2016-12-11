@@ -53,6 +53,7 @@
     <Compile Include="Clases Trabajo\PersistenciaEntrada.cs" />
     <Compile Include="Clases Trabajo\PersistenciaEvento.cs" />
     <Compile Include="Clases Trabajo\PersistenciaFeedbackLugar.cs" />
+    <Compile Include="Clases Trabajo\PersistenciaFotosLugar.cs" />
     <Compile Include="Clases Trabajo\PersistenciaLugar.cs" />
     <Compile Include="Clases Trabajo\PersistenciaMapa.cs" />
     <Compile Include="Clases Trabajo\PersistenciaOrganizador.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Interfaces\IPersistenciaEvento.cs" />
     <Compile Include="Interfaces\IPersistenciaFeedbackEvento.cs" />
     <Compile Include="Interfaces\IPersistenciaFeedbackLugar.cs" />
+    <Compile Include="Interfaces\IPersistenciaFotosLugar.cs" />
     <Compile Include="Interfaces\IPersistenciaLugar.cs" />
     <Compile Include="Interfaces\IPersistenciaMapa.cs" />
     <Compile Include="Interfaces\IPersistenciaOrganizador.cs" />

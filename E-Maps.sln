@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCompartidas", "EntidadesCompartidas\EntidadesCompartidas.csproj", "{3BD0DD4C-4A1A-4D07-9C44-FD3592CFD320}"
 EndProject
@@ -17,6 +17,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCFinal.Tests", "MVCFinal.Tests\MVCFinal.Tests.csproj", "{47099991-D15E-4975-9C82-88958C9AB68B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wcf-Sistema", "Wcf-Sistema\Wcf-Sistema.csproj", "{A89C16D8-1BF9-4297-AC26-F496ABB4977F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{EFE48C33-82ED-43C7-B197-28B16268A052}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Ejemplo foto\ControladorImagen.ashx = ..\..\Ejemplo foto\ControladorImagen.ashx
+		..\..\Ejemplo foto\MostrarHotel.aspx.cs = ..\..\Ejemplo foto\MostrarHotel.aspx.cs
+		..\..\Ejemplo foto\PersistenciaFoto.cs = ..\..\Ejemplo foto\PersistenciaFoto.cs
+		..\..\Ejemplo foto\UCImagenes.ascx = ..\..\Ejemplo foto\UCImagenes.ascx
+		..\..\Ejemplo foto\UCImagenes.ascx.cs = ..\..\Ejemplo foto\UCImagenes.ascx.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
