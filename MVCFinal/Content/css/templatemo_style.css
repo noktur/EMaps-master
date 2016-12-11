@@ -1,8 +1,5 @@
 /* 
 
-Urbanic Template 
-
-http://www.templatemo.com/tm-395-urbanic
 
 */
 
@@ -22,6 +19,8 @@ body {
 h1, h2, h3, h4, h5, h6, span, p {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	color: #2A3F55;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 }
 
 * {
@@ -62,7 +61,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 /* ------ Carousel ----- */
 
 #templatemo-carousel {
-    background: url('../images/Carrousel1.jpg') no-repeat center center fixed; 
+    background: url('../../Content/images/Carrousel1.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -109,13 +108,26 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 @media (max-width: 1024px) {
     #templatemo-carousel {
-        background: url('../images/Carrousel2jpg.jpg') no-repeat center center; 
+        background: url('../../Content/images/Carrousel1.jpg') no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
         overflow-x: hidden;
-        margin-bottom:0;
+        margin-bottom: 0;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    #templatemo-carousel {
+        background: url('../../Content/images/Carrousel1.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow-x: hidden;
+        margin-bottom: 0;
         height: 500px;
     }
 }
@@ -264,7 +276,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 }
 
 .templatemo-team {
-    background: url('../images/background.png') ; 
+    background: url('../../Content/images/background.png') ; 
     font-family:  'Open Sans', sans-serif;
     min-height:590px;
     color:#ffffff;
@@ -724,8 +736,21 @@ ul.templatemo-project-gallery  li  a img:hover {
 	}
 }
 
-@media  ( max-width: 410px) {
-	 .team_hr {
-		width: 11%;
+@media ( max-width: 410px) {
+    .team_hr {
+        width: 11%;
+    }
+}
+     @media  ( min-width: 768px) 
+     {
+	 h1 {
+		width: 100%;
+	}
+}
+
+      @media  ( min-width: 768px) 
+     {
+	 p {
+		width: 100%;
 	}
 }

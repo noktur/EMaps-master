@@ -51,14 +51,24 @@
   <xs:complexType name="Entrada">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
-      <xs:element minOccurs="0" name="EventoAsociado" nillable="true" type="tns:Evento" />
       <xs:element minOccurs="0" name="FechaEmision" type="xs:dateTime" />
       <xs:element minOccurs="0" name="IdEntrada" type="xs:int" />
       <xs:element minOccurs="0" name="Precio" type="xs:double" />
-      <xs:element minOccurs="0" name="UnCliente" nillable="true" type="tns:Cliente" />
+      <xs:element minOccurs="0" name="ReservaEvento" nillable="true" type="tns:Reserva" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Entrada" nillable="true" type="tns:Entrada" />
+  <xs:complexType name="Reserva">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="ClienteReserva" nillable="true" type="tns:Cliente" />
+      <xs:element minOccurs="0" name="EventoReservado" nillable="true" type="tns:Evento" />
+      <xs:element minOccurs="0" name="FechaEmision" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaReserva" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdReserva" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Reserva" nillable="true" type="tns:Reserva" />
   <xs:complexType name="Evento">
     <xs:sequence>
       <xs:element minOccurs="0" name="CategoriaEvento" nillable="true" type="tns:Categoria" />

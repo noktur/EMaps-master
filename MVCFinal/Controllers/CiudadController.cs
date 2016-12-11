@@ -128,18 +128,7 @@ namespace MVCFinal.Controllers
          }
 
 
-         public static EntidadesCompartidas.Ciudad convertirModelCiudad(MVCFinal.Models.CiudadModel model)
-         {
-             Maps.IServicioEvento _ServicioWCF = new ServicioEventoClient();
-             EntidadesCompartidas.Ciudad p = new EntidadesCompartidas.Ciudad();
-             
-             p.Nombre = model.NombreCiudad;
-             p.CoordenadaX = model.CoordenadaX;
-             p.CoordenadaY = model.CoordenadaY;           
-             p.UnPais= _ServicioWCF.BuscarPais(model.NombrePais);
-
-             return p;
-         }
+         
 
 
          public static EntidadesCompartidas.Pais convertirModelPais(MVCFinal.Models.PaisModel model)

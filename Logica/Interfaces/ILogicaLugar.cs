@@ -15,6 +15,5 @@ namespace Logica.Interfaces
         List<Lugar> ListarLugares();
         List<Lugar> ListarLugaresDisponibles();
         List<Lugar> ListarLugaresCiudad(string pNombreCiudad);
-        Lugar BuscarMapaLugar(string NombreLugar, int IdMapa);
     }
 }

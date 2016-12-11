@@ -15,6 +15,8 @@ namespace EntidadesCompartidas
         private int _IdMapa;
         private byte[] _Imagen;
         private string _Nombre;
+        private string _Extension;
+        private Lugar _LugarAsociado;
         private List<Area> _ListaAreas;
 
         #endregion
@@ -26,6 +28,13 @@ namespace EntidadesCompartidas
         {
             get { return _IdMapa; }
             set { _IdMapa = value; }
+        }
+
+        [DataMember]
+        public Lugar LugarAsociado
+        {
+            get { return _LugarAsociado; }
+            set { _LugarAsociado = value; }
         }
 
         [DataMember]
@@ -42,6 +51,14 @@ namespace EntidadesCompartidas
             set { _Nombre = value; }
         }
 
+
+        [DataMember]
+        public string Extension
+        {
+            get { return _Extension; }
+            set { _Extension = value; }
+        }
+
         [DataMember]
         public List<Area> Areas
         {
@@ -53,18 +70,22 @@ namespace EntidadesCompartidas
 
         #region Constructores
 
-        public Mapa(int pIdMapa,byte[] pImagen,string pNombre)
+        public Mapa(int pIdMapa,byte[] pImagen,Lugar pLugarAsociado,string pNombre,string pExtension)
         {
             Imagen = pImagen;
             Nombre = pNombre;
+            LugarAsociado = pLugarAsociado;
             IdMapa = pIdMapa;
+            Extension = pExtension;
         }
-        public Mapa(int pIdMapa,byte[] pImagen, string pNombre,List<Area> pListaAreas)
+        public Mapa(int pIdMapa, byte[] pImagen, string pNombre,string pExtension, Lugar pLugarAsociado, List<Area> pListaAreas)
         {
             Imagen = pImagen;
             Nombre = pNombre;
             IdMapa = pIdMapa;
+            LugarAsociado = pLugarAsociado;
             _ListaAreas = pListaAreas;
+            Extension = pExtension;
         }
 
 
@@ -73,6 +94,8 @@ namespace EntidadesCompartidas
             IdMapa = 0;
             Imagen = null;
             Nombre = "";
+            Extension = "";
+            LugarAsociado = null;
             _ListaAreas = null;
         }
         #endregion
