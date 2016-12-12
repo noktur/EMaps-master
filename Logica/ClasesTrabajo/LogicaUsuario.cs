@@ -118,11 +118,11 @@ namespace Logica.ClasesTrabajo
             {
                 U = FabricaPersistencia.getPersistenciaAdmin().Logueo(nomUsu, pass);
             }
-            else if (U == null)
+            if (U == null)
             {
                 U = FabricaPersistencia.getPersistenciaDueño().Logueo(nomUsu, pass);
             }
-            else if (U == null)
+            if (U == null)
             {
                 U = FabricaPersistencia.getPersistenciaOrganizador().Logueo(nomUsu, pass);
             }

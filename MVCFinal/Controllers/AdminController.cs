@@ -1,4 +1,6 @@
-﻿using MVCFinal.Maps;
+﻿using EntidadesCompartidas;
+using Logica;
+using MVCFinal.Maps;
 using MVCFinal.Models;
 using Newtonsoft.Json;
 using System;
@@ -12,7 +14,54 @@ namespace MVCFinal.Controllers
     public class AdminController : Controller
     {
         //
+
+        public static EntidadesCompartidas.Ciudad convertirModelCiudad(MVCFinal.Models.CiudadModel model)
+        {
+            Maps.IServicioEvento _ServicioWCF = new ServicioEventoClient();
+            EntidadesCompartidas.Ciudad p = new EntidadesCompartidas.Ciudad();
+
+            p.Nombre = model.NombreCiudad;
+            p.CoordenadaX = model.CoordenadaX;
+            p.CoordenadaY = model.CoordenadaY;
+            p.UnPais = _ServicioWCF.BuscarPais(model.NombrePais);
+
+            return p;
+        }
+
+
         // GET: /Admin/
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar")]
+        public ActionResult Guardar(FormCollection collection)
+        {
+            try
+            {
+                PaisModel Pais = (PaisModel)Session["PaisActual"];
+                
+
+                MVCFinal.Models.CiudadModel Ciudad = new Models.CiudadModel();
+
+                Ciudad.NombrePais = Convert.ToString(collection["NombrePais"]);
+                Ciudad.NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
+                Ciudad.CoordenadaX = float.Parse(collection["CoordenadaX"], System.Globalization.CultureInfo.InvariantCulture);
+                Ciudad.CoordenadaY = float.Parse(collection["CoordenadaY"], System.Globalization.CultureInfo.InvariantCulture);
+
+                CreoServicio().AltaUbicacion(convertirModelCiudad(Ciudad));
+
+                string JsonPais = JsonConvert.SerializeObject(Pais);
+                Session["Pais"] = JsonPais;
+
+                Session["CiudadActual"] =Ciudad;
+
+                return RedirectToAction("ControlCiudad", "Admin");
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         public ActionResult ControlEventos()
         {
@@ -70,13 +119,16 @@ namespace MVCFinal.Controllers
         [HttpGet]
         public ActionResult ControlPaises()
         {
+           
+            
+            PaisModel pais = new PaisModel();
 
             try
             {
 
 
                 List<EntidadesCompartidas.Pais> lista = CreoServicio().ListarPais().ToList();
-                PaisModel pais = new PaisModel();
+               
 
                 
 
@@ -105,15 +157,115 @@ namespace MVCFinal.Controllers
             {
                 AdminModel miAdmin =(AdminModel)Session["Admin"];
 
+                
+                string JsonAdmin = JsonConvert.SerializeObject(miAdmin);
+                Session["AdminJson"] = JsonAdmin;   
+
                 return View(miAdmin);
 
             }
 
-
+            
             return RedirectToAction("Portada", "Index");
         }
 
-        public ActionResult SaveChanges()
+
+        [HttpGet]
+        public ActionResult SeleccionarEvento(int IdEvento)
+        {
+            try
+            {
+
+                EntidadesCompartidas.Evento evento = new Evento();
+
+                evento = Logica.FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+
+                EventoModel model=new EventoModel();
+
+                model.IdEvento = evento.IdEvento;
+                model.ClasificacionEvento.NombreCategoria = evento.CategoriaEvento.NombreCategoria;
+                model.ClasificacionEvento.Descripcion = evento.CategoriaEvento.Descripcion;
+                model.Descripcion = evento.Descripcion;
+                model.FechaInicio = evento.FechaInicio;
+                model.FechaFin = evento.FechaFin;
+                model.UnLugar.Capacidad = evento.UnLugar.Capacidad;
+                model.UnLugar.CoordenadaX = evento.UnLugar.CoordenadaX;
+                model.UnLugar.CoordenadaY = evento.UnLugar.CoordenadaY;
+                model.UnLugar.Descripcion = evento.UnLugar.Descripcion;
+                model.UnLugar.Direccion = evento.UnLugar.Direccion;
+                model.UnLugar.NombreCiudad = evento.UnLugar.UbicacionLugar.Nombre;
+                model.UnLugar.Nombre = evento.UnLugar.Nombre;
+                model.OrganizadorEvento.CI = evento.OrganizadorEvento.CI;
+                model.OrganizadorEvento.Contraseña = evento.OrganizadorEvento.Contraseña;
+                model.OrganizadorEvento.Email = evento.OrganizadorEvento.Email;
+                model.OrganizadorEvento.Nombre = evento.OrganizadorEvento.Nombre;
+                model.OrganizadorEvento.NombreUsuario = evento.OrganizadorEvento.NombreUsuario;
+
+                Session["EventoSeleccionado"] = model;
+
+                return View(model);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult ElegirFeedback(int IdFeedback)
+        {
+            try
+            {
+
+                EntidadesCompartidas.FeedbackEvento feedback = new FeedbackEvento();
+
+               feedback = Logica.FabricaLogica.getLogicaFeedbackEvento().BuscarMensajeFeedbackEvento(IdFeedback);
+
+                FeebackAdminModel model = new FeebackAdminModel();
+
+                model.FeedbackSeleccionado.UsuarioFeedback.CI = feedback.UsuarioFeedback.CI;
+                model.FeedbackSeleccionado.UsuarioFeedback.Contraseña = feedback.UsuarioFeedback.Contraseña;
+                model.FeedbackSeleccionado.UsuarioFeedback.Email = feedback.UsuarioFeedback.Email;
+                model.FeedbackSeleccionado.UsuarioFeedback.Nombre = feedback.UsuarioFeedback.Nombre;
+                model.FeedbackSeleccionado.UsuarioFeedback.NombreUsuario = feedback.UsuarioFeedback.NombreUsuario;
+                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Nombre = feedback.EventoFeedback.UnLugar.Nombre;
+                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Descripcion = feedback.EventoFeedback.UnLugar.Descripcion;
+                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Direccion = feedback.EventoFeedback.UnLugar.Direccion;
+                model.FeedbackSeleccionado.EventoFeedback.UnLugar.UbicacionLugar.Nombre = feedback.EventoFeedback.UnLugar.UbicacionLugar.Nombre;
+                model.FeedbackSeleccionado.EventoFeedback.UnLugar.DueñoLugar.Nombre = feedback.EventoFeedback.UnLugar.DueñoLugar.Nombre;
+                model.FeedbackSeleccionado.EventoFeedback.NombreEvento = feedback.EventoFeedback.NombreEvento;
+                model.FeedbackSeleccionado.EventoFeedback.Descripcion= feedback.EventoFeedback.Descripcion;
+                model.FeedbackSeleccionado.EventoFeedback.FechaInicio = feedback.EventoFeedback.FechaInicio;
+                model.FeedbackSeleccionado.EventoFeedback.FechaFin = feedback.EventoFeedback.FechaFin;
+                model.FeedbackSeleccionado.EventoFeedback.CategoriaEvento.NombreCategoria = feedback.EventoFeedback.CategoriaEvento.NombreCategoria;
+
+                Session["FeedbackSeleccionado"] = model;
+
+                List<EntidadesCompartidas.ComentarioFeedbackEvento> comentariosFeedback = new List<ComentarioFeedbackEvento>();
+
+                 comentariosFeedback = Logica.FabricaLogica.getLogicaComentariosFeedbackEvento().ListarComentariosdeUnMensajeFeedbackEvento(feedback.IdFeedbackEvento);
+
+                 model.listaComentariosFeedback = comentariosFeedback;
+
+                 Session["ComentariosMensajeSelect"] = model.listaComentariosFeedback;
+
+
+                return View(model);
+            
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Save Changes")]
+        public ActionResult SaveChanges(FormCollection collection)
         {
 
             if (Session["Admin"] == null)
@@ -124,7 +276,28 @@ namespace MVCFinal.Controllers
             {
                 AdminModel miAdmin = (AdminModel)Session["Admin"];
 
-                return View(miAdmin);
+                
+
+               miAdmin.Ci = Convert.ToString(collection["Ci"]);
+               miAdmin.Email = Convert.ToString(collection["Email"]);
+               miAdmin.Nombre = Convert.ToString(collection["Nombre"]);
+               miAdmin.Password = Convert.ToString(collection["Password"]);
+               miAdmin.Usuario = Convert.ToString(collection["Usuario"]);
+
+               EntidadesCompartidas.Admin admin = new Admin();
+
+               admin.CI = miAdmin.Ci;
+               admin.Contraseña = miAdmin.Password;
+               admin.Email = miAdmin.Email;
+               admin.Nombre = miAdmin.Nombre;
+               admin.NombreUsuario = miAdmin.Usuario;
+                
+
+
+               Logica.FabricaLogica.getLogicaUsuario().Modificar((Usuario)admin);
+
+
+                return RedirectToAction("Principal","Admin");
 
             }
 
@@ -161,7 +334,7 @@ namespace MVCFinal.Controllers
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Enviar Datos")]
-        public ActionResult Guardar(FormCollection collection)
+        public ActionResult  EnviarDatos(FormCollection collection)
         {
 
             try
@@ -177,6 +350,7 @@ namespace MVCFinal.Controllers
 
                 Session["PaisActual"] = Pais;
 
+
                 return RedirectToAction("ControlCiudad", "Admin");
                 
             }
@@ -187,54 +361,24 @@ namespace MVCFinal.Controllers
         }
 
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Buscar")]
-        public ActionResult Buscar(FormCollection collection)
-        {
-            try
-            {
-                return View();
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-
-        [HttpPost]
-        public ActionResult ModificarCiudad(string Nombre)
-        {
-            string valor1="";
-            valor1 = Nombre;
-
-            try
-            {
-               
-                
-
-
-                return View();
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-        [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Eliminar")]
-        public ActionResult Eliminar(FormCollection coleccion)
+        public ActionResult Eliminar(FormCollection collection)
         {
+
+
             try
             {
-                string Nombre = Convert.ToString(coleccion["Nombre"]);
 
-                
-                    return View();
+                string NombrePais = Convert.ToString(collection["NombrePais"]);
+
+                EntidadesCompartidas.Pais pais = new EntidadesCompartidas.Pais();
+
+                pais = FabricaLogica.getLogicaUbicacion().BuscarPais(NombrePais);
+
+
+                FabricaLogica.getLogicaUbicacion().Eliminar(pais);
+
+                return View();
 
             }
             catch
@@ -244,6 +388,32 @@ namespace MVCFinal.Controllers
         }
 
 
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Dar de Baja")]
+        public ActionResult DarBaja(FormCollection collection)
+        {
+
+
+            try
+            {
+
+                string NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
+
+                EntidadesCompartidas.Ciudad ciudad = new EntidadesCompartidas.Ciudad();
+
+                ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(NombreCiudad);
+
+
+                FabricaLogica.getLogicaUbicacion().Eliminar(ciudad);
+
+                return View();
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         public static EntidadesCompartidas.Pais convertirModelPais(MVCFinal.Models.PaisModel model)
         {
@@ -265,7 +435,35 @@ namespace MVCFinal.Controllers
 
         public ActionResult ControlFeedbacks()
         {
-            return View();
+            if (Session["Admin"] == null)
+            {
+                RedirectToAction("Portada,Index");
+            }
+            else
+            {
+
+                FeebackAdminModel feedback = new FeebackAdminModel();
+
+                try
+                {
+
+                    List<EntidadesCompartidas.FeedbackEvento> lista = Logica.FabricaLogica.getLogicaFeedbackEvento().ListarMensajesFeedbackEvento();
+
+                    feedback.listaFeedback = lista;
+
+                    Session["ControlAdminListaFeedback"] = lista;
+                    return View(feedback);
+
+                }
+                catch
+                {
+                    return View();
+                }          
+
+            }
+
+
+            return RedirectToAction("Portada,Index");
         }
 
     }

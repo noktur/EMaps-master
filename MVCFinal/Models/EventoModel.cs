@@ -10,6 +10,7 @@ namespace MVCFinal.Models
 {
     public class EventoModel
     {
+        public int IdEvento { get; set; }
         public string NombreEvento { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaInicio { get; set; }
@@ -27,7 +28,7 @@ namespace MVCFinal.Models
 
         public Organizador OrganizadorEvento { get; set; }
 
-        private EntidadesCompartidas.Entrada entrada { get; }
+        private EntidadesCompartidas.Entrada entrada { get; set; }
 
         public double PrecioEntradas { get { return entrada.Precio; } set { } }
     }
