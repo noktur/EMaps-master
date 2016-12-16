@@ -26,6 +26,11 @@ namespace Logica.ClasesTrabajo
         public void AltaArea(Area a)
         {
             FabricaPersistencia.getPersistenciaArea().AltaArea(a);
+
+            foreach (Punto p in a.PuntosArea)
+            {
+                FabricaPersistencia.getPersistenciaArea().AltaPuntodeArea(a, p);
+            }
         }
         public void ModificarArea(Area a)
         {
@@ -35,9 +40,9 @@ namespace Logica.ClasesTrabajo
         {
             return FabricaPersistencia.getPersistenciaArea().BuscarArea(IdArea);
         }
-        public void AltaPuntodeArea(Area a)
+        public void AltaPuntodeArea(Area a,Punto p)
         {
-            FabricaPersistencia.getPersistenciaArea().AltaPuntodeArea(a);
+            FabricaPersistencia.getPersistenciaArea().AltaPuntodeArea(a,p);
         }
         public void BajaArea(Area a)
         {
@@ -47,9 +52,9 @@ namespace Logica.ClasesTrabajo
         {
             return FabricaPersistencia.getPersistenciaArea().ListarAreasDeMapa(IdMapa);
         }
-        public List<Area> ListarPuntosDeUnArea(int IdArea)
+        public List<Punto> ListarPuntosDeUnArea(Area a)
         {
-            return FabricaPersistencia.getPersistenciaArea().ListarPuntosDeUnArea(IdArea);
+            return FabricaPersistencia.getPersistenciaArea().ListarPuntosDeUnArea(a);
         }
 
         #endregion

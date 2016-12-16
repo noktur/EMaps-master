@@ -51,7 +51,6 @@ namespace MVCFinal.Controllers
                         Lugar.CoordenadaX = lista[i].CoordenadaX;
                         Lugar.CoordenadaY = lista[i].CoordenadaY;
                         Lugar.Nombre = lista[i].Nombre;
-                        Lugar.Capacidad = lista[i].Capacidad;
                         Lugar.Descripcion = lista[i].Descripcion;
                         Lugar.Direccion = lista[i].Direccion;
                         Lugar.NombreCiudad = lista[i].UbicacionLugar.Nombre;

@@ -24,6 +24,16 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->         
+
+        <script type="text/javascript">
+
+        </script>
+        <style>
+            
+
+        </style>
+
+
     </head>     
     <body> 
         <nav class="navbar navbar-inverse">                   
@@ -46,11 +56,12 @@
                        { %>   
                 <div class="form-group" style="padding-left:10px">
               <span class="form-group-addon"><i class="icon_profile" style="color:white"></i></span>
-              <input type="text"  class="form-control" placeholder="Username" name="Usuario" >
+              <input type="text" required="required" class="form-control" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de usuario')" placeholder="Username" name="Usuario" >
             </div>
             <div class="form-group" style="padding-left:10px">
                 <span class="form-group-addon"><i class="icon_key_alt" style="color:white"></i></span>
-                <input type="password"  class="form-control" placeholder="Password" name="Password">
+                <input required="required" type="password" <%--pattern="[a-z][1,99]{7,20}"--%>
+        title="La contraseña debe contener mas de 7 caracteres" oninput="setCustomValidity('')" oninvalid="setCustomValidity1('Se requiere ingresar una contraseña')" class="form-control" placeholder="Password" name="Password">
             </div>
                 <div class="form-group" style="padding-top:17px; padding-left:10px">
                 <input type="submit" class="btn btn-success" value="SIGN IN" name="action">

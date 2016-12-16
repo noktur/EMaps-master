@@ -1,4 +1,4 @@
-﻿DROP DATABASE IF EXISTS SistemaEventos ;
+DROP DATABASE IF EXISTS SistemaEventos ;
 
 CREATE database IF NOT EXISTS SistemaEventos ;
 
@@ -62,13 +62,35 @@ create table Ciudad
     primary key(NombreCiudad,NombrePais)
 );
 
+create table Lugar 
+(
+    NombreLugar varchar(30) not null,
+    Direccion varchar(30) not null,
+    Descripcion varchar(30) not null,
+    UbicacionCiudad varchar(30) not null,
+    CordX real not null,
+    CordY real not null,
+    Eliminado boolean,
+    CiDueño varchar(30) not null,
+    foreign key (CiDueño) references Dueño (CiDueño),
+    foreign key (UbicacionCiudad) references Ubicacion (Nombre),
+    primary key(NombreLugar,UbicacionCiudad,CiDueño)
+);
+
 create table Mapa 
 (
-    IdMapa int AUTO_INCREMENT not null primary key,
+    IdMapa int AUTO_INCREMENT not null ,
 	Nombre varchar(30) not null,
-	Imagen varbinary(300),
-    Eliminado boolean
+	Imagen longblob,
+    NombreLugar varchar(30),
+    extension varchar(5),
+    foreign key(NombreLugar) references Lugar(NombreLugar),
+    Eliminado boolean,
+    primary key(IdMapa,NombreLugar)
 );
+
+alter table Mapa Add unique index Mapa_NombreLugar(NombreLugar);
+
 
 create table Punto 
 (
@@ -81,38 +103,23 @@ create table Punto
 create table Area 
 (
     IdArea INT AUTO_INCREMENT not null ,
-    IdMapa int not null,
-	Nombre varchar(30) not null,
+    IdMapa int ,
+    Nombre varchar(30) not null,
+	Capacidad int,
+    Descripcion varchar(30),
     Eliminado boolean,
-    IdPunto int not null,
+    IdPunto int ,
     foreign key (IdPunto) references Punto (IdPunto),
     foreign key (IdMapa) references Mapa (IdMapa),
     primary key(IdArea,IdMapa,IdPunto)
-);
-
-create table Lugar 
-(
-	NombreLugar varchar(30) not null,
-    Direccion varchar(30) not null,
-    Capacidad int,
-    Descripcion varchar(30) not null,
-	UbicacionCiudad varchar(30) not null,
-    CordX real not null,
-    CordY real not null,
-    Eliminado boolean,
-    IdMapa int not null,
-	CiDueño varchar(30) not null,
-    foreign key (CiDueño) references Dueño (CiDueño),
-    foreign key (IdMapa) references Mapa (IdMapa),
-	foreign key (UbicacionCiudad) references Ubicacion (Nombre),
-    primary key(NombreLugar,IdMapa,UbicacionCiudad,CiDueño)
 );
 
 create table FotosLugar
 (
 NombreFoto varchar(30) not null,
 NombreLugar varchar(30) ,
-Foto varbinary(100) not null,
+extension varchar(5),
+Foto longblob not null,
 foreign key (NombreLugar) references Lugar (NombreLugar),
 primary key(NombreFoto,NombreLugar)
 );
@@ -120,14 +127,14 @@ primary key(NombreFoto,NombreLugar)
 create table Alquiler
 (
 IdAlquiler int AUTO_INCREMENT not null,
-NombreLugar varchar(30) not null,
+IdArea int not null,
 CiOrganizador varchar(30) not null,
 FechaInicioAlquiler timestamp,
 FechaFinAlquiler timestamp,
 FechaRealizado timestamp,
-foreign key (NombreLugar) references Lugar (NombreLugar),
+foreign key (IdArea) references Area (IdArea),
 foreign key (CiOrganizador) references organizador (CiOrganizador),
-primary key(IdAlquiler,NombreLugar,CiOrganizador)
+primary key(IdAlquiler,IdArea,CiOrganizador)
 );
 
 create table Categoria
@@ -144,15 +151,15 @@ create table Evento
   Descripcion varchar(100),
   FechaInicio timestamp not null,
   FechaFin timestamp not null,
-  NombreLugar varchar(30) ,
+  IdArea  int not null,
   CiOrganizador varchar(30) not null,
   NombreCategoria varchar(30) not null,
   CapacidadDisponible int not null,
   EstadoReserva boolean default false,
   foreign key (NombreCategoria) references categoria (NombreCategoria),
-  foreign key (NombreLugar) references Lugar (NombreLugar),
-  foreign key (CiOrganizador) references Organizador(CiOrganizador),
-  primary key(IdEvento,NombreLugar,CiOrganizador),
+  foreign key (IdArea) references Alquiler(IdArea),
+  foreign key (CiOrganizador) references Alquiler(CiOrganizador),
+  primary key(IdEvento,IdArea,CiOrganizador),
   Eliminado boolean default 0
 );
 
@@ -250,8 +257,8 @@ CREATE PROCEDURE AltaAdmin (pNombre VARCHAR(30), pContraseña Varchar(30),pNombr
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiAdmin,pEmail);
-INSERT INTO Admin values(pCiAdmin);
+INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiAdmin,pEmail);
+INSERT INTO Admin(CiAdmin) values(pCiAdmin);
 		COMMIT;
 END //
 DELIMITER;
@@ -315,8 +322,8 @@ CREATE PROCEDURE AltaCliente (pNombre VARCHAR(30), pContraseña Varchar(30),pNom
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiCliente,pEmail);
-INSERT INTO Clientes values(pCiCliente);
+INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiCliente,pEmail);
+INSERT INTO Clientes(CiCliente) values(pCiCliente);
 		COMMIT;
 END //
 DELIMITER;
@@ -382,8 +389,8 @@ CREATE PROCEDURE AltaDueño (pNombre VARCHAR(30), pContraseña Varchar(30),pNomb
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiDueño,pEmail);
-INSERT INTO Dueño values(pCiDueño);
+INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiDueño,pEmail);
+INSERT INTO Dueño(CiDueño) values(pCiDueño);
 		COMMIT;
 END //
 DELIMITER;
@@ -447,8 +454,8 @@ CREATE PROCEDURE AltaOrganizador (pNombre VARCHAR(30), pContraseña Varchar(30),
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios VALUES(pNombre,pContraseña,pNombreUsuario,pCiOrganizador,pEmail);
-INSERT INTO Organizador values(pCiOrganizador);
+INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiOrganizador,pEmail);
+INSERT INTO Organizador(CiOrganizador) values(pCiOrganizador);
 		COMMIT;
 END //
 DELIMITER;
@@ -495,6 +502,7 @@ WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
 END //
 DELIMITER;
 
+
 DELIMITER //
 CREATE PROCEDURE ListarOrganizadores()
 BEGIN
@@ -531,7 +539,7 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE EliminarPais (pNombre varchar(30))
 BEGIN
-UPDATE Ubicacion SET Ubicacion.Eliminado=1  WHERE Pais.NombrePais=pNombre;
+UPDATE Ubicacion SET Ubicacion.Eliminado=1  WHERE ubicacion.Nombre=pNombre;
 END//
 DELIMITER;
 
@@ -580,7 +588,8 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE EliminarCiudad (pNombreCiudad varchar(30),pNombrePais varchar(30))
 BEGIN
-UPDATE Ubicacion SET Eliminado=1 WHERE Ciudad.NombreCiudad=pNombreCiudad and Ciudad.NombrePais=pNombrePais;
+UPDATE Ubicacion SET Eliminado=1 WHERE Ubicacion.Nombre=pNombreCiudad;
+UPDATE Ubicacion SET Eliminado=1 WHERE Ubicacion.Nombre=pNombrePais;
 END//
 DELIMITER;
 
@@ -588,10 +597,10 @@ DELIMITER //
 CREATE PROCEDURE BuscarCiudad(pNombre varchar(30))
 BEGIN
 SELECT *
-FROM Ubicacion join Pais 
-ON Ubicacion.Nombre=Pais.NombrePais
-join Ciudad 
-ON Pais.NombrePais=Ciudad.NombreCiudad
+FROM Ubicacion join Ciudad
+ON Ubicacion.Nombre=Ciudad.NombreCiudad
+join Pais
+ON Ciudad.NombrePais=Pais.NombrePais
 WHERE Ciudad.NombreCiudad=pNombre and  Ubicacion.Eliminado=0;
 END //
 DELIMITER;
@@ -600,13 +609,15 @@ DELIMITER //
 CREATE PROCEDURE ListarCiudades()
 BEGIN
 SELECT *
-FROM Ubicacion join Pais 
-ON Ubicacion.Nombre=Pais.NombrePais
-join Ciudad 
-ON Pais.NombrePais=Ciudad.NombreCiudad
+FROM Ubicacion join ciudad
+ON Ubicacion.Nombre=ciudad.NombreCiudad
+join pais
+ON ciudad.NombrePais=pais.NombrePais
 WHERE Ubicacion.Eliminado=0;
 END//
 DELIMITER;
+
+
 
 DELIMITER //
 CREATE PROCEDURE ListarCiudadesdePais(pNombrePais varchar(30))
@@ -624,16 +635,16 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE AltaLugar (pNombre varchar(30),pDireccion varchar(30),pCapacidad int,pDescripcion varchar(30),pIdMapa int,pNombreUbicacion varchar(30),pCordX real,pCordY real,pCiDueño varchar(30))
+CREATE PROCEDURE AltaLugar (pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCordX real,pCordY real,pCiDueño varchar(30))
 BEGIN
-INSERT INTO Lugar(NombreLugar,Direccion,Capacidad,Descripcion,IdMapa,UbicacionCiudad,CordX,CordY,CiDueño,EstadoAlquiler) VALUES(pNombre,pDireccion,pCapacidad,pDescripcion,pIdMapa,pNombreUbicacion,pCordX,pCordY,pCiDueño,0);
+INSERT INTO Lugar(NombreLugar,Direccion,Descripcion,UbicacionCiudad,CordX,CordY,CiDueño) VALUES(pNombre,pDireccion,pDescripcion,pNombreUbicacion,pCordX,pCordY,pCiDueño);
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ModificarLugar(pNombre varchar(30),pDireccion varchar(30),pCapacidad int,pDescripcion varchar(30),pIdMapa int,pNombreUbicacion varchar(30),pCiDueño varchar(30)) 
+CREATE PROCEDURE ModificarLugar(pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCiDueño varchar(30)) 
 BEGIN
-UPDATE Lugar SET NombreLugar=pNombre,Direccion=pDireccion,Capacidad=pCapacidad,Descripcion=pDescripcion,IdMapa=pIdMapa,UbicacionCiudad=pNombreUbicacion,CiDueño=pCiDueño WHERE NombreLugar=pNombreLugar;
+UPDATE Lugar SET NombreLugar=pNombre,Direccion=pDireccion,Descripcion=pDescripcion,UbicacionCiudad=pNombreUbicacion,CiDueño=pCiDueño WHERE NombreLugar=pNombreLugar;
 END//
 DELIMITER;
 
@@ -721,39 +732,38 @@ BEGIN
 SELECT *
 FROM Mapa
 join Lugar
-On Mapa.IdMapa=Lugar.IdMapa
-WHERE Lugar.NombreLugar=pNombreLugar and lugar.IdMapa=pIdMapa;
+On Mapa.NombreLugar=Lugar.NombreLugar
+WHERE Mapa.NombreLugar=pNombreLugar and Mapa.IdMapa=pIdMapa;
 END//
 DELIMITER;
-
 
 
 -- PROCEDIMIENTOS ALMACENADOS ALQUILER
 
 
 DELIMITER //
-CREATE PROCEDURE AlquilarLugar (pNombreLugar varchar(30),pFechaInicio timestamp,pFechaFin timestamp,pCiOrganizador varchar(30),pFechaReservacion timestamp)
+CREATE PROCEDURE AlquilarArea (pIdArea int,pFechaInicio timestamp,pFechaFin timestamp,pCiOrganizador varchar(30),pFechaReservacion timestamp)
 BEGIN
-INSERT INTO ALQUILER(IdAlquiler,NombreLugar,CiOrganizador,FechaInicioAlquiler,FechaFinAlquiler,FechaRealizado) values (0,pNombreLugar,pCiOrganizador,pFechaInicio,pFechaFin,pFechaReservacion);
+INSERT INTO ALQUILER(IdAlquiler,IdArea,CiOrganizador,FechaInicioAlquiler,FechaFinAlquiler,FechaRealizado) values (0,pIdArea,pCiOrganizador,pFechaInicio,pFechaFin,pFechaReservacion);
 END//
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ComprobarAlquilerLugar(pNombreLugar varchar(30),pFechaInicio timestamp,pFechaFin timestamp)
+CREATE PROCEDURE ComprobarAlquilerArea(pIdArea int,pFechaInicio timestamp,pFechaFin timestamp)
 BEGIN
 SELECT *
 FROM Alquiler 
-where alquiler.NombreLugar=pNombreLugar and alquiler.FechaInicioAlquiler <= pFechaFin 
+where alquiler.IdArea=pIdArea and alquiler.FechaInicioAlquiler <= pFechaFin 
   AND alquiler.FechaFinAlquiler >= pFechaInicio;
 END//
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE EliminarAlquilerLugar (pIdAlquiler int,pNombreLugar varchar(30))
+CREATE PROCEDURE EliminarAlquilerArea (pIdAlquiler int,pIdArea int)
 BEGIN
-DELETE from alquiler WHERE alquiler.IdAlquiler=pIdAlquiler and alquiler.NombreLugar=pNombreLugar;
+DELETE from alquiler WHERE alquiler.IdAlquiler=pIdAlquiler and alquiler.IdArea=pIdArea;
 END//
 DELIMITER;
 
@@ -767,6 +777,10 @@ WHERE alquiler.IdAlquiler=pIdAlquiler
 order by  UNIX_TIMESTAMP(alquiler.FechaInicioAlquiler) desc;
 END//
 DELIMITER;
+
+
+
+
 
 DELIMITER //
 CREATE PROCEDURE ListarAlquiler()
@@ -791,13 +805,13 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarAlquilerdeLugar(pNombreLugar varchar(30))
+CREATE PROCEDURE ListarAlquilerdeArea(pIdArea int)
 BEGIN
 SELECT *
 FROM lugar
 join alquiler
 on lugar.NombreLugar=alquiler.NombreLugar
-where alquiler.NombreLugar=pNombreLugar
+where alquiler.IdArea=pIdArea
 order by  UNIX_TIMESTAMP(alquiler.FechaInicioAlquiler) desc;
 END//
 DELIMITER;
@@ -806,7 +820,7 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarPunto(pCordX double,pCordY double,pIdPunto int) 
+CREATE PROCEDURE ModificarPunto(pCordX real,pCordY real,pIdPunto int) 
 BEGIN
 UPDATE Punto SET cordX=pCordX,cordY=pCordY  WHERE IdPunto=pIdPunto;
 END//
@@ -829,7 +843,7 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE BuscarPuntoxCoordenadas(pCordX double,pCordY double)
+CREATE PROCEDURE BuscarPuntoxCoordenadas(pCordX real,pCordY real)
 BEGIN
 SELECT *
 FROM Punto p
@@ -837,27 +851,29 @@ WHERE p.CordX=pCordX and p.CordY=pCordY;
 END
 
 
--- PROCEDIMIENTOS ALMACENADOS EVENTO
+
+
+-- PROCEDIMIENTOS ALMACENADOS MAPA
 
 DELIMITER //
-CREATE PROCEDURE AltaMapa (pNombre varchar(30),pImagen varbinary(300))
+CREATE PROCEDURE AltaMapa (pNombre varchar(30),pImagen longblob,pExtension varchar(5),pNombreLugar varchar(30))
 BEGIN
-INSERT INTO Mapa(IdMapa,Nombre,Imagen) VALUES(0,pNombre,pImagen);
+INSERT INTO Mapa(IdMapa,Nombre,Imagen,extension,NombreLugar) VALUES(0,pNombre,pImagen,pExtension,pNombreLugar);
 UPDATE Mapa SET Eliminado=0;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ModificarMapa(pIdMapa int,pNombre varchar(30),pImagen varbinary(300)) 
+CREATE PROCEDURE ModificarMapa(pIdMapa int,pNombre varchar(30),pImagen longblob,pExtension varchar(5),pNombreLugar varchar(30)) 
 BEGIN
-UPDATE Mapa SET Nombre=pNombre,Imagen=pImagen WHERE IdMapa=pIdMapa;
+UPDATE Mapa SET Nombre=pNombre,Imagen=pImagen,extension=pExtension,NombreLugar=pNombreLugar WHERE IdMapa=pIdMapa and  NombreLugar=pNombreLugar;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarMapa (pIdMapa int)
+CREATE PROCEDURE EliminarMapa (pIdMapa int,pNombreLugar varchar(30))
 BEGIN
-UPDATE Mapa SET Eliminado=1 WHERE IdMapa=pIdMapa;
+UPDATE Mapa SET Eliminado=1 WHERE IdMapa=pIdMapa and NombreLugar=pNombreLugar;
 END//
 DELIMITER;
 
@@ -875,37 +891,40 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS FOTOS DE LUGAR
 
 DELIMITER //
-CREATE PROCEDURE AltaFotosLugar (pNombreFoto varchar(30),pFoto varbinary(300),pNombreLugar varchar(30))
+CREATE PROCEDURE AltaFotosLugar (pNombreFoto varchar(30),pExtension varchar(5),pFoto longblob,pNombreLugar varchar(30))
 BEGIN
-INSERT INTO FotosLugar(NombreFoto,Foto,NombreLugar) VALUES(pNombreFoto,pFoto,pNombreLugar);
+INSERT INTO FotosLugar(NombreFoto,Extension,Foto,NombreLugar) VALUES(pNombreFoto,pExtension,pFoto,pNombreLugar);
 END//
+DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarFotosLugar (pNombreFoto varchar(30),pNombreLugar varchar(30))
-BEGIN
-Delete from FotosLugar
-where NombreFoto = pNombreFoto and NombreLugar = pNombreLugar;
-END//
-
 CREATE PROCEDURE ListarFotosLugar (pNombreLugar varchar(30))
 BEGIN
-Select * from FotosLugar
-where NombreLugar = pNombreLugar;
+SELECT * FROM fotoslugar
+where fotoslugar.NombreLugar=pNombreLugar;
 END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE BajaFotosLugar (pNombreFoto varchar(30),pNombreLugar varchar(30))
+BEGIN
+delete from FotosLugar where NombreFoto=pNombreFoto and NombreLugar=pNombreLugar;
+END//
+DELIMITER;
 
 -- PROCEDIMIENTOS ALMACENADOS AREAS
 
 DELIMITER //
-CREATE PROCEDURE AltaArea (pNombre varchar(30),pIdMapa int)
+CREATE PROCEDURE AltaArea (pNombre varchar(30),pDescripcion varchar(30),pCantidad int,pIdMapa int)
 BEGIN
-INSERT INTO Area (IdArea,Nombre,IdMapa) VALUES(0,pNombre,pIdMapa);
+INSERT INTO Area (IdArea,Nombre,Descripcion,Cantidad,IdMapa) VALUES(0,pNombre,pDescripcion,pCantidad,pIdMapa);
 
 END
 
 DELIMITER //
-CREATE PROCEDURE ModificarArea(pIdArea int,pNombre varchar(30),pIdMapa int)
+CREATE PROCEDURE ModificarArea(pIdArea int,pNombre varchar(30),pDescripcion varchar(30),pCantidad int,pIdMapa int)
 BEGIN
-UPDATE Area SET Nombre=pNombre,IdMapa=pIdMapa WHERE IdArea=pIdArea;
+UPDATE Area SET Nombre=pNombre,Descripcion=pDescripcion,Cantidad=pCantidad,IdMapa=pIdMapa WHERE IdArea=pIdArea;
 END//
 DELIMITER;
 
@@ -918,12 +937,12 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE AltaPuntodeArea (pIdArea int,pIdPunto int,pCordX real,pCordY real,pIdMapa int)
+CREATE PROCEDURE AltaPuntodeArea (pIdArea int,pIdPunto int,pCordX real,pCordY real)
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
 INSERT INTO Punto (IdPunto,CordX,CordY) VALUES(0,pCordX,pCordY);
-INSERT INTO Area (IdArea,IdPunto,IdMapa) VALUES(0,pIdPunto,pIdMapa);
+INSERT INTO Area (IdArea,IdPunto) VALUES(pIdArea,pIdPunto);
 commit;
 END
 //
@@ -955,9 +974,9 @@ DELIMITER //
 CREATE PROCEDURE ListarPuntosdeUnArea(pIdArea int)
 BEGIN
 SELECT *
-FROM Area 
-join Punto
-ON Area.IdPunto=Punto.IdPunto
+FROM punto
+join area
+ON punto.IdPunto=Area.IdPunto
 where Area.IdArea=pIdArea;
 END//
 DELIMITER;
@@ -967,14 +986,14 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE AltaEvento (pNombre varchar(30),pDescripcion varchar(60),pFechaInicio timestamp,pFechaFin timestamp,pNombreLugar varchar(30),pCiOrganizador varchar(30),pNombreCategoria varchar(30))
+CREATE PROCEDURE AltaEvento (pNombre varchar(30),pDescripcion varchar(60),pFechaInicio timestamp,pFechaFin timestamp,pIdArea int,pCiOrganizador varchar(30),pNombreCategoria varchar(30))
 BEGIN
-INSERT INTO Evento(IdEvento,Nombre,Descripcion,FechaInicio,FechaFin,NombreLugar,CiOrganizador,NombreCategoria,Eliminado) VALUES(0,pNombre,pDescripcion,pFechaInicio,pFechaFin,pNombreLugar,pCiOrganizador,pNombreCategoria,0);
+INSERT INTO Evento(IdEvento,Nombre,Descripcion,FechaInicio,FechaFin,IdArea,CiOrganizador,NombreCategoria,Eliminado) VALUES(0,pNombre,pDescripcion,pFechaInicio,pFechaFin,pIdArea,pCiOrganizador,pNombreCategoria,0);
 END//
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarEvento(pIdEvento int,pNombre varchar(30),pDescripcion varchar(60),pFechaInicio timestamp,pFechaFin timestamp,pNombreLugar varchar(30),pCiOrganizador varchar(30),pNombreCategoria varchar(30))
+CREATE PROCEDURE ModificarEvento(pIdEvento int,pNombre varchar(30),pDescripcion varchar(60),pFechaInicio timestamp,pFechaFin timestamp,pIdArea int,pCiOrganizador varchar(30),pNombreCategoria varchar(30))
 BEGIN
 UPDATE Evento SET Nombre=pNombre,Descripcion=pDescripcion,FechaInicio=pFechaInicio,FechaFin=pFechaFin,NombreLugar=pNombreLugar,CiOrganizador=pCiOrganizador,NombreCategoria=pNombreCategoria  WHERE IdEvento=pIdEvento;
 END//
@@ -1047,14 +1066,13 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarEventosxLugar(pNombreLugar varchar(30))
+CREATE PROCEDURE ListarEventosxArea(pIdArea int)
 BEGIN
 SELECT *
-FROM fotoslugar
-join lugar
-on fotoslugar.NombreLugar=lugar.NombreLugar
+FROM area
+join alquiler
+on area.IdArea=alquiler.IdArea
 join evento 
-on lugar.NombreLugar=evento.NombreLugar
 where evento.NombreLugar=pNombreLugar and evento.Eliminado=0;
 END//
 DELIMITER;
@@ -1508,8 +1526,6 @@ DELIMITER;
 
 
 
-
-
 -- PROCEDIMIENTOS ALMACENADOS CATEGORIA
 
 DELIMITER //
@@ -1526,7 +1542,20 @@ CREATE PROCEDURE ListarCategorias()
 BEGIN
 SELECT *
 FROM categoria;
+END // 
+
+call AltaDueño('Matias','matiasmelfi1990','Matii','4772000','matias@gmail');
 END//
 
-call AltaCliente('a','matiasmelfi','la','aasdasd','asdasd@fasdasd')
-create table ComentarioFeedbackLugar (  IdComentario int AUTO_INCREMENT, IdFeedback int not null, AsuntoComentario varchar(30), MensajeComentario varchar(100), CiUsuario varchar(30), FechaRealizado timestamp, foreign key (CiUsuario) references Usuarios(Ci), foreign key (IdFeedback) references Feedback(IdFeedback), primary key(IdComentario,CiUsuario,IdFeedback) )
+
+call AltaPais ('Uruguay','UY',-32.522779,-55.765835);
+call AltaPais ('Argentina','AR',-38.416097,-63.616672);
+call AltaPais ('Brasil','BR',-14.235004,-51.92528);
+call AltaCiudad ('Montevideo'),-34.9011127,-56.1645314,'Uruguay');
+call AltaCiudad ('Santa Lucia'),-34.46467409,-56.40518188,'Uruguay');
+call AltaCiudad ('Minas'),-34.38084597,-55.26260376,'Uruguay');
+call AltaCiudad ('BahÃ¬a Blanca'),-38.76693348,-62.26501465,'Argentina');
+call AltaCiudad ('Buenos Aires'),-34.6377276,-58.39782715,'Argentina');
+call AltaCiudad ('Mar del Plata'),-38.07836563,-57.58483887,'Argentina');
+call AltaCiudad ('Brasilia'),-15.80282494,-47.80151367,'Brasil');
+call AltaCiudad ('Salvador'),-13.02596593,-38.45214844,'Brasil');

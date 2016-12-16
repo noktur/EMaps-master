@@ -34,21 +34,6 @@ namespace MVCFinal.Controllers
             }
             return _ServicioWCF;
         }
-
-       
-        [HttpPost]
-        public ActionResult SeleccionarLugar(string NombreLugar)
-        {
-            try
-            {
-
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
         
 
         public ActionResult Index()
@@ -58,40 +43,47 @@ namespace MVCFinal.Controllers
 
         public ActionResult PlanoLugar()
         {
-            if(Session["Dueño"] != null)
-            {
-                MVCFinal.Models.PlanoModel Plano = new PlanoModel();
-                EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
+            return View();
+            //if(Session["Dueño"] != null)
+            //{
+            //    MVCFinal.Models.PlanoModel Plano = new PlanoModel();
+            //    EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
                
 
-                try
-                {
+            //    try
+            //    {
 
-                    Session["Plano"] = mapa;
-                    List<EntidadesCompartidas.Area> listaArea= Logica.FabricaLogica.getLogicaArea().ListarAreasDeMapa(mapa.IdMapa);
+            //        mapa=(EntidadesCompartidas.Mapa)Session["Plano"] ;
+            //        List<EntidadesCompartidas.Area> listaArea= Logica.FabricaLogica.getLogicaArea().ListarAreasDeMapa(mapa.IdMapa);
                     
                     
 
 
-                    Plano.ListaAreasPlano=listaArea;
-                    Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
-                    Plano.elMapa = mapa;
-                    Session["MiMapa"] = Plano.elMapa;
-                    string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
-                    Session["MapaJson"] = JsonMapa;
-                    string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
-                    Session["AreasMapaJson"] = JsonMapa;
+            //        Plano.ListaAreasPlano=listaArea;
+            //        Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
+            //        Plano.elMapa = mapa;
+            //        Session["Plano"] = Plano.elMapa;
+            //        string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
+            //        Session["MapaJson"] = JsonMapa;
+            //        string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
+            //        Session["AreasMapaJson"] = JsonMapa;
 
-                    return View(Plano);
 
-                }
-                catch
-                {
-                    return View();
-                }
-            }
+                    
 
-            return RedirectToAction("Portada", "Index");
+            //        Session["Imagen"] = File(mapa.Imagen, mapa.Extension);
+
+
+            //        return View(Plano);
+
+            //    }
+            //    catch
+            //    {
+            //        return View();
+            //    }
+            //}
+
+            //return RedirectToAction("Portada", "Index");
         }
 
 
@@ -120,6 +112,26 @@ namespace MVCFinal.Controllers
            
 
             return Json(JsonCiudad,JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        [HttpPost]
+        public ActionResult RecuperarArea(string json)
+        {
+
+           
+           EntidadesCompartidas.Area a= JsonConvert.DeserializeObject<EntidadesCompartidas.Area>(json);
+
+           a.MapaAsociado =(EntidadesCompartidas.Mapa)Session["Plano"];
+
+           FabricaLogica.getLogicaArea().AltaArea(a);
+
+
+           Session["Areas"]=a;
+           
+
+            return View("PlanoLugar");
 
         }
 
@@ -198,7 +210,6 @@ namespace MVCFinal.Controllers
 
                 Lugar.Nombre = Convert.ToString(collection["Nombre"]);
                 Lugar.Direccion= Convert.ToString(collection["Direccion"]);
-                Lugar.Capacidad = Convert.ToInt32(collection["Capacidad"]);
                 Lugar.NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
 
                 EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(Lugar.NombreCiudad);
@@ -211,7 +222,6 @@ namespace MVCFinal.Controllers
 
                 l.Nombre = Lugar.Nombre;
                 l.Direccion = Lugar.Direccion;
-                l.Capacidad = Lugar.Capacidad;
                 l.UbicacionLugar = Ciudad;
                 l.Descripcion = Lugar.Descripcion;
                 l.CoordenadaX = Lugar.CoordenadaX;
@@ -297,7 +307,7 @@ namespace MVCFinal.Controllers
 
                 FabricaLogica.getLogicaMapa().AltaMapa(miMapa);
 
-
+                Session["Plano"] = miMapa;
                 return View("AdministrarLugares",model);
 
                 

@@ -16,7 +16,7 @@ namespace MVCFinal.Models
         public DateTime FechaInicio { get; set; }
 
         public DateTime FechaFin { get; set; }
-        public LugarModel UnLugar { get; set; }
+        public EntidadesCompartidas.Area UnArea { get; set; }
         public List<Entrada> EntradasEvento { get; set; }
         public Categoria ClasificacionEvento { get; set; }
 

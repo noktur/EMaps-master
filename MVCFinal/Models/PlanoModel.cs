@@ -9,6 +9,15 @@ namespace MVCFinal.Models
     {
         
         public EntidadesCompartidas.Mapa elMapa { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string Descripcion { get; set; }
+
+        public string Capacidad { get; set; }
+
+        public List<EntidadesCompartidas.Punto> ListaPuntos { get; set; }
+
         public List<EntidadesCompartidas.Area> ListaAreasPlano { get; set; }
 
     }

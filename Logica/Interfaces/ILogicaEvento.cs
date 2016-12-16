@@ -17,6 +17,6 @@ namespace Logica.Interfaces
         List<Evento> ListarEventosOrdenFecha();
         List<Evento> ListarEventosOrganizador(string CiOrganizador);
         List<Evento> ListarEventosReservados();
-        List<Evento> ListarEventosxLugar(string pNombreLugar);
+        List<Evento> ListarEventosxArea(int IdArea);
     }
 }

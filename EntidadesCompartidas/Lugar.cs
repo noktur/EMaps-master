@@ -15,7 +15,6 @@ namespace EntidadesCompartidas
         private string _Nombre;
         private string _Direccion;
         private string _Descripcion;
-        private int _Capacidad;
         private Ciudad _UbicacionLugar;
         private float _CoordenadaX;
         private float _CoordenadaY;
@@ -45,15 +44,6 @@ namespace EntidadesCompartidas
         {
             get { return _Descripcion; }
             set { _Descripcion = value; }
-        }
-
-
-        
-        [DataMember]
-        public int Capacidad
-        {
-            get { return _Capacidad; }
-            set { _Capacidad = value; }
         }
 
         [DataMember]
@@ -92,12 +82,11 @@ namespace EntidadesCompartidas
         #endregion
 
         #region Constructores
-        public Lugar(string pNombre,string pDireccion,string pDescripcion,int pCapacidad,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar)
+        public Lugar(string pNombre,string pDireccion,string pDescripcion,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar)
         {
             Direccion = pDireccion;
             Descripcion = pDescripcion;
             _fotosLugar= new List<FotosLugar>();
-            Capacidad = pCapacidad;
             UbicacionLugar = pUbicacionLugar;
             CoordenadaX = pCoordenadaX;
             CoordenadaY = pCoordenadaY;
@@ -108,7 +97,6 @@ namespace EntidadesCompartidas
         {
             Direccion = "";
             Descripcion = "";
-            Capacidad = 0;
             UbicacionLugar = null;
             CoordenadaX = 0;
             CoordenadaY = 0;

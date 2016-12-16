@@ -9,7 +9,6 @@ namespace Persistencia.Interfaces
 {
     public interface IPersistenciaPunto
     {
-        void AltaPunto(Punto p);
         void ModificarPunto(Punto p);
         Punto BuscarPuntoxId(int IdPunto);
         Punto BuscarPuntoxCoordenadas(double Cordx, double CordY);

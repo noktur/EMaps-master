@@ -17,7 +17,6 @@ namespace MVCFinal.Models
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
-        public int  Capacidad { get; set; }
 
         public Ciudad Ciudad  { get; set; }
 

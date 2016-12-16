@@ -154,7 +154,7 @@
     <Compile Include="Controllers\OrganizadorController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\PortadaController.cs" />
-    <Compile Include="Controllers\RegistroAController.cs" />
+    <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -730,7 +730,7 @@
     <Content Include="Views\Pais\Index.aspx" />
     <Content Include="Views\Portada\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\RegistroA\RegistroAdmin.aspx" />
+    <Content Include="Views\Registro\Registro.aspx" />
     <Content Include="web.config" />
     <Content Include="Views\Shared\MasterDueño.Master" />
     <Content Include="Views\Shared\MasterOrganizador.Master" />

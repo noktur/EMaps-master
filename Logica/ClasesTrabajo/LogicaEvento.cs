@@ -60,9 +60,9 @@ namespace Logica.ClasesTrabajo
         {
             return FabricaPersistencia.getPersistenciaEvento().ListarEventosReservados();
         }
-        public List<Evento> ListarEventosxLugar(string pNombreLugar)
+        public List<Evento> ListarEventosxArea(int IdArea)
         {
-            return FabricaPersistencia.getPersistenciaEvento().ListarEventosxLugar(pNombreLugar);
+            return FabricaPersistencia.getPersistenciaEvento().ListarEventosxArea(IdArea);
         }
             
     }

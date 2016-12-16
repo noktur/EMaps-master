@@ -188,22 +188,15 @@ namespace MVCFinal.Controllers
                 model.Descripcion = evento.Descripcion;
                 model.FechaInicio = evento.FechaInicio;
                 model.FechaFin = evento.FechaFin;
-                model.UnLugar.Capacidad = evento.UnLugar.Capacidad;
-                model.UnLugar.CoordenadaX = evento.UnLugar.CoordenadaX;
-                model.UnLugar.CoordenadaY = evento.UnLugar.CoordenadaY;
-                model.UnLugar.Descripcion = evento.UnLugar.Descripcion;
-                model.UnLugar.Direccion = evento.UnLugar.Direccion;
-                model.UnLugar.NombreCiudad = evento.UnLugar.UbicacionLugar.Nombre;
-                model.UnLugar.Nombre = evento.UnLugar.Nombre;
-                model.OrganizadorEvento.CI = evento.OrganizadorEvento.CI;
-                model.OrganizadorEvento.Contraseña = evento.OrganizadorEvento.Contraseña;
-                model.OrganizadorEvento.Email = evento.OrganizadorEvento.Email;
-                model.OrganizadorEvento.Nombre = evento.OrganizadorEvento.Nombre;
-                model.OrganizadorEvento.NombreUsuario = evento.OrganizadorEvento.NombreUsuario;
+                model.OrganizadorEvento.CI = evento.UnOrganizador.CI;
+                model.OrganizadorEvento.Contraseña = evento.UnOrganizador.Contraseña;
+                model.OrganizadorEvento.Email = evento.UnOrganizador.Email;
+                model.OrganizadorEvento.Nombre = evento.UnOrganizador.Nombre;
+                model.OrganizadorEvento.NombreUsuario = evento.UnOrganizador.NombreUsuario;
 
                 Session["EventoSeleccionado"] = model;
 
-                return View(model);
+                return View("",model);
             }
             catch
             {
@@ -229,11 +222,6 @@ namespace MVCFinal.Controllers
                 model.FeedbackSeleccionado.UsuarioFeedback.Email = feedback.UsuarioFeedback.Email;
                 model.FeedbackSeleccionado.UsuarioFeedback.Nombre = feedback.UsuarioFeedback.Nombre;
                 model.FeedbackSeleccionado.UsuarioFeedback.NombreUsuario = feedback.UsuarioFeedback.NombreUsuario;
-                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Nombre = feedback.EventoFeedback.UnLugar.Nombre;
-                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Descripcion = feedback.EventoFeedback.UnLugar.Descripcion;
-                model.FeedbackSeleccionado.EventoFeedback.UnLugar.Direccion = feedback.EventoFeedback.UnLugar.Direccion;
-                model.FeedbackSeleccionado.EventoFeedback.UnLugar.UbicacionLugar.Nombre = feedback.EventoFeedback.UnLugar.UbicacionLugar.Nombre;
-                model.FeedbackSeleccionado.EventoFeedback.UnLugar.DueñoLugar.Nombre = feedback.EventoFeedback.UnLugar.DueñoLugar.Nombre;
                 model.FeedbackSeleccionado.EventoFeedback.NombreEvento = feedback.EventoFeedback.NombreEvento;
                 model.FeedbackSeleccionado.EventoFeedback.Descripcion= feedback.EventoFeedback.Descripcion;
                 model.FeedbackSeleccionado.EventoFeedback.FechaInicio = feedback.EventoFeedback.FechaInicio;

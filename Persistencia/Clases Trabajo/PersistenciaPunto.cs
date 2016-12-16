@@ -28,30 +28,7 @@ namespace Persistencia.Clases_Trabajo
         #endregion
 
         #region Operaciones
-
-        public void AltaPunto(Punto p)
-        {
-            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AltaPunto", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("pCordX", p.CoordenadaX);
-            cmd.Parameters.AddWithValue("pCordY", p.CoordenadaY);
-
-            try
-            {
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Problema con la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+        
 
         public void ModificarPunto(Punto p)
         {
@@ -95,7 +72,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnPunto = new Punto(IdPunto,(double)oReader["CordX"], (double)oReader["CordY"]);
+                    UnPunto = new Punto(IdPunto,(Single)oReader["CordX"], (Single)oReader["CordY"]);
                 }
                 oReader.Close();
             }
@@ -127,7 +104,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnPunto = new Punto((int)oReader["IdPunto"],Cordx,CordY);
+                    UnPunto = new Punto((int)oReader["IdPunto"],Convert.ToSingle(Cordx),Convert.ToSingle(CordY));
                 }
                 oReader.Close();
             }

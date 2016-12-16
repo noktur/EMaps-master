@@ -43,9 +43,9 @@ namespace Logica.ClasesTrabajo
         {
            return FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileres();
         }
-        public List<Alquiler> ListarAlquileresLugar(string NombreLugar)
+        public List<Alquiler> ListarAlquileresArea(int IdArea)
         {
-          return  FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresLugar(NombreLugar);
+          return  FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresArea(IdArea);
         }
 
         public List<Alquiler> ListarAlquileresOrganizador(string Ci)

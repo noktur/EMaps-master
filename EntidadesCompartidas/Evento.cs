@@ -17,8 +17,8 @@ namespace EntidadesCompartidas
         private string _Descripcion;
         private DateTime _FechaInicioEvento;
         private DateTime _FechaFinEvento;
-        private Lugar _UnLugar;
         private Categoria _CategoriaEvento;
+        private Area _AreaAlquilada;
         private Organizador _OrganizadorEvento;
 
        #endregion
@@ -62,10 +62,17 @@ namespace EntidadesCompartidas
         }
 
         [DataMember]
-        public Lugar UnLugar
+        public Organizador UnOrganizador
         {
-            get { return _UnLugar; }
-            set { _UnLugar = value; }
+            get { return _OrganizadorEvento; }
+            set { _OrganizadorEvento = value; }
+        }
+
+        [DataMember]
+        public Area AreaEvento
+        {
+            get { return _AreaAlquilada; }
+            set { _AreaAlquilada = value; }
         }
 
         [DataMember]
@@ -75,26 +82,20 @@ namespace EntidadesCompartidas
             set { _CategoriaEvento = value; }
         }
 
-        public Organizador OrganizadorEvento
-        {
-            get { return _OrganizadorEvento; }
-            set { _OrganizadorEvento = value; }
-        }
-
        #endregion
 
        #region Constructores
 
-        public Evento(int pIdEvento,string pNombreEvento,string pDescripcion,DateTime pFechaInicio,DateTime pFechaFin,Lugar pUnLugar,Categoria pCategoria,Organizador pOrganizadorEvento)
+        public Evento(int pIdEvento,string pNombreEvento,string pDescripcion,DateTime pFechaInicio,DateTime pFechaFin,Area pArea,Categoria pCategoria,Organizador pOrganizador)
         {
             IdEvento = pIdEvento;
             NombreEvento = pNombreEvento;
             Descripcion = pDescripcion;
             FechaInicio = pFechaInicio;
             FechaFin = pFechaFin;
-            UnLugar = pUnLugar;
+            UnOrganizador = pOrganizador;
+            AreaEvento = pArea;
             CategoriaEvento = pCategoria;
-            OrganizadorEvento = pOrganizadorEvento;
         }
 
         public Evento()
@@ -104,9 +105,9 @@ namespace EntidadesCompartidas
             Descripcion = "";
             FechaInicio = DateTime.Now;
             FechaFin = DateTime.Now;
-            UnLugar = null;
+            AreaEvento = null;
            CategoriaEvento = null;
-           OrganizadorEvento = null;
+           UnOrganizador= null;
         }
 
 

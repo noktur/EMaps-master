@@ -14,12 +14,30 @@ namespace EntidadesCompartidas
 
         private int _IdArea;
         private string _NombreArea;
+        private string _Descripcion;
         private Mapa _MapaAsociado;
-        private Punto  _PuntosArea;
+        private List<Punto>  _PuntosArea;
+        private int _Capacidad;
 
         #endregion
 
         #region Propiedades
+
+        [DataMember]
+        public string Descripcion
+        {
+            get { return _Descripcion; }
+            set { _Descripcion = value; }
+        }
+
+
+        [DataMember]
+        public int Capacidad
+        {
+            get { return _Capacidad; }
+            set { _Capacidad = value; }
+        }
+
 
         [DataMember]
         public int IdArea
@@ -36,7 +54,7 @@ namespace EntidadesCompartidas
         }
 
         [DataMember]
-        public Punto PuntosArea
+        public List<Punto> PuntosArea
         {
             get { return _PuntosArea; }
             set { _PuntosArea = value; }
@@ -54,20 +72,37 @@ namespace EntidadesCompartidas
         
         #region Constructores
         
-        public Area(int pIdArea,string pNombreArea,Mapa pMapaAsociado,Punto pPuntosArea)
+        public Area(int pIdArea,string pNombreArea,string pDescripcion,int pCapacidad,Mapa pMapaAsociado)
         {
             IdArea = pIdArea;
             NombreArea = pNombreArea;
-            PuntosArea = pPuntosArea;
+            Descripcion = pDescripcion;
+            Capacidad = pCapacidad;
+            MapaAsociado = pMapaAsociado;
+        }
+        public Area(int pIdArea, string pNombreArea, string pDescripcion, int pCapacidad, Mapa pMapaAsociado,List<Punto> pPuntos)
+        {
+            IdArea = pIdArea;
+            NombreArea = pNombreArea;
+            Descripcion = pDescripcion;
+            Capacidad = pCapacidad;
+            PuntosArea = pPuntos;
             MapaAsociado = pMapaAsociado;
         }
 
         public Area()
         {
             IdArea = 0;
+            Descripcion = "";
+            Capacidad = 0;
             NombreArea = "";
-            PuntosArea = null;
+            PuntosArea = new List<Punto>();
             MapaAsociado = null;
+        }
+
+        public void AgregarPunto(Punto unPunto)
+        {
+            _PuntosArea.Add(unPunto);
         }
 
         #endregion

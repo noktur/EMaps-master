@@ -36,8 +36,8 @@
 
                  var select = document.getElementById("seleccion");
 
-                 select.options[i] = new Option("Seleccione una Ciudad");
-                 for (var i = 0; i < jsonconvertido.length; i++)
+                 select.options[0] = new Option("Seleccione una Ciudad");
+                 for (var i = 1; i < jsonconvertido.length; i++)
                  {
                      
                      select.options[i] = new Option(jsonconvertido[i].Nombre,jsonconvertido[i].Nombre);
@@ -286,7 +286,7 @@
               var array = { nombre: valor };
 
               $.ajax({
-                  url: '/Dueño/CiudadObtenida',
+                  url: '/Dueño/RecuperarArea',
                   type: 'POST',       
                   dataType: 'json',
                   data: array,
@@ -294,7 +294,7 @@
                   success: function (data) 
                   {
 
-                      RecuperarCiudad(data);
+                      RecuperarArea(data);
 
                   }
               });
@@ -314,11 +314,13 @@
              ImageFondo2Aux = input;
          }
 
-         function showerrorfondo(response) {
+         function showerrorfondo(response)
+         {
              document.getElementById('lblRespuestaFondo').innerHTML = response['message'];
          }
 
-         function obtenerImagenFondo() {
+         function obtenerImagenFondo()
+         {
              var data = new FormData();
              var files = $("#uploadFondoInput").get(0).files;
              if (files.length > 0) {
@@ -398,13 +400,10 @@
                                <input name="NombreCiudad" id="NombreCiudad" type="text"  class="form-control hidden" /> 
                           </div>
                         <div class="form-group">
-                                        <input name="Nombre" id="Nombre" type="text" placeholder="Ingrese el nombre ......" class="form-control"/>     
+                                        <input name="Nombre" id="Nombre" type="text" pattern="[a-z]{1,15}"
+        title="el nombre del lugar solo puede contener letras" oninput="setCustomValidity('Se requiere ingresar un nombre')" oninvalid="setCustomValidity('Se requiere ingresar un nombre')" placeholder="Ingrese el nombre ......" class="form-control"/>     
                                       
                                 </div>  
-                            <div class="form-group">
-                                        <input name="Capacidad" id="Capacidad" min="0" type="number" class="form-control"/>     
-                                      
-                                </div>   
                              <div class="form-group">
                                 <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion....."></textarea>
                             </div>
@@ -506,15 +505,15 @@
                              
             </div>
               
-            <div class="col-md-4" style="border:solid whitesmoke 2px">
+            <div class="col-md-4" style="border:solid whitesmoke 2px; background-color: whitesmoke;">
                 <% using (Html.BeginForm("AgregarFoto", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
                     {  %>
-                <div class="thumbnail" style="border:none">
+                <div class="thumbnail" style="border:none;background-color: whitesmoke;">
                     <div class="caption"> 
                         <h3>Agregue fotos a su lugar</h3> 
                         <div class="input-group"> 
                                 <span class="input-group-addon"><i class="fa fa-file-image-o"></i></span> 
-                                <input type="file" id="image2" required="required"   name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
+                                <input type="file" oninvalid="setCustomValidity('No ha ingresado archivo');" id="image2" required="required"   name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
                             </div>
                         <p>Aqui podra agregar cada una de sus fotos del lugar de manera de brindar un mayor servicio a sus clientes.</p>
                         <button type="submit" class="btn btn-primary" name="submit1">Agregar foto</button>
