@@ -10,7 +10,8 @@ namespace Persistencia.Interfaces
     {
         void AltaArea(Area a);
         void ModificarArea(Area a);
-        Area BuscarArea(int IdArea);
+        Area BuscarArea(int pIdArea);
+        Area BuscarAreaPorNombre(string NombreArea);
         void AltaPuntodeArea(Area a,Punto p);
         void BajaArea(Area a);
         List<Area> ListarAreasDeMapa(int IdMapa);

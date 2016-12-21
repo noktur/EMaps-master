@@ -130,7 +130,41 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnArea = new Area(IdArea, (string)oReader["NombreArea"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])));
+                    UnArea = new Area(IdArea,(string)oReader["Nombre"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])));
+                }
+                oReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error con la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return UnArea;
+        }
+
+        public Area BuscarAreaPorNombre(string NombreArea)
+        {
+            Area UnArea = null;
+
+            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
+            MySqlCommand cmd = new MySqlCommand("BuscarAreaPorNombre", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            cmd.Parameters.AddWithValue("pNombre", NombreArea);
+
+
+            try
+            {
+                con.Open();
+                MySqlDataReader oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    UnArea = new Area((int)oReader["IdArea"],NombreArea, (string)oReader["Descripcion"], (int)oReader["Capacidad"], FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])));
                 }
                 oReader.Close();
             }
@@ -221,7 +255,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnPunto = new Punto((int)lector["IdPunto"], (Single)lector["CordX"], (Single)lector["CordY"]);
+                        UnPunto = new Punto((int)lector["IdPunto"], (Single)lector["CordX"], (Single)lector["CordY"],a);
                         a.PuntosArea.Add(UnPunto);
                     }
                 }

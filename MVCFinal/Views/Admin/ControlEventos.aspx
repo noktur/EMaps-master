@@ -41,7 +41,7 @@
                                         <td><%= item.FechaInicio %></td> 
                                         <td><%= item.FechaFin %></td> 
                                         <td><%= item.Descripcion %></td> 
-                                        <td><%= item.OrganizadorEvento %></td> 
+                                        <td><%= item.UnOrganizador.NombreUsuario %></td> 
                                         <td>
                                             <%= Html.ActionLink("Seleccionar", "SeleccionarEvento", "Admin", new { IdEvento = item.IdEvento}, new { @class="btn btn-default btn-sm" })%>
                                         </td>

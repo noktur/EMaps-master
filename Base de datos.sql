@@ -80,8 +80,8 @@ create table Lugar
 create table Mapa 
 (
     IdMapa int AUTO_INCREMENT not null ,
-	Nombre varchar(30) not null,
-	Imagen longblob,
+    Nombre varchar(30) not null,
+    Imagen longblob,
     NombreLugar varchar(30),
     extension varchar(5),
     foreign key(NombreLugar) references Lugar(NombreLugar),
@@ -91,15 +91,6 @@ create table Mapa
 
 alter table Mapa Add unique index Mapa_NombreLugar(NombreLugar);
 
-
-create table Punto 
-(
-    IdPunto int AUTO_INCREMENT not null primary key,
-	cordX real,
-	cordY real,
-    Eliminado boolean
-);
-
 create table Area 
 (
     IdArea INT AUTO_INCREMENT not null ,
@@ -108,10 +99,19 @@ create table Area
 	Capacidad int,
     Descripcion varchar(30),
     Eliminado boolean,
-    IdPunto int ,
-    foreign key (IdPunto) references Punto (IdPunto),
     foreign key (IdMapa) references Mapa (IdMapa),
-    primary key(IdArea,IdMapa,IdPunto)
+    primary key(IdArea)
+);
+
+create table Punto 
+(
+    IdPunto int AUTO_INCREMENT not null,
+	cordX real,
+	cordY real,
+    Eliminado boolean,
+    IdArea int not null,
+    foreign key (IdArea) references Area (IdArea),
+    primary key(IdPunto,IdArea)
 );
 
 create table FotosLugar
@@ -727,13 +727,13 @@ END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE BuscarMapaLugar(pNombreLugar varchar(30),pIdMapa int)
+CREATE PROCEDURE BuscarMapaLugar(pNombreLugar varchar(30))
 BEGIN
 SELECT *
 FROM Mapa
 join Lugar
 On Mapa.NombreLugar=Lugar.NombreLugar
-WHERE Mapa.NombreLugar=pNombreLugar and Mapa.IdMapa=pIdMapa;
+WHERE Mapa.NombreLugar=pNombreLugar;
 END//
 DELIMITER;
 
@@ -816,43 +816,6 @@ order by  UNIX_TIMESTAMP(alquiler.FechaInicioAlquiler) desc;
 END//
 DELIMITER;
 
--- PROCEDIMIENTOS ALMACENADOS PUNTO
-
-
-DELIMITER //
-CREATE PROCEDURE ModificarPunto(pCordX real,pCordY real,pIdPunto int) 
-BEGIN
-UPDATE Punto SET cordX=pCordX,cordY=pCordY  WHERE IdPunto=pIdPunto;
-END//
-DELIMITER;
-
-DELIMITER //
-CREATE PROCEDURE EliminarPunto (pIdPunto int)
-BEGIN
-UPDATE Punto SET Eliminado=1  WHERE IdPunto=pIdPunto;
-END//
-DELIMITER;
-
-DELIMITER //
-CREATE PROCEDURE BuscarPuntoxId(pIdPunto int)
-BEGIN
-SELECT *
-FROM Punto p
-WHERE p.IdPunto=pIdPunto;
-END//
-DELIMITER;
-
-DELIMITER //
-CREATE PROCEDURE BuscarPuntoxCoordenadas(pCordX real,pCordY real)
-BEGIN
-SELECT *
-FROM Punto p
-WHERE p.CordX=pCordX and p.CordY=pCordY;
-END
-
-
-
-
 -- PROCEDIMIENTOS ALMACENADOS MAPA
 
 DELIMITER //
@@ -915,11 +878,11 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS AREAS
 
 DELIMITER //
-CREATE PROCEDURE AltaArea (pNombre varchar(30),pDescripcion varchar(30),pCantidad int,pIdMapa int)
+CREATE PROCEDURE AltaArea (pNombre varchar(30),pDescripcion varchar(30),pCapacidad int,pIdMapa int)
 BEGIN
-INSERT INTO Area (IdArea,Nombre,Descripcion,Cantidad,IdMapa) VALUES(0,pNombre,pDescripcion,pCantidad,pIdMapa);
-
-END
+INSERT INTO Area (IdArea,Nombre,Descripcion,Capacidad,IdMapa) VALUES(0,pNombre,pDescripcion,pCapacidad,pIdMapa);
+END//
+DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE ModificarArea(pIdArea int,pNombre varchar(30),pDescripcion varchar(30),pCantidad int,pIdMapa int)
@@ -931,6 +894,7 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE EliminarArea (pIdArea int)
 BEGIN
+UPDATE PUNTO SET ELIMINADO=1 WHERE IdArea=pIdArea;
 UPDATE Area SET Eliminado=1 WHERE IdArea=pIdArea;
 END//
 DELIMITER;
@@ -939,11 +903,7 @@ DELIMITER;
 DELIMITER //
 CREATE PROCEDURE AltaPuntodeArea (pIdArea int,pIdPunto int,pCordX real,pCordY real)
 BEGIN
-DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
-START TRANSACTION;
-INSERT INTO Punto (IdPunto,CordX,CordY) VALUES(0,pCordX,pCordY);
-INSERT INTO Area (IdArea,IdPunto) VALUES(pIdArea,pIdPunto);
-commit;
+INSERT INTO Punto (IdPunto,IdArea,CordX,CordY) VALUES(0,pIdArea,pCordX,pCordY);
 END
 //
 DELIMITER;
@@ -953,8 +913,17 @@ DELIMITER //
 CREATE PROCEDURE BuscarArea(pIdArea int)
 BEGIN
 SELECT *
-FROM Mapa 
-WHERE Mapa.IdArea=pIdArea;
+FROM Area
+WHERE Area.IdArea=pIdArea;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE BuscarAreaPorNombre(pNombre varchar(30))
+BEGIN
+SELECT *
+FROM Area
+WHERE Area.Nombre=pNombre;
 END//
 DELIMITER;
 
@@ -962,9 +931,9 @@ DELIMITER //
 CREATE PROCEDURE ListarAreasDeMapa(pIdMapa int)
 BEGIN
 SELECT *
-FROM Area
-Join Mapa
-On Area.IdMapa=Mapa.IdMapa
+FROM Mapa
+join area
+on mapa.IdMapa=Area.IdMapa
 WHERE Area.Eliminado=0 and Area.IdMapa=pIdMapa;
 END
 
@@ -974,9 +943,9 @@ DELIMITER //
 CREATE PROCEDURE ListarPuntosdeUnArea(pIdArea int)
 BEGIN
 SELECT *
-FROM punto
-join area
-ON punto.IdPunto=Area.IdPunto
+FROM Area
+join punto 
+ON Area.IdPunto=Punto.IdPunto
 where Area.IdArea=pIdArea;
 END//
 DELIMITER;
@@ -1545,10 +1514,9 @@ FROM categoria;
 END // 
 
 call AltaDueño('Matias','matiasmelfi1990','Matii','4772000','matias@gmail');
-END//
 
+call AltaPais ('Uruguay','UY','-32.522779','-55.765835')
 
-call AltaPais ('Uruguay','UY',-32.522779,-55.765835);
 call AltaPais ('Argentina','AR',-38.416097,-63.616672);
 call AltaPais ('Brasil','BR',-14.235004,-51.92528);
 call AltaCiudad ('Montevideo'),-34.9011127,-56.1645314,'Uruguay');

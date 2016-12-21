@@ -22,7 +22,7 @@
                         <p>Aqui puede buscar una ciudad para luego agregar.</p>
                             <% using(Html.BeginForm()) { %>
                             <div id="elementosBuscar" class="input-group">
-                                <input type="text" class="form-control" name="NombreCiudad1" id="NombreCiudad1"  />
+                                <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de ciudad)" name="NombreCiudad1" id="NombreCiudad1"  />
                                 <span class="input-group-btn"><button class="btn btn-info" onclick="BuscarCiudad()"  type="button">Buscar</button></span>
                                    </div>
                           <div class="form-group">
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
                             </div>
-                            <span class="fa-map-marker"></span>
+
                             <div class="form-group">
                                 <input type="text" class="form-control" readonly="readonly" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
                             </div>
@@ -44,7 +44,7 @@
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container -->
-        </div><!-- /#templatemo-contact -->
+            </div><!-- /#templatemo-contact -->
         
 
         </form>

@@ -100,10 +100,5 @@ namespace Persistencia
         {
             return (PersistenciaPais.GetInstancia());
         }
-       
-        public static IPersistenciaPunto getPersistenciaPunto()
-        {
-            return (PersistenciaPunto.GetInstancia());
-        }
     }
 }

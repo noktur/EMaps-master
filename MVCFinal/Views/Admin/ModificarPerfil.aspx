@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Cedula Identidad</label>
                             <div class="col-md-7">
-                                <input type="text" name="Ci" id="Ci" placeholder="<%= Model.Ci %>"  class="form-control" readonly="readonly">
+                                <input type="text" name="Ci" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar cedula)" id="Ci" placeholder="<%= Model.Ci %>"  class="form-control" readonly="readonly">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Nombre Completo</label>
                             <div class="col-md-7">
-                                <input type="text" name="Nombre" id="Nombre" placeholder="<%= Model.Nombre %>" class="form-control">
+                                <input type="text" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su nombre')" name="Nombre" id="Nombre" placeholder="<%= Model.Nombre %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Contraseña</label>
                             <div class="col-md-7">
-                                <input type="password" name="Password" id="Password" placeholder="<%= Model.Password %>" class="form-control">
+                                <input type="password" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su contraseña)" name="Password" id="Password" placeholder="<%= Model.Password %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Email Address</label>
                             <div class="col-md-7">
-                                <input type="email" name="Email" id="Email" placeholder="<%= Model.Email %>" class="form-control">
+                                <input type="email" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su email)" name="Email" id="Email" placeholder="<%= Model.Email %>" class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">User Login</label>
                             <div class="col-md-7">
-                                <input type="text" name="Usuario" id="Usuario" placeholder="<%= Model.Usuario %>"  class ="form-control">
+                                <input type="text" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su nombre de usuario)" name="Usuario" id="Usuario" placeholder="<%= Model.Usuario %>"  class ="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         

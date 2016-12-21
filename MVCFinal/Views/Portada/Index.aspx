@@ -60,7 +60,7 @@
             </div>
             <div class="form-group" style="padding-left:10px">
                 <span class="form-group-addon"><i class="icon_key_alt" style="color:white"></i></span>
-                <input required="required" type="password" <%--pattern="[a-z][1,99]{7,20}"--%>
+                <input required="required" type="password" pattern=".{7,}"
         title="La contraseña debe contener mas de 7 caracteres" oninput="setCustomValidity('')" oninvalid="setCustomValidity1('Se requiere ingresar una contraseña')" class="form-control" placeholder="Password" name="Password">
             </div>
                 <div class="form-group" style="padding-top:17px; padding-left:10px">

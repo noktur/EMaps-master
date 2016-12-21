@@ -43,47 +43,55 @@ namespace MVCFinal.Controllers
 
         public ActionResult PlanoLugar()
         {
-            return View();
-            //if(Session["Dueño"] != null)
-            //{
-            //    MVCFinal.Models.PlanoModel Plano = new PlanoModel();
-            //    EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
+            
+            if(Session["Dueño"] != null)
+            {
+               MVCFinal.Models.PlanoModel Plano = new PlanoModel();
+               EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
                
 
-            //    try
-            //    {
+                      try
+              {
 
-            //        mapa=(EntidadesCompartidas.Mapa)Session["Plano"] ;
-            //        List<EntidadesCompartidas.Area> listaArea= Logica.FabricaLogica.getLogicaArea().ListarAreasDeMapa(mapa.IdMapa);
-                    
-                    
+                 mapa=(EntidadesCompartidas.Mapa)Session["Plano"] ;
 
+                 if (mapa.Areas.Count() > 0)
+                 {
 
-            //        Plano.ListaAreasPlano=listaArea;
-            //        Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
-            //        Plano.elMapa = mapa;
-            //        Session["Plano"] = Plano.elMapa;
-            //        string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
-            //        Session["MapaJson"] = JsonMapa;
-            //        string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
-            //        Session["AreasMapaJson"] = JsonMapa;
+                     List<EntidadesCompartidas.Area> listaArea = Logica.FabricaLogica.getLogicaArea().ListarAreasDeMapa(mapa.IdMapa);
 
 
-                    
+                     Plano.ListaAreasPlano = listaArea;
+                     Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
 
-            //        Session["Imagen"] = File(mapa.Imagen, mapa.Extension);
+                 }
+                 else
+                 {
 
 
-            //        return View(Plano);
+                     
+                     Plano.elMapa = mapa;
+                     Session["Plano"] = Plano.elMapa;
+                     string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
+                     Session["MapaJson"] = JsonMapa;
+                     string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
+                     Session["AreasMapaJson"] = JsonAreas;
 
-            //    }
-            //    catch
-            //    {
-            //        return View();
-            //    }
-            //}
+                     Session["Imagen"] = File(mapa.Imagen, mapa.Extension);
 
-            //return RedirectToAction("Portada", "Index");
+
+                     
+                 }
+                 return View(Plano);
+
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Portada", "Index");
         }
 
 
@@ -121,17 +129,34 @@ namespace MVCFinal.Controllers
         {
 
            
+
            EntidadesCompartidas.Area a= JsonConvert.DeserializeObject<EntidadesCompartidas.Area>(json);
 
            a.MapaAsociado =(EntidadesCompartidas.Mapa)Session["Plano"];
 
+           a.MapaAsociado=FabricaLogica.getLogicaMapa().BuscarMapaLugar(a.MapaAsociado.LugarAsociado.Nombre);
+
+           Session["Puntos"] = a.PuntosArea;
+
            FabricaLogica.getLogicaArea().AltaArea(a);
 
+           a = FabricaLogica.getLogicaArea().BuscarAreaPorNombre(a.NombreArea);
+
+           a.PuntosArea = (List<Punto>)Session["Puntos"];
+            
+           foreach(Punto p in a.PuntosArea)
+           {
+               FabricaLogica.getLogicaArea().AltaPuntodeArea(a, p);
+           }
+
+           a.MapaAsociado.Areas.Add(a);
+
+           string JsonAreas = JsonConvert.SerializeObject(a.MapaAsociado.Areas);
+           Session["AreasMapaJson"] = JsonAreas;
 
            Session["Areas"]=a;
-           
 
-            return View("PlanoLugar");
+           return View("PlanoLugar");
 
         }
 
@@ -231,9 +256,13 @@ namespace MVCFinal.Controllers
 
                 Logica.FabricaLogica.getLogicaLugar().AltaLugar(l);
 
+                string JsonLugar = JsonConvert.SerializeObject(l);
+                Session["LugarJson"] = JsonLugar;
+
                 Session["LugarActual"] = l;
                 Session["LugarModel"] = Lugar;
-                return View("AdministrarLugares",Lugar);
+
+                return View("AdministrarLugares");
 
             }
             catch
@@ -272,6 +301,12 @@ namespace MVCFinal.Controllers
                         string JsonCiudades = JsonConvert.SerializeObject(listaCiudad);
                         Session["CiudadesJson"] = JsonCiudades;
 
+                        EntidadesCompartidas.Lugar l = new EntidadesCompartidas.Lugar();
+                        l =(EntidadesCompartidas.Lugar)Session["LugarActual"];
+                        string JsonLugar = JsonConvert.SerializeObject(l);
+                        Session["LugarJson"] = JsonLugar;
+
+                        
                         
                     return View(Lugar);
 
@@ -307,15 +342,15 @@ namespace MVCFinal.Controllers
 
                 FabricaLogica.getLogicaMapa().AltaMapa(miMapa);
 
+                
                 Session["Plano"] = miMapa;
-                return View("AdministrarLugares",model);
-
+                
+                return View("AdministrarLugares");
                 
             }
 
             public ActionResult AgregarFoto(HttpPostedFileBase image1)
             {
-
 
                 List<EntidadesCompartidas.FotosLugar> list=null;
 
@@ -343,14 +378,19 @@ namespace MVCFinal.Controllers
                 {
                     list.Add(foto);
                 }
-                
+                EntidadesCompartidas.Lugar Lugar = new Lugar();
+
+                Lugar =(EntidadesCompartidas.Lugar)Session["LugarActual"];
+
+                string JsonLugar = JsonConvert.SerializeObject(Lugar);
+                Session["LugarJson"] = JsonLugar;
+
                 string JsonFotos = JsonConvert.SerializeObject(list);
                 Session["FotosJson"] = JsonFotos;
                 Session["Fotos"] = list;                   
 
 
                 return View("AdministrarLugares");
-
 
             }
 

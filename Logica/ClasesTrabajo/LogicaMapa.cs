@@ -41,9 +41,9 @@ namespace Logica.ClasesTrabajo
             return FabricaPersistencia.getPersistenciaMapa().BuscarMapa(IdMapa);
         }
 
-        public Mapa BuscarMapaLugar(string NombreLugar, int IdMapa)
+        public Mapa BuscarMapaLugar(string NombreLugar)
         {
-            return FabricaPersistencia.getPersistenciaMapa().BuscarMapaLugar(NombreLugar,IdMapa);
+            return FabricaPersistencia.getPersistenciaMapa().BuscarMapaLugar(NombreLugar);
         }
 
 

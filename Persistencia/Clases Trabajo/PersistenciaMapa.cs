@@ -142,7 +142,7 @@ namespace Persistencia.Clases_Trabajo
         }
 
 
-        public Mapa BuscarMapaLugar(string NombreLugar, int IdMapa)
+        public Mapa BuscarMapaLugar(string NombreLugar)
         {
             Mapa UnMapa = null;
 
@@ -150,7 +150,6 @@ namespace Persistencia.Clases_Trabajo
             MySqlCommand cmd = new MySqlCommand("BuscarMapaLugar", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("pNombreLugar", NombreLugar);
-            cmd.Parameters.AddWithValue("pIdMapa", IdMapa);
 
 
             try
@@ -160,7 +159,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnMapa = new Mapa(IdMapa, (byte[])oReader["Imagen"], PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar), Convert.ToString(oReader["Nombre"]), (string)oReader["extension"]);
+                    UnMapa = new Mapa((int)oReader["IdMapa"], (byte[])oReader["Imagen"], PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar), Convert.ToString(oReader["Nombre"]), (string)oReader["extension"]);
                 }
                 oReader.Close();
             }

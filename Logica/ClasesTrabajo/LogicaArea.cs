@@ -26,11 +26,6 @@ namespace Logica.ClasesTrabajo
         public void AltaArea(Area a)
         {
             FabricaPersistencia.getPersistenciaArea().AltaArea(a);
-
-            foreach (Punto p in a.PuntosArea)
-            {
-                FabricaPersistencia.getPersistenciaArea().AltaPuntodeArea(a, p);
-            }
         }
         public void ModificarArea(Area a)
         {
@@ -39,6 +34,11 @@ namespace Logica.ClasesTrabajo
         public Area BuscarArea(int IdArea)
         {
             return FabricaPersistencia.getPersistenciaArea().BuscarArea(IdArea);
+        }
+
+        public Area BuscarAreaPorNombre(string NombreArea)
+        {
+            return FabricaPersistencia.getPersistenciaArea().BuscarAreaPorNombre(NombreArea);
         }
         public void AltaPuntodeArea(Area a,Punto p)
         {

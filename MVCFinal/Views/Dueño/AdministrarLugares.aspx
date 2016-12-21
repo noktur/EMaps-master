@@ -108,10 +108,77 @@
          jQuery(document).ready(function () {
              //Asignamos al evento click del boton la funcion codeAddress
              //Inicializamos la función de google maps una vez el DOM este cargado
-             
-             
-                 CargarSelect();             
+                
+                
+             var jsonlist = '<%= (Session["LugarJson"] == null ? null : (string)Session["LugarJson"])%>';
+
+             var item = null;
+             if (jsonlist != 'null')
+             {
+
+                 item = jQuery.parseJSON(jsonlist);
+
+                 var latLng = new google.maps.LatLng(item.CoordenadaX,item.CoordenadaY);
+
+                 //Definimos algunas opciones del mapa a crear
+                 var myOptions = {
+                     center: latLng,//centro del mapa
+                     zoom: 4,//zoom del mapa
+                     mapTypeId: google.maps.MapTypeId.ROADMAP //tipo de mapa, carretera, híbrido,etc
+                 };
+                 //creamos el mapa con las opciones anteriores y le pasamos el elemento div
+                 map = new google.maps.Map(document.getElementById("mapa"), myOptions);
+
+
+                 var posi = new google.maps.LatLng(item.CoordenadaX, item.CoordenadaY);
+
+
+                 var marker = new google.maps.Marker
+                ({
+                     map: map,
+                     titulo: item.Nombre,
+                     position: posi,
+                     draggable: false
+
+                 });
+
+                 marcadoresBD.push(marker);
+
+
+                 google.maps.event.addListener(map, 'click', function () {
+                     closeInfoWindow();
+
+                 });
+
+
+                 google.maps.event.addListener(marker, 'click', function () {
+                     openInfoWindow(marker, item.Nombre);
+                 });
+
+                 jQuery('#CoordenadaX').val(item.CoordenadaX);
+                 jQuery('#CoordenadaY').val(item.CoordenadaY);
+                 jQuery('#Descripcion').val(item.Descripcion);
+                 jQuery('#Nombre').val(item.Nombre);
+                 jQuery('#NombreCiudad').val(item.NombreCiudad);
+                 var span = document.getElementById("span");
+                 span.style.display = '';
+                 span.style.visibility = 'none';
+                 var btn = document.getElementById("btnBuscar");
+                 btn.style.display = '';
+                 btn.style.visibility = 'none';
+                 jQuery('#Direccion').val(item.Direccion);
+                 jQuery('#Direccion1').val(item.Direccion);
+                 CargarSelect();
+
+
+
+             }
+             else
+             {
+
+                 CargarSelect();
                  initialize();
+             }
 
 
          });
@@ -286,7 +353,7 @@
               var array = { nombre: valor };
 
               $.ajax({
-                  url: '/Dueño/RecuperarArea',
+                  url: '/Dueño/CiudadObtenida',
                   type: 'POST',       
                   dataType: 'json',
                   data: array,
@@ -294,7 +361,7 @@
                   success: function (data) 
                   {
 
-                      RecuperarArea(data);
+                      RecuperarCiudad(data);
 
                   }
               });
@@ -308,7 +375,8 @@
          }
 
 
-         function showPicture(input) {
+         function showPicture(input)
+         {
              //$("#OriginalPreviewFondo2").attr('style', 'display:none;');
              $("#preview").attr('style', '');
              ImageFondo2Aux = input;
@@ -353,8 +421,7 @@
     <form id="form1" runat="server"> 
     <div data-spy="scroll" data-target="nav"> 
         
-        <section class="content-block contact-1" style="padding-bottom:5px;background-color: whitesmoke; ">
-            
+        <section class="content-block contact-1" style="padding-bottom:5px;background-color: whitesmoke; ">         
             <div class="container text-center">
                     <div class="underlined-title">
                         <h1>Get in Touch</h1>
@@ -383,7 +450,7 @@
                             <p>Aqui podra ingresar la direccion a buscar en la ciudad correspondiente </p>
                              <div id="elementosBuscar" class="input-group">
                                 <input type="text" class="form-control" name="Direccion1" id="Direccion1"  />
-                                <span class="input-group-btn"><button class="btn btn-danger" onclick="BuscarDireccion()"  type="button">Buscar</button></span>
+                                <span id="span"  class="input-group-btn"><button id="btnBuscar" class="btn btn-danger" onclick="BuscarDireccion()"  type="button">Buscar</button></span>
                                    </div>
                             </div>
 
@@ -400,12 +467,12 @@
                                <input name="NombreCiudad" id="NombreCiudad" type="text"  class="form-control hidden" /> 
                           </div>
                         <div class="form-group">
-                                        <input name="Nombre" id="Nombre" type="text" pattern="[a-z]{1,15}"
-        title="el nombre del lugar solo puede contener letras" oninput="setCustomValidity('Se requiere ingresar un nombre')" oninvalid="setCustomValidity('Se requiere ingresar un nombre')" placeholder="Ingrese el nombre ......" class="form-control"/>     
+                                        <input name="Nombre" required="required" id="Nombre" type="text" pattern="[a-z]{1,15}"
+        title="el nombre del lugar solo puede contener letras" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre')" placeholder="Ingrese el nombre ......" class="form-control"/>     
                                       
                                 </div>  
                              <div class="form-group">
-                                <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion....."></textarea>
+                                <textarea name="Descripcion" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar una descripcion)" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion....."></textarea>
                             </div>
                                 
                                  <div class="form-group hidden">
@@ -448,7 +515,7 @@
                     <h3>Agregue fotos a su lugar</h3> 
                         <div class="input-group"> 
                                 <span class="input-group-addon"><i class="fa fa-file-image-o"></i></span> 
-                                <input type="file" id="image1" name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
+                                <input type="file" id="image1" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se ha ingresado una foto)" name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
                          
                         </div>
                         <p>Aqui podra agregar cada una de sus fotos del lugar de manera de brindar un mayor servicio a sus clientes.</p>
@@ -513,7 +580,7 @@
                         <h3>Agregue fotos a su lugar</h3> 
                         <div class="input-group"> 
                                 <span class="input-group-addon"><i class="fa fa-file-image-o"></i></span> 
-                                <input type="file" oninvalid="setCustomValidity('No ha ingresado archivo');" id="image2" required="required"   name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
+                                <input type="file" oninput="setCustomValidity('')" oninvalid="setCustomValidity('No ha ingresado el plano')" id="image2" required="required"   name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
                             </div>
                         <p>Aqui podra agregar cada una de sus fotos del lugar de manera de brindar un mayor servicio a sus clientes.</p>
                         <button type="submit" class="btn btn-primary" name="submit1">Agregar foto</button>

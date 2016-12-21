@@ -11,6 +11,7 @@ namespace Logica.Interfaces
         void AltaArea(Area a);
         void ModificarArea(Area a);
         Area BuscarArea(int IdArea);
+        Area BuscarAreaPorNombre(string NombreArea);
         void AltaPuntodeArea(Area a,Punto p);
         void BajaArea(Area a);
         List<Area> ListarAreasDeMapa(int IdMapa);
