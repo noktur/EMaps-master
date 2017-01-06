@@ -31,10 +31,7 @@ namespace Logica.ClasesTrabajo
         {
             FabricaPersistencia.getPersistenciaAlquiler().BajaAlquiler(e);
         }
-        public void ComprobarAlquiler(Alquiler p, DateTime fechainicio, DateTime fechafin)
-        {
-            FabricaPersistencia.getPersistenciaAlquiler().ComprobarAlquiler(p,fechainicio,fechafin);
-        }
+
         public Alquiler BuscarAlquiler(int IdAlquiler)
         {
             return FabricaPersistencia.getPersistenciaAlquiler().BuscarAlquiler(IdAlquiler);

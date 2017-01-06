@@ -62,6 +62,16 @@ create table Ciudad
     primary key(NombreCiudad,NombrePais)
 );
 
+create table Mapa 
+(
+    IdMapa int AUTO_INCREMENT not null ,
+    Nombre varchar(30) not null,
+    Imagen longblob,
+    extension varchar(5),
+    Eliminado boolean,
+    primary key(IdMapa)
+);
+
 create table Lugar 
 (
     NombreLugar varchar(30) not null,
@@ -72,24 +82,12 @@ create table Lugar
     CordY real not null,
     Eliminado boolean,
     CiDueño varchar(30) not null,
+	IdMapa int not null,
     foreign key (CiDueño) references Dueño (CiDueño),
     foreign key (UbicacionCiudad) references Ubicacion (Nombre),
     primary key(NombreLugar,UbicacionCiudad,CiDueño)
 );
 
-create table Mapa 
-(
-    IdMapa int AUTO_INCREMENT not null ,
-    Nombre varchar(30) not null,
-    Imagen longblob,
-    NombreLugar varchar(30),
-    extension varchar(5),
-    foreign key(NombreLugar) references Lugar(NombreLugar),
-    Eliminado boolean,
-    primary key(IdMapa,NombreLugar)
-);
-
-alter table Mapa Add unique index Mapa_NombreLugar(NombreLugar);
 
 create table Area 
 (
@@ -249,15 +247,14 @@ foreign key (IdFeedback) references MensajeFeedbackEvento(IdFeedback),
 primary key(IdComentario,CiUsuario,IdFeedback)
 );
 
-
 -- PROCEDIMIENTOS ALMACENADOS ADMIN
 
 DELIMITER //
-CREATE PROCEDURE AltaAdmin (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiAdmin varchar(30),pEmail varchar(50))
+CREATE PROCEDURE AltaAdmin (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiAdmin varchar(30),pEmail varchar(50))
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiAdmin,pEmail);
+INSERT INTO Usuarios(Nombre,ContraseÃ±a,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseÃ±a,pNombreUsuario,pCiAdmin,pEmail);
 INSERT INTO Admin(CiAdmin) values(pCiAdmin);
 		COMMIT;
 END //
@@ -265,9 +262,9 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarAdmin (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiAdmin varchar(30),pEmail varchar(50))
+CREATE PROCEDURE ModificarAdmin (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiAdmin varchar(30),pEmail varchar(50))
 BEGIN
-UPDATE Usuarios SET Nombre=pNombre,Contraseña=pContraseña,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiAdmin=pCiAdmin;
+UPDATE Usuarios SET Nombre=pNombre,ContraseÃ±a=pContraseÃ±a,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiAdmin=pCiAdmin;
 END
 // DELIMITER;
 
@@ -296,12 +293,12 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE AdminLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
+CREATE PROCEDURE AdminLogueo(pNombreUsuario varchar(30),pContraseÃ±a varchar(30))
 BEGIN
 SELECT *
 FROM Usuarios u JOIN Admin a
 ON u.Ci =a.CiAdmin
-WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
+WHERE u.NombreUsuario=pNombreUsuario and u.ContraseÃ±a=pContraseÃ±a;
 END //
 DELIMITER;
 
@@ -318,11 +315,11 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS CLIENTE
 
 DELIMITER //
-CREATE PROCEDURE AltaCliente (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiCliente varchar(30),pEmail varchar(50))
+CREATE PROCEDURE AltaCliente (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiCliente varchar(30),pEmail varchar(50))
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiCliente,pEmail);
+INSERT INTO Usuarios(Nombre,ContraseÃ±a,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseÃ±a,pNombreUsuario,pCiCliente,pEmail);
 INSERT INTO Clientes(CiCliente) values(pCiCliente);
 		COMMIT;
 END //
@@ -332,9 +329,9 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarCliente (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiCliente varchar(30),pEmail varchar(50))
+CREATE PROCEDURE ModificarCliente (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiCliente varchar(30),pEmail varchar(50))
 BEGIN
-UPDATE Usuarios SET Nombre=pNombre,Contraseña=pContraseña,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiCliente=pCiCliente;
+UPDATE Usuarios SET Nombre=pNombre,ContraseÃ±a=pContraseÃ±a,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiCliente=pCiCliente;
 END
 // DELIMITER;
 
@@ -363,12 +360,12 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ClienteLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
+CREATE PROCEDURE ClienteLogueo(pNombreUsuario varchar(30),pContraseÃ±a varchar(30))
 BEGIN
 SELECT *
 FROM Usuarios u JOIN Clientes c
 ON u.Ci =c.CiCliente
-WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
+WHERE u.NombreUsuario=pNombreUsuario and u.ContraseÃ±a=pContraseÃ±a;
 END //
 DELIMITER;
 
@@ -382,67 +379,67 @@ END//
 DELIMITER;
 
 
--- PROCEDIMIENTOS ALMACENADOS DUEÑO
+-- PROCEDIMIENTOS ALMACENADOS DUEÃ‘O
 
 DELIMITER //
-CREATE PROCEDURE AltaDueño (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiDueño varchar(30),pEmail varchar(50))
+CREATE PROCEDURE AltaDueÃ±o (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiDueÃ±o varchar(30),pEmail varchar(50))
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiDueño,pEmail);
-INSERT INTO Dueño(CiDueño) values(pCiDueño);
+INSERT INTO Usuarios(Nombre,ContraseÃ±a,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseÃ±a,pNombreUsuario,pCiDueÃ±o,pEmail);
+INSERT INTO DueÃ±o(CiDueÃ±o) values(pCiDueÃ±o);
 		COMMIT;
 END //
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarDueño (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiDueño varchar(30),pEmail varchar(50))
+CREATE PROCEDURE ModificarDueÃ±o (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiDueÃ±o varchar(30),pEmail varchar(50))
 BEGIN
-UPDATE Usuarios SET Nombre=pNombre,Contraseña=pContraseña,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiDueño=pCiDueño;
+UPDATE Usuarios SET Nombre=pNombre,ContraseÃ±a=pContraseÃ±a,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiDueÃ±o=pCiDueÃ±o;
 END
 // DELIMITER;
 
 
 
 DELIMITER //
-CREATE PROCEDURE EliminarDueño (pCiDueño varchar(30))
+CREATE PROCEDURE EliminarDueÃ±o (pCiDueÃ±o varchar(30))
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-DELETE FROM Dueño WHERE CiDueño=pCiDueño;
-DELETE FROM Usuarios WHERE Ci=pCiDueño;
+DELETE FROM DueÃ±o WHERE CiDueÃ±o=pCiDueÃ±o;
+DELETE FROM Usuarios WHERE Ci=pCiDueÃ±o;
 		COMMIT;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE BuscarDueño(pCiDueño varchar(30))
+CREATE PROCEDURE BuscarDueÃ±o(pCiDueÃ±o varchar(30))
 BEGIN
 SELECT *
-FROM Usuarios u JOIN Dueño d
-ON u.Ci =d.CiDueño
-WHERE d.CiDueño=pCiDueño;
+FROM Usuarios u JOIN DueÃ±o d
+ON u.Ci =d.CiDueÃ±o
+WHERE d.CiDueÃ±o=pCiDueÃ±o;
 END //
 DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE DueñoLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
+CREATE PROCEDURE DueÃ±oLogueo(pNombreUsuario varchar(30),pContraseÃ±a varchar(30))
 BEGIN
 SELECT *
-FROM Usuarios u JOIN Dueño c
-ON u.Ci =c.CiDueño
-WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
+FROM Usuarios u JOIN DueÃ±o c
+ON u.Ci =c.CiDueÃ±o
+WHERE u.NombreUsuario=pNombreUsuario and u.ContraseÃ±a=pContraseÃ±a;
 END //
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ListarDueños()
+CREATE PROCEDURE ListarDueÃ±os()
 BEGIN
 SELECT *
-FROM Usuarios u JOIN Dueño d
-ON u.Ci=d.CiDueño and u.Eliminado=0;
+FROM Usuarios u JOIN DueÃ±o d
+ON u.Ci=d.CiDueÃ±o and u.Eliminado=0;
 END//
 DELIMITER;
 
@@ -450,11 +447,11 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS ORGANIZADOR
 
 DELIMITER //
-CREATE PROCEDURE AltaOrganizador (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiOrganizador varchar(30),pEmail varchar(50))
+CREATE PROCEDURE AltaOrganizador (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiOrganizador varchar(30),pEmail varchar(50))
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 START TRANSACTION;
-INSERT INTO Usuarios(Nombre,Contraseña,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseña,pNombreUsuario,pCiOrganizador,pEmail);
+INSERT INTO Usuarios(Nombre,ContraseÃ±a,NombreUsuario,Ci,Email) VALUES(pNombre,pContraseÃ±a,pNombreUsuario,pCiOrganizador,pEmail);
 INSERT INTO Organizador(CiOrganizador) values(pCiOrganizador);
 		COMMIT;
 END //
@@ -462,9 +459,9 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE ModificarOrganizador (pNombre VARCHAR(30), pContraseña Varchar(30),pNombreUsuario varchar(30),pCiOganizador varchar(30),pEmail varchar(50))
+CREATE PROCEDURE ModificarOrganizador (pNombre VARCHAR(30), pContraseÃ±a Varchar(30),pNombreUsuario varchar(30),pCiOganizador varchar(30),pEmail varchar(50))
 BEGIN
-UPDATE Usuarios SET Nombre=pNombre,Contraseña=pContraseña,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiOrganizador=pCiOrganizador;
+UPDATE Usuarios SET Nombre=pNombre,ContraseÃ±a=pContraseÃ±a,NombreUsuario=pNombreUsuario,Email=pEmail  WHERE CiOrganizador=pCiOrganizador;
 END
 // DELIMITER;
 
@@ -493,12 +490,12 @@ DELIMITER;
 
 
 DELIMITER //
-CREATE PROCEDURE OrganizadorLogueo(pNombreUsuario varchar(30),pContraseña varchar(30))
+CREATE PROCEDURE OrganizadorLogueo(pNombreUsuario varchar(30),pContraseÃ±a varchar(30))
 BEGIN
 SELECT *
 FROM Usuarios u JOIN Organizador o
 ON u.Ci =o.CiOrganizador
-WHERE u.NombreUsuario=pNombreUsuario and u.Contraseña=pContraseña;
+WHERE u.NombreUsuario=pNombreUsuario and u.ContraseÃ±a=pContraseÃ±a;
 END //
 DELIMITER;
 
@@ -631,20 +628,21 @@ WHERE Ubicacion.Eliminado=0 and Ciudad.NombrePais=pNombrePais;
 END//
 DELIMITER;
 
+
 -- PROCEDIMIENTOS ALMACENADOS LUGAR
 
 
 DELIMITER //
-CREATE PROCEDURE AltaLugar (pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCordX real,pCordY real,pCiDueño varchar(30))
+CREATE PROCEDURE AltaLugar (pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCordX real,pCordY real,pCiDueño varchar(30),pIdMapa int)
 BEGIN
-INSERT INTO Lugar(NombreLugar,Direccion,Descripcion,UbicacionCiudad,CordX,CordY,CiDueño) VALUES(pNombre,pDireccion,pDescripcion,pNombreUbicacion,pCordX,pCordY,pCiDueño);
+INSERT INTO Lugar(NombreLugar,Direccion,Descripcion,UbicacionCiudad,CordX,CordY,CiDueño,IdMapa,IdMapa) VALUES(pNombre,pDireccion,pDescripcion,pNombreUbicacion,pCordX,pCordY,pCiDueño,pIdMapa);
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ModificarLugar(pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCiDueño varchar(30)) 
+CREATE PROCEDURE ModificarLugar(pNombre varchar(30),pDireccion varchar(30),pDescripcion varchar(30),pNombreUbicacion varchar(30),pCiDueño varchar(30),pIdMapa int) 
 BEGIN
-UPDATE Lugar SET NombreLugar=pNombre,Direccion=pDireccion,Descripcion=pDescripcion,UbicacionCiudad=pNombreUbicacion,CiDueño=pCiDueño WHERE NombreLugar=pNombreLugar;
+UPDATE Lugar SET NombreLugar=pNombre,Direccion=pDireccion,Descripcion=pDescripcion,UbicacionCiudad=pNombreUbicacion,CiDueño=pCiDueño,IdMapa = pIdMapa WHERE NombreLugar=pNombreLugar;
 END//
 DELIMITER;
 
@@ -732,7 +730,7 @@ BEGIN
 SELECT *
 FROM Mapa
 join Lugar
-On Mapa.NombreLugar=Lugar.NombreLugar
+On Mapa.IdMapa=Lugar.IdMapa
 WHERE Mapa.NombreLugar=pNombreLugar;
 END//
 DELIMITER;
@@ -819,24 +817,24 @@ DELIMITER;
 -- PROCEDIMIENTOS ALMACENADOS MAPA
 
 DELIMITER //
-CREATE PROCEDURE AltaMapa (pNombre varchar(30),pImagen longblob,pExtension varchar(5),pNombreLugar varchar(30))
+CREATE PROCEDURE AltaMapa (pNombre varchar(30),pImagen longblob,pExtension varchar(5))
 BEGIN
-INSERT INTO Mapa(IdMapa,Nombre,Imagen,extension,NombreLugar) VALUES(0,pNombre,pImagen,pExtension,pNombreLugar);
+INSERT INTO Mapa(IdMapa,Nombre,Imagen,extension,NombreLugar) VALUES(0,pNombre,pImagen,pExtension);
 UPDATE Mapa SET Eliminado=0;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE ModificarMapa(pIdMapa int,pNombre varchar(30),pImagen longblob,pExtension varchar(5),pNombreLugar varchar(30)) 
+CREATE PROCEDURE ModificarMapa(pIdMapa int,pNombre varchar(30),pImagen longblob,pExtension varchar(5)) 
 BEGIN
-UPDATE Mapa SET Nombre=pNombre,Imagen=pImagen,extension=pExtension,NombreLugar=pNombreLugar WHERE IdMapa=pIdMapa and  NombreLugar=pNombreLugar;
+UPDATE Mapa SET Nombre=pNombre,Imagen=pImagen,extension=pExtension,NombreLugar=pNombreLugar WHERE IdMapa=pIdMapa;
 END//
 DELIMITER;
 
 DELIMITER //
-CREATE PROCEDURE EliminarMapa (pIdMapa int,pNombreLugar varchar(30))
+CREATE PROCEDURE EliminarMapa (pIdMapa int)
 BEGIN
-UPDATE Mapa SET Eliminado=1 WHERE IdMapa=pIdMapa and NombreLugar=pNombreLugar;
+UPDATE Mapa SET Eliminado=1 WHERE IdMapa=pIdMapa;
 END//
 DELIMITER;
 

@@ -456,8 +456,10 @@
 
                            </div>
 
-
-                        <% using (Html.BeginForm()) { %>                  
+                        <div>
+                        <% using (Html.BeginForm("Guardar", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+                           
+                           { %>                  
                             
                         <div class="form-group">
                                <input name="Direccion" id="Direccion" type="text" class="form-control hidden" /> 
@@ -482,25 +484,25 @@
                                         <input name="CoordenadaY" id="CoordenadaY" type="text" value="" placeholder="Coordenada Y..." class="form-control no-shadow" />
                                     
                                      </div> 
-                         <div class="col-md-12 text-center">          
-                <input class="btn btn-lg btn-green" style="" type="submit" value="Guardar lugar" name="action"/>
-                  </div> 
+                                     <div class="form-group">                   
+                                         <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png" class="form-control"/>
+                                     </div> 
+
+                                 <div class="col-md-12 text-center">          
+                               <input type="submit" class="btn btn-dark" name="action" value="Guardar Lugar" />
+                                </div> 
+
 
 
                         <% } %>
+                        </div>
 
+                           
                         
                             </div>
                      
                 </div>
-
-
                 </div>
-           
-                    <!-- /.form-container -->
-                <!-- /.col-sm-10 -->
-        
-            <!-- /.container -->
         </section>
       
            <section id="content-3-4" class="content-block content-3-4" style="padding-top:15px; padding-bottom:0px; background-color: whitesmoke; ">
@@ -596,22 +598,7 @@
 </section>                        
              
 
- <section id="content-2-10" class="content-3-4 content-block" style="padding-bottom:20px;">
-            <div class="container">
-                <div class="col-md-12" style="border:solid whitesmoke 2px">
-                 <% using (Html.BeginForm("SubirPlano", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
-                    {  %>
-                <div class="col-md-8">
-                    <h3><input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png" class="form-control"/></h3>
-                    <h2 style=" font-size:1.5em;font-family:Roboto" class="deepocean text-center text-uppercase">Aqui puede subir el plano de su lugar si lo desea</h2>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary btn-lg" style="background-color:blue;" type="submit" id="cf-submit" name="submit">Subir Plano</button>
-                </div>
-                <% } %>
-            </div>
-                </div>
-        </section>
+
 </div>  
        </form> 
        

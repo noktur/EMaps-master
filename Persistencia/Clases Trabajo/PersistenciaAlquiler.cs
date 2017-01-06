@@ -57,34 +57,6 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-
-        public void ComprobarAlquiler(Alquiler p,DateTime fechainicio,DateTime fechafin)
-        {
-            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("ComprobarAlquilerArea", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("pNombreLugar", p.AreaAlquiler.IdArea);
-            cmd.Parameters.AddWithValue("pFechaInicio", fechainicio);
-            cmd.Parameters.AddWithValue("pFechaFin", fechafin);
-
-
-
-            try
-            {
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Problema con la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
         public void BajaAlquiler(Alquiler e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);

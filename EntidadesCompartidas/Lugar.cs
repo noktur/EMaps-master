@@ -20,10 +20,17 @@ namespace EntidadesCompartidas
         private float _CoordenadaY;
         private List<FotosLugar> _fotosLugar;
         private Dueño _DueñoLugar;
+        private Mapa _MapaAsociado;
 
         #endregion
 
         #region Propiedades
+
+        [DataMember]
+        public Mapa MapaAsociado {
+            get { return _MapaAsociado; }
+            set { _MapaAsociado = value; }
+        }
 
         [DataMember]
         public string Nombre
@@ -82,7 +89,7 @@ namespace EntidadesCompartidas
         #endregion
 
         #region Constructores
-        public Lugar(string pNombre,string pDireccion,string pDescripcion,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar)
+        public Lugar(string pNombre,string pDireccion,string pDescripcion,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar, Mapa pMapaAsociado)
         {
             Direccion = pDireccion;
             Descripcion = pDescripcion;
@@ -91,6 +98,7 @@ namespace EntidadesCompartidas
             CoordenadaX = pCoordenadaX;
             CoordenadaY = pCoordenadaY;
             DueñoLugar = pDueñoLugar;
+            MapaAsociado = pMapaAsociado;
         }
 
         public Lugar()
@@ -102,6 +110,7 @@ namespace EntidadesCompartidas
             CoordenadaY = 0;
             DueñoLugar = null;
             _fotosLugar = null;
+            MapaAsociado = null;
         }
 
         public void AgregarFoto(FotosLugar unaFoto)

@@ -61,6 +61,11 @@ namespace Logica.ClasesTrabajo
             return FabricaPersistencia.getPersistenciaLugar().ListarLugaresCiudad(pNombreCiudad);
         }
 
+        public Lugar BuscarMapaLugar(int IdMapa)
+        {
+            return FabricaPersistencia.getPersistenciaLugar().BuscarMapaLugar(IdMapa);
+        }
+
         #endregion
     }
 }

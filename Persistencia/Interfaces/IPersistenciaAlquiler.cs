@@ -10,7 +10,6 @@ namespace Persistencia.Interfaces
     {
         void AltaAlquiler(Alquiler e);
         void BajaAlquiler(Alquiler e);
-        void ComprobarAlquiler(Alquiler p, DateTime fechainicio, DateTime fechafin);
         Alquiler BuscarAlquiler(int IdAlquiler);
         List<Alquiler> ListarAlquileres();
         List<Alquiler> ListarAlquileresArea(int IdArea);

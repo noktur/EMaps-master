@@ -36,10 +36,7 @@ namespace MVCFinal.Controllers
         }
         
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+
 
         public ActionResult PlanoLugar()
         {
@@ -134,8 +131,6 @@ namespace MVCFinal.Controllers
 
            a.MapaAsociado =(EntidadesCompartidas.Mapa)Session["Plano"];
 
-           a.MapaAsociado=FabricaLogica.getLogicaMapa().BuscarMapaLugar(a.MapaAsociado.LugarAsociado.Nombre);
-
            Session["Puntos"] = a.PuntosArea;
 
            FabricaLogica.getLogicaArea().AltaArea(a);
@@ -221,11 +216,12 @@ namespace MVCFinal.Controllers
 
     
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar lugar")]
-        public ActionResult Guardar(FormCollection collection)
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar Lugar")]
+        public ActionResult Guardar(HttpPostedFileBase image, FormCollection collection)
         {
             try
             {
+                
 
                 EntidadesCompartidas.Dueño dueño = new Dueño();
                 dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
@@ -253,6 +249,7 @@ namespace MVCFinal.Controllers
                 l.CoordenadaY = Lugar.CoordenadaY;
                 l.DueñoLugar = dueño;
                 l.Fotos =(List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
+                l.MapaAsociado = (EntidadesCompartidas.Mapa)Session["Plano"];
 
                 Logica.FabricaLogica.getLogicaLugar().AltaLugar(l);
 
@@ -335,12 +332,7 @@ namespace MVCFinal.Controllers
                     image.InputStream.Read(buffer, 0, length);
                     miMapa.Imagen = buffer;
                     miMapa.Nombre =image.FileName.Substring(0,image.FileName.LastIndexOf('.'));
-                    miMapa.LugarAsociado =(EntidadesCompartidas.Lugar)Session["LugarActual"];
                 }
-
-                model.MapaActual = miMapa;
-
-                FabricaLogica.getLogicaMapa().AltaMapa(miMapa);
 
                 
                 Session["Plano"] = miMapa;
@@ -378,12 +370,6 @@ namespace MVCFinal.Controllers
                 {
                     list.Add(foto);
                 }
-                EntidadesCompartidas.Lugar Lugar = new Lugar();
-
-                Lugar =(EntidadesCompartidas.Lugar)Session["LugarActual"];
-
-                string JsonLugar = JsonConvert.SerializeObject(Lugar);
-                Session["LugarJson"] = JsonLugar;
 
                 string JsonFotos = JsonConvert.SerializeObject(list);
                 Session["FotosJson"] = JsonFotos;

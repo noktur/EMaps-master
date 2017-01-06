@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LoginModel>" %>
-
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PortadaModel>" %>
 <!DOCTYPE html> 
 <html lang="en"> 
     <head> 
@@ -18,6 +17,17 @@
         <link href="../../Content/css/templatemo_style.css" rel='stylesheet' type='text/css'>
         <link href="../../Content/css/font-awesome.css" rel='stylesheet' type='text/css'> 
         <link href="../../Content/css/elegant-icons-style.css" rel='stylesheet' type='text/css'> 
+        <link href="../../Content/css/blocks.css" rel='stylesheet' type='text/css'> 
+        <link href="../../Content/css/style-library-1.css" rel='stylesheet' type='text/css'> 
+        <link href="../../Content/css/plugins.css" rel='stylesheet' type='text/css'> 
+        <link href="../../Content/css/custom.css" rel='stylesheet' type='text/css'> 
+                <script src="../../Content/js/vendor/jquery-1.11.1.min.js" type="text/javascript"></script>         
+        <script src="../../Content/js/vendor//bootstrap.min.js" type="text/javascript"></script>             
+        <script src="../../Content/js/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>         
+        <script src="../../Content/js/vendor/templatemo_script.js" type="text/javascript"></script>   
+        <script src="../../Content/css/jquery.waypoints.min.js " type="text/javascript"></script>   
+        <link href="../../Content/js/vendor/templatemo_misc.css" rel="stylesheet" type="text/css">
+        <link href="../../Content/css/animate.css" rel="stylesheet" type="text/css">
         
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->         
         <!--[if lt IE 9]>
@@ -25,18 +35,58 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->         
 
-        <script type="text/javascript">
+       
+         <script type="text/javascript">
 
+
+             $(document).ready
+                    (function () {
+                
+                        $('#welcome').css('opacity', 0);
+
+
+                 $('#welcome').waypoint(function () {
+                     $('#welcome').addClass('bounceIn');
+                 }, { Offset: '-0.2% ' });
+
+                 $('#menu1').css('opacity', 0);
+
+
+                 $('#menu1').waypoint(function () {
+                     $('#menu1').addClass('flipInX');
+                 }, { Offset: '100% ', setTimeOut: 150,duration:100 });
+
+                 $('#menu1').css('opacity', 100);
+
+
+                 $('#item1').css('opacity', 0);
+
+                 $('#item1').waypoint(function () {
+                     $('#item1').addClass('');
+                 }, { Offset: '100% ', setTimeout:100,duration:100 });
+
+                 $('#menu2').css('opacity', 100);
+
+                
+
+
+
+             });
         </script>
+
+
+
+
         <style>
             
-
+          
         </style>
 
 
     </head>     
     <body> 
-        <nav class="navbar navbar-inverse">                   
+        <form id="form1" runat="server">
+        <nav class="navbar navbar-inverse animated" id="menu1">                   
                   
     <div class="container">
         <div class="navbar-header">
@@ -51,9 +101,9 @@
                         
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <form id="form1" runat="server" class="navbar-form navbar-right">
                   <% using (Html.BeginForm())
                        { %>   
+            <div class="nav navbar-right navbar-form">
                 <div class="form-group" style="padding-left:10px">
               <span class="form-group-addon"><i class="icon_profile" style="color:white"></i></span>
               <input type="text" required="required" class="form-control" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de usuario')" placeholder="Username" name="Usuario" >
@@ -61,14 +111,14 @@
             <div class="form-group" style="padding-left:10px">
                 <span class="form-group-addon"><i class="icon_key_alt" style="color:white"></i></span>
                 <input required="required" type="password" pattern=".{7,}"
-        title="La contraseña debe contener mas de 7 caracteres" oninput="setCustomValidity('')" oninvalid="setCustomValidity1('Se requiere ingresar una contraseña')" class="form-control" placeholder="Password" name="Password">
+        title="La contraseña debe contener mas de 7 caracteres" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar una contraseña')" class="form-control" placeholder="Password" name="Password">
             </div>
                 <div class="form-group" style="padding-top:17px; padding-left:10px">
                 <input type="submit" class="btn btn-success" value="SIGN IN" name="action">
                <a style="margin-left:10px" href="../RegistroA/RegistroAdmin.aspx"> <input class=" btn btn-orange" type="button"  name="action" value="SIGNUP"></a>
                     </div>
+                </div>
                 <% } %>
-            </form>
         </div>
         <!--/.navbar-collapse -->
     </div>
@@ -92,16 +142,16 @@
                         </div>                         
                         <div class="navbar-collapse collapse" id="templatemo-nav-bar"> 
                             <ul class="nav navbar-nav navbar-right" style="margin-top: 40px;"> 
-                                <li class="active">
+                                <li class="active animated" id="item1">
                                     <a href="#templatemo-top">PRINCIPAL</a>
                                 </li>                                 
-                                <li>
+                                <li class="animated" id="item2">
                                     <a href="#templatemo-about">ACERCA DE</a>
                                 </li>                                 
-                                <li>
+                                <li class="animated" id="item3">
                                     <a href="#templatemo-portfolio">PORTFOLIO</a>
                                 </li>                                 
-                                <li>
+                                <li class="animated" id="item4">
                                     <a href="#templatemo-contact">CONTACTO</a>
                                 </li>    
                                       
@@ -119,8 +169,6 @@
             <!-- /container -->             
         </div>         
         <div> 
-  
-
             <!-- Carousel -->             
             <div id="templatemo-carousel" class="carousel slide" data-ride="carousel"> 
                 <!-- Indicators -->                 
@@ -133,7 +181,7 @@
                     <div class="item active"> 
                         <div class="container"> 
                             <div class="carousel-caption"> 
-                                <h1>BIENVENIDO A UBICATREX</h1> 
+                               <h1 style="font-size:2.0em;">BIENVENIDO A UBICATREX</h1> 
                                 <p>LA OPORTUNIDAD DE DESCUBRIR Y ORGANIZAR SUS EVENTOS</p> 
                                 
                                 <p><a class="btn btn-lg btn-green" role="button" style="margin: 20px;">Registrese</a> <a class="btn btn-lg btn-orange" href="#" role="button">Contactenos</a></p> 
@@ -168,14 +216,81 @@
                 <a class="right carousel-control" href="#templatemo-carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
             </div>             
         </div>         
-        <div class="templatemo-welcome" id="templatemo-welcome"> 
+        <div class="templatemo-welcome" id="templatemo-welcome" style="padding-top:5px;padding-bottom:10px;background-color:antiquewhite;"> 
+        <div class="row">
             <div class="container"> 
-                <div class="templatemo-slogan text-center"> 
-                    <span class="txt_darkgrey">Welcome to </span>Ubicatrex
-                    <p class="txt_slogan"><i> See or died. Nuestro eslogan representa que lo mas importante de cada accion que realizes en tu vida como en cualquier negocio debes estar conciente donde estas sino tienes rumbo no hay sentido </i></p> 
+                <div class="templatemo-slogan text-center" > 
+                    <div class="animated" id="welcome">
+                    <span class="txt_darkgrey" >Welcome to Ubicatrex </span>
+                    <p class="txt_slogan" ><i> See or died. Nuestro eslogan representa que lo mas importante de cada accion que realizes en tu vida como en cualquier negocio debes estar conciente donde estas sino tienes rumbo no hay sentido </i></p> 
+                    </div>
+                        <div class="col-md-5">
+                 <% using (Html.BeginForm())
+                       { %>   
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Nombre" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el nombre')" placeholder="Name" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Usuario" placeholder="User" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el usuario')" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Ci" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar la cedula')"  placeholder="Writ Identity" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Password" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar una contraseña')" placeholder="Password" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Email" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el correo electronico')" placeholder="Email address" class="form-control" />
+                    </div>
+                     <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="radio" name="radio" /><p style="font-size:0.3em;" >Cliente</p>
+                                <i class="fa fa-info-circle small glyphicon-resize-small"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="radio" name="radio1"  /><p style="font-size:0.3em;">Dueño</p>
+                                <i class="fa fa-info-circle glyphicon-resize-small small"></i>
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="radio" name="radio2" /><p style="font-size:0.3em;">Organizador</p>
+                                <i class="fa fa-info-circle small glyphicon-resize-small"></i>
+                            </div>
+                       </div>
+                    <div class="col-md-12 text-center">
+                    <input type="submit" name="action" value="Register Now!" class="btn btn-primary btn-block"/>
+                        </div>
+                <% } %>
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6 col-md-offset-1">
+                <div class="video-wrapper">
+                    <iframe width="560" height="315" src="http://www.youtube.com/embed/vcQDcbChHQA?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+                
+                
                 </div>                 
-            </div>             
-        </div>         
+            </div>                      
         <div class="templatemo-service"> 
             <div class="container"> 
                 <div class="row"> 
@@ -389,8 +504,7 @@
                         </div>                         
                     </div>                     
                     <br class="clearfix" /> 
-                </div>                 
-                AQUI VAN FEEDBACK DE ALGUNOS USUARIOS     
+                </div>                     
                 <div class="blog_box"> 
                     <div class="col-sm-5 col-md-6 blog_post"> 
                         <ul class="list-inline"> 
@@ -514,7 +628,7 @@
                         <p><img src="images/location.png" alt="icon 1" />Montevideo</p> 
                         <p><img src="images/phone1.png" alt="icon 2" /> 598-080-0110</p> 
                         <p><img src="images/globe.png" alt="icon 3" /><a class="link_orange" href="#"><span class="txt_orange">www.Ubicatrex.com</span></a></p> 
-                        <form class="form-horizontal" action="#"> 
+                        <div class="form-horizontal"> 
                             <div class="form-group"> 
                                 <input type="email" class="form-control" placeholder="Su Nombre..." maxlength="40" /> 
                             </div>                             
@@ -525,7 +639,7 @@
                                 <textarea class="form-control" style="height: 130px;" placeholder="Escriba debajo su comentario..."></textarea>                                 
                             </div>                             
                             <button type="submit" class="btn btn-orange pull-right">Enviar</button>                             
-                        </form>                         
+                        </div>                         
                     </div>                     
                 </div>
                 <!-- /.row -->                 
@@ -584,14 +698,11 @@
                     </div>                     
                 </div>                 
             </div>             
-        </div>         
-        <script src="../../Content/js/vendor/jquery-1.11.1.min.js" type="text/javascript"></script>         
-        <script src="../../Content/js/vendor//bootstrap.min.js" type="text/javascript"></script>         
-        <script src="../../Content/js/vendor//stickUp.min.js" type="text/javascript"></script>         
-        <script src="../../Content/js/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>         
-        <script src="../../Content/js/vendor/templatemo_script.js" type="text/javascript"></script>   
-        <link href="../../Content/js/vendor/templatemo_misc.css" rel="stylesheet" type="text/css">
-        <link href="../../Content/js/vendor/animate.css" rel="stylesheet" type="text/css">        
+        </div>
+            </form>         
+
+       
+                
         <!-- templatemo 395 urbanic -->         
-    </body>     
+    </body>    
 </html>
