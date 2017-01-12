@@ -26,10 +26,12 @@ namespace Logica.ClasesTrabajo
         public void AltaLugar(Lugar l)
         {
             FabricaPersistencia.getPersistenciaLugar().AltaLugar(l);
-            foreach(FotosLugar f in l.Fotos)
+
+            foreach (FotosLugar f in l.Fotos)
             {
                 FabricaPersistencia.getPersistenciaFotosLugar().AltaFotoLugar(f, l);
             }
+
         }
         public void ModificarLugar(Lugar l)
         {
@@ -57,6 +59,11 @@ namespace Logica.ClasesTrabajo
         public List<Lugar> ListarLugaresCiudad(string pNombreCiudad)
         {
             return FabricaPersistencia.getPersistenciaLugar().ListarLugaresCiudad(pNombreCiudad);
+        }
+
+        public Lugar BuscarMapaLugar(int IdMapa)
+        {
+            return FabricaPersistencia.getPersistenciaLugar().BuscarMapaLugar(IdMapa);
         }
 
         #endregion

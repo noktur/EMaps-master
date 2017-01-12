@@ -35,7 +35,9 @@ namespace Persistencia.Clases_Trabajo
             MySqlCommand cmd = new MySqlCommand("AltaArea", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pNombre", a.NombreArea);
+            cmd.Parameters.AddWithValue("pNombre", a.NombreArea);   
+            cmd.Parameters.AddWithValue("pCapacidad", a.Capacidad);
+            cmd.Parameters.AddWithValue("pDescripcion", a.Descripcion);
             cmd.Parameters.AddWithValue("pIdMapa", a.MapaAsociado.IdMapa);
 
 
@@ -62,6 +64,8 @@ namespace Persistencia.Clases_Trabajo
 
             cmd.Parameters.AddWithValue("pIdArea", a.IdArea);
             cmd.Parameters.AddWithValue("pNombre", a.NombreArea);
+            cmd.Parameters.AddWithValue("pCapacidad", a.Capacidad);
+            cmd.Parameters.AddWithValue("pDescripcion", a.Descripcion);
             cmd.Parameters.AddWithValue("pIdMapa", a.MapaAsociado.IdMapa);
 
 
@@ -80,17 +84,16 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-        public void AltaPuntodeArea(Area a)
+        public void AltaPuntodeArea(Area a,Punto p)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
             MySqlCommand cmd = new MySqlCommand("AltaPuntodeArea", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pIdArea", a.IdArea);
-            cmd.Parameters.AddWithValue("pIdPunto", a.PuntosArea.IdPunto);
-            cmd.Parameters.AddWithValue("pCordX", a.PuntosArea.CoordenadaX);
-            cmd.Parameters.AddWithValue("pCordY", a.PuntosArea.CoordenadaY);
-            cmd.Parameters.AddWithValue("pIdMapa", a.MapaAsociado.IdMapa);
+            cmd.Parameters.AddWithValue("pIdArea", a.IdArea );
+            cmd.Parameters.AddWithValue("pIdPunto", p.IdPunto);
+            cmd.Parameters.AddWithValue("pCordX", p.CoordenadaX);
+            cmd.Parameters.AddWithValue("pCordY", p.CoordenadaY);
 
 
             try
@@ -127,7 +130,41 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnArea = new Area(IdArea,(string)oReader["NombreArea"],FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])),FabricaPersistencia.getPersistenciaPunto().BuscarPuntoxId(Convert.ToInt32(oReader["IdPunto"])));
+                    UnArea = new Area(IdArea,(string)oReader["Nombre"], (string)oReader["Descripcion"], (int)oReader["Capacidad"], FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])));
+                }
+                oReader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error con la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return UnArea;
+        }
+
+        public Area BuscarAreaPorNombre(string NombreArea)
+        {
+            Area UnArea = null;
+
+            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
+            MySqlCommand cmd = new MySqlCommand("BuscarAreaPorNombre", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            cmd.Parameters.AddWithValue("pNombre", NombreArea);
+
+
+            try
+            {
+                con.Open();
+                MySqlDataReader oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    UnArea = new Area((int)oReader["IdArea"],NombreArea, (string)oReader["Descripcion"], (int)oReader["Capacidad"], FabricaPersistencia.getPersistenciaMapa().BuscarMapa(Convert.ToInt32(oReader["IdMapa"])));
                 }
                 oReader.Close();
             }
@@ -184,7 +221,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnArea = new Area(Convert.ToInt32(lector["IdArea"]),Convert.ToString(lector["Nombre"]),PersistenciaMapa.GetInstancia().BuscarMapa(IdMapa),PersistenciaPunto.GetInstancia().BuscarPuntoxId(Convert.ToInt32(lector["IdPunto"])));
+                        UnArea = new Area(Convert.ToInt32(lector["IdArea"]),Convert.ToString(lector["Nombre"]), (string)lector["Descripcion"], (int)lector["Capacidad"],PersistenciaMapa.GetInstancia().BuscarMapa(IdMapa));
                         listaArea.Add(UnArea);
                     }
                 }
@@ -201,15 +238,14 @@ namespace Persistencia.Clases_Trabajo
             return listaArea;
         }
 
-        public List<Area> ListarPuntosDeUnArea(int IdArea)
+        public List<Punto> ListarPuntosDeUnArea(Area a)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
-            Area UnArea = null;
-            List<Area> listaArea = new List<Area>();
+            Punto UnPunto = null;
 
             MySqlCommand comando = new MySqlCommand("ListarPuntosdeUnArea", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pIdArea", IdArea);
+            comando.Parameters.AddWithValue("pIdArea", a.IdArea);
 
             try
             {
@@ -219,8 +255,8 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnArea = new Area(IdArea, Convert.ToString(lector["Nombre"]), PersistenciaMapa.GetInstancia().BuscarMapa(Convert.ToInt32(lector["IdMapa"])), PersistenciaPunto.GetInstancia().BuscarPuntoxId(Convert.ToInt32(lector["IdPunto"])));
-                        listaArea.Add(UnArea);
+                        UnPunto = new Punto((int)lector["IdPunto"], (Single)lector["CordX"], (Single)lector["CordY"],a);
+                        a.PuntosArea.Add(UnPunto);
                     }
                 }
                 lector.Close();
@@ -233,12 +269,11 @@ namespace Persistencia.Clases_Trabajo
             {
                 conexion.Close();
             }
-            return listaArea;
+
+            return a.PuntosArea;
         }
 
 
         #endregion
-
-        
     }
 }

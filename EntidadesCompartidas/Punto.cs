@@ -13,8 +13,10 @@ namespace EntidadesCompartidas
         #region Atributos
 
         private int _IdPunto;
-        private double _CoordenadaX;
-        private double _CoordenadaY;
+        private float _CoordenadaX;
+        private float _CoordenadaY;
+        private Area _MiArea;
+
 
         #endregion
 
@@ -28,35 +30,44 @@ namespace EntidadesCompartidas
         }
 
         [DataMember]
-        public double CoordenadaX
+        public float CoordenadaX
         {
             get { return _CoordenadaX; }
             set { _CoordenadaX = value; }
         }
 
         [DataMember]
-        public double CoordenadaY
+        public float CoordenadaY
         {
             get { return _CoordenadaY; }
             set { _CoordenadaY = value; }
+        }
+
+        [DataMember]
+        public Area MiArea
+        {
+            get { return _MiArea; }
+            set { _MiArea = value; }
         }
 
         #endregion
 
         #region Constructores
         
-        public Punto(int pIdPunto,double pCoordenadaX,double pCoordenadaY)
+        public Punto(int pIdPunto,float pCoordenadaX,float pCoordenadaY,Area UnArea)
         {
             IdPunto = pIdPunto;
             CoordenadaX = pCoordenadaX;
             CoordenadaY = pCoordenadaY;
+            MiArea = UnArea;
         }
 
         public Punto()
         {
             IdPunto = 0;
-            CoordenadaX = 0.0;
-            CoordenadaY = 0.0;
+            CoordenadaX =0;
+            CoordenadaY = 0;
+            MiArea = null;
         }
 
 

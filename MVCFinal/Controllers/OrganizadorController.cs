@@ -12,7 +12,7 @@ namespace MVCFinal.Controllers
         //
         // GET: /Organizador/
 
-        public ActionResult AlquilerLugares()
+        public ActionResult AlquilerAreas()
         {
             return View();
         }

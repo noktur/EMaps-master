@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Persistencia.Clases_Trabajo
 {
-    internal class PersistenciaMapa:IPersistenciaMapa
+    internal class PersistenciaMapa : IPersistenciaMapa
     {
 
-          #region Singleton
+        #region Singleton
         private static PersistenciaMapa _instancia = null;
 
         private PersistenciaMapa() { }
@@ -38,7 +38,6 @@ namespace Persistencia.Clases_Trabajo
 
             cmd.Parameters.AddWithValue("pNombre", m.Nombre);
             cmd.Parameters.AddWithValue("pImagen", m.Imagen);
-            cmd.Parameters.AddWithValue("pNombreLugar", m.LugarAsociado.Nombre);
             cmd.Parameters.AddWithValue("pExtension", m.Extension);
 
             try
@@ -65,7 +64,6 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pIdMapa", m.IdMapa);
             cmd.Parameters.AddWithValue("pNombre", m.Nombre);
             cmd.Parameters.AddWithValue("pImagen", m.Imagen);
-            cmd.Parameters.AddWithValue("pNombreLugar", m.LugarAsociado);
             cmd.Parameters.AddWithValue("pExtension", m.Extension);
 
 
@@ -103,7 +101,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnMapa = new Mapa(IdMapa, (byte[])oReader["Imagen"], PersistenciaLugar.GetInstancia().BuscarLugar((string)oReader["NombreLugar"]), (string)oReader["Nombre"], (string)oReader["extension"]);
+                    UnMapa = new Mapa(IdMapa, (byte[])oReader["Imagen"], (string)oReader["Nombre"], (string)oReader["extension"]);
                 }
                 oReader.Close();
             }
@@ -116,7 +114,7 @@ namespace Persistencia.Clases_Trabajo
                 con.Close();
             }
             return UnMapa;
-        }  
+        }
 
         public void BajaMapa(Mapa m)
         {
@@ -139,40 +137,6 @@ namespace Persistencia.Clases_Trabajo
             {
                 con.Close();
             }
-        }
-
-
-        public Mapa BuscarMapaLugar(string NombreLugar, int IdMapa)
-        {
-            Mapa UnMapa = null;
-
-            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("BuscarMapaLugar", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("pNombreLugar", NombreLugar);
-            cmd.Parameters.AddWithValue("pIdMapa", IdMapa);
-
-
-            try
-            {
-                con.Open();
-                MySqlDataReader oReader = cmd.ExecuteReader();
-                if (oReader.HasRows)
-                {
-                    oReader.Read();
-                    UnMapa = new Mapa(IdMapa, (byte[])oReader["Imagen"], PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar), Convert.ToString(oReader["Nombre"]), (string)oReader["extension"]);
-                }
-                oReader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Error con la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return UnMapa;
         }
 
         #endregion

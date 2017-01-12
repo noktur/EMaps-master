@@ -49,7 +49,6 @@
     <Compile Include="ClasesTrabajo\LogicaFeedbackLugar.cs" />
     <Compile Include="ClasesTrabajo\LogicaLugar.cs" />
     <Compile Include="ClasesTrabajo\LogicaMapa.cs" />
-    <Compile Include="ClasesTrabajo\LogicaPunto.cs" />
     <Compile Include="ClasesTrabajo\LogicaReserva.cs" />
     <Compile Include="ClasesTrabajo\LogicaUbicacion.cs" />
     <Compile Include="ClasesTrabajo\LogicaUsuario.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="Interfaces\ILogicaFeedbackLugar.cs" />
     <Compile Include="Interfaces\ILogicaLugar.cs" />
     <Compile Include="Interfaces\ILogicaMapa.cs" />
-    <Compile Include="Interfaces\ILogicaPunto.cs" />
     <Compile Include="Interfaces\ILogicaReserva.cs" />
     <Compile Include="Interfaces\ILogicaUbicacion.cs" />
     <Compile Include="Interfaces\ILogicaUsuario.cs" />

@@ -65,11 +65,6 @@ namespace Logica
             return (LogicaMapa.GetInstancia());
         }
         
-        public static ILogicaPunto getLogicaPunto()
-        {
-            return (LogicaPunto.GetInstancia());
-        }
-
         public static ILogicaUbicacion getLogicaUbicacion()
         {
             return (LogicaUbicacion.getInstancia());

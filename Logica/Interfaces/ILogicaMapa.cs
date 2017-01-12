@@ -13,6 +13,5 @@ namespace Logica.Interfaces
         Mapa BuscarMapa(int IdMapa);
         void BajaMapa(Mapa m);
 
-        Mapa BuscarMapaLugar(string NombreLugar, int IdMapa);
     }
 }

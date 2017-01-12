@@ -21,15 +21,15 @@
                         <p>Aqui puede buscar un pais para luego ser agregado.</p>
                             <% using(Html.BeginForm()) { %>
                             <div id="elementosBuscar" class="input-group">
-                                <input type="text" class="form-control" name="NombrePais1" id="NombrePais1"  />
+                                <input type="text" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de pais)" class="form-control" name="NombrePais1" id="NombrePais1"  />
                                 <span class="input-group-btn"><button class="btn btn-dark" onclick="Buscar()"  type="button">Buscar</button></span>
                                    </div>
                          
                             <div class="form-group">
-                                <input type="text" class="form-control"  name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
+                                <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de pais)"   name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" readonly="readonly" name="CodPais" id="CodPais" placeholder="Codigo Pais..."  />
+                                <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un codigo de pais)" readonly="readonly" name="CodPais" id="CodPais" placeholder="Codigo Pais..."  />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />

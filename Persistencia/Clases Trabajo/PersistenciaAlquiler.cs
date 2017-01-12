@@ -32,10 +32,10 @@ namespace Persistencia.Clases_Trabajo
         public void AltaAlquiler(Alquiler e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AlquilarLugar", con);
+            MySqlCommand cmd = new MySqlCommand("AlquilarArea", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("pNombreLugar", e.LugarAlquiler.Nombre);
+            cmd.Parameters.AddWithValue("pIdArea", e.AreaAlquiler.IdArea);
             cmd.Parameters.AddWithValue("pCiOrganizador", e.ClienteAlquiler.CI);
             cmd.Parameters.AddWithValue("pFechaInicio", e.FechaInicio);
             cmd.Parameters.AddWithValue("pFechaFin", e.FechaFin);
@@ -57,42 +57,14 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-
-        public void ComprobarAlquiler(Alquiler p,DateTime fechainicio,DateTime fechafin)
-        {
-            MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AlquilarLugar", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("pNombreLugar", p.LugarAlquiler.Nombre);
-            cmd.Parameters.AddWithValue("pFechaInicio", fechainicio);
-            cmd.Parameters.AddWithValue("pFechaFin", fechafin);
-
-
-
-            try
-            {
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Problema con la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
         public void BajaAlquiler(Alquiler e)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("EliminarAlquilerLugar", con);
+            MySqlCommand cmd = new MySqlCommand("EliminarAlquilerArea", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pIdAlquiler", e.IdAlquiler);
-            cmd.Parameters.AddWithValue("pNombreLugar", e.LugarAlquiler.Nombre);
+            cmd.Parameters.AddWithValue("pIdArea", e.AreaAlquiler.IdArea);
             
 
 
@@ -127,7 +99,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnAlquiler = new Alquiler(IdAlquiler, PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(oReader["NombreLugar"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(oReader["CiOrganizador"])),Convert.ToDateTime(oReader["FechaInicioAlquiler"]),Convert.ToDateTime(oReader["FechaFinAlquiler"]),Convert.ToDateTime(oReader["FechaRealizado"]));
+                    UnAlquiler = new Alquiler(IdAlquiler,PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(oReader["IdArea"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(oReader["CiOrganizador"])),Convert.ToDateTime(oReader["FechaInicioAlquiler"]),Convert.ToDateTime(oReader["FechaFinAlquiler"]),Convert.ToDateTime(oReader["FechaRealizado"]));
                 }
 
                 oReader.Close();
@@ -160,7 +132,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
+                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(lector["IdArea"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
                         listaAlquiler.Add(UnAlquiler);
                     }
                 }
@@ -177,15 +149,15 @@ namespace Persistencia.Clases_Trabajo
             return listaAlquiler;
         }
 
-        public List<Alquiler> ListarAlquileresLugar(string NombreLugar)
+        public List<Alquiler> ListarAlquileresArea(int IdArea)
         {
             MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
             Alquiler UnAlquiler = null;
             List<Alquiler> listaAlquiler = new List<Alquiler>();
 
-            MySqlCommand comando = new MySqlCommand("ListarAlquilerdeLugar", conexion);
+            MySqlCommand comando = new MySqlCommand("ListarAlquilerdeArea", conexion);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("pNombreLugar", NombreLugar);
+            comando.Parameters.AddWithValue("pIdArea", IdArea);
 
             try
             {
@@ -195,7 +167,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaLugar.GetInstancia().BuscarLugar(NombreLugar), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
+                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaArea.GetInstancia().BuscarArea(IdArea), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
                         listaAlquiler.Add(UnAlquiler);
                     }
                 }
@@ -230,7 +202,7 @@ namespace Persistencia.Clases_Trabajo
                 {
                     while (lector.Read())
                     {
-                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaOrganizador.GetInstancia().Buscar(Ci), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
+                        UnAlquiler = new Alquiler(Convert.ToInt32(lector["IdAlquiler"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(lector["IdArea"])), PersistenciaOrganizador.GetInstancia().Buscar(Ci), Convert.ToDateTime(lector["FechaInicioAlquiler"]), Convert.ToDateTime(lector["FechaFinAlquiler"]), Convert.ToDateTime(lector["FechaRealizado"]));
                         listaAlquiler.Add(UnAlquiler);
                     }
                 }

@@ -8,7 +8,6 @@ namespace Logica.Interfaces
 {
     public interface ILogicaPunto
     {
-        void AltaPunto(Punto p);
         void ModificarPunto(Punto p);
         Punto BuscarPuntoxId(int IdPunto);
         Punto BuscarPuntoxCoordenadas(double Cordx, double CordY);

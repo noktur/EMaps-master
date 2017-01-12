@@ -15,16 +15,22 @@ namespace EntidadesCompartidas
         private string _Nombre;
         private string _Direccion;
         private string _Descripcion;
-        private int _Capacidad;
         private Ciudad _UbicacionLugar;
         private float _CoordenadaX;
         private float _CoordenadaY;
         private List<FotosLugar> _fotosLugar;
         private Dueño _DueñoLugar;
+        private Mapa _MapaAsociado;
 
         #endregion
 
         #region Propiedades
+
+        [DataMember]
+        public Mapa MapaAsociado {
+            get { return _MapaAsociado; }
+            set { _MapaAsociado = value; }
+        }
 
         [DataMember]
         public string Nombre
@@ -45,15 +51,6 @@ namespace EntidadesCompartidas
         {
             get { return _Descripcion; }
             set { _Descripcion = value; }
-        }
-
-
-        
-        [DataMember]
-        public int Capacidad
-        {
-            get { return _Capacidad; }
-            set { _Capacidad = value; }
         }
 
         [DataMember]
@@ -86,34 +83,34 @@ namespace EntidadesCompartidas
         public List<FotosLugar> Fotos
         {
             get { return _fotosLugar; }
-            set { }
+            set { _fotosLugar = value; }
         }
 
         #endregion
 
         #region Constructores
-        public Lugar(string pNombre,string pDireccion,string pDescripcion,int pCapacidad,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar)
+        public Lugar(string pNombre,string pDireccion,string pDescripcion,Ciudad pUbicacionLugar,float pCoordenadaX,float pCoordenadaY,Dueño pDueñoLugar, Mapa pMapaAsociado)
         {
             Direccion = pDireccion;
             Descripcion = pDescripcion;
             _fotosLugar= new List<FotosLugar>();
-            Capacidad = pCapacidad;
             UbicacionLugar = pUbicacionLugar;
             CoordenadaX = pCoordenadaX;
             CoordenadaY = pCoordenadaY;
             DueñoLugar = pDueñoLugar;
+            MapaAsociado = pMapaAsociado;
         }
 
         public Lugar()
         {
             Direccion = "";
             Descripcion = "";
-            Capacidad = 0;
             UbicacionLugar = null;
             CoordenadaX = 0;
             CoordenadaY = 0;
             DueñoLugar = null;
             _fotosLugar = null;
+            MapaAsociado = null;
         }
 
         public void AgregarFoto(FotosLugar unaFoto)

@@ -16,7 +16,7 @@ namespace MVCFinal.Models
         [Required(ErrorMessage = "Debe ingresar el nombre de la ciudad")]
         [StringLength(30,ErrorMessage ="El nombre de la ciudad no puede exceder los 30 caracteres")]
         public string NombreCiudad { get; set; }
-        [Required(ErrorMessage = "Debe ingresar las ciudades")]
+
         public List<EntidadesCompartidas.Ciudad> milista { get; set; }
     }
 }

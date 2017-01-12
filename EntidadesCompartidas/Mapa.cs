@@ -16,7 +16,6 @@ namespace EntidadesCompartidas
         private byte[] _Imagen;
         private string _Nombre;
         private string _Extension;
-        private Lugar _LugarAsociado;
         private List<Area> _ListaAreas;
 
         #endregion
@@ -30,12 +29,7 @@ namespace EntidadesCompartidas
             set { _IdMapa = value; }
         }
 
-        [DataMember]
-        public Lugar LugarAsociado
-        {
-            get { return _LugarAsociado; }
-            set { _LugarAsociado = value; }
-        }
+        
 
         [DataMember]
         public byte[] Imagen
@@ -70,20 +64,19 @@ namespace EntidadesCompartidas
 
         #region Constructores
 
-        public Mapa(int pIdMapa,byte[] pImagen,Lugar pLugarAsociado,string pNombre,string pExtension)
+        public Mapa(int pIdMapa,byte[] pImagen,string pNombre,string pExtension)
         {
             Imagen = pImagen;
             Nombre = pNombre;
-            LugarAsociado = pLugarAsociado;
             IdMapa = pIdMapa;
             Extension = pExtension;
         }
-        public Mapa(int pIdMapa, byte[] pImagen, string pNombre,string pExtension, Lugar pLugarAsociado, List<Area> pListaAreas)
+        public Mapa(int pIdMapa, byte[] pImagen, string pNombre,string pExtension, List<Area> pListaAreas)
         {
             Imagen = pImagen;
             Nombre = pNombre;
             IdMapa = pIdMapa;
-            LugarAsociado = pLugarAsociado;
+         
             _ListaAreas = pListaAreas;
             Extension = pExtension;
         }
@@ -95,7 +88,7 @@ namespace EntidadesCompartidas
             Imagen = null;
             Nombre = "";
             Extension = "";
-            LugarAsociado = null;
+
             _ListaAreas = null;
         }
         #endregion

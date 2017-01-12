@@ -10,10 +10,9 @@ namespace Logica.Interfaces
     {
         void AltaAlquiler(Alquiler e);
         void BajaAlquiler(Alquiler e);
-        void ComprobarAlquiler(Alquiler p, DateTime fechainicio, DateTime fechafin);
         Alquiler BuscarAlquiler(int IdAlquiler);
         List<Alquiler> ListarAlquileres();
-        List<Alquiler> ListarAlquileresLugar(string NombreLugar);
+        List<Alquiler> ListarAlquileresArea(int IdArea);
 
         List<Alquiler> ListarAlquileresOrganizador(string Ci);
     }

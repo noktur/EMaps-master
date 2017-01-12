@@ -31,10 +31,7 @@ namespace Logica.ClasesTrabajo
         {
             FabricaPersistencia.getPersistenciaAlquiler().BajaAlquiler(e);
         }
-        public void ComprobarAlquiler(Alquiler p, DateTime fechainicio, DateTime fechafin)
-        {
-            FabricaPersistencia.getPersistenciaAlquiler().ComprobarAlquiler(p,fechainicio,fechafin);
-        }
+
         public Alquiler BuscarAlquiler(int IdAlquiler)
         {
             return FabricaPersistencia.getPersistenciaAlquiler().BuscarAlquiler(IdAlquiler);
@@ -43,9 +40,9 @@ namespace Logica.ClasesTrabajo
         {
            return FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileres();
         }
-        public List<Alquiler> ListarAlquileresLugar(string NombreLugar)
+        public List<Alquiler> ListarAlquileresArea(int IdArea)
         {
-          return  FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresLugar(NombreLugar);
+          return  FabricaPersistencia.getPersistenciaAlquiler().ListarAlquileresArea(IdArea);
         }
 
         public List<Alquiler> ListarAlquileresOrganizador(string Ci)

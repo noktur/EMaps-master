@@ -19,17 +19,11 @@ namespace MVCFinal.Models
         public string Comentario { get; set; }
         [Required(ErrorMessage = "Debe ingresar el evento")]
         public EntidadesCompartidas.Evento EventoActual { get; set; }
-        [Required(ErrorMessage = "Debe ingresar el dueño")]
         public EntidadesCompartidas.Dueño DueñoActual { get; set; }
-        [Required(ErrorMessage = "Debe ingresar el feedback del lugar")]
         public EntidadesCompartidas.FeedbackLugar feedbackAsociado { get; set; }
-        [Required(ErrorMessage = "Debe ingresar la lista de lugares")]
         public List<Lugar> listalugaresPropios { get; set; }
-        [Required(ErrorMessage = "Debe ingresar la lista de feedback")]
         public List<EntidadesCompartidas.FeedbackLugar> listaFeedbackSeleccionado { get; set; }
-        [Required(ErrorMessage = "Debe ingresar la lista de feedback general")]
         public List<EntidadesCompartidas.FeedbackLugar> listaFeedbackGeneral { get; set; }
-        [Required(ErrorMessage = "Debe ingresar la lista de comentarios mensaje seleccionado")]
         public List<EntidadesCompartidas.ComentarioFeedbackLugar> listaComentariosMensajeSeleccionado { get; set; }
 
 

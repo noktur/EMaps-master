@@ -11,7 +11,7 @@ namespace EntidadesCompartidas
         #region Atributos
 
         private int _IdAlquiler;
-        private Lugar _LugarAlquiler;
+        private Area _AreaAlquiler;
         private Organizador _ClienteAlquiler;
         private DateTime _FechaReservacion;
         private DateTime _FechaInicio;
@@ -31,10 +31,10 @@ namespace EntidadesCompartidas
          }
 
         [DataMember]
-         public Lugar LugarAlquiler
+         public Area AreaAlquiler
          {
-             get { return _LugarAlquiler;}
-             set { _LugarAlquiler = value; }
+             get { return _AreaAlquiler;}
+             set { _AreaAlquiler = value; }
          }
 
          [DataMember]
@@ -69,10 +69,10 @@ namespace EntidadesCompartidas
 
          #region Constructores
          
-         public Alquiler(int pIdAlquiler,Lugar pLugarAlquiler,Organizador pUnClienteAlquiler,DateTime pFechaInicio,DateTime pFechaFin,DateTime pFechaReservacion)
+         public Alquiler(int pIdAlquiler,Area pAreaAlquiler,Organizador pUnClienteAlquiler,DateTime pFechaInicio,DateTime pFechaFin,DateTime pFechaReservacion)
          {
              IdAlquiler= pIdAlquiler;
-             LugarAlquiler = pLugarAlquiler;
+             AreaAlquiler = pAreaAlquiler;
               ClienteAlquiler= pUnClienteAlquiler;
               FechaInicio = pFechaInicio;
               FechaFin = pFechaFin;
@@ -82,7 +82,7 @@ namespace EntidadesCompartidas
          public Alquiler()
          {
              IdAlquiler = 0;
-             LugarAlquiler = null;
+             AreaAlquiler = null;
              FechaInicio = DateTime.Now;
              FechaFin = DateTime.Now;
              FechaReservacion = DateTime.Now;

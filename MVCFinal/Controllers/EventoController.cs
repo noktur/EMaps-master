@@ -43,7 +43,7 @@ namespace MVCFinal.Controllers
                 //Evento.ClasificacionEvento =
                 Evento.FechaInicio = Convert.ToDateTime(collection["FechaInicio"]);
                 Evento.FechaFin = Convert.ToDateTime(collection["FechaFin"]);
-                Evento.UnLugar = new LugarModel();//_ServicioWCF.BuscarLugarxId(1,"","");
+                //Evento.UnLugar = new LugarModel();//_ServicioWCF.BuscarLugarxId(1,"","");
 
                 //CreoServicio().AltaEvento(ModelEvento(Evento));
                 return View();
@@ -63,7 +63,7 @@ namespace MVCFinal.Controllers
             _evento.FechaInicio = e.FechaInicio;
             _evento.FechaFin = e.FechaFin;
             _evento.CategoriaEvento = e.ClasificacionEvento;
-            _evento.UnLugar = new EntidadesCompartidas.Lugar();//e.UnLugar;
+            _evento.AreaEvento = new EntidadesCompartidas.Area();//e.UnLugar;
 
             return _evento;
         }

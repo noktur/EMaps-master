@@ -42,8 +42,8 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pDescripcion", p.Descripcion);
             cmd.Parameters.AddWithValue("pFechaInicio", p.FechaInicio);
             cmd.Parameters.AddWithValue("pFechaFin", p.FechaFin);
-            cmd.Parameters.AddWithValue("pNombreLugar", p.UnLugar.Nombre);
-            cmd.Parameters.AddWithValue("pCiOrganizador", p.OrganizadorEvento.CI);
+            cmd.Parameters.AddWithValue("pIdArea", p.AreaEvento.IdArea);
+            cmd.Parameters.AddWithValue("pCiOrganizador", p.UnOrganizador.CI);
             cmd.Parameters.AddWithValue("pNombreCategoria", p.CategoriaEvento.NombreCategoria);
 
 
@@ -66,7 +66,7 @@ namespace Persistencia.Clases_Trabajo
         public void ComprobarEstadoEvento(Evento UnEvento,DateTime fecha1,DateTime fecha2)
         {
             MySqlConnection con = new MySqlConnection(Conexion.Cnn);
-            MySqlCommand cmd = new MySqlCommand("AltaEvento", con);
+            MySqlCommand cmd = new MySqlCommand("ComprobarEstadoEvento", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("pIdEvento", UnEvento.IdEvento);
@@ -129,7 +129,7 @@ namespace Persistencia.Clases_Trabajo
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    UnEvento = new Evento(IdEvento, Convert.ToString(oReader["Nombre"]), Convert.ToString(oReader["Descripcion"]), Convert.ToDateTime(oReader["FechaInicio"]), Convert.ToDateTime(oReader["FechaFin"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(oReader["NombreLugar"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(oReader["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(oReader["CiOrganizador"])));
+                    UnEvento = new Evento(IdEvento, Convert.ToString(oReader["Nombre"]), Convert.ToString(oReader["Descripcion"]), Convert.ToDateTime(oReader["FechaInicio"]), Convert.ToDateTime(oReader["FechaFin"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(oReader["IdArea"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(oReader["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(oReader["CiOrganizador"])));
                 }
                 oReader.Close();
             }
@@ -226,7 +226,7 @@ namespace Persistencia.Clases_Trabajo
                  {
                      while (lector.Read())
                      {
-                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
+                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(lector["IdArea"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
                          listaEventos.Add(UnEvento);
                      }
                  }
@@ -261,7 +261,7 @@ namespace Persistencia.Clases_Trabajo
                  {
                      while (lector.Read())
                      {
-                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]),Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(CiOrganizador));
+                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]),Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(lector["IdArea"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(CiOrganizador));
                          listaEventos.Add(UnEvento);
                      }
                  }
@@ -295,7 +295,7 @@ namespace Persistencia.Clases_Trabajo
                  {
                      while (lector.Read())
                      {
-                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaLugar.GetInstancia().BuscarLugar(Convert.ToString(lector["NombreLugar"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
+                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaArea.GetInstancia().BuscarArea(Convert.ToInt32(lector["IdArea"])), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])), PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
                          listaEventos.Add(UnEvento);
                      }
                  }
@@ -312,15 +312,15 @@ namespace Persistencia.Clases_Trabajo
              return listaEventos;
          }
 
-         public List<Evento> ListarEventosxLugar(string pNombreLugar)
+         public List<Evento> ListarEventosxArea(int pIdArea)
          {
              MySqlConnection conexion = new MySqlConnection(Conexion.Cnn);
              Evento UnEvento = null;
              List<Evento> listaEventos = new List<Evento>();
 
-             MySqlCommand comando = new MySqlCommand("ListarEventosxLugar", conexion);
+             MySqlCommand comando = new MySqlCommand("ListarEventosxArea", conexion);
              comando.CommandType = System.Data.CommandType.StoredProcedure;
-             comando.Parameters.AddWithValue("pNombreLugar", pNombreLugar);
+             comando.Parameters.AddWithValue("pIdArea", pIdArea);
 
              try
              {
@@ -330,7 +330,7 @@ namespace Persistencia.Clases_Trabajo
                  {
                      while (lector.Read())
                      {
-                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaLugar.GetInstancia().BuscarLugar(pNombreLugar), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])),PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
+                         UnEvento = new Evento(Convert.ToInt32(lector["IdEvento"]), Convert.ToString(lector["Nombre"]), Convert.ToString(lector["Descripcion"]), Convert.ToDateTime(lector["FechaInicio"]), Convert.ToDateTime(lector["FechaFin"]), PersistenciaArea.GetInstancia().BuscarArea(pIdArea), PersistenciaEvento.GetInstancia().BuscarCategoria(Convert.ToString(lector["NombreCategoria"])),PersistenciaOrganizador.GetInstancia().Buscar(Convert.ToString(lector["CiOrganizador"])));
                          listaEventos.Add(UnEvento);
                      }
                  }

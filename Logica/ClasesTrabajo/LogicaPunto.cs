@@ -22,11 +22,6 @@ namespace Logica.ClasesTrabajo
         #endregion
 
         #region Operaciones
-        public void AltaPunto(Punto p)
-        {
-            FabricaPersistencia.getPersistenciaPunto().AltaPunto(p);
-        }
-
         public void ModificarPunto(Punto p)
         {
             FabricaPersistencia.getPersistenciaPunto().ModificarPunto(p);
