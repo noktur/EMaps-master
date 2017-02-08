@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterDueño.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LugarModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LugarModel>" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">        
      
@@ -418,9 +418,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      
-    <form id="form1" runat="server"> 
     <div data-spy="scroll" data-target="nav"> 
-        
+        <form id="form1" runat="server">  
         <section class="content-block contact-1" style="padding-bottom:5px;background-color: whitesmoke; ">         
             <div class="container text-center">
                     <div class="underlined-title">
@@ -455,12 +454,12 @@
                             </div>
 
                            </div>
-
+                          
                         <div>
-                        <% using (Html.BeginForm("Guardar", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
-                           
+                                <div id="miform">  
+                                    <section id="asd">
+                         <% using (Html.BeginForm("GuardarLugar","Dueño", FormMethod.Post, new { enctype = "multipart/form-data" }))                           
                            { %>                  
-                            
                         <div class="form-group">
                                <input name="Direccion" id="Direccion" type="text" class="form-control hidden" /> 
                           </div>
@@ -471,12 +470,10 @@
                         <div class="form-group">
                                         <input name="Nombre" required="required" id="Nombre" type="text" pattern="[a-z]{1,15}"
         title="el nombre del lugar solo puede contener letras" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre')" placeholder="Ingrese el nombre ......" class="form-control"/>     
-                                      
                                 </div>  
                              <div class="form-group">
                                 <textarea name="Descripcion" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar una descripcion)" id="Descripcion" class="form-control" rows="3" placeholder="Agregue aqui la descripcion....."></textarea>
-                            </div>
-                                
+                            </div>                   
                                  <div class="form-group hidden">
                                         <input name="CoordenadaX" id="CoordenadaX" type="text" value="" placeholder="Coordenada X..." class="form-control no-shadow" />
                                      </div>
@@ -487,21 +484,17 @@
                                      <div class="form-group">                   
                                          <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png" class="form-control"/>
                                      </div> 
-
-                                 <div class="col-md-12 text-center">          
-                               <input type="submit" class="btn btn-dark" name="action" value="Guardar Lugar" />
+                              <div class="col-md-12 text-center">          
+                               <button type="submit" class="btn btn-danger" value="Guardar"/>
                                 </div> 
-
-
-
+                                        
                         <% } %>
-                        </div>
-
-                           
-                        
+                                        </section>
+                                    </div>  
+                            </div>
+                            </div>             
                             </div>
                      
-                </div>
                 </div>
         </section>
       
@@ -595,12 +588,10 @@
         </div>
         <!-- /.row -->
     <!-- /.container -->
-</section>                        
-             
-
-
-</div>  
-       </form> 
+</section>    
+     </form>
+        </div>                     
+       
        
     
 </asp:Content>

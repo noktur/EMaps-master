@@ -1,5 +1,4 @@
-﻿using Logica;
-using MVCFinal.Maps;
+﻿using MVCFinal.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +9,14 @@ namespace MVCFinal.Controllers
 {
     public class RegistroController : Controller
     {
-
-        Maps.IServicioEvento _ServicioWCF = null;
-
-        private IServicioEvento CreoServicio()
-        {
-            try
-            {
-                if (_ServicioWCF == null)
-
-                    _ServicioWCF = new ServicioEventoClient();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
-            }
-            return _ServicioWCF;
-        }
-
         //
-        // GET: /RegistroAdmin/
+        // GET: /Registro/
 
-        public ActionResult Registro()
+        public ActionResult Register()
         {
             return View();
         }
+
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Register Now!")]
@@ -43,7 +25,7 @@ namespace MVCFinal.Controllers
 
             try
             {
-                EntidadesCompartidas.Usuario Usuario=null;
+                EntidadesCompartidas.Usuario Usuario = null;
 
                 Usuario.CI = Convert.ToString(collection["Ci"]);
                 Usuario.Email = Convert.ToString(collection["Email"]);
@@ -63,5 +45,25 @@ namespace MVCFinal.Controllers
                 return View();
             }
         }
+
+        Maps.IServicioEvento _ServicioWCF = null;
+
+        private IServicioEvento CreoServicio()
+        {
+            try
+            {
+                if (_ServicioWCF == null)
+
+                    _ServicioWCF = new ServicioEventoClient();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+            }
+            return _ServicioWCF;
+        }
+
+
+
     }
 }

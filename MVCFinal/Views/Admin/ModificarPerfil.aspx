@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.AdminModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.AdminModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
 
@@ -9,8 +9,8 @@
                         <h3 class="text-left">Edit Profile Settings</h3>
                     </div>
                     <p class="offwhite text-left margin-top20 pad-bottom20">En este modulo usted podra modificar los datos de su perfil en caso que lo solicite.</p>
-                    <form id="formulario" runat="server"> 
-                        <% if(Model != null) { %>
+                    <form id="formulario" class=" form-horizontal" runat="server"> 
+                        <% if(Session["Admin"] != null) { %>
                         <% using (Html.BeginForm()) 
                            { %>
                         <!-- /.form-group -->
@@ -65,6 +65,10 @@
                         </div>                         
                         <!-- /.form-group -->
                         <% } %>
+                        <% } else {  %>
+                        <div id="message">
+                            <h1>No se encontro la informacion del admin </h1>
+                        </div>
                         <% } %>
                     </form>                  
                 </div>

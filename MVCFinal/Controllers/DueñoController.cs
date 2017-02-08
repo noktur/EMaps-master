@@ -156,108 +156,61 @@ namespace MVCFinal.Controllers
         }
 
 
-        // [HttpPost]
-        //public JsonResult GuardarImagenFondo() 
-        // {
-        //    int largoKeys = 0;
-        //    largoKeys = System.Web.HttpContext.Current.Request.Files.AllKeys.Length;
-        //    string res = "";
-        //    Usuario usr = null;//new Usuario(); //setear usuario
-
-        //    Image b = null;
-        //    if (largoKeys > 0) {
-        //        string pathForSaving = RutaImagenesGuardar;
-        //        if (System.Web.HttpContext.Current.Request.Form.Keys.Count == 2) {
-        //        }
-        //        var pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
-        //        string exttension = System.IO.Path.GetExtension(pic.FileName);
-        //        string nombreimagen = ""; //TODO: Obtener nombre del usuario en session para darle nombre al mapa
-        //        Random rdm = new Random();
-        //        int numRdm = rdm.Next(0, 999);
-        //        nombreimagen += "_" + numRdm.ToString();
-        //        string x = "0";
-        //        string y = "0";
-        //        string imagenPath;
-        //        if (exttension != ".png") {
-        //            try {
-        //                nombreimagen += ".jpg";
-        //                string originalPicTemp = RutaImagenesGuardar;//Temp + "temp\\l\\";
-        //                pic.SaveAs(originalPicTemp + nombreimagen);
-        //                originalPicTemp = originalPicTemp + nombreimagen;
-        //                imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
-        //                img.isPng = false;
-        //                img.setPaths(null, null);//aca deberiamos setear si precisamos distintos tamaños
-        //                imagenPath = originalPicTemp;
-        //            } 
-        //            catch (Exception ex) 
-        //            {
-        //                res = ex.Message;
-        //            }
-        //        } else 
-        //        {
-        //            try {
-        //                nombreimagen += ".png";
-        //                string originalPicTemp = RutaImagenesGuardar;// + "temp\\l\\";
-        //                if (!Directory.Exists(originalPicTemp))
-        //                    Directory.CreateDirectory(originalPicTemp);
-        //                pic.SaveAs(originalPicTemp + nombreimagen);
-        //                originalPicTemp = originalPicTemp + nombreimagen;
-        //                imageForCropping img = new imageForCropping(originalPicTemp, pathForSaving, usr, x, y, b, res);
-        //                img.isPng = true;
-        //                img.setPaths(null, null);
-        //                imagenPath = originalPicTemp;
-        //            } catch (Exception ex) {
-        //                res = ex.Message;
-        //            }
-        //        }
-        //    }
-        //    return Json(new { message = "" }, "text/html");
-        //}
-
-    
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar Lugar")]
-        public ActionResult Guardar(HttpPostedFileBase image, FormCollection collection)
+        public ActionResult GuardarLugar(HttpPostedFileBase image, LugarModel milugar)
         {
             try
             {
-                
 
+
+                LugarModel lugar = new LugarModel();
                 EntidadesCompartidas.Dueño dueño = new Dueño();
                 dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
 
-                LugarModel Lugar = new LugarModel();
                 EntidadesCompartidas.Lugar l = new EntidadesCompartidas.Lugar();
 
-                Lugar.Nombre = Convert.ToString(collection["Nombre"]);
-                Lugar.Direccion= Convert.ToString(collection["Direccion"]);
-                Lugar.NombreCiudad = Convert.ToString(collection["NombreCiudad"]);
 
-                EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(Lugar.NombreCiudad);
+                EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(lugar.Ciudad.Nombre);                
 
-                Lugar.Descripcion = Convert.ToString(collection["Descripcion"]);
-                Lugar.CoordenadaX = float.Parse(collection["CoordenadaX"], System.Globalization.CultureInfo.InvariantCulture);
-                Lugar.CoordenadaY = float.Parse(collection["CoordenadaY"], System.Globalization.CultureInfo.InvariantCulture);
-                
-
-
-                l.Nombre = Lugar.Nombre;
-                l.Direccion = Lugar.Direccion;
+                l.Nombre = lugar.Nombre;
+                l.Direccion = lugar.Direccion;
                 l.UbicacionLugar = Ciudad;
-                l.Descripcion = Lugar.Descripcion;
-                l.CoordenadaX = Lugar.CoordenadaX;
-                l.CoordenadaY = Lugar.CoordenadaY;
+                l.Descripcion = lugar.Descripcion;
+                l.CoordenadaX = lugar.CoordenadaX;
+                l.CoordenadaY = lugar.CoordenadaY;
                 l.DueñoLugar = dueño;
-                l.Fotos =(List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
-                l.MapaAsociado = (EntidadesCompartidas.Mapa)Session["Plano"];
 
+                EntidadesCompartidas.Mapa miMapa = new Mapa();
+
+                if (image != null)
+                {
+                    miMapa.Extension = Path.GetExtension(image.FileName);
+
+                    int length = image.ContentLength;
+                    byte[] buffer = new byte[length];
+                    image.InputStream.Read(buffer, 0, length);
+                    miMapa.Imagen = buffer;
+                    miMapa.Nombre = image.FileName.Substring(0, image.FileName.LastIndexOf('.'));
+                }
+
+                l.MapaAsociado = miMapa;
+
+                if (l.Fotos.Count() > 0)
+                {
+                    l.Fotos = (List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
+                }
+                else
+                {
+                    l.Fotos = null;
+                }
+                
                 Logica.FabricaLogica.getLogicaLugar().AltaLugar(l);
 
                 string JsonLugar = JsonConvert.SerializeObject(l);
                 Session["LugarJson"] = JsonLugar;
 
                 Session["LugarActual"] = l;
-                Session["LugarModel"] = Lugar;
+                Session["LugarModel"] = lugar;
 
                 return View("AdministrarLugares");
 
@@ -314,32 +267,6 @@ namespace MVCFinal.Controllers
             }        
         }
 
-        [HttpPost]
-            public ActionResult SubirPlano(HttpPostedFileBase image)
-            {
-                LugarModel model = new LugarModel();
-
-                
-
-                EntidadesCompartidas.Mapa miMapa = new Mapa();
-
-                if (image != null)
-                {
-                    miMapa.Extension = Path.GetExtension(image.FileName);
-                    
-                    int length = image.ContentLength;
-                    byte[] buffer = new byte[length];
-                    image.InputStream.Read(buffer, 0, length);
-                    miMapa.Imagen = buffer;
-                    miMapa.Nombre =image.FileName.Substring(0,image.FileName.LastIndexOf('.'));
-                }
-
-                
-                Session["Plano"] = miMapa;
-                
-                return View("AdministrarLugares");
-                
-            }
 
             public ActionResult AgregarFoto(HttpPostedFileBase image1)
             {
@@ -379,7 +306,6 @@ namespace MVCFinal.Controllers
                 return View("AdministrarLugares");
 
             }
-
 
         public ActionResult FeedbackDueño()
         {

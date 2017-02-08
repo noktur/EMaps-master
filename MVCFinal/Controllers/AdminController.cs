@@ -146,15 +146,46 @@ namespace MVCFinal.Controllers
             }
         }
 
+        public ActionResult ModificarPerfil1()
+        {
+
+            //if (Session["Admin"] == null)
+            //{
+            //    RedirectToAction("Portada,Index");
+            //}
+            //else
+            //{
+            Admin miAdmin = (Admin)Session["Admin"];
+
+
+            string JsonAdmin = JsonConvert.SerializeObject(miAdmin);
+            Session["AdminJson"] = JsonAdmin;
+
+            MVCFinal.Models.AdminModel a = new AdminModel();
+             a.Ci=miAdmin.CI ;
+             a.Password= miAdmin.Contraseña;
+             a.Email = miAdmin.Email; ;
+             a.Nombre = miAdmin.Nombre ;
+             a.Usuario = miAdmin.NombreUsuario;
+
+            return View(a);
+
+            //}
+
+
+            //return RedirectToAction("Portada", "Index");
+        }
+
+
         public ActionResult ModificarPerfil()
         {
 
-            if (Session["Admin"] == null)
-            {
-                RedirectToAction("Portada,Index");
-            }
-            else
-            {
+            //if (Session["Admin"] == null)
+            //{
+            //    RedirectToAction("Portada,Index");
+            //}
+            //else
+            //{
                 AdminModel miAdmin =(AdminModel)Session["Admin"];
 
                 
@@ -163,10 +194,10 @@ namespace MVCFinal.Controllers
 
                 return View(miAdmin);
 
-            }
+            //}
 
             
-            return RedirectToAction("Portada", "Index");
+            //return RedirectToAction("Portada", "Index");
         }
 
 
