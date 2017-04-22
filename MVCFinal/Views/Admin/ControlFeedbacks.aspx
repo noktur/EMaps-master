@@ -2,44 +2,45 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <section id="content-3-4" class="content-block content-3-4 bg-deepocean white">
-            <div class="container">
-                <div class="row">
                     <% if (Session["ControlAdminListaFeedback"] != null) { %>
-                    <div class="col-md-7">
-                        <div class="table-responsive bg-offwhite deepocean" style=" border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:25px ">
-                            <table class="table bg-transparent margin-top0 margin-bottom0"> 
-                                <thead> 
-                                    <tr> 
-                                        <th>#</th> 
-                                        <th>First Name</th> 
-                                        <th>Last Name</th> 
-                                        <th>Username</th> 
-                                        <th>Action</th>
-                                    </tr>                                     
-                                </thead>                                 
-                                <tbody> 
-                                    <% foreach(var item in Model.listaFeedback) { %>
-                                    <tr> 
-                                        <td></td> 
-                                        <td class="hidden"><%= item.IdFeedbackEvento %></td> 
-                                        <td><%= item.NombreFeedback %></td> 
-                                        <td><%= item.Mensaje %></td> 
-                                        <td><%= item.UsuarioFeedback %></td> 
-                                        <td><%= item.EventoFeedback.NombreEvento %></td> 
-                                        <td><%= item.FechaRealizado  %></td> 
-                                        <td>
-                                            <%= Html.ActionLink("Elegir", "ElegirFeedback", "Admin", new { IdFeedback = item.IdFeedbackEvento }, new { @class="btn btn-default btn-sm"})%>
-                                        </td>
-                                    </tr>   
-                                    <% } %>                           
-                                </tbody>
-                            </table>
-                        </div>
-                        <h2 class="text-uppercase" style=" font-family:Grand Hote;font-size:1.6em;">seleccione un feedback y sera desplegado por categoria</h2>
+                    
+    <div class="page-aside">
+      <div class="page-aside-switch">
+        <i class="icon md-chevron-left" aria-hidden="true"></i>
+        <i class="icon md-chevron-right" aria-hidden="true"></i>
+      </div>
+      <div class="page-aside-inner">
+
+        <div class="app-message-list scrollable is-enabled scrollable-vertical" data-plugin="pageAsideScroll" style="position: relative;">
+          <div data-role="container" class="scrollable-container" style="height: 201px; width: 276px;">
+            <div data-role="content" class="scrollable-content" style="width: 259px;">
+              <ul class="list-group">
+                    <% foreach(var group in Model.listaFeedback.GroupBy((item => item.EventoFeedback)) { %>
+                <li class="list-group-item">
+                  <div class="media">
+                    <div class="media-left">
+                         <%= Html.ActionLink("", "ElegirFeedback", "Admin", new { IdEvento = group.Key.IdEvento }, new { @class="btn btn-round red-400"})%>
                     </div>
-                    <% } %>
-                    <% if(Session["FeedbackSeleccionado"] != null) { %>
+                    <div class="media-body">
+                      <h4 class="media-heading"><%= group.Key.NombreEvento %></h4>
+                      <span class="media-time"><%= group.Key.FechaInicio %></span>
+                    </div>
+                    <div class="media-right">
+                      <span class="badge badge-danger"><%= group.Key.UnOrganizador.NombreUsuario %></span>
+                    </div>
+                  </div>
+                </li>
+                 
+              </ul>
+            </div>
+          </div>
+        <div class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide" draggable="false"><div class="scrollable-bar-handle" style="height: 47.2509px;"></div></div></div>
+      </div>
+    </div>
+     <% } %>
+    <% } %>
+
+     <% if(Session["FeedbackSeleccionado"] != null) { %>
                     <div class="col-md-4 col-md-offset-1">
                         <div class="panel-group">
                             <div class="panel panel-default">

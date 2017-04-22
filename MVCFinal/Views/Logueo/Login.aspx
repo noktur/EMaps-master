@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.LoginModel>" %>
 
 <!DOCTYPE html>
 <html class="js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js-menubar" lang="es">
@@ -71,21 +71,25 @@
     <div class="page-content">
       <div class="page-brand-info">
         <div class="brand">
+            <div class="brand visible-xs">
           <img class="brand-img" src="../../Content/js/logo@2x.png" alt="...">
           <h2 class="brand-text font-size-40">UBICATE!</h2>
         </div>
+            </div>
         <p class="font-size-20">Abrite al mundo de Ubicate! y descubri la mejor manera de encontrar los eventos mas importantes y asistir a ellos.</p>
       </div>
 
       <div class="page-login-main">
         <div class="brand visible-xs">
-          <img class=" brand-img " src="../../Content/js/logo-blue@2x.png" alt="...">
-          <h3 class="brand-text font-size-40">Remark</h3>
+          <img class=" brand-img " src="../../Content/Portada/logo-blue@2x.png" alt="...">
+          <h3 class="brand-text font-size-40">UBICATE!</h3>
         </div>
         <h3 class="font-size-24">Sign In</h3>
         <p>Ubicate! le da la bienvenida registrate gratis ahora.</p>
 
         <form autocomplete="off" runat="server">
+
+            
 
              <% using (Html.BeginForm())
                        { %> 
@@ -104,10 +108,22 @@
             </div>
             <a class="pull-right" href="#">Forgot password?</a>
           </div>
+
+
+            <% 
+                if( Session["ErrorUsu"] != null )
+               { %>
+            
+            <% } else { %>
+            <label>El usuario y password no existen</label>
+            <% } %>
           <input type="submit" class="btn btn-primary btn-block waves-effect waves-light" value="SIGN IN" name="action"/>
 
             <% } %>
         </form>
+
+
+        
 
         <p>No account? <a href="../Registro/">Sign Up</a></p>
 

@@ -1,8 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.AdminModel>" %>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+    <link rel="stylesheet" href="../../Content/css/blocks.css">
+    <link rel="stylesheet" href="../../Content/css/custom.css">
+    <link rel="stylesheet" href="../../Content/css/component.css">
+    <link rel="stylesheet" href="../../Content/css/style-library-1.css">
+
+     <script type="text/javascript">
+
+         jQuery(document).ready(function () {
+
+             LLenarCampos();
+
+         });
+
+
+         function LLenarCampos() {
+             var Admin;
+             Admin = '<%=(Session["AdminJson"] == null ? null : (string)Session["AdminJson"])%>';
+             var AdminJson = null;
+
+             if (Admin != null) {
+                 AdminJson = jQuery.parseJSON(Admin);
+
+                 jQuery('#Ci').val(AdminJson.Ci);
+                 jQuery('#Email').val(AdminJson.Email);
+                 jQuery('#Nombre').val(AdminJson.Nombre);
+                 jQuery('#Password').val(AdminJson.Password);
+                 jQuery('#Usuario').val(AdminJson.Usuario);
+
+             }
+             else {
+                 alert("No se encontro el admin")
+             }
+
+         }
+
+</script>
+</asp:Content>
+    
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceholder1" runat="server">
 
-<section class="content-block contact-1 pad0 pad-bottom0 margin-top0 margin-bottom0 bg-deepocean offwhite">
+<section class="content-block contact-1 pad0 pad-bottom0 margin-top0 margin-bottom0  offwhite">
             <div class="container text-center">
                 <div class="col-sm-8 col-md-9 col-md-offset-1 pad-bottom25">
                     <div class="tab-pane fade in active pad-bottom0 pad0">
@@ -33,7 +73,7 @@
                         <div class="form-group">
                             <label class="col-md-3 text-left">Contraseña</label>
                             <div class="col-md-7">
-                                <input type="password" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su contraseña)" name="Password" id="Password" placeholder="<%= Model.Password %>" class="form-control">
+                                <input type="password" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar su contraseña)" name="Password" id="Password" placeholder="<%= Model.Password %>"   class="form-control">
                             </div>                             
                             <!-- /.col -->
                         </div>                         
@@ -77,43 +117,8 @@
         </section>
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 
-     <script type="text/javascript">
+   
 
-         jQuery(document).ready(function () {
-
-             LLenarCampos();
-
-         });
-
-
-         function LLenarCampos()
-         {
-             var Admin;
-             Admin = '<%=(Session["AdminJson"] == null ? null : (string)Session["AdminJson"])%>';
-             var AdminJson = null;
-
-             if (Admin != null)
-             {
-                 AdminJson = jQuery.parseJSON(Admin);
-
-                 jQuery('#Ci').val(AdminJson.Ci);
-                 jQuery('#Email').val(AdminJson.Email);
-                 jQuery('#Nombre').val(AdminJson.Nombre);
-                 jQuery('#Password').val(AdminJson.Password);
-                 jQuery('#Usuario').val(AdminJson.Usuario);
-
-             }
-             else
-             {
-                 alert("No se encontro el admin")
-             }
-
-         }
-
-</script>
-
-</asp:Content>
 
 

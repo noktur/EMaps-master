@@ -27,6 +27,60 @@ namespace MVCFinal.Maps {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BajaLugar", ReplyAction="http://tempuri.org/IServicioEvento/BajaLugarResponse")]
         void BajaLugar(EntidadesCompartidas.Lugar l);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarLugares", ReplyAction="http://tempuri.org/IServicioEvento/ListarLugaresResponse")]
+        EntidadesCompartidas.Lugar[] ListarLugares();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarLugaresDisponibles", ReplyAction="http://tempuri.org/IServicioEvento/ListarLugaresDisponiblesResponse")]
+        EntidadesCompartidas.Lugar[] ListarLugaresDisponibles();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarLugaresCiudad", ReplyAction="http://tempuri.org/IServicioEvento/ListarLugaresCiudadResponse")]
+        EntidadesCompartidas.Lugar[] ListarLugaresCiudad(string pNombreCiudad);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarMapaLugar", ReplyAction="http://tempuri.org/IServicioEvento/BuscarMapaLugarResponse")]
+        EntidadesCompartidas.Lugar BuscarMapaLugar(int IdMapa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaArea", ReplyAction="http://tempuri.org/IServicioEvento/AltaAreaResponse")]
+        void AltaArea(EntidadesCompartidas.Area a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ModificarArea", ReplyAction="http://tempuri.org/IServicioEvento/ModificarAreaResponse")]
+        void ModificarArea(EntidadesCompartidas.Area a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarArea", ReplyAction="http://tempuri.org/IServicioEvento/BuscarAreaResponse")]
+        EntidadesCompartidas.Area BuscarArea(int IdArea);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarAreaPorNombre", ReplyAction="http://tempuri.org/IServicioEvento/BuscarAreaPorNombreResponse")]
+        EntidadesCompartidas.Area BuscarAreaPorNombre(string NombreArea);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaPuntodeArea", ReplyAction="http://tempuri.org/IServicioEvento/AltaPuntodeAreaResponse")]
+        void AltaPuntodeArea(EntidadesCompartidas.Area a, EntidadesCompartidas.Punto p);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BajaArea", ReplyAction="http://tempuri.org/IServicioEvento/BajaAreaResponse")]
+        void BajaArea(EntidadesCompartidas.Area a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarAreasDeMapa", ReplyAction="http://tempuri.org/IServicioEvento/ListarAreasDeMapaResponse")]
+        EntidadesCompartidas.Area[] ListarAreasDeMapa(int IdMapa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarPuntosDeUnArea", ReplyAction="http://tempuri.org/IServicioEvento/ListarPuntosDeUnAreaResponse")]
+        EntidadesCompartidas.Punto[] ListarPuntosDeUnArea(EntidadesCompartidas.Area a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaAlquiler", ReplyAction="http://tempuri.org/IServicioEvento/AltaAlquilerResponse")]
+        void AltaAlquiler(EntidadesCompartidas.Alquiler e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BajaAlquiler", ReplyAction="http://tempuri.org/IServicioEvento/BajaAlquilerResponse")]
+        void BajaAlquiler(EntidadesCompartidas.Alquiler e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarAlquiler", ReplyAction="http://tempuri.org/IServicioEvento/BuscarAlquilerResponse")]
+        EntidadesCompartidas.Alquiler BuscarAlquiler(int IdAlquiler);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarAlquileres", ReplyAction="http://tempuri.org/IServicioEvento/ListarAlquileresResponse")]
+        EntidadesCompartidas.Alquiler[] ListarAlquileres();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarAlquileresArea", ReplyAction="http://tempuri.org/IServicioEvento/ListarAlquileresAreaResponse")]
+        EntidadesCompartidas.Alquiler[] ListarAlquileresArea(int IdArea);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarAlquileresOrganizador", ReplyAction="http://tempuri.org/IServicioEvento/ListarAlquileresOrganizadorResponse")]
+        EntidadesCompartidas.Alquiler[] ListarAlquileresOrganizador(string Ci);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaMapa", ReplyAction="http://tempuri.org/IServicioEvento/AltaMapaResponse")]
         void AltaMapa(EntidadesCompartidas.Mapa m);
         
@@ -71,36 +125,36 @@ namespace MVCFinal.Maps {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaUsuario", ReplyAction="http://tempuri.org/IServicioEvento/AltaUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void AltaUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ModificarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/ModificarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void ModificarUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/EliminarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/EliminarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         void EliminarUsuario(EntidadesCompartidas.Usuario U);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarUsuario", ReplyAction="http://tempuri.org/IServicioEvento/BuscarUsuarioResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         EntidadesCompartidas.Usuario BuscarUsuario(string pDoc);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/Login", ReplyAction="http://tempuri.org/IServicioEvento/LoginResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Cliente))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Organizador))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Admin))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(EntidadesCompartidas.Dueño))]
         EntidadesCompartidas.Usuario Login(string nomUsu, string pass);
         
@@ -115,6 +169,36 @@ namespace MVCFinal.Maps {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarClientes", ReplyAction="http://tempuri.org/IServicioEvento/ListarClientesResponse")]
         EntidadesCompartidas.Cliente[] ListarClientes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/AltaEvento", ReplyAction="http://tempuri.org/IServicioEvento/AltaEventoResponse")]
+        void AltaEvento(EntidadesCompartidas.Evento p);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ComprobarEstadoEvento", ReplyAction="http://tempuri.org/IServicioEvento/ComprobarEstadoEventoResponse")]
+        void ComprobarEstadoEvento(EntidadesCompartidas.Evento UnEvento, System.DateTime fecha1, System.DateTime fecha2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BajaEvento", ReplyAction="http://tempuri.org/IServicioEvento/BajaEventoResponse")]
+        void BajaEvento(EntidadesCompartidas.Evento e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarEvento", ReplyAction="http://tempuri.org/IServicioEvento/BuscarEventoResponse")]
+        EntidadesCompartidas.Evento BuscarEvento(int IdEvento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarCategoria", ReplyAction="http://tempuri.org/IServicioEvento/BuscarCategoriaResponse")]
+        EntidadesCompartidas.Categoria BuscarCategoria(string NombreCategoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarCategorias", ReplyAction="http://tempuri.org/IServicioEvento/ListarCategoriasResponse")]
+        EntidadesCompartidas.Categoria[] ListarCategorias();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarEventosOrdenFecha", ReplyAction="http://tempuri.org/IServicioEvento/ListarEventosOrdenFechaResponse")]
+        EntidadesCompartidas.Evento[] ListarEventosOrdenFecha();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarEventosOrganizador", ReplyAction="http://tempuri.org/IServicioEvento/ListarEventosOrganizadorResponse")]
+        EntidadesCompartidas.Evento[] ListarEventosOrganizador(string CiOrganizador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarEventosReservados", ReplyAction="http://tempuri.org/IServicioEvento/ListarEventosReservadosResponse")]
+        EntidadesCompartidas.Evento[] ListarEventosReservados();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarEventosxArea", ReplyAction="http://tempuri.org/IServicioEvento/ListarEventosxAreaResponse")]
+        EntidadesCompartidas.Evento[] ListarEventosxArea(int IdArea);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -158,6 +242,78 @@ namespace MVCFinal.Maps {
         
         public void BajaLugar(EntidadesCompartidas.Lugar l) {
             base.Channel.BajaLugar(l);
+        }
+        
+        public EntidadesCompartidas.Lugar[] ListarLugares() {
+            return base.Channel.ListarLugares();
+        }
+        
+        public EntidadesCompartidas.Lugar[] ListarLugaresDisponibles() {
+            return base.Channel.ListarLugaresDisponibles();
+        }
+        
+        public EntidadesCompartidas.Lugar[] ListarLugaresCiudad(string pNombreCiudad) {
+            return base.Channel.ListarLugaresCiudad(pNombreCiudad);
+        }
+        
+        public EntidadesCompartidas.Lugar BuscarMapaLugar(int IdMapa) {
+            return base.Channel.BuscarMapaLugar(IdMapa);
+        }
+        
+        public void AltaArea(EntidadesCompartidas.Area a) {
+            base.Channel.AltaArea(a);
+        }
+        
+        public void ModificarArea(EntidadesCompartidas.Area a) {
+            base.Channel.ModificarArea(a);
+        }
+        
+        public EntidadesCompartidas.Area BuscarArea(int IdArea) {
+            return base.Channel.BuscarArea(IdArea);
+        }
+        
+        public EntidadesCompartidas.Area BuscarAreaPorNombre(string NombreArea) {
+            return base.Channel.BuscarAreaPorNombre(NombreArea);
+        }
+        
+        public void AltaPuntodeArea(EntidadesCompartidas.Area a, EntidadesCompartidas.Punto p) {
+            base.Channel.AltaPuntodeArea(a, p);
+        }
+        
+        public void BajaArea(EntidadesCompartidas.Area a) {
+            base.Channel.BajaArea(a);
+        }
+        
+        public EntidadesCompartidas.Area[] ListarAreasDeMapa(int IdMapa) {
+            return base.Channel.ListarAreasDeMapa(IdMapa);
+        }
+        
+        public EntidadesCompartidas.Punto[] ListarPuntosDeUnArea(EntidadesCompartidas.Area a) {
+            return base.Channel.ListarPuntosDeUnArea(a);
+        }
+        
+        public void AltaAlquiler(EntidadesCompartidas.Alquiler e) {
+            base.Channel.AltaAlquiler(e);
+        }
+        
+        public void BajaAlquiler(EntidadesCompartidas.Alquiler e) {
+            base.Channel.BajaAlquiler(e);
+        }
+        
+        public EntidadesCompartidas.Alquiler BuscarAlquiler(int IdAlquiler) {
+            return base.Channel.BuscarAlquiler(IdAlquiler);
+        }
+        
+        public EntidadesCompartidas.Alquiler[] ListarAlquileres() {
+            return base.Channel.ListarAlquileres();
+        }
+        
+        public EntidadesCompartidas.Alquiler[] ListarAlquileresArea(int IdArea) {
+            return base.Channel.ListarAlquileresArea(IdArea);
+        }
+        
+        public EntidadesCompartidas.Alquiler[] ListarAlquileresOrganizador(string Ci) {
+            return base.Channel.ListarAlquileresOrganizador(Ci);
         }
         
         public void AltaMapa(EntidadesCompartidas.Mapa m) {
@@ -242,6 +398,46 @@ namespace MVCFinal.Maps {
         
         public EntidadesCompartidas.Cliente[] ListarClientes() {
             return base.Channel.ListarClientes();
+        }
+        
+        public void AltaEvento(EntidadesCompartidas.Evento p) {
+            base.Channel.AltaEvento(p);
+        }
+        
+        public void ComprobarEstadoEvento(EntidadesCompartidas.Evento UnEvento, System.DateTime fecha1, System.DateTime fecha2) {
+            base.Channel.ComprobarEstadoEvento(UnEvento, fecha1, fecha2);
+        }
+        
+        public void BajaEvento(EntidadesCompartidas.Evento e) {
+            base.Channel.BajaEvento(e);
+        }
+        
+        public EntidadesCompartidas.Evento BuscarEvento(int IdEvento) {
+            return base.Channel.BuscarEvento(IdEvento);
+        }
+        
+        public EntidadesCompartidas.Categoria BuscarCategoria(string NombreCategoria) {
+            return base.Channel.BuscarCategoria(NombreCategoria);
+        }
+        
+        public EntidadesCompartidas.Categoria[] ListarCategorias() {
+            return base.Channel.ListarCategorias();
+        }
+        
+        public EntidadesCompartidas.Evento[] ListarEventosOrdenFecha() {
+            return base.Channel.ListarEventosOrdenFecha();
+        }
+        
+        public EntidadesCompartidas.Evento[] ListarEventosOrganizador(string CiOrganizador) {
+            return base.Channel.ListarEventosOrganizador(CiOrganizador);
+        }
+        
+        public EntidadesCompartidas.Evento[] ListarEventosReservados() {
+            return base.Channel.ListarEventosReservados();
+        }
+        
+        public EntidadesCompartidas.Evento[] ListarEventosxArea(int IdArea) {
+            return base.Channel.ListarEventosxArea(IdArea);
         }
     }
 }

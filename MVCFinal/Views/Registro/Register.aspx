@@ -75,59 +75,36 @@
         <form  runat="server">
             <% using (Html.BeginForm())
                        { %>
-          <div class="form-group form-material floating">
-              <label class="floating-label" for="Nombre">Name</label>
-             <input type="text" name="Nombre" id="Nombre" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el nombre')" class="form-control empty" />
-            
-          </div>
-          <div class="form-group form-material floating">
-            <input type="text" name="Email" id="Email" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el correo electronico')" class="form-control empty" />
-            <label class="floating-label" for="Email">Email</label>
-          </div>
-             <div class="form-group form-material floating">
-                <input type="text" name="Usuario" id="Usuario" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el usuario')" class="form-control empty" />
-            <label class="floating-label" for="Usuario">User</label>
-          </div>
-
-          <div class="form-group form-material floating">
+            <div class="form-material form-group">
+              <label class=" floating-label-static" for="Nombre">Name</label>
+             <input type="text" required="required" name="Nombre" id="Nombre" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el nombre')" class="form-control empty" />
+            </div>
+            <div class="form-material form-group">
+             <label class="floating-label-static" for="Email">Email</label>
+            <input type="text" name="Email" required="required" id="Email" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el correo electronico')" class="form-control empty" />
+           </div>
+         
+          <div class="form-material form-group">
+                 <label class="floating-label-static" for="Usuario">User</label>
+                <input type="text" name="Usuario" id="Usuario" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar el usuario')" class="form-control empty" />
+            </div>
+        
+            <div class="form-material form-group">
+              <label class="floating-label-static" for="Password">Password</label>
               <input required="required" type="password" pattern=".{7,}"
         title="La contraseña debe contener mas de 7 caracteres " id="Password" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar una contraseña')" class="form-control empty" name="Password">
-            <label class="floating-label" for="Password">Password</label>
-          </div>
-
-            <div class="form-group form-material floating">
-            <input type="text" name="Ci" oninput="setCustomValidity('')" id="Ci" oninvalid="setCustomValidity('Se requiere ingresar la cedula')"  class="form-control empty" />
-                 <label class="floating-label" for="Ci">Writ Identity</label>
-          </div>
-            <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="radio" name="radio" /><p style="font-size:0.7em;" >Cliente</p>
-                                <i class="fa fa-info-circle small glyphicon-resize-small"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="radio" name="radio1"  /><p style="font-size:0.7em;">Dueño</p>
-                                <i class="fa fa-info-circle glyphicon-resize-small small"></i>
-                                </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="radio" name="radio2" /><p style="font-size:0.7em;">Organizador</p>
-                                <i class="fa fa-info-circle small glyphicon-resize-small"></i>
-                            </div>
-                            </div>
-          <div class="form-group clearfix">
-            <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
-              <input type="checkbox" id="inputCheckbox" name="term">
-              <label for="inputCheckbox"></label>
             </div>
-          </div>
+
+         <div class="form-material form-group">
+            <label class="floating-label-static" for="Ci">Writ Identity</label>
+            <input type="text" required="required" name="Ci" oninput="setCustomValidity('')" id="Ci" oninvalid="setCustomValidity('Se requiere ingresar la cedula')"  class="form-control" />
+            </div>    
+                  
           <input type="submit" class="btn btn-primary btn-block waves-effect waves-light" value="Register Now!" name="action" />
             <% } %>
         </form>
           
-        <p>Have account already? Please go to <a href="../Logueo/Login">Sign In</a></p>
+        <p>Have account already? Please go to <a href="../../Content/Portada/login.jpg">Sign In</a></p>
 
         <footer class="page-copyright">
           <p>WEBSITE BY UBICATE!</p>

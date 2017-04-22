@@ -41,6 +41,25 @@ namespace Wcf_Sistema
             return _Lugar;
         }
 
+         List<Lugar>  IServicioEvento.ListarLugares()
+        {
+            return FabricaLogica.getLogicaLugar().ListarLugares();
+        }
+
+          List<Lugar> IServicioEvento.ListarLugaresDisponibles()
+         {
+             return FabricaLogica.getLogicaLugar().ListarLugaresDisponibles();
+         }
+          List<Lugar> IServicioEvento.ListarLugaresCiudad(string pNombreCiudad)
+         {
+             return FabricaLogica.getLogicaLugar().ListarLugaresCiudad(pNombreCiudad);
+         }
+
+          Lugar IServicioEvento.BuscarMapaLugar(int IdMapa)
+         {
+             return FabricaLogica.getLogicaLugar().BuscarMapaLugar(IdMapa);
+         }
+
         #endregion
 
         #region Mapa
@@ -67,6 +86,77 @@ namespace Wcf_Sistema
         void IServicioEvento.BajaMapa(Mapa m)
         {
             FabricaLogica.getLogicaMapa().BajaMapa(m);
+        }
+
+        #endregion
+
+        #region Alquiler
+
+         void IServicioEvento.AltaAlquiler(Alquiler e)
+        {
+            FabricaLogica.getLogicaAlquiler().AltaAlquiler(e);
+        }
+         void IServicioEvento.BajaAlquiler(Alquiler e)
+        {
+            FabricaLogica.getLogicaAlquiler().BajaAlquiler(e);
+        }
+
+         Alquiler IServicioEvento.BuscarAlquiler(int IdAlquiler)
+        {
+            return FabricaLogica.getLogicaAlquiler().BuscarAlquiler(IdAlquiler);
+        }
+         List<Alquiler> IServicioEvento.ListarAlquileres()
+        {
+            return FabricaLogica.getLogicaAlquiler().ListarAlquileres();
+        }
+         List<Alquiler> IServicioEvento.ListarAlquileresArea(int IdArea)
+        {
+            return FabricaLogica.getLogicaAlquiler().ListarAlquileresArea(IdArea);
+        }
+
+         List<Alquiler> IServicioEvento.ListarAlquileresOrganizador(string Ci)
+        {
+            return FabricaLogica.getLogicaAlquiler().ListarAlquileresOrganizador(Ci);
+        }
+
+
+
+        #endregion
+
+        #region Area
+
+        void IServicioEvento.AltaArea(Area a)
+        {
+            FabricaLogica.getLogicaArea().AltaArea(a);
+        }
+         void IServicioEvento.ModificarArea(Area a)
+        {
+            FabricaLogica.getLogicaArea().ModificarArea(a);
+        }
+         Area IServicioEvento.BuscarArea(int IdArea)
+        {
+            return FabricaLogica.getLogicaArea().BuscarArea(IdArea);
+        }
+
+         Area IServicioEvento.BuscarAreaPorNombre(string NombreArea)
+        {
+            return FabricaLogica.getLogicaArea().BuscarAreaPorNombre(NombreArea);
+        }
+         void IServicioEvento.AltaPuntodeArea(Area a, Punto p)
+        {
+            FabricaLogica.getLogicaArea().AltaPuntodeArea(a, p);
+        }
+         void IServicioEvento.BajaArea(Area a)
+        {
+            FabricaLogica.getLogicaArea().BajaArea(a);
+        }
+        List<Area> IServicioEvento.ListarAreasDeMapa(int IdMapa)
+        {
+            return FabricaLogica.getLogicaArea().ListarAreasDeMapa(IdMapa);
+        }
+        List<Punto> IServicioEvento.ListarPuntosDeUnArea(Area a)
+        {
+            return FabricaLogica.getLogicaArea().ListarPuntosDeUnArea(a);
         }
 
         #endregion
@@ -199,6 +289,51 @@ namespace Wcf_Sistema
         List<Cliente> IServicioEvento.ListarClientes()
         {
             return FabricaLogica.getLogicaUsuario().ListarClientes();
+        }
+
+        #endregion
+
+        #region Evento
+
+         void IServicioEvento.AltaEvento(Evento p)
+        {
+            FabricaLogica.getLogicaEvento().AltaEvento(p);
+        }
+         void IServicioEvento.ComprobarEstadoEvento(Evento UnEvento, DateTime fecha1, DateTime fecha2)
+        {
+            FabricaLogica.getLogicaEvento().ComprobarEstadoEvento(UnEvento, fecha1, fecha2);
+        }
+         void IServicioEvento.BajaEvento(Evento e)
+        {
+            FabricaLogica.getLogicaEvento().BajaEvento(e);
+        }
+         Evento IServicioEvento.BuscarEvento(int IdEvento)
+        {
+            return FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+        }
+         Categoria IServicioEvento.BuscarCategoria(string NombreCategoria)
+        {
+            return FabricaLogica.getLogicaEvento().BuscarCategoria(NombreCategoria);
+        }
+         List<Categoria> IServicioEvento.ListarCategorias()
+        {
+            return FabricaLogica.getLogicaEvento().ListarCategorias();
+        }
+        List<Evento> IServicioEvento.ListarEventosOrdenFecha()
+        {
+            return FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+        }
+         List<Evento> IServicioEvento.ListarEventosOrganizador(string CiOrganizador)
+        {
+            return FabricaLogica.getLogicaEvento().ListarEventosOrganizador(CiOrganizador);
+        }       
+        List<Evento> IServicioEvento.ListarEventosReservados()
+        {
+            return FabricaLogica.getLogicaEvento().ListarEventosReservados();
+        }
+         List<Evento> IServicioEvento.ListarEventosxArea(int IdArea)
+        {
+            return FabricaLogica.getLogicaEvento().ListarEventosxArea(IdArea);
         }
 
         #endregion

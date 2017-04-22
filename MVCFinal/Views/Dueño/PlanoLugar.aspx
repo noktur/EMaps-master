@@ -250,8 +250,6 @@
              });
          }
 
-
-
         function initialize()
          {
 
@@ -272,7 +270,6 @@
             }
 
          }
-
 
           function ListarAreas()
          {
@@ -307,8 +304,6 @@
                     
                      dibujo.setMap(map);
 
-
-
                  });
 
              }
@@ -317,7 +312,6 @@
              }
 
          }
-
 
            </script>
     

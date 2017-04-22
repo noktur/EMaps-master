@@ -78,7 +78,7 @@ namespace Persistencia.Clases_Trabajo
             }
         }
 
-        public Ciudad BuscarCiudad(String NombreCiudad)
+        public Ciudad BuscarCiudad(string NombreCiudad)
         {
             Ciudad UnaCiudad = null;
 

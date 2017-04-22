@@ -9,14 +9,15 @@
         <meta name="description" content="Ubicate!"> 
         <meta name="author" content=""> 
         <title> Landing Page | Ubicate!</title>         
-        <link rel="apple-touch-icon" href="http://getbootstrapadmin.com/remark/material/iconbar/assets/images/apple-touch-icon.png"> 
-        <link rel="shortcut icon" href="http://getbootstrapadmin.com/remark/material/iconbar/assets/images/favicon.ico"> 
         
         <!-- Stylesheets -->         
         
         <link rel="stylesheet" href="../../Content/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="../../Content/css/bootstrap-extend.min.css"> 
         <link rel="stylesheet" href="../../Content/css/site.min.css">        
+
+         <script src="../../Content/js/jquery-2.2.3.js" type="text/javascript"></script>    
+         <script src="../../Content/js/jquery-2.2.3.min.js" type="text/javascript"></script>     
         
         <!-- Plugins -->         
         
@@ -75,10 +76,15 @@
 
 
         <% } else if (Session["Organizador"] != null) { %>  
-
+  
+                <% Html.RenderPartial("NavOrganizador"); %>
+                 <% Html.RenderPartial("SidebarOrganizador"); %> 
+                
 
         <% } else if (Session["Cliente"] != null) { %>
 
+                <% Html.RenderPartial("NavCliente"); %>
+                 <% Html.RenderPartial("SidebarCliente"); %> 
 
         <% } %>
 
@@ -112,23 +118,20 @@
          <asp:ContentPlaceHolder ID="head" runat="server">
                         </asp:ContentPlaceHolder>         
         <!-- Core  -->         
-        <script src="../../Content/js/jquery.min.js"></script>         
-        <script src="../../Content/js/bootstrap.min.js"></script>         
-        <script src="../../Content/js/animsition.min.js"></script>         
-        <script src="../../Content/js/asscrollable.min.js"></script>         
-        <script src="../../Content/js/jquery.mousewheel.min.js"></script>         
+    
+        <script src="../../Content/js/bootstrap.min.js"></script>                 
+        <script src="../../Content/js/jquery.mousewheel.min.js"></script>    
+                <script src="../../Content/js/animsition.min.js"></script>       
         <script src="../../Content/js/jquery.asScrollable.all.min.js"></script>         
         <script src="../../Content/js/jquery-asHoverScroll.min.js"></script>         
         <script src="../../Content/js/waves.min.js"></script>         
         <!-- Plugins -->         
         <script src="../../Content/js/switchery.min.js"></script>         
         <script src="../../Content/js/intro.min.js"></script>         
-        <script src="../../Content/js/screenfull.min.js"></script>         
+        <script src="../../Content/js/screenfull.min.js"></script>   
+        <script src="../../Content/js/jquery.matchHeight-min.js"></script>               
         <script src="../../Content/js/jquery-slidePanel.min.js"></script>         
-        <!-- Plugins For This Page -->         
-        <script src="../../Content/js/chartist.min.js"></script>         
-        <script src="../../Content/js/chartist-plugin-tooltip.min.js"></script>                 
-        <script src="../../Content/js/matchheight.min.js"></script>         
+        <!-- Plugins For This Page -->             
         <script src="../../Content/js/jquery.peity.min.js"></script>         
         <!-- Scripts -->         
         <script src="../../Content/js/core.min.js"></script>         
@@ -138,13 +141,11 @@
         <script src="../../Content/js/sidebar.min.js"></script>         
         <script src="../../Content/js/config-colors.min.js"></script>         
         <script src="../../Content/js/config-tour.min.js"></script>         
-        <script src="../../Content/js/asscrollable.min.js"></script>         
-        <script src="../../Content/js/animsition.min.js"></script>         
+        <script src="../../Content/js/asscrollable.min.js"></script>                 
         <script src="../../Content/js/slidepanel.min.js"></script>                  
         <script src="../../Content/js/tabs.min.js"></script>         
         <script src="../../Content/js/matchheight.min.js"></script>              
-        <script src="../../Content/js/peity.min.js"></script>         
-        <script src="../../Content/js/v1.min.js"></script>         
-        <div class="jvectormap-tip"></div>         
+        <script src="../../Content/js/peity.min.js"></script> 
+        <script src="../../Content/js/v1.min.js"></script>                            
     </body>     
 </html>

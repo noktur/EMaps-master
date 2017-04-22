@@ -15,6 +15,25 @@ namespace MVCFinal.Controllers
     {
         //
 
+        Maps.IServicioEvento _ServicioWCF = null;
+
+        private IServicioEvento CreoServicio()
+        {
+            try
+            {
+                if (_ServicioWCF == null)
+
+                    _ServicioWCF = new ServicioEventoClient();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+            }
+            return _ServicioWCF;
+        }
+
+        
+        
         public static EntidadesCompartidas.Ciudad convertirModelCiudad(MVCFinal.Models.CiudadModel model)
         {
             Maps.IServicioEvento _ServicioWCF = new ServicioEventoClient();
@@ -25,10 +44,10 @@ namespace MVCFinal.Controllers
             p.CoordenadaY = model.CoordenadaY;
             p.UnPais = _ServicioWCF.BuscarPais(model.NombrePais);
 
+            
             return p;
         }
-
-
+        
         // GET: /Admin/
 
         [HttpPost]
@@ -37,6 +56,8 @@ namespace MVCFinal.Controllers
         {
             try
             {
+
+              
                 PaisModel Pais = (PaisModel)Session["PaisActual"];
                 
 
@@ -71,7 +92,7 @@ namespace MVCFinal.Controllers
             try
             {
 
-                List<EntidadesCompartidas.Evento> lista = Logica.FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+                List<EntidadesCompartidas.Evento> lista = CreoServicio().ListarEventosOrdenFecha().ToList();
 
                Evento.milista = lista;
                 return View(Evento);
@@ -168,6 +189,16 @@ namespace MVCFinal.Controllers
              a.Nombre = miAdmin.Nombre ;
              a.Usuario = miAdmin.NombreUsuario;
 
+            
+            
+
+             //Cargo la lista de feedback por usuario 
+             List<FeedbackEvento> ListFeddback =FabricaLogica.getLogicaFeedbackEvento().ListarMensajesFeedbackEvento();
+
+                                   
+             Session["ListFeedback"] = ListFeddback;
+
+
             return View(a);
 
             //}
@@ -186,13 +217,21 @@ namespace MVCFinal.Controllers
             //}
             //else
             //{
-                AdminModel miAdmin =(AdminModel)Session["Admin"];
+                EntidadesCompartidas.Admin miAdmin =(Admin)Session["Admin"];
 
                 
                 string JsonAdmin = JsonConvert.SerializeObject(miAdmin);
-                Session["AdminJson"] = JsonAdmin;   
+                Session["AdminJson"] = JsonAdmin;
 
-                return View(miAdmin);
+                MVCFinal.Models.AdminModel a = new AdminModel();
+                a.Ci = miAdmin.CI;
+                a.Password = miAdmin.Contraseña;
+                a.Email = miAdmin.Email; ;
+                a.Nombre = miAdmin.Nombre;
+                a.Usuario = miAdmin.NombreUsuario;
+                
+
+                return View(a);
 
             //}
 
@@ -209,7 +248,7 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Evento evento = new Evento();
 
-                evento = Logica.FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+                evento = CreoServicio().BuscarEvento(IdEvento);
 
                 EventoModel model=new EventoModel();
 
@@ -313,7 +352,7 @@ namespace MVCFinal.Controllers
                 
 
 
-               Logica.FabricaLogica.getLogicaUsuario().Modificar((Usuario)admin);
+               CreoServicio().ModificarUsuario((Usuario)admin);
 
 
                 return RedirectToAction("Principal","Admin");
@@ -323,29 +362,6 @@ namespace MVCFinal.Controllers
 
             return View();
         }
-
-
-
-
-
-
-        Maps.IServicioEvento _ServicioWCF = null;
-
-        private IServicioEvento CreoServicio()
-        {
-            try
-            {
-                if (_ServicioWCF == null)
-
-                    _ServicioWCF = new ServicioEventoClient();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
-            }
-            return _ServicioWCF;
-        }
-
 
 
 
@@ -392,10 +408,10 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Pais pais = new EntidadesCompartidas.Pais();
 
-                pais = FabricaLogica.getLogicaUbicacion().BuscarPais(NombrePais);
+                pais = CreoServicio().BuscarPais(NombrePais);
 
 
-                FabricaLogica.getLogicaUbicacion().Eliminar(pais);
+                CreoServicio().EliminarUbicacion(pais);
 
                 return View();
 
@@ -420,10 +436,10 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Ciudad ciudad = new EntidadesCompartidas.Ciudad();
 
-                ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(NombreCiudad);
+                ciudad = CreoServicio().BuscarCiudad(NombreCiudad);
 
 
-                FabricaLogica.getLogicaUbicacion().Eliminar(ciudad);
+                CreoServicio().EliminarUbicacion(ciudad);
 
                 return View();
 

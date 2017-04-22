@@ -54,7 +54,14 @@ namespace MVCFinal.Controllers
                 Usu = CreoServicio().Login(Usuario.Usuario, Usuario.Password);
 
 
-                if (Usu is EntidadesCompartidas.Dueño)
+
+                if(Usu == null) 
+                {
+                    Session["ErrorUsu"] = Usu;
+                    return View("Login");
+                
+                }
+                else if (Usu is EntidadesCompartidas.Dueño)
                 {
                     Session["Dueño"] = Usu;
                     return RedirectToAction("Principal", "Dueño");
@@ -71,7 +78,7 @@ namespace MVCFinal.Controllers
                 {
                     Session["Admin"] = Usu;
 
-                    return RedirectToAction("ModificarPerfil1", "Admin");
+                    return RedirectToAction("ControlPaises", "Admin");
                 }
                 else if (Usu is EntidadesCompartidas.Organizador)
                 {
@@ -79,6 +86,7 @@ namespace MVCFinal.Controllers
 
                     return RedirectToAction("Principal", "Organizador");
                 }
+
 
 
                 return View();

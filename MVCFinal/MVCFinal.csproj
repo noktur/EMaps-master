@@ -183,11 +183,15 @@
   <ItemGroup>
     <Content Include="Content\css\animsition.min.css" />
     <Content Include="Content\css\asScrollable.min.css" />
+    <Content Include="Content\css\blocks.css" />
     <Content Include="Content\css\bootstrap-extend.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\brand-icons.min.css" />
     <Content Include="Content\css\chartist-plugin-tooltip.min.css" />
     <Content Include="Content\css\chartist.min.css" />
+    <Content Include="Content\css\component.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\demo.css" />
     <Content Include="Content\css\errors.min.css" />
     <Content Include="Content\css\flag-icon.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
@@ -200,9 +204,16 @@
     <Content Include="Content\css\site.min.css" />
     <Content Include="Content\css\skintools.min.css" />
     <Content Include="Content\css\slidePanel.min.css" />
+    <Content Include="Content\css\style-library-1.css" />
     <Content Include="Content\css\switchery.min.css" />
     <Content Include="Content\css\v1.min.css" />
     <Content Include="Content\css\waves.min.css" />
+    <Content Include="Content\image\html5.png" />
+    <Content Include="Content\image\logo-bootstrap.png" />
+    <Content Include="Content\image\Logo-Google-Maps-300x170.jpg" />
+    <Content Include="Content\image\logo-jquery.png" />
+    <Content Include="Content\image\microsoft_-net_logo.jpg" />
+    <Content Include="Content\image\mysql_logo-300x170.jpg" />
     <Content Include="Content\js\animate-list.min.js" />
     <Content Include="Content\js\animsition.min%282%29.js" />
     <Content Include="Content\js\animsition.min.js" />
@@ -215,6 +226,8 @@
     <Content Include="Content\js\config-tour.min.js" />
     <Content Include="Content\js\core.min.js" />
     <Content Include="Content\js\intro.min.js" />
+    <Content Include="Content\js\jquery-2.2.3.js" />
+    <Content Include="Content\js\jquery-2.2.3.min.js" />
     <Content Include="Content\js\jquery-asHoverScroll.min.js" />
     <Content Include="Content\js\jquery-asScroll.min.js" />
     <Content Include="Content\js\jquery-jvectormap-world-mill-en.js" />
@@ -246,19 +259,12 @@
     <Content Include="Content\js\v1.min.js" />
     <Content Include="Content\js\waves.min.js" />
     <Content Include="Content\Portada\1.jpg" />
-    <Content Include="Content\Portada\1.png" />
     <Content Include="Content\Portada\2.jpg" />
-    <Content Include="Content\Portada\2.png" />
     <Content Include="Content\Portada\3.jpg" />
-    <Content Include="Content\Portada\3.png" />
     <Content Include="Content\Portada\4.jpg" />
-    <Content Include="Content\Portada\4.png" />
     <Content Include="Content\Portada\5.jpg" />
-    <Content Include="Content\Portada\5.png" />
     <Content Include="Content\Portada\6.jpg" />
-    <Content Include="Content\Portada\6.png" />
     <Content Include="Content\Portada\7.jpg" />
-    <Content Include="Content\Portada\7.png" />
     <Content Include="Content\Portada\animate.css" />
     <Content Include="Content\Portada\animate.min.css" />
     <Content Include="Content\Portada\bootstrap.min.css" />
@@ -341,6 +347,11 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Properties\DataSources\EntidadesCompartidas.Alquiler.datasource" />
+    <Content Include="Properties\DataSources\EntidadesCompartidas.Area.datasource" />
+    <Content Include="Properties\DataSources\EntidadesCompartidas.Punto.datasource" />
+    <Content Include="Properties\DataSources\EntidadesCompartidas.Categoria.datasource" />
+    <Content Include="Properties\DataSources\EntidadesCompartidas.Evento.datasource" />
     <None Include="Service References\Maps\ServicioEvento.disco" />
     <None Include="Service References\Maps\configuration91.svcinfo" />
     <None Include="Service References\Maps\configuration.svcinfo" />
@@ -354,7 +365,8 @@
     <Content Include="Views\Admin\ControlLugares.aspx" />
     <Content Include="Views\Admin\ControlPaises.aspx" />
     <Content Include="Views\Admin\ModificarPerfil.aspx" />
-    <Content Include="Views\Admin\ModificarPerfil1.aspx" />
+    <Content Include="Views\Dueño\GalleryLugar.aspx" />
+    <Content Include="Views\Dueño\UpgradeDueño.aspx" />
     <Content Include="Views\ElCliente\DetalleEvento.aspx" />
     <Content Include="Views\ElCliente\ImprimirEntrada.aspx" />
     <Content Include="Views\Dueño\AdministrarLugares.aspx" />
@@ -362,20 +374,32 @@
     <Content Include="Views\Dueño\PlanoLugar.aspx" />
     <Content Include="Views\Dueño\Principal.aspx" />
     <Content Include="Views\ElCliente\Principal.aspx" />
+    <Content Include="Views\ElCliente\UpgradeCliente.aspx" />
     <Content Include="Views\ElCliente\VentaEntrada.aspx" />
     <Content Include="Views\Errors\Maintenance.aspx" />
     <Content Include="Views\Logueo\Login.aspx" />
     <Content Include="Views\Organizador\AlquilerAreas.aspx" />
+    <Content Include="Views\Organizador\DetalleAreas.aspx" />
     <Content Include="Views\Organizador\FeedbackOrganizador.aspx" />
     <Content Include="Views\Organizador\Geolocalizacion.aspx" />
     <Content Include="Views\Organizador\Principal.aspx" />
     <Content Include="Views\Organizador\PublicacionEventos.aspx" />
     <Content Include="Views\Errors\Error404.aspx" />
+    <Content Include="Views\Organizador\UpgradeOrganizador.aspx" />
     <Content Include="Views\Portada\FAQ.aspx" />
     <Content Include="Views\Portada\Principal.aspx" />
     <Content Include="Views\Registro\Register.aspx" />
     <Content Include="web.config" />
     <Content Include="Views\Shared\Master.Master" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\NavAdmin.cshtml" />
+    <Content Include="Views\Shared\NavDueño.cshtml" />
+    <Content Include="Views\Shared\SidebarAdmin.cshtml" />
+    <Content Include="Views\Shared\SidebarDueño.cshtml" />
+    <Content Include="Views\Shared\NavOrganizador.cshtml" />
+    <Content Include="Views\Shared\SidebarOrganizador.cshtml" />
+    <Content Include="Views\Shared\NavCliente.cshtml" />
+    <Content Include="Views\Shared\SidebarCliente.cshtml" />
     <None Include="Service References\Maps\ServicioEvento.wsdl" />
     <None Include="Service References\Maps\ServicioEvento.xsd">
       <SubType>Designer</SubType>
@@ -386,15 +410,6 @@
     <None Include="Service References\Maps\ServicioEvento2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\NavAdmin.cshtml" />
-    <Content Include="Views\Shared\NavDueño.cshtml" />
-    <Content Include="Views\Shared\SidebarAdmin.cshtml" />
-    <Content Include="Views\Shared\SidebarDueño.cshtml" />
-    <Content Include="Views\Shared\NavOrganizador.cshtml" />
-    <Content Include="Views\Shared\SidebarOrganizador.cshtml" />
-    <Content Include="Views\Shared\NavCliente.cshtml" />
-    <Content Include="Views\Shared\SidebarCliente.cshtml" />
     <None Include="Views\web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

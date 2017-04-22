@@ -34,8 +34,12 @@ namespace MVCFinal.Controllers
             }
             return _ServicioWCF;
         }
-        
 
+
+        public ActionResult GalleryLugar()
+        {
+            return View();
+        }
 
 
         public ActionResult PlanoLugar()
@@ -55,7 +59,7 @@ namespace MVCFinal.Controllers
                  if (mapa.Areas.Count() > 0)
                  {
 
-                     List<EntidadesCompartidas.Area> listaArea = Logica.FabricaLogica.getLogicaArea().ListarAreasDeMapa(mapa.IdMapa);
+                     List<EntidadesCompartidas.Area> listaArea = CreoServicio().ListarAreasDeMapa(mapa.IdMapa).ToList();
 
 
                      Plano.ListaAreasPlano = listaArea;
@@ -97,6 +101,11 @@ namespace MVCFinal.Controllers
             return View();
         }
 
+        public ActionResult UpgradeDueño()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult CiudadObtenida(String[] nombre)
         {
@@ -133,15 +142,15 @@ namespace MVCFinal.Controllers
 
            Session["Puntos"] = a.PuntosArea;
 
-           FabricaLogica.getLogicaArea().AltaArea(a);
+           CreoServicio().AltaArea(a);
 
-           a = FabricaLogica.getLogicaArea().BuscarAreaPorNombre(a.NombreArea);
+           a = CreoServicio().BuscarAreaPorNombre(a.NombreArea);
 
            a.PuntosArea = (List<Punto>)Session["Puntos"];
             
            foreach(Punto p in a.PuntosArea)
            {
-               FabricaLogica.getLogicaArea().AltaPuntodeArea(a, p);
+               CreoServicio().AltaPuntodeArea(a, p);
            }
 
            a.MapaAsociado.Areas.Add(a);
@@ -163,21 +172,20 @@ namespace MVCFinal.Controllers
             {
 
 
-                LugarModel lugar = new LugarModel();
                 EntidadesCompartidas.Dueño dueño = new Dueño();
                 dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
 
                 EntidadesCompartidas.Lugar l = new EntidadesCompartidas.Lugar();
 
 
-                EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(lugar.Ciudad.Nombre);                
+                EntidadesCompartidas.Ciudad Ciudad = Logica.FabricaLogica.getLogicaUbicacion().BuscarCiudad(milugar.NombreCiudad);                
 
-                l.Nombre = lugar.Nombre;
-                l.Direccion = lugar.Direccion;
+                l.Nombre = milugar.Nombre;
+                l.Direccion = milugar.Direccion;
                 l.UbicacionLugar = Ciudad;
-                l.Descripcion = lugar.Descripcion;
-                l.CoordenadaX = lugar.CoordenadaX;
-                l.CoordenadaY = lugar.CoordenadaY;
+                l.Descripcion = milugar.Descripcion;
+                l.CoordenadaX = milugar.CoordenadaX;
+                l.CoordenadaY = milugar.CoordenadaY;
                 l.DueñoLugar = dueño;
 
                 EntidadesCompartidas.Mapa miMapa = new Mapa();
@@ -195,22 +203,17 @@ namespace MVCFinal.Controllers
 
                 l.MapaAsociado = miMapa;
 
-                if (l.Fotos.Count() > 0)
-                {
-                    l.Fotos = (List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
-                }
-                else
-                {
-                    l.Fotos = null;
-                }
-                
-                Logica.FabricaLogica.getLogicaLugar().AltaLugar(l);
+                CreoServicio().AltaMapa(miMapa);
+
+                CreoServicio().AltaLugar(l);
+
+
 
                 string JsonLugar = JsonConvert.SerializeObject(l);
                 Session["LugarJson"] = JsonLugar;
 
                 Session["LugarActual"] = l;
-                Session["LugarModel"] = lugar;
+                Session["LugarModel"] = milugar;
 
                 return View("AdministrarLugares");
 
@@ -239,8 +242,8 @@ namespace MVCFinal.Controllers
                         dueño = (EntidadesCompartidas.Dueño)Session["Dueño"];
 
 
-                        List<EntidadesCompartidas.Ciudad> listaCiudad = Logica.FabricaLogica.getLogicaUbicacion().ListarCiudades();
-                        List<EntidadesCompartidas.Lugar> listaLugar = Logica.FabricaLogica.getLogicaLugar().ListarLugares();
+                        List<EntidadesCompartidas.Ciudad> listaCiudad = CreoServicio().ListarCiudades().ToList();
+                        List<EntidadesCompartidas.Lugar> listaLugar = CreoServicio().ListarLugares().ToList(); ;
 
                         Lugar.milistaCiudad = listaCiudad;
                         Lugar.milistaLugar = listaLugar;
@@ -300,8 +303,10 @@ namespace MVCFinal.Controllers
 
                 string JsonFotos = JsonConvert.SerializeObject(list);
                 Session["FotosJson"] = JsonFotos;
-                Session["Fotos"] = list;                   
-
+                Session["Fotos"] = list;
+                EntidadesCompartidas.Lugar l = (EntidadesCompartidas.Lugar)Session["LugarActual"];
+                l.Fotos = list;
+               
 
                 return View("AdministrarLugares");
 
@@ -311,5 +316,29 @@ namespace MVCFinal.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action2", MatchFormValue = "Upgrade")]
+        public ActionResult AltaUpgradeCliente()
+        {
+
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "action", MatchFormValue = "Upgrade")]
+        public ActionResult AltaUpgradeOrganizador()
+        {
+
+
+            return View();
+        }
+
+
+
+
     }
 }

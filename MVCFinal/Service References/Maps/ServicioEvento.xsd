@@ -51,10 +51,245 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ListarLugares">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarLugaresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarLugaresResult" nillable="true" type="q5:ArrayOfLugar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarLugaresDisponibles">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarLugaresDisponiblesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarLugaresDisponiblesResult" nillable="true" type="q6:ArrayOfLugar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarLugaresCiudad">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pNombreCiudad" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarLugaresCiudadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarLugaresCiudadResult" nillable="true" type="q7:ArrayOfLugar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarMapaLugar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdMapa" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarMapaLugarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarMapaLugarResult" nillable="true" type="q8:Lugar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="a" nillable="true" type="q9:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaAreaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModificarArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="a" nillable="true" type="q10:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModificarAreaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdArea" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarAreaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarAreaResult" nillable="true" type="q11:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarAreaPorNombre">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NombreArea" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarAreaPorNombreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarAreaPorNombreResult" nillable="true" type="q12:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaPuntodeArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="a" nillable="true" type="q13:Area" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="p" nillable="true" type="q14:Punto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaPuntodeAreaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="a" nillable="true" type="q15:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaAreaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAreasDeMapa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdMapa" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAreasDeMapaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAreasDeMapaResult" nillable="true" type="q16:ArrayOfArea" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPuntosDeUnArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="a" nillable="true" type="q17:Area" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPuntosDeUnAreaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarPuntosDeUnAreaResult" nillable="true" type="q18:ArrayOfPunto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaAlquiler">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="e" nillable="true" type="q19:Alquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaAlquilerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaAlquiler">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="e" nillable="true" type="q20:Alquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaAlquilerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarAlquiler">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdAlquiler" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarAlquilerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarAlquilerResult" nillable="true" type="q21:Alquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileres">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAlquileresResult" nillable="true" type="q22:ArrayOfAlquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileresArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdArea" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileresAreaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAlquileresAreaResult" nillable="true" type="q23:ArrayOfAlquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileresOrganizador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Ci" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarAlquileresOrganizadorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAlquileresOrganizadorResult" nillable="true" type="q24:ArrayOfAlquiler" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AltaMapa">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q5:Mapa" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q25:Mapa" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -66,7 +301,7 @@
   <xs:element name="ModificarMapa">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q6:Mapa" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q26:Mapa" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,14 +320,14 @@
   <xs:element name="BuscarMapaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarMapaResult" nillable="true" type="q7:Mapa" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarMapaResult" nillable="true" type="q27:Mapa" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="BajaMapa">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q8:Mapa" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="m" nillable="true" type="q28:Mapa" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -104,7 +339,7 @@
   <xs:element name="AltaUbicacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q9:Ubicacion" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q29:Ubicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -116,7 +351,7 @@
   <xs:element name="ModificarUbicacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q10:Ubicacion" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q30:Ubicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +363,7 @@
   <xs:element name="EliminarUbicacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q11:Ubicacion" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q31:Ubicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -147,7 +382,7 @@
   <xs:element name="BuscarPaisResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarPaisResult" nillable="true" type="q12:Pais" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarPaisResult" nillable="true" type="q32:Pais" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -155,14 +390,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="pNombrePais" nillable="true" type="xs:string" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="UnPais" nillable="true" type="q13:Pais" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="UnPais" nillable="true" type="q33:Pais" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="BuscarCiudadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarCiudadResult" nillable="true" type="q14:Ciudad" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarCiudadResult" nillable="true" type="q34:Ciudad" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -174,7 +409,7 @@
   <xs:element name="ListarCiudadesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarCiudadesResult" nillable="true" type="q15:ArrayOfCiudad" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarCiudadesResult" nillable="true" type="q35:ArrayOfCiudad" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -186,28 +421,28 @@
   <xs:element name="ListarPaisResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarPaisResult" nillable="true" type="q16:ArrayOfPais" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarPaisResult" nillable="true" type="q36:ArrayOfPais" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListarCiudadesPais">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="UnPais" nillable="true" type="q17:Pais" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="UnPais" nillable="true" type="q37:Pais" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListarCiudadesPaisResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarCiudadesPaisResult" nillable="true" type="q18:ArrayOfCiudad" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarCiudadesPaisResult" nillable="true" type="q38:ArrayOfCiudad" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AltaUsuario">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q19:Usuario" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q39:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -219,7 +454,7 @@
   <xs:element name="ModificarUsuario">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q20:Usuario" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q40:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -231,7 +466,7 @@
   <xs:element name="EliminarUsuario">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q21:Usuario" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="U" nillable="true" type="q41:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -250,7 +485,7 @@
   <xs:element name="BuscarUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarUsuarioResult" nillable="true" type="q22:Usuario" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarUsuarioResult" nillable="true" type="q42:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,7 +500,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="LoginResult" nillable="true" type="q23:Usuario" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="LoginResult" nillable="true" type="q43:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -277,7 +512,7 @@
   <xs:element name="ListarAdminResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAdminResult" nillable="true" type="q24:ArrayOfAdmin" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarAdminResult" nillable="true" type="q44:ArrayOfAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -289,7 +524,7 @@
   <xs:element name="ListarDueñosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarDueñosResult" nillable="true" type="q25:ArrayOfDueño" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarDueñosResult" nillable="true" type="q45:ArrayOfDueño" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -301,7 +536,7 @@
   <xs:element name="ListarOrganizadoresResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarOrganizadoresResult" nillable="true" type="q26:ArrayOfOrganizador" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarOrganizadoresResult" nillable="true" type="q46:ArrayOfOrganizador" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -313,7 +548,137 @@
   <xs:element name="ListarClientesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarClientesResult" nillable="true" type="q27:ArrayOfCliente" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarClientesResult" nillable="true" type="q47:ArrayOfCliente" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaEvento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="p" nillable="true" type="q48:Evento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AltaEventoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComprobarEstadoEvento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="UnEvento" nillable="true" type="q49:Evento" />
+        <xs:element minOccurs="0" name="fecha1" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="fecha2" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComprobarEstadoEventoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaEvento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="e" nillable="true" type="q50:Evento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BajaEventoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarEvento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdEvento" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarEventoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarEventoResult" nillable="true" type="q51:Evento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarCategoria">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NombreCategoria" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarCategoriaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="BuscarCategoriaResult" nillable="true" type="q52:Categoria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarCategorias">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarCategoriasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarCategoriasResult" nillable="true" type="q53:ArrayOfCategoria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosOrdenFecha">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosOrdenFechaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarEventosOrdenFechaResult" nillable="true" type="q54:ArrayOfEvento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosOrganizador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CiOrganizador" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosOrganizadorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarEventosOrganizadorResult" nillable="true" type="q55:ArrayOfEvento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosReservados">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosReservadosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarEventosReservadosResult" nillable="true" type="q56:ArrayOfEvento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosxArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdArea" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarEventosxAreaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/EntidadesCompartidas" minOccurs="0" name="ListarEventosxAreaResult" nillable="true" type="q57:ArrayOfEvento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

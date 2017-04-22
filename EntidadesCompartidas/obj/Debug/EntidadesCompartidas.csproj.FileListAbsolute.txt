@@ -7,3 +7,11 @@ C:\Users\Matias\Desktop\E-Maps\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCo
 C:\Users\Matias\Desktop\E-Maps\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
 C:\Users\Matias\Desktop\E-Maps\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
 C:\Users\Matias\Desktop\E-Maps\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb

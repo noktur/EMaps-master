@@ -17,6 +17,11 @@ namespace MVCFinal.Controllers
             return View();
         }
 
+        public ActionResult Registro()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Register Now!")]

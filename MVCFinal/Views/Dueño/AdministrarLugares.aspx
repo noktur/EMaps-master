@@ -419,7 +419,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      
     <div data-spy="scroll" data-target="nav"> 
-        <form id="form1" runat="server">  
+       
         <section class="content-block contact-1" style="padding-bottom:5px;background-color: whitesmoke; ">         
             <div class="container text-center">
                     <div class="underlined-title">
@@ -432,7 +432,7 @@
                       </div>  
                 <div class="col-md-12">
                     <div class="col-md-8">
-                    <div id="mapa" class="map min-height-300px">
+                    <div style="height:450px; width:100%;" class="templatemo-contact-map" id="mapa">
                      </div>                  
                     </div>
                     <div class="col-md-4 right">
@@ -456,10 +456,9 @@
                            </div>
                           
                         <div>
-                                <div id="miform">  
-                                    <section id="asd">
                          <% using (Html.BeginForm("GuardarLugar","Dueño", FormMethod.Post, new { enctype = "multipart/form-data" }))                           
-                           { %>                  
+                           { %>          
+                             <form id="form1" runat="server">          
                         <div class="form-group">
                                <input name="Direccion" id="Direccion" type="text" class="form-control hidden" /> 
                           </div>
@@ -484,112 +483,20 @@
                                      <div class="form-group">                   
                                          <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png" class="form-control"/>
                                      </div> 
-                              <div class="col-md-12 text-center">          
-                               <button type="submit" class="btn btn-danger" value="Guardar"/>
+                              <div class="form-group">        
+                               <button type="submit" class="btn btn-danger white" value="Guardar"/>
                                 </div> 
-                                        
+                                  </form>      
                         <% } %>
-                                        </section>
-                                    </div>  
                             </div>
-                            </div>             
-                            </div>
-                     
+                        </div>
+                    </div>
                 </div>
-        </section>
-      
-           <section id="content-3-4" class="content-block content-3-4" style="padding-top:15px; padding-bottom:0px; background-color: whitesmoke; ">
-    <div class="container" style="background-color: whitesmoke;">
-        <% if(Session["Fotos"] == null) { %>
-        <div class="col-md-12"  style="background-color: whitesmoke;">
-                <div class="col-md-7" style="background-color: whitesmoke;">
-                <% using (Html.BeginForm("AgregarFoto", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
-                    {  %>
-                <div class="thumbnail" style="border:none;background-color: whitesmoke;">
-                    <div class="caption"> 
-                    <h3>Agregue fotos a su lugar</h3> 
-                        <div class="input-group"> 
-                                <span class="input-group-addon"><i class="fa fa-file-image-o"></i></span> 
-                                <input type="file" id="image1" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se ha ingresado una foto)" name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
-                         
-                        </div>
-                        <p>Aqui podra agregar cada una de sus fotos del lugar de manera de brindar un mayor servicio a sus clientes.</p>
-                        <button type="submit" class="btn btn-primary" name="submit1">Agregar foto</button>
-                    </div>                                          
-                </div> 
-                    <% } %>                            
-            </div>
-            </div>
-        <% } else { %>
-         <div class=" col-md-7" style="background-color: whitesmoke;">
-                <div id="Carousel-FotosLugar" style="height:380px;" class="carousel slide" data-ride="carousel" data-pg-collapsed> 
-                    <!-- Indicators -->                     
-                    <ol class="carousel-indicators"> 
-                        <%  List<EntidadesCompartidas.FotosLugar> foto=(List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
-                            for(int i=0;i<foto.Count;i++) 
-                            { 
-                                %>
-                     <% if(i == 0)
-                        { %>
-                                <li data-target="#Carousel-FotosLugar" data-slide-to="0" class="active"></li>   
-                       <% }
-                      else { %>                 
-                                <li data-target="#Carousel-FotosLugar" data-slide-to="<%= i %>"></li> 
-                         <% } %>                  
-                        <% } %>                        
-                    </ol>                     
-                    <!-- Wrapper for slides -->                     
-                    <div class="carousel-inner" style="height:380px;"> 
-                      <%  List<EntidadesCompartidas.FotosLugar> foto1=(List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
-                            for(int i=0;i<foto1.Count;i++) 
-                            { %>
-                        <% if(i==0) { %>
-                        <div class="item active"> 
-                            <img width="635" height="200"  src="data:image;base64,<%=System.Convert.ToBase64String(foto1[0].Imagen)%>"  /> 
-                            <div class="carousel-caption"> 
-                                <h3><%= foto1[0].NombreFoto  %></h3> 
-                            </div>                             
-                        </div>
-                        <% } else { %> 
-                              <div class="item"> 
-                            <img width="635"  src="data:image;base64,<%=System.Convert.ToBase64String(foto1.ElementAt(i).Imagen)%>" /> 
-                            <div class="carousel-caption"> 
-                                <h3><%= foto1.ElementAt(1).NombreFoto  %></h3> 
-                            </div>                             
-                        </div>
-                        <% } %>
-                        <% } %>                                         
-                    </div>                     
-                    <!-- Controls -->                     
-                    <a class="left carousel-control" href="#Carousel-FotosLugar" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> 
-                    <a class="right carousel-control" href="#Carousel-FotosLugar" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a> 
-                </div> 
-                             
-            </div>
-              
-            <div class="col-md-4" style="border:solid whitesmoke 2px; background-color: whitesmoke;">
-                <% using (Html.BeginForm("AgregarFoto", "Dueño", FormMethod.Post, new { enctype = "multipart/form-data" })) 
-                    {  %>
-                <div class="thumbnail" style="border:none;background-color: whitesmoke;">
-                    <div class="caption"> 
-                        <h3>Agregue fotos a su lugar</h3> 
-                        <div class="input-group"> 
-                                <span class="input-group-addon"><i class="fa fa-file-image-o"></i></span> 
-                                <input type="file" oninput="setCustomValidity('')" oninvalid="setCustomValidity('No ha ingresado el plano')" id="image2" required="required"   name="image1" accept="image/gif, image/jpeg, image/png" class="form-control"> 
-                            </div>
-                        <p>Aqui podra agregar cada una de sus fotos del lugar de manera de brindar un mayor servicio a sus clientes.</p>
-                        <button type="submit" class="btn btn-primary" name="submit1">Agregar foto</button>
-                    </div>                                          
-                </div>  
-                <% } %>               
-            </div>
-        <% } %> 
-            <!-- /.column -->
-        </div>
-        <!-- /.row -->
-    <!-- /.container -->
-</section>    
-     </form>
+                                        </section>
+                     <div class="pull-right" style="padding-right:100px;">
+      <a href="../Dueño/GalleryLugar" type="button" class="btn btn-lg bg-cyan-a100 btn-floating" title="Agregar Imagenes"><i   class="fa fa-image"></i></a>
+        <a href="#" type="button" class="btn btn-lg bg-cyan-a100 btn-floating" title="Dibujar Plano"><i class="fa fa-building"></i></a>
+       </div>
         </div>                     
        
        

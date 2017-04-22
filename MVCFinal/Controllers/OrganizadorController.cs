@@ -17,6 +17,11 @@ namespace MVCFinal.Controllers
             return View();
         }
 
+        public ActionResult DetalleAreas()
+        {
+            return View();
+        }
+
         public ActionResult FeedbackOrganizador()
         {
             if (Session["Organizador"] != null)

@@ -25,7 +25,7 @@
                                 <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de ciudad)" name="NombreCiudad1" id="NombreCiudad1"  />
                                 <span class="input-group-btn"><button class="btn btn-info" onclick="BuscarCiudad()"  type="button">Buscar</button></span>
                                    </div>
-                          <div class="form-group" style="padding-top:10px;">
+                          <div class="form-group">
                                 <input type="text" class="form-control" name="NombreCiudad" id="NombreCiudad" placeholder="Nombre Ciudad..." />
                             </div>
                             <div class="form-group">
@@ -38,8 +38,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" readonly="readonly" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
                             </div>
-                            <input type="submit" id="Guardar" class="btn btn-primary pull-right" name="action" value="Guardar"/>
-                        <input type="submit" id="Eliminar" class="btn btn-primary" name="action" value="Dar de Baja"/>
+                            <input type="submit" id="Guardar" class="btn btn-orange pull-right" name="action" value="Guardar"/>
+                        <input type="submit" id="Eliminar" class="btn btn-orange pull-right" name="action" value="Dar de Baja"/>
                      <% } %>   	
                     </div>
                 </div><!-- /.row -->
@@ -52,6 +52,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+
+
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJiCs0vB2sIBGKclrmhydA4I9uekWOIvk&libraries=places"></script>
     
     
@@ -71,9 +74,6 @@
         var botonGuardar;
         var autocomplete;
         var countryRestrict;
-
-
-
 
 
         jQuery(document).ready(function () {
