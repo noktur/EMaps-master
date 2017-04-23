@@ -40,10 +40,25 @@ namespace Persistencia.Clases_Trabajo
             cmd.Parameters.AddWithValue("pImagen", m.Imagen);
             cmd.Parameters.AddWithValue("pExtension", m.Extension);
 
+            EntidadesCompartidas.Mapa UnMapa = new EntidadesCompartidas.Mapa();
+
+
             try
             {
                 con.Open();
+
+
+                MySqlDataReader oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                   UnMapa = new Mapa((int)oReader["IdMapa"],m.Imagen, m.Nombre,m.Extension);
+                }
+                oReader.Close();
+
+
                 cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
@@ -51,7 +66,9 @@ namespace Persistencia.Clases_Trabajo
             }
             finally
             {
+                
                 con.Close();
+                
             }
         }
 
@@ -70,6 +87,14 @@ namespace Persistencia.Clases_Trabajo
             try
             {
                 con.Open();
+
+                MySqlDataReader oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    EntidadesCompartidas.Mapa UnMapa = new Mapa((int)oReader["IdMapa"], (byte[])oReader["Imagen"], (string)oReader["Nombre"], (string)oReader["extension"]);
+                }
+                oReader.Close();
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

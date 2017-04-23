@@ -31,6 +31,114 @@
   <wsdl:message name="IServicioEvento_BajaLugar_OutputMessage">
     <wsdl:part name="parameters" element="tns:BajaLugarResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugares_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugares" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugares_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugaresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugaresDisponibles_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugaresDisponibles" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugaresDisponibles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugaresDisponiblesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugaresCiudad_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugaresCiudad" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarLugaresCiudad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarLugaresCiudadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarMapaLugar_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarMapaLugar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarMapaLugar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarMapaLugarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:AltaArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AltaAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ModificarArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ModificarArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarAreaPorNombre_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarAreaPorNombre" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarAreaPorNombre_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarAreaPorNombreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaPuntodeArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:AltaPuntodeArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaPuntodeArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AltaPuntodeAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:BajaArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BajaAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAreasDeMapa_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAreasDeMapa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAreasDeMapa_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAreasDeMapaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarPuntosDeUnArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarPuntosDeUnArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarPuntosDeUnArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarPuntosDeUnAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaAlquiler_InputMessage">
+    <wsdl:part name="parameters" element="tns:AltaAlquiler" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaAlquiler_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AltaAlquilerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaAlquiler_InputMessage">
+    <wsdl:part name="parameters" element="tns:BajaAlquiler" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaAlquiler_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BajaAlquilerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarAlquiler_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarAlquiler" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarAlquiler_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarAlquilerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileres_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileres" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileres_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileresArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileresArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileresArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileresAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileresOrganizador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileresOrganizador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarAlquileresOrganizador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAlquileresOrganizadorResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioEvento_AltaMapa_InputMessage">
     <wsdl:part name="parameters" element="tns:AltaMapa" />
   </wsdl:message>
@@ -157,6 +265,66 @@
   <wsdl:message name="IServicioEvento_ListarClientes_OutputMessage">
     <wsdl:part name="parameters" element="tns:ListarClientesResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AltaEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_AltaEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AltaEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ComprobarEstadoEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarEstadoEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ComprobarEstadoEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ComprobarEstadoEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:BajaEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BajaEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BajaEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarCategoria_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarCategoria" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_BuscarCategoria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarCategorias_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarCategorias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosOrdenFecha_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosOrdenFecha" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosOrdenFecha_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosOrdenFechaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosOrganizador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosOrganizador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosOrganizador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosOrganizadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosReservados_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosReservados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosReservados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosReservadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosxArea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosxArea" />
+  </wsdl:message>
+  <wsdl:message name="IServicioEvento_ListarEventosxArea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarEventosxAreaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServicioEvento">
     <wsdl:operation name="AltaLugar">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaLugar" message="tns:IServicioEvento_AltaLugar_InputMessage" />
@@ -173,6 +341,78 @@
     <wsdl:operation name="BajaLugar">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BajaLugar" message="tns:IServicioEvento_BajaLugar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BajaLugarResponse" message="tns:IServicioEvento_BajaLugar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugares">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugares" message="tns:IServicioEvento_ListarLugares_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugaresResponse" message="tns:IServicioEvento_ListarLugares_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugaresDisponibles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugaresDisponibles" message="tns:IServicioEvento_ListarLugaresDisponibles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugaresDisponiblesResponse" message="tns:IServicioEvento_ListarLugaresDisponibles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugaresCiudad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugaresCiudad" message="tns:IServicioEvento_ListarLugaresCiudad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarLugaresCiudadResponse" message="tns:IServicioEvento_ListarLugaresCiudad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarMapaLugar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarMapaLugar" message="tns:IServicioEvento_BuscarMapaLugar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarMapaLugarResponse" message="tns:IServicioEvento_BuscarMapaLugar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AltaArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaArea" message="tns:IServicioEvento_AltaArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/AltaAreaResponse" message="tns:IServicioEvento_AltaArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ModificarArea" message="tns:IServicioEvento_ModificarArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ModificarAreaResponse" message="tns:IServicioEvento_ModificarArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarArea" message="tns:IServicioEvento_BuscarArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarAreaResponse" message="tns:IServicioEvento_BuscarArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarAreaPorNombre">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarAreaPorNombre" message="tns:IServicioEvento_BuscarAreaPorNombre_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarAreaPorNombreResponse" message="tns:IServicioEvento_BuscarAreaPorNombre_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AltaPuntodeArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaPuntodeArea" message="tns:IServicioEvento_AltaPuntodeArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/AltaPuntodeAreaResponse" message="tns:IServicioEvento_AltaPuntodeArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BajaArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BajaArea" message="tns:IServicioEvento_BajaArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BajaAreaResponse" message="tns:IServicioEvento_BajaArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAreasDeMapa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarAreasDeMapa" message="tns:IServicioEvento_ListarAreasDeMapa_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarAreasDeMapaResponse" message="tns:IServicioEvento_ListarAreasDeMapa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPuntosDeUnArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarPuntosDeUnArea" message="tns:IServicioEvento_ListarPuntosDeUnArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarPuntosDeUnAreaResponse" message="tns:IServicioEvento_ListarPuntosDeUnArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AltaAlquiler">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaAlquiler" message="tns:IServicioEvento_AltaAlquiler_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/AltaAlquilerResponse" message="tns:IServicioEvento_AltaAlquiler_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BajaAlquiler">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BajaAlquiler" message="tns:IServicioEvento_BajaAlquiler_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BajaAlquilerResponse" message="tns:IServicioEvento_BajaAlquiler_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarAlquiler">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarAlquiler" message="tns:IServicioEvento_BuscarAlquiler_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarAlquilerResponse" message="tns:IServicioEvento_BuscarAlquiler_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileres">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileres" message="tns:IServicioEvento_ListarAlquileres_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileresResponse" message="tns:IServicioEvento_ListarAlquileres_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileresArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileresArea" message="tns:IServicioEvento_ListarAlquileresArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileresAreaResponse" message="tns:IServicioEvento_ListarAlquileresArea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileresOrganizador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileresOrganizador" message="tns:IServicioEvento_ListarAlquileresOrganizador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarAlquileresOrganizadorResponse" message="tns:IServicioEvento_ListarAlquileresOrganizador_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AltaMapa">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaMapa" message="tns:IServicioEvento_AltaMapa_InputMessage" />
@@ -258,6 +498,46 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarClientes" message="tns:IServicioEvento_ListarClientes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarClientesResponse" message="tns:IServicioEvento_ListarClientes_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AltaEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/AltaEvento" message="tns:IServicioEvento_AltaEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/AltaEventoResponse" message="tns:IServicioEvento_AltaEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarEstadoEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ComprobarEstadoEvento" message="tns:IServicioEvento_ComprobarEstadoEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ComprobarEstadoEventoResponse" message="tns:IServicioEvento_ComprobarEstadoEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BajaEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BajaEvento" message="tns:IServicioEvento_BajaEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BajaEventoResponse" message="tns:IServicioEvento_BajaEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarEvento" message="tns:IServicioEvento_BuscarEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarEventoResponse" message="tns:IServicioEvento_BuscarEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarCategoria">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/BuscarCategoria" message="tns:IServicioEvento_BuscarCategoria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/BuscarCategoriaResponse" message="tns:IServicioEvento_BuscarCategoria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarCategorias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarCategorias" message="tns:IServicioEvento_ListarCategorias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarCategoriasResponse" message="tns:IServicioEvento_ListarCategorias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosOrdenFecha">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosOrdenFecha" message="tns:IServicioEvento_ListarEventosOrdenFecha_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosOrdenFechaResponse" message="tns:IServicioEvento_ListarEventosOrdenFecha_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosOrganizador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosOrganizador" message="tns:IServicioEvento_ListarEventosOrganizador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosOrganizadorResponse" message="tns:IServicioEvento_ListarEventosOrganizador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosReservados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosReservados" message="tns:IServicioEvento_ListarEventosReservados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosReservadosResponse" message="tns:IServicioEvento_ListarEventosReservados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosxArea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosxArea" message="tns:IServicioEvento_ListarEventosxArea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioEvento/ListarEventosxAreaResponse" message="tns:IServicioEvento_ListarEventosxArea_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicioEvento" type="tns:IServicioEvento">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -290,6 +570,168 @@
     </wsdl:operation>
     <wsdl:operation name="BajaLugar">
       <soap:operation soapAction="http://tempuri.org/IServicioEvento/BajaLugar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugares">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarLugares" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugaresDisponibles">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarLugaresDisponibles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarLugaresCiudad">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarLugaresCiudad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarMapaLugar">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarMapaLugar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AltaArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/AltaArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ModificarArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarAreaPorNombre">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarAreaPorNombre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AltaPuntodeArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/AltaPuntodeArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BajaArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BajaArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAreasDeMapa">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarAreasDeMapa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPuntosDeUnArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarPuntosDeUnArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AltaAlquiler">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/AltaAlquiler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BajaAlquiler">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BajaAlquiler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarAlquiler">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarAlquiler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileres">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarAlquileres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileresArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarAlquileresArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlquileresOrganizador">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarAlquileresOrganizador" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -479,6 +921,96 @@
     </wsdl:operation>
     <wsdl:operation name="ListarClientes">
       <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarClientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AltaEvento">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/AltaEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComprobarEstadoEvento">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ComprobarEstadoEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BajaEvento">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BajaEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEvento">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarCategoria">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/BuscarCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCategorias">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosOrdenFecha">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarEventosOrdenFecha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosOrganizador">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarEventosOrganizador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosReservados">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarEventosReservados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEventosxArea">
+      <soap:operation soapAction="http://tempuri.org/IServicioEvento/ListarEventosxArea" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

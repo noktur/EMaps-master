@@ -1,241 +1,107 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterOrganizador.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <form id="Form1">
-     <div class="container bg-offwhite margin-top0 margin-bottom0 pad-bottom0" style="width:100%">
-          
-                <div class="row  bg-offwhite">
-                    <div class="col-md-4 margin-top5 pad-bottom0 margin-bottom0">
-                        <h2 class="text-uppercase" style="font-size:1.1em;font-family:Lora;">Aqui puedes filtrar los datos para la busqueda</h2>
-                        <div id="contact" class="form-container margin-top0 pad-bottom0 pad0 margin-bottom0;height:100%">
-                            <fieldset class="margin-top0 pad-bottom0 pad5 margin-bottom5">
-                             <% using(Html.BeginForm()) { %>
-                                    <div class="form-group">
-                                        <label class="control-label" style="padding-left:5px;">Check in</label>
-                                        <div class='input-group date margin-bottom25' id='Fecha1'>
-                                            <input type="text" id="FechaInicio" name="FechaInicio" class="form-control" />
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" style="padding-left:5px;">Check Out</label>
-                                            <div class='input-group date' id='Fecha2'>
-                                                <input type="text" id="FechaFin" name="FechaFin" class="form-control" />
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group hidden">
-                                       <input name="FechaReservacion" id="FechaReservacion" type="text" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" id="Filtrar" name="action" value="Filtrar Busqueda">
-                                    </div>
-                                <% } %>
-                            </fieldset>
-                        </div>                         
-                        <!-- /.isotope-gallery-container -->                         
-                    </div>
-                    <div class="col-md-8" style="margin-left:0px;margin-right:0px;">
-                        <div id="map" class="map min-height-500px"></div>
-                    </div>
-                </div>
-                <!-- /.container -->
+   <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+
+                 <% using(Html.BeginForm()) { %>
+
+            <div class="panel-heading panel-collapse-trigger collapse" data-toggle="collapse" data-target="#de8fb204-3a80-b158-15e3-1b90b4cd3a29" aria-expanded="false" style="height: 38px;">
+              <h4 class="panel-title"></h4>
             </div>
-            <section class="content-block gallery-1 gallery-1-2 margin-top0 pad0 bg-clouds pad-bottom15">
-                <div class="container" style="width:90%">
-                    <div class="underlined-title">
-                        <hr>
-                        <h2>Gallery Place</h2>
-                    </div>
-                    <!-- /.gallery-filter -->
-                    <div class="row">
-                        <div class="col-md-3 bg-offwhite"> 
-                            <div class="thumbnail">
-                                <div id="carousel1" class="carousel slide" data-ride="carousel"> 
-                                    <!-- Indicators -->                                     
-                                    <ol class="carousel-indicators"> 
-                                        <li data-target="#carousel1" data-slide-to="0" class="active"></li>                                         
-                                        <li data-target="#carousel1" data-slide-to="1"></li>                                         
-                                        <li data-target="#carousel1" data-slide-to="2"></li>                                         
-                                    </ol>                                     
-                                    <!-- Wrapper for slides -->                                     
-                                    <div class="carousel-inner"> 
-                                        <div class="item active"> 
-                                            <img src="../../imagenes de prueba/img4.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 1 title</h3> 
-                                                <p>Slide 1 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img1.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 2 title</h3> 
-                                                <p>Slide 2 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img7.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 3 title</h3> 
-                                                <p>Slide 3 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                    </div>                                     
-                                    <!-- Controls -->                                     
-                                    <a class="left carousel-control" href="#carousel1" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> 
-                                    <a class="right carousel-control" href="#carousel1" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a> 
-                                </div>                                 
-                                <div class="caption"> 
-                                    <h3>Area 1</h3> 
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> </p> 
-                                </div>                                 
-                            </div>                             
-                        </div>
-                        <!-- /.isotope-gallery-container -->
-                        <div class="col-md-3 bg-offwhite"> 
-                            <div class="thumbnail">
-                                <div id="carousel2" class="carousel slide" data-ride="carousel"> 
-                                    <!-- Indicators -->                                     
-                                    <ol class="carousel-indicators"> 
-                                        <li data-target="#carousel2" data-slide-to="0" class="active"></li>                                         
-                                        <li data-target="#carousel2" data-slide-to="1"></li>                                         
-                                        <li data-target="#carousel2" data-slide-to="2"></li>                                         
-                                    </ol>                                     
-                                    <!-- Wrapper for slides -->                                     
-                                    <div class="carousel-inner"> 
-                                        <div class="item active"> 
-                                            <img src="../../imagenes de prueba/img2.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 1 title</h3> 
-                                                <p>Slide 1 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img4.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 2 title</h3> 
-                                                <p>Slide 2 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img6.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 3 title</h3> 
-                                                <p>Slide 3 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                    </div>                                     
-                                    <!-- Controls -->                                     
-                                    <a class="left carousel-control" href="#carousel2" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> 
-                                    <a class="right carousel-control" href="#carousel2" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a> 
-                                </div>                                 
-                                <div class="caption"> 
-                                    <h3>Area 2</h3> 
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> </p> 
-                                </div>                                 
-                            </div>                             
-                        </div>
-                        <div class="col-md-3 bg-offwhite"> 
-                            <div class="thumbnail"> 
-                                <div id="carousel5" class="carousel slide" data-ride="carousel"> 
-                                    <!-- Indicators -->                                     
-                                    <ol class="carousel-indicators"> 
-                                        <li data-target="#carousel5" data-slide-to="0" class="active"></li>                                         
-                                        <li data-target="#carousel5" data-slide-to="1"></li>                                         
-                                        <li data-target="#carousel5" data-slide-to="2"></li>                                         
-                                    </ol>                                     
-                                    <!-- Wrapper for slides -->                                     
-                                    <div class="carousel-inner"> 
-                                        <div class="item active"> 
-                                            <img src="../../imagenes de prueba/img1.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 1 title</h3> 
-                                                <p>Slide 1 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img2.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 2 title</h3> 
-                                                <p>Slide 2 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img5.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 3 title</h3> 
-                                                <p>Slide 3 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                    </div>                                     
-                                    <!-- Controls -->                                     
-                                    <a class="left carousel-control" href="#carousel5" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> 
-                                    <a class="right carousel-control" href="#carousel5" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a> 
-                                </div>
-                                <div class="caption"> 
-                                    <h3>Area 3</h3> 
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> </p> 
-                                </div>                                 
-                            </div>                             
-                        </div>
-                        <div class="col-md-3 bg-offwhite"> 
-                            <div class="thumbnail">
-                                <div id="carousel6" class="carousel slide" data-ride="carousel"> 
-                                    <!-- Indicators -->                                     
-                                    <ol class="carousel-indicators"> 
-                                        <li data-target="#carousel6" data-slide-to="0" class="active"></li>                                         
-                                        <li data-target="#carousel6" data-slide-to="1"></li>                                         
-                                        <li data-target="#carousel6" data-slide-to="2"></li>                                         
-                                    </ol>                                     
-                                    <!-- Wrapper for slides -->                                     
-                                    <div class="carousel-inner"> 
-                                        <div class="item active"> 
-                                            <img src="../../imagenes de prueba/img5.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 1 title</h3> 
-                                                <p>Slide 1 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img8.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 2 title</h3> 
-                                                <p>Slide 2 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                        <div class="item"> 
-                                            <img src="../../imagenes de prueba/img2.jpg" alt="" /> 
-                                            <div class="carousel-caption"> 
-                                                <h3>Slide 3 title</h3> 
-                                                <p>Slide 3 description.</p> 
-                                            </div>                                             
-                                        </div>                                         
-                                    </div>                                     
-                                    <!-- Controls -->                                     
-                                    <a class="left carousel-control" href="#carousel6" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> 
-                                    <a class="right carousel-control" href="#carousel6" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a> 
-                                </div>                                 
-                                <div class="caption"> 
-                                    <h3>Thumbnail label</h3> 
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> </p> 
-                                </div>                                 
-                            </div>                             
-                        </div>
-                        <!-- /.isotope-gallery-container -->
-                        <!-- /.isotope-gallery-container -->
-                        <!-- /.isotope-gallery-container -->
-                        <!-- /.isotope-gallery-container -->
-                        <!-- /.isotope-gallery-container -->
-                        <!-- /.isotope-gallery-container -->
-                    </div>
-                    <!-- /.row -->
+            
+          <div id="406f12c9-12c6-1bf8-3658-f92403704ea5" class="collapse in"></div><div id="de8fb204-3a80-b158-15e3-1b90b4cd3a29" class="collapse in"><div class="panel-body">
+              
+             
+              
+               <div class="form-group">
+                
+                  <select id="seleccion"  class="form-control" name="seleccion">                                                     
+                            <option value="0">Seleccione una ciudad</option>                                                                                      
+                            </select>
+
+              </div>
+
+
+
+          <div class="panel panel-default" data-toggle="panel-collapse" data-open="false">
+            <div class="panel-heading panel-collapse-trigger collapse" data-toggle="collapse" data-target="#6e0479c0-a2b7-6cba-3d91-0506c1a6f8e6" aria-expanded="false" style="height: 38px;">
+              <h4 class="panel-title">Date</h4>
+            </div>
+            
+
+
+            </div></div></div>
+
+
+
+                  <div class="panel-body">
+
+             
+        <div class="form-group">
+            <label class="control-label" style="padding-left:5px;">Check in</label>
+            <div class='input-group date margin-bottom25' id='Fecha1'>
+                <input type="date" id="FechaInicio" name="FechaInicio" class="form-control" />
+                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="padding-left:5px;">Check Out</label>
+                <div class='input-group date' id='Fecha2'>
+                    <input type="date" id="FechaFin" name="FechaFin" class="form-control" />
+                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                 </div>
-                <!-- /.container -->
-            </section>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" id="Filtrar" name="action" value="Filtrar Busqueda"> Shearch Now </button>
+        </div>
+    <% } %>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-9">
+            <% if(Session["ListaLugaresBusqueda"] != null )
+               { List<EntidadesCompartidas.Lugar> a=(List<EntidadesCompartidas.Lugar>)Session["ListaAreaBusqueda"]; 
+                    %>
+
+            <%  foreach(var item in a)
+                {  %>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="media media-clearfix-xs media-clearfix-sm">
+                <div class="media-left">
+                  <p>
+                   
+                      <img src="./Real Estate5_files/photodune-195203-houses-xs.jpg" alt="property" width="150" class="media-object">
+                  
+                       </p>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading margin-v-0-10">
+                    <a href="#"><%= item.Nombre %></a>
+                    <small class="text-grey-400"><i class="fa fa-clock-o fa-fw"></i><%=item.Direccion %> </small>
+                  </h4>
+                  <p>
+                    <span class="label label-grey-100"><i class="fa fa-home fa-fw"></i><%= item.UbicacionLugar.Nombre %></span>
+                    <span class="label label-grey-100"><i class="fa fa-fw icon icon-toilet"></i><%= item.DueñoLugar.Nombre %></span>
+                  </p>
+                  <p class="margin-none"><%= item.Descripcion %></p>
+                </div>
+                  <button type="submit" class="btn btn-primary">More Info !</button>
+
+              </div>
+            </div>
+          </div>
+            <% } %>
+
+            <% } %>
+        </div>
+      </div>
+          
+                
             </form>
 </asp:Content>
 

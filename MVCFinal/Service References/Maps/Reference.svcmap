@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7be434e0-2733-4a8a-a053-0e7d47831e70" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="38969d0f-fc94-4a8b-95b1-a4fdbecb8f4a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost:2115/ServicioEvento.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServicioEvento.xsd" MetadataType="Schema" ID="606d145c-6b15-4865-a0a8-74643c73438e" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServicioEvento1.xsd" MetadataType="Schema" ID="3049097e-490c-43ce-a8e1-980cef4a3d01" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServicioEvento.wsdl" MetadataType="Wsdl" ID="5a17ddf6-f73c-436a-9fac-bc7bf44949fa" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?wsdl" />
-    <MetadataFile FileName="ServicioEvento.disco" MetadataType="Disco" ID="411fefa2-15b5-4102-85b2-de40492af1be" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?disco" />
-    <MetadataFile FileName="ServicioEvento2.xsd" MetadataType="Schema" ID="1252cb84-c79b-4d5f-8d67-a40ad438adff" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioEvento.xsd" MetadataType="Schema" ID="da12fd45-6ede-49e5-b01d-cb8e46ccf16e" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioEvento1.xsd" MetadataType="Schema" ID="dbdc5111-f5bd-47c6-9d55-31ff8d161c8e" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioEvento.wsdl" MetadataType="Wsdl" ID="04eb6eb3-52a9-4cc2-990f-f9221fa0febe" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?wsdl" />
+    <MetadataFile FileName="ServicioEvento.disco" MetadataType="Disco" ID="70bc7a29-1009-4518-8f30-6eb3c249e7f6" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?disco" />
+    <MetadataFile FileName="ServicioEvento2.xsd" MetadataType="Schema" ID="cb4bc8cf-917b-4759-ae3a-676034ec9dd8" SourceId="1" SourceUrl="http://localhost:2115/ServicioEvento.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

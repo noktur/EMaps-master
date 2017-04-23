@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterDueño.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PlanoModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PlanoModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <section id="content-3-7" style="background-color:whitesmoke" class="content-block content-3-7">
@@ -250,8 +250,6 @@
              });
          }
 
-
-
         function initialize()
          {
 
@@ -272,7 +270,6 @@
             }
 
          }
-
 
           function ListarAreas()
          {
@@ -307,8 +304,6 @@
                     
                      dibujo.setMap(map);
 
-
-
                  });
 
              }
@@ -317,7 +312,6 @@
              }
 
          }
-
 
            </script>
     

@@ -10,41 +10,9 @@ namespace MVCFinal.Controllers
 {
     public class PortadaController : Controller
     {
-        //
-        // GET: /Portada/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Register Now!")]
-        public ActionResult Register(FormCollection collection)
-        {
-
-            try
-            {
-                EntidadesCompartidas.Usuario Usuario = null;
-
-                Usuario.CI = Convert.ToString(collection["Ci"]);
-                Usuario.Email = Convert.ToString(collection["Email"]);
-                Usuario.Nombre = Convert.ToString(collection["Nombre"]);
-                Usuario.NombreUsuario = Convert.ToString(collection["Usuario"]);
-                Usuario.Contraseña = Convert.ToString(collection["Password"]);
 
 
-
-                CreoServicio().AltaUsuario(Usuario);
-
-                return View(Usuario);
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        #region ServicioWCF
 
         Maps.IServicioEvento _ServicioWCF = null;
 
@@ -58,65 +26,35 @@ namespace MVCFinal.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+                throw new System.ServiceModel.FaultException(ex.Message);
             }
             return _ServicioWCF;
         }
 
-
-        [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "SIGN IN")]
-        public ActionResult Login(FormCollection collection)
+        private void CerrarServicio()
         {
-
-            
-            try
+            if (_ServicioWCF != null)
             {
-                LoginModel Usuario = new Models.LoginModel();
+                Maps.ServicioEventoClient e = new ServicioEventoClient();
 
-                EntidadesCompartidas.Usuario Usu = null;
-
-                Usuario.Usuario = Convert.ToString(collection["Usuario"]);
-                Usuario.Password = Convert.ToString(collection["Password"]);
-
-                Usu = CreoServicio().Login(Usuario.Usuario, Usuario.Password);
-
-
-                if (Usu is EntidadesCompartidas.Dueño)
-                {
-                    Session["Dueño"] = Usu;
-                    return RedirectToAction("Principal", "Dueño");
-
-                }
-                else if (Usu is EntidadesCompartidas.Cliente)
-                {
-
-                    Session["Cliente"] = Usu;
-
-                    return RedirectToAction("Principal", "ElCliente");
-                }
-                else if (Usu is EntidadesCompartidas.Admin)
-                {
-                    Session["Admin"] = Usu;
-
-                    return RedirectToAction("Principal", "Admin");
-                }
-                else if (Usu is EntidadesCompartidas.Organizador)
-                {
-                    Session["Organizador"] = Usu;
-
-                    return RedirectToAction("Principal", "Organizador");
-                }
-
-
-                return View();
-
+                e.Close();
 
             }
-            catch
-            {
-                return View();
-            }
+        }
+
+
+        #endregion
+
+
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Principal()
+        {
+            return View();
         }
 
 

@@ -22,3 +22,39 @@ C:\Users\Matias\Desktop\E-Maps\E-Maps\Wcf-Sistema\bin\Persistencia.pdb
 C:\Users\Matias\Desktop\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
 C:\Users\Matias\Desktop\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
 C:\Users\Matias\Desktop\E-Maps\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.dll.config
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Logica.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Persistencia.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Logica.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\bin\Persistencia.pdb
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\Paginas nuevas a aprobacion\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.dll.config
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Logica.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Persistencia.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Logica.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\bin\Persistencia.pdb
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\obj\Debug\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll.config
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.dll
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Wcf-Sistema.pdb
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Logica.dll
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Persistencia.dll
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Logica.pdb
+C:\Users\Matias\Desktop\EMaps-master\Wcf-Sistema\bin\Persistencia.pdb

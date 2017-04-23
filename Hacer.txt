@@ -1,0 +1,16 @@
+Terminar lo de plano--------- Matias
+hacer las interfaces----------- Martin
+consistencia de datos entre interfaz y logica------ German
+feedback-------- Martin y German
+Solicitud entrada---- Matias despues que este Interfaz
+Upgrade Usuarios----- German
+Control de unique---- Matias
+Try y catch todo------ Matias
+Anexo ---- 
+Hacer testing----- Matias, German, Martin
+(Arreglar lo de plano)----- Matias
+Cancelar evento, modificar, lista de usuarios--------- Matias despues que este interfaz
+Verificar redirecciones------  Matias
+Agregar servicios extra
+Hacer Gets-- Martin y Matias
+Revisar Autocomplete---- Matias

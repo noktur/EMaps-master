@@ -1,59 +1,56 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/MasterAdmin.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PaisModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Master.Master" Inherits="System.Web.Mvc.ViewPage<MVCFinal.Models.PaisModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="formulario" runat="server">
-       <div id="templatemo-contact" style="padding-bottom:30px">
-            <div class="container">
-                <div class="row">
-                    <div class="templatemo-line-header head_contact">
-                        <div class="text-center">
-                            <hr class="team_hr team_hr_left hr_gray"/><span class="txt_darkgrey">PAISES</span>
-                            <hr class="team_hr team_hr_right hr_gray"/>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div style="height:378px; width:100%;" class="templatemo-contact-map" id="mapa">
-                            
-                      </div>
-                        </div>  
-                    <div class="col-md-4 contact_right">
-                       
-                        <p>Aqui puede buscar un pais para luego ser agregado.</p>
+        
+               <div class="col-md-4">
                             <% using(Html.BeginForm()) { %>
-                            <div id="elementosBuscar" class="input-group">
-                                <input type="text" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de pais)" class="form-control" name="NombrePais1" id="NombrePais1"  />
-                                <span class="input-group-btn"><button class="btn btn-dark" onclick="Buscar()"  type="button">Buscar</button></span>
+                   <div  class="input-group bg-white" style="padding-bottom:10px;padding-top:10px;">
+                                <input type="text" class="form-control" required="required" placeholder="Search Country......" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de ciudad)" name="NombrePais1" id="NombrePais1"  />
+                                <span class="input-group-btn"><button class="btn btn-info" onclick="Buscar()"  type="button"><i class="fa fa-search"></i></button></span>
                                    </div>
-                         
+
+                   <div id="form" style="display:none;">
                             <div class="form-group">
-                                <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de pais)"   name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
+                                <input type="text" class="form-control hidden" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un nombre de pais)"   name="NombrePais" id="NombrePais" placeholder="Nombre Pais..." />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Se requiere ingresar un codigo de pais)" readonly="readonly" name="CodPais" id="CodPais" placeholder="Codigo Pais..."  />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
+                                <input type="text" class="form-control "  readonly="readonly" name="CoordenadaX" id="CoordenadaX" placeholder="CoordenadaX..."  />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" readonly="readonly" name="CoordenadaY" id="CoordenadaY" placeholder="CoordenadaY..." />
                             </div>
-                            <input type="submit" id="Guardar" class="btn btn-orange pull-right" name="action" value="Enviar Datos"/>
-                        <input type="submit" id="Eliminar" class="btn btn-orange pull-right" name="action" value="Eliminar" />
+                        <div class="form-group">
+                            <button type="submit" id="Guardar" class="btn btn-primary bg-red-500 white"  name="action" value="Enviar Datos">Guardar </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="Eliminar" class="btn btn-primary bg-blue-500 white" name="action" value="Eliminar">Eliminar </button>
+                            </div>
+                         </div>
                      <% } %>   	
                     </div>
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /#templatemo-contact -->
-        
+           <div class="col-md-8">
+                        <div style="height:450px; width:100%;" class="templatemo-contact-map" id="mapa">
+                            
+                      </div>
+                        </div>
+         
+
+
     </form>
+
+    
 </asp:Content>
 
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server"> 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJiCs0vB2sIBGKclrmhydA4I9uekWOIvk&libraries=places"></script>
-    
+   
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJiCs0vB2sIBGKclrmhydA4I9uekWOIvk&libraries=places"></script>
 
     <script type="text/javascript">
 
@@ -79,14 +76,6 @@
             //Asignamos al evento click del boton la funcion codeAddress
             //Inicializamos la función de google maps una vez el DOM este cargado
            
-           
-            botonEliminar=document.getElementById("Eliminar");
-            botonEliminar.style.display='none';
-            botonGuardar=document.getElementById("Guardar");
-            botonGuardar.style.display = 'none';
-
-            var inputNombrePais = document.getElementById("NombrePais");
-            inputNombrePais.style.display = 'none';
 
             var input = document.getElementById('NombrePais1');
 
@@ -146,18 +135,18 @@
                         closeInfoWindow();
 
                         botonGuardar = document.getElementById("Guardar");
-                        botonGuardar.style.display = '';
+                        botonGuardar.style.display = 'none';
                         botonGuardar.style.visibility = 'visible';
                         botonEliminar = document.getElementById("Eliminar");
                         botonEliminar.style.display = 'none';
-                        var inputNombrePais1 = document.getElementById("elementosBuscar");
-                        inputNombrePais1.style.display = '';
-                        inputNombrePais1.style.visibility = 'visible';
+                        var inputNombrePais1 = document.getElementById("form");
+                        inputNombrePais1.style.display = 'block';
                         var inputNombrePais = document.getElementById("NombrePais");
                         inputNombrePais.style.display = 'none';
                         jQuery('#NombrePais').val('');
                         jQuery('#CoordenadaX').val('');
                         jQuery('#CoordenadaY').val('');
+                        jQuery('#CodPais').val('');
 
                     });
 
@@ -167,20 +156,26 @@
                         jQuery('#NombrePais').val(item.Nombre);
                         jQuery('#CoordenadaX').val(item.CoordenadaX);
                         jQuery('#CoordenadaY').val(item.CoordenadaY);
+                        jQuery('#CodPais').val(item.CodPais);
+
+                        var form = document.getElementById("form");
+                        form.style.display = 'block';
+                        form.style.visibility = 'visible';
 
                         botonGuardar = document.getElementById("Guardar");
                         botonGuardar.style.display = 'none';
                         botonEliminar=document.getElementById("Eliminar");
-                        botonEliminar.style.display='';
+                        botonEliminar.style.display='block';
                         botonEliminar.style.visibility='visible';
-                        var inputNombrePais1 = document.getElementById("elementosBuscar");
-                        inputNombrePais1.style.display = 'none';
                         var inputNombrePais = document.getElementById("NombrePais");
-                        inputNombrePais.style.display = '';
                         inputNombrePais.style.visibility = 'visible';
-
+                        closeInfoWindow();
                         
-                    });
+                    }
+                    
+
+                    );
+                    
 
                 });
 
@@ -228,12 +223,9 @@
                 marker.setMap(map);
                 updatePosition(marker.getPosition());
 
-                var inputNombrePais1 = document.getElementById("elementosBuscar");
-                inputNombrePais1.style.display = 'none';
 
-
-                var inputNombrePais = document.getElementById("NombrePais");
-                inputNombrePais.style.display = '';
+                var inputNombrePais = document.getElementById("form");
+                inputNombrePais.style.display = 'block';
                 inputNombrePais.style.visibility = 'visible';
 
                 jQuery('#NombrePais').val(address);
@@ -242,7 +234,10 @@
 
                 botonGuardar=document.getElementById("Guardar");
                 botonGuardar.style.display='';
-                botonGuardar.style.visibility='visible';
+                botonGuardar.style.visibility = 'visible';
+
+                botonEliminar = document.getElementById("Eliminar");
+                botonEliminar.style.display = 'none';
 
             }
             else {

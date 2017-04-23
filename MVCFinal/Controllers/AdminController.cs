@@ -6,14 +6,51 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Protocols;
 
 namespace MVCFinal.Controllers
 {
     public class AdminController : Controller
     {
         //
+
+        #region ServicioWCF
+
+        Maps.IServicioEvento _ServicioWCF = null;
+
+        private IServicioEvento CreoServicio()
+        {
+            try
+            {
+                if (_ServicioWCF == null)
+
+                    _ServicioWCF = new ServicioEventoClient();
+            }
+            catch (Exception ex)
+            {
+                throw new System.ServiceModel.FaultException(ex.Message);
+            }
+            return _ServicioWCF;
+        }
+
+        private void CerrarServicio()
+        {
+             if (_ServicioWCF != null)
+             {
+                 Maps.ServicioEventoClient e = new ServicioEventoClient();
+
+                 e.Close();
+                 
+             }
+        }
+
+
+        #endregion
+
+        #region ConvertirModels
 
         public static EntidadesCompartidas.Ciudad convertirModelCiudad(MVCFinal.Models.CiudadModel model)
         {
@@ -25,11 +62,28 @@ namespace MVCFinal.Controllers
             p.CoordenadaY = model.CoordenadaY;
             p.UnPais = _ServicioWCF.BuscarPais(model.NombrePais);
 
+            
             return p;
         }
 
-
         // GET: /Admin/
+
+        public static EntidadesCompartidas.Pais convertirModelPais(MVCFinal.Models.PaisModel model)
+        {
+            EntidadesCompartidas.Pais p = new EntidadesCompartidas.Pais();
+
+            p.Nombre = model.NombrePais;
+            p.CoordenadaX = model.CoordenadaX;
+            p.CoordenadaY = model.CoordenadaY;
+            p.CodPais = model.CodPais;
+
+
+            return p;
+        }
+
+        #endregion
+
+        #region MetodosControllers
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Guardar")]
@@ -37,6 +91,8 @@ namespace MVCFinal.Controllers
         {
             try
             {
+
+              
                 PaisModel Pais = (PaisModel)Session["PaisActual"];
                 
 
@@ -57,10 +113,26 @@ namespace MVCFinal.Controllers
                 return RedirectToAction("ControlCiudad", "Admin");
 
             }
-            catch
+
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+            
+            finally
+            {
+             CerrarServicio();   
+            }
+
+            return View();
         }
 
         public ActionResult ControlEventos()
@@ -68,20 +140,36 @@ namespace MVCFinal.Controllers
 
             MVCFinal.Models.EventoModel Evento=new EventoModel();
 
+            
+
             try
             {
 
-                List<EntidadesCompartidas.Evento> lista = Logica.FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+                List<EntidadesCompartidas.Evento> lista = CreoServicio().ListarEventosOrdenFecha().ToList();
 
                Evento.milista = lista;
                 return View(Evento);
 
             }
-            catch
+            catch (SoapException ex)
             {
-
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
         [HttpGet]
         public ActionResult ControlCiudad()
@@ -105,14 +193,25 @@ namespace MVCFinal.Controllers
             return View(Ciudad);
 
             }
-            catch
+            catch (SoapException ex)
             {
-
-                string JsonPais = JsonConvert.SerializeObject(Pais);
-                Session["Pais"] = JsonPais;
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
             }
 
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -140,14 +239,92 @@ namespace MVCFinal.Controllers
 
 
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
+
+        public ActionResult ModificarPerfil1()
+        {
+            try
+            {
+
+
+                if (Session["Admin"] == null)
+                {
+                    RedirectToAction("Portada,Index");
+                }
+                else
+                {
+                    Admin miAdmin = (Admin)Session["Admin"];
+
+
+                    string JsonAdmin = JsonConvert.SerializeObject(miAdmin);
+                    Session["AdminJson"] = JsonAdmin;
+
+                    MVCFinal.Models.AdminModel a = new AdminModel();
+                    a.Ci = miAdmin.CI;
+                    a.Password = miAdmin.Contraseña;
+                    a.Email = miAdmin.Email; ;
+                    a.Nombre = miAdmin.Nombre;
+                    a.Usuario = miAdmin.NombreUsuario;
+
+
+
+
+                    //Cargo la lista de feedback por usuario 
+                    List<FeedbackEvento> ListFeddback = FabricaLogica.getLogicaFeedbackEvento().ListarMensajesFeedbackEvento();
+
+
+                    Session["ListFeedback"] = ListFeddback;
+
+
+                    return View(a);
+
+                }
+            }
+            catch (SoapException ex)
+            {
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
+        }
+
 
         public ActionResult ModificarPerfil()
         {
+            try
+            {
 
             if (Session["Admin"] == null)
             {
@@ -155,18 +332,43 @@ namespace MVCFinal.Controllers
             }
             else
             {
-                AdminModel miAdmin =(AdminModel)Session["Admin"];
+                EntidadesCompartidas.Admin miAdmin =(Admin)Session["Admin"];
 
                 
                 string JsonAdmin = JsonConvert.SerializeObject(miAdmin);
-                Session["AdminJson"] = JsonAdmin;   
+                Session["AdminJson"] = JsonAdmin;
 
-                return View(miAdmin);
+                MVCFinal.Models.AdminModel a = new AdminModel();
+                a.Ci = miAdmin.CI;
+                a.Password = miAdmin.Contraseña;
+                a.Email = miAdmin.Email; ;
+                a.Nombre = miAdmin.Nombre;
+                a.Usuario = miAdmin.NombreUsuario;
+                
 
+                return View(a);
+
+                }
+            }
+             catch (SoapException ex)
+            {
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
             }
 
-            
-            return RedirectToAction("Portada", "Index");
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -178,7 +380,7 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Evento evento = new Evento();
 
-                evento = Logica.FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+                evento = CreoServicio().BuscarEvento(IdEvento);
 
                 EventoModel model=new EventoModel();
 
@@ -198,10 +400,25 @@ namespace MVCFinal.Controllers
 
                 return View("",model);
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -242,10 +459,25 @@ namespace MVCFinal.Controllers
                 return View(model);
             
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -256,65 +488,63 @@ namespace MVCFinal.Controllers
         public ActionResult SaveChanges(FormCollection collection)
         {
 
-            if (Session["Admin"] == null)
-            {
-                RedirectToAction("Portada,Index");
-            }
-            else
-            {
-                AdminModel miAdmin = (AdminModel)Session["Admin"];
-
-                
-
-               miAdmin.Ci = Convert.ToString(collection["Ci"]);
-               miAdmin.Email = Convert.ToString(collection["Email"]);
-               miAdmin.Nombre = Convert.ToString(collection["Nombre"]);
-               miAdmin.Password = Convert.ToString(collection["Password"]);
-               miAdmin.Usuario = Convert.ToString(collection["Usuario"]);
-
-               EntidadesCompartidas.Admin admin = new Admin();
-
-               admin.CI = miAdmin.Ci;
-               admin.Contraseña = miAdmin.Password;
-               admin.Email = miAdmin.Email;
-               admin.Nombre = miAdmin.Nombre;
-               admin.NombreUsuario = miAdmin.Usuario;
-                
-
-
-               Logica.FabricaLogica.getLogicaUsuario().Modificar((Usuario)admin);
-
-
-                return RedirectToAction("Principal","Admin");
-
-            }
-
-
-            return View();
-        }
-
-
-
-
-
-
-        Maps.IServicioEvento _ServicioWCF = null;
-
-        private IServicioEvento CreoServicio()
-        {
             try
             {
-                if (_ServicioWCF == null)
 
-                    _ServicioWCF = new ServicioEventoClient();
+                if (Session["Admin"] == null)
+                {
+                    RedirectToAction("Portada,Index");
+                }
+                else
+                {
+                    AdminModel miAdmin = (AdminModel)Session["Admin"];
+
+
+
+                    miAdmin.Ci = Convert.ToString(collection["Ci"]);
+                    miAdmin.Email = Convert.ToString(collection["Email"]);
+                    miAdmin.Nombre = Convert.ToString(collection["Nombre"]);
+                    miAdmin.Password = Convert.ToString(collection["Password"]);
+                    miAdmin.Usuario = Convert.ToString(collection["Usuario"]);
+
+                    EntidadesCompartidas.Admin admin = new Admin();
+
+                    admin.CI = miAdmin.Ci;
+                    admin.Contraseña = miAdmin.Password;
+                    admin.Email = miAdmin.Email;
+                    admin.Nombre = miAdmin.Nombre;
+                    admin.NombreUsuario = miAdmin.Usuario;
+
+
+
+                    CreoServicio().ModificarUsuario((Usuario)admin);
+
+
+                    return RedirectToAction("Principal", "Admin");
+
+                }
+
+            }
+            catch (SoapException ex)
+            {
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
             }
             catch (Exception ex)
             {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+                ViewBag.Text = CodigoCatch(ex);
             }
-            return _ServicioWCF;
-        }
 
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
+        }
 
 
 
@@ -342,17 +572,31 @@ namespace MVCFinal.Controllers
                 return RedirectToAction("ControlCiudad", "Admin");
                 
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
         [HttpPost]
         [MultiButton(MatchFormKey = "action", MatchFormValue = "Eliminar")]
         public ActionResult Eliminar(FormCollection collection)
         {
-
 
             try
             {
@@ -361,18 +605,33 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Pais pais = new EntidadesCompartidas.Pais();
 
-                pais = FabricaLogica.getLogicaUbicacion().BuscarPais(NombrePais);
+                pais = CreoServicio().BuscarPais(NombrePais);
 
 
-                FabricaLogica.getLogicaUbicacion().Eliminar(pais);
+                CreoServicio().EliminarUbicacion(pais);
 
                 return View();
 
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -389,32 +648,36 @@ namespace MVCFinal.Controllers
 
                 EntidadesCompartidas.Ciudad ciudad = new EntidadesCompartidas.Ciudad();
 
-                ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(NombreCiudad);
+                ciudad = CreoServicio().BuscarCiudad(NombreCiudad);
 
 
-                FabricaLogica.getLogicaUbicacion().Eliminar(ciudad);
+                CreoServicio().EliminarUbicacion(ciudad);
 
                 return View();
 
             }
-            catch
+            catch (SoapException ex)
             {
-                return View();
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
-        public static EntidadesCompartidas.Pais convertirModelPais(MVCFinal.Models.PaisModel model)
-        {
-            EntidadesCompartidas.Pais p = new EntidadesCompartidas.Pais();
 
-            p.Nombre = model.NombrePais;
-            p.CoordenadaX = model.CoordenadaX;
-            p.CoordenadaY = model.CoordenadaY;
-            p.CodPais = model.CodPais;
-
-
-            return p;
-        }
         
         public ActionResult ControlLugares()
         {
@@ -443,16 +706,81 @@ namespace MVCFinal.Controllers
                     return View(feedback);
 
                 }
-                catch
+                catch (SoapException ex)
                 {
-                    return View();
-                }          
+                    ViewBag.Text = CodigoCatchSoap(ex);
+                }
+                catch (FaultException ex)
+                {
+                    ViewBag.Text = CodigoCatchFault(ex);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Text = CodigoCatch(ex);
+                }
+
+                finally
+                {
+                    CerrarServicio();
+                }        
 
             }
 
-
-            return RedirectToAction("Portada,Index");
+            return View();
         }
+
+
+        #endregion
+
+
+        #region Exceptions
+
+        private String CodigoCatch(Exception ex)
+        {
+            String msg = ex.Message; ;
+            if (msg.Length > 100)
+                msg = msg.Substring(0, 100);
+            return msg;
+        }
+
+        private String CodigoCatchSoap(SoapException ex)
+        {
+            String msg = "Error al procesar la solicitud. Verifique informacion igresada.";
+
+            if (ex.Detail.InnerText.CompareTo(String.Empty) == 0)
+            {
+                if (ex.Message.Contains("&$"))
+                {
+                    msg = (ex.Message.Split((new String[] { "&$" }), StringSplitOptions.RemoveEmptyEntries))[1];
+                }
+            }
+            else
+            {
+                if (ex.Detail.InnerText.Length > 100)
+                    msg = ex.Detail.InnerText.Substring(0, 100);
+                else
+                    msg = ex.Detail.InnerText;
+            }
+            return msg;
+        }
+
+        private String CodigoCatchFault(FaultException ex)
+        {
+            String msg = ex.Message;
+
+            if (msg.Contains("&$"))
+            {
+                msg = (ex.Message.Split((new String[] { "&$" }), StringSplitOptions.RemoveEmptyEntries))[1];
+            }
+            else
+            {
+                if (msg.Length > 100)
+                    msg = msg.Substring(0, 100);
+            }
+            return msg;
+        }
+
+        #endregion
 
     }
 }

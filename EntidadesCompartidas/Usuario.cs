@@ -34,10 +34,7 @@ namespace EntidadesCompartidas
                 get { return _ci; }
                 set
                 {
-                      if (value.Length == 7)
-                        _ci = value;
-                    else
-                        throw new Exception("&$ La cedula debe ser de 7 caracteres. &$");
+                    _ci = value;
                 }
             }
 
@@ -47,10 +44,7 @@ namespace EntidadesCompartidas
                 get { return _nombre; }
                 set
                 {
-                    if (value.Trim().Length > 0)
                         _nombre = value;
-                    else
-                        throw new Exception("&$ Debe ingresar un nombre. &$");
                 }
             }
 
@@ -60,10 +54,7 @@ namespace EntidadesCompartidas
                 get { return _nombreUsuario; }
                 set
                 {
-                    if (value.Trim().Length > 0)
                         _nombreUsuario = value;
-                    else
-                        throw new Exception("&$ Debe ingresar un nombre de usuario. &$");
                 }
             }
 
@@ -73,10 +64,9 @@ namespace EntidadesCompartidas
                 get { return _contraseña; }
                 set
                 {
-                    if (value.Length >= 7)
+                    
                         _contraseña = value;
-                    else
-                        throw new Exception("&$ El largo de la contraseña debe ser al menos de 7 caracteres. &$");
+                   
                 }
             }
 
@@ -86,10 +76,7 @@ namespace EntidadesCompartidas
                 get { return _email; }
                 set
                 {
-                    if (value.Trim().Length > 0)
                         _email = value;
-                    else
-                        throw new Exception("&$ Debe ingresar un email. &$");
                 }
             }
 

@@ -25,6 +25,7 @@ namespace Logica.ClasesTrabajo
         public void AltaMapa(Mapa m)
         {
             FabricaPersistencia.getPersistenciaMapa().AltaMapa(m);
+
         }
 
         public void ModificarMapa(Mapa m)

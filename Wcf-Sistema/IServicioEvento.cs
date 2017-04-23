@@ -28,9 +28,72 @@ namespace Wcf_Sistema
         [OperationContract]
         void BajaLugar(Lugar l);
 
+        [OperationContract]
+        List<Lugar> ListarLugares();
+
+        [OperationContract]
+        List<Lugar> ListarLugaresDisponibles();
+
+        [OperationContract]
+        List<Lugar> ListarLugaresCiudad(string pNombreCiudad);
+
+        [OperationContract]
+        Lugar BuscarMapaLugar(int IdMapa);
+
+
         #endregion
 
-        #region Mapa 
+        #region Area
+
+        [OperationContract]
+        void AltaArea(Area a);
+
+        [OperationContract]
+        void ModificarArea(Area a);
+
+        [OperationContract]
+        Area BuscarArea(int IdArea);
+
+        [OperationContract]
+        Area BuscarAreaPorNombre(string NombreArea);
+
+        [OperationContract]
+        void AltaPuntodeArea(Area a, Punto p);
+
+        [OperationContract]
+        void BajaArea(Area a);
+
+        [OperationContract]
+        List<Area> ListarAreasDeMapa(int IdMapa);
+
+        [OperationContract]
+        List<Punto> ListarPuntosDeUnArea(Area a);
+
+        #endregion
+
+        #region Alquiler
+
+        [OperationContract]
+        void AltaAlquiler(Alquiler e);
+
+        [OperationContract]
+        void BajaAlquiler(Alquiler e);
+
+        [OperationContract]
+        Alquiler BuscarAlquiler(int IdAlquiler);
+
+        [OperationContract]
+        List<Alquiler> ListarAlquileres();
+
+        [OperationContract]
+        List<Alquiler> ListarAlquileresArea(int IdArea);
+
+        [OperationContract]
+        List<Alquiler> ListarAlquileresOrganizador(string Ci);
+
+        #endregion
+
+        #region Mapa
 
         [OperationContract]
         void AltaMapa(Mapa m);
@@ -61,7 +124,7 @@ namespace Wcf_Sistema
         Pais BuscarPais(string pNombre);
 
         [OperationContract]
-        Ciudad BuscarCiudad(string pNombrePais, Pais UnPais);
+        Ciudad BuscarCiudad(string pNombreCiudad);
 
         [OperationContract]
         List<Ciudad> ListarCiudades();
@@ -105,6 +168,39 @@ namespace Wcf_Sistema
 
         #endregion
 
+        #region Evento
+
+        [OperationContract]
+        void AltaEvento(Evento p);
+
+        [OperationContract]
+        void ComprobarEstadoEvento(Evento UnEvento, DateTime fecha1, DateTime fecha2);
+
+        [OperationContract]
+        void BajaEvento(Evento e);
+
+        [OperationContract]
+        Evento BuscarEvento(int IdEvento);
+
+        [OperationContract]
+        Categoria BuscarCategoria(string NombreCategoria);
+
+        [OperationContract]
+        List<Categoria> ListarCategorias();
+
+        [OperationContract]
+        List<Evento> ListarEventosOrdenFecha();
+
+        [OperationContract]
+        List<Evento> ListarEventosOrganizador(string CiOrganizador);
+
+        [OperationContract]
+        List<Evento> ListarEventosReservados();
+
+        [OperationContract]
+        List<Evento> ListarEventosxArea(int IdArea);
+
+        #endregion
 
 
     }
