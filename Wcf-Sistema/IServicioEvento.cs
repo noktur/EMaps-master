@@ -32,13 +32,13 @@ namespace Wcf_Sistema
         List<Lugar> ListarLugares();
 
         [OperationContract]
-         List<Lugar> ListarLugaresDisponibles();
+        List<Lugar> ListarLugaresDisponibles();
 
         [OperationContract]
-         List<Lugar> ListarLugaresCiudad(string pNombreCiudad);
+        List<Lugar> ListarLugaresCiudad(string pNombreCiudad);
 
         [OperationContract]
-         Lugar BuscarMapaLugar(int IdMapa);
+        Lugar BuscarMapaLugar(int IdMapa);
 
 
         #endregion
@@ -71,7 +71,7 @@ namespace Wcf_Sistema
 
         #endregion
 
-        #region Alquiler 
+        #region Alquiler
 
         [OperationContract]
         void AltaAlquiler(Alquiler e);
@@ -124,7 +124,7 @@ namespace Wcf_Sistema
         Pais BuscarPais(string pNombre);
 
         [OperationContract]
-        Ciudad BuscarCiudad(string pNombrePais, Pais UnPais);
+        Ciudad BuscarCiudad(string pNombreCiudad);
 
         [OperationContract]
         List<Ciudad> ListarCiudades();
@@ -175,7 +175,7 @@ namespace Wcf_Sistema
 
         [OperationContract]
         void ComprobarEstadoEvento(Evento UnEvento, DateTime fecha1, DateTime fecha2);
-       
+
         [OperationContract]
         void BajaEvento(Evento e);
 

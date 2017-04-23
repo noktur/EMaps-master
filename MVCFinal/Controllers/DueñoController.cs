@@ -7,18 +7,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Protocols;
 using System.Web.UI.WebControls;
 
 namespace MVCFinal.Controllers
 {
     public class DueñoController : Controller
     {
-        //
-        // GET: /Dueño/
 
-          Maps.IServicioEvento _ServicioWCF = null;
+        #region ServicioWCF
+
+        Maps.IServicioEvento _ServicioWCF = null;
 
         private IServicioEvento CreoServicio()
         {
@@ -30,11 +32,27 @@ namespace MVCFinal.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+                throw new System.ServiceModel.FaultException(ex.Message);
             }
             return _ServicioWCF;
         }
 
+        private void CerrarServicio()
+        {
+            if (_ServicioWCF != null)
+            {
+                Maps.ServicioEventoClient e = new ServicioEventoClient();
+
+                e.Close();
+
+            }
+        }
+
+
+        #endregion
+
+
+        #region MetodosControllers
 
         public ActionResult GalleryLugar()
         {
@@ -44,55 +62,72 @@ namespace MVCFinal.Controllers
 
         public ActionResult PlanoLugar()
         {
-            
-            if(Session["Dueño"] != null)
+
+            if (Session["Dueño"] != null)
             {
-               MVCFinal.Models.PlanoModel Plano = new PlanoModel();
-               EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
-               
 
-                      try
-              {
-
-                 mapa=(EntidadesCompartidas.Mapa)Session["Plano"] ;
-
-                 if (mapa.Areas.Count() > 0)
-                 {
-
-                     List<EntidadesCompartidas.Area> listaArea = CreoServicio().ListarAreasDeMapa(mapa.IdMapa).ToList();
+                MVCFinal.Models.PlanoModel Plano = new PlanoModel();
+                EntidadesCompartidas.Mapa mapa = new EntidadesCompartidas.Mapa();
 
 
-                     Plano.ListaAreasPlano = listaArea;
-                     Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
-
-                 }
-                 else
-                 {
-
-
-                     
-                     Plano.elMapa = mapa;
-                     Session["Plano"] = Plano.elMapa;
-                     string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
-                     Session["MapaJson"] = JsonMapa;
-                     string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
-                     Session["AreasMapaJson"] = JsonAreas;
-
-                     Session["Imagen"] = File(mapa.Imagen, mapa.Extension);
-
-
-                     
-                 }
-                 return View(Plano);
-
-                }
-                catch
+                try
                 {
-                    return View();
+
+                    mapa = (EntidadesCompartidas.Mapa)Session["Plano"];
+
+                    if (mapa.Areas.Count() > 0)
+                    {
+
+                        List<EntidadesCompartidas.Area> listaArea = CreoServicio().ListarAreasDeMapa(mapa.IdMapa).ToList();
+
+
+                        Plano.ListaAreasPlano = listaArea;
+                        Session["ListaAreaPlano"] = Plano.ListaAreasPlano;
+
+                    }
+                    else
+                    {
+
+
+
+                        Plano.elMapa = mapa;
+                        Session["Plano"] = Plano.elMapa;
+                        string JsonMapa = JsonConvert.SerializeObject(Plano.elMapa);
+                        Session["MapaJson"] = JsonMapa;
+                        string JsonAreas = JsonConvert.SerializeObject(Plano.ListaAreasPlano);
+                        Session["AreasMapaJson"] = JsonAreas;
+
+                        Session["Imagen"] = File(mapa.Imagen, mapa.Extension);
+
+                        return View(Plano);
+
+                    }
+
+
                 }
+                catch (SoapException ex)
+                {
+                    ViewBag.Text = CodigoCatchSoap(ex);
+                }
+                catch (FaultException ex)
+                {
+                    ViewBag.Text = CodigoCatchFault(ex);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Text = CodigoCatch(ex);
+                }
+
+                finally
+                {
+                    CerrarServicio();
+                }
+
+               
             }
 
-            return RedirectToAction("Portada", "Index");
+            return View();
+
         }
 
 
@@ -110,22 +145,45 @@ namespace MVCFinal.Controllers
         public ActionResult CiudadObtenida(String[] nombre)
         {
 
-            List<String> a = nombre.ToList();
+            try
+            {
 
-            string ciudad = "";
+                List<String> a = nombre.ToList();
 
-            ciudad = nombre[0].ToString();
+                string ciudad = "";
 
-            LugarModel lugar = new LugarModel();
+                ciudad = nombre[0].ToString();
 
-            lugar.Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(ciudad);
+                LugarModel lugar = new LugarModel();
 
-            string JsonCiudad = JsonConvert.SerializeObject(lugar.Ciudad);
-            Session["CiudadJson"] = JsonCiudad;
+                lugar.Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(ciudad);
 
-           
+                string JsonCiudad = JsonConvert.SerializeObject(lugar.Ciudad);
+                Session["CiudadJson"] = JsonCiudad;
 
-            return Json(JsonCiudad,JsonRequestBehavior.AllowGet);
+
+
+                return Json(JsonCiudad, JsonRequestBehavior.AllowGet);
+            }
+            catch (SoapException ex)
+            {
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
 
         }
 
@@ -134,34 +192,56 @@ namespace MVCFinal.Controllers
         public ActionResult RecuperarArea(string json)
         {
 
-           
 
-           EntidadesCompartidas.Area a= JsonConvert.DeserializeObject<EntidadesCompartidas.Area>(json);
+            try
+            {
 
-           a.MapaAsociado =(EntidadesCompartidas.Mapa)Session["Plano"];
+                EntidadesCompartidas.Area a = JsonConvert.DeserializeObject<EntidadesCompartidas.Area>(json);
 
-           Session["Puntos"] = a.PuntosArea;
+                a.MapaAsociado = (EntidadesCompartidas.Mapa)Session["Plano"];
 
-           CreoServicio().AltaArea(a);
+                Session["Puntos"] = a.PuntosArea;
 
-           a = CreoServicio().BuscarAreaPorNombre(a.NombreArea);
+                CreoServicio().AltaArea(a);
 
-           a.PuntosArea = (List<Punto>)Session["Puntos"];
-            
-           foreach(Punto p in a.PuntosArea)
-           {
-               CreoServicio().AltaPuntodeArea(a, p);
-           }
+                a = CreoServicio().BuscarAreaPorNombre(a.NombreArea);
 
-           a.MapaAsociado.Areas.Add(a);
+                a.PuntosArea = (List<Punto>)Session["Puntos"];
 
-           string JsonAreas = JsonConvert.SerializeObject(a.MapaAsociado.Areas);
-           Session["AreasMapaJson"] = JsonAreas;
+                foreach (Punto p in a.PuntosArea)
+                {
+                    CreoServicio().AltaPuntodeArea(a, p);
+                }
 
-           Session["Areas"]=a;
+                a.MapaAsociado.Areas.Add(a);
 
-           return View("PlanoLugar");
+                string JsonAreas = JsonConvert.SerializeObject(a.MapaAsociado.Areas);
+                Session["AreasMapaJson"] = JsonAreas;
 
+                Session["Areas"] = a;
+
+                return View("PlanoLugar");
+
+            }
+            catch (SoapException ex)
+            {
+                ViewBag.Text = CodigoCatchSoap(ex);
+            }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
         }
 
 
@@ -218,10 +298,25 @@ namespace MVCFinal.Controllers
                 return View("AdministrarLugares");
 
             }
-            catch
+            catch (SoapException ex)
             {
-                return View("AdministrarLugares");
+                ViewBag.Text = CodigoCatchSoap(ex);
             }
+            catch (FaultException ex)
+            {
+                ViewBag.Text = CodigoCatchFault(ex);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Text = CodigoCatch(ex);
+            }
+
+            finally
+            {
+                CerrarServicio();
+            }
+
+            return View();
 
     }
 
@@ -264,52 +359,89 @@ namespace MVCFinal.Controllers
                     return View(Lugar);
 
             }
-            catch
-            {
+                catch (SoapException ex)
+                {
+                    ViewBag.Text = CodigoCatchSoap(ex);
+                }
+                catch (FaultException ex)
+                {
+                    ViewBag.Text = CodigoCatchFault(ex);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Text = CodigoCatch(ex);
+                }
+
+                finally
+                {
+                    CerrarServicio();
+                }
+
                 return View();
-            }        
+                  
         }
 
 
             public ActionResult AgregarFoto(HttpPostedFileBase image1)
             {
 
-                List<EntidadesCompartidas.FotosLugar> list=null;
-
-                list = (List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
-                EntidadesCompartidas.FotosLugar foto = new FotosLugar();
-
-                if (image1 != null)
+                try
                 {
-                    foto.Extension = Path.GetExtension(image1.FileName);
+                    List<EntidadesCompartidas.FotosLugar> list = null;
 
-                    int length = image1.ContentLength;
-                    byte[] buffer = new byte[length];
-                    image1.InputStream.Read(buffer, 0, length);
-                    foto.Imagen = buffer;
-                    foto.NombreFoto = image1.FileName.Substring(0, image1.FileName.LastIndexOf('.'));
-                      
+                    list = (List<EntidadesCompartidas.FotosLugar>)Session["Fotos"];
+                    EntidadesCompartidas.FotosLugar foto = new FotosLugar();
+
+                    if (image1 != null)
+                    {
+                        foto.Extension = Path.GetExtension(image1.FileName);
+
+                        int length = image1.ContentLength;
+                        byte[] buffer = new byte[length];
+                        image1.InputStream.Read(buffer, 0, length);
+                        foto.Imagen = buffer;
+                        foto.NombreFoto = image1.FileName.Substring(0, image1.FileName.LastIndexOf('.'));
+
+                    }
+
+                    if (list == null)
+                    {
+                        list = new List<FotosLugar>();
+                        list.Add(foto);
+                    }
+                    else
+                    {
+                        list.Add(foto);
+                    }
+
+                    string JsonFotos = JsonConvert.SerializeObject(list);
+                    Session["FotosJson"] = JsonFotos;
+                    Session["Fotos"] = list;
+                    EntidadesCompartidas.Lugar l = (EntidadesCompartidas.Lugar)Session["LugarActual"];
+                    l.Fotos = list;
+
+
+                    return View("AdministrarLugares");
+                }
+                catch (SoapException ex)
+                {
+                    ViewBag.Text = CodigoCatchSoap(ex);
+                }
+                catch (FaultException ex)
+                {
+                    ViewBag.Text = CodigoCatchFault(ex);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Text = CodigoCatch(ex);
                 }
 
-                if (list == null)
+                finally
                 {
-                    list = new List<FotosLugar>();
-                    list.Add(foto);
-                }
-                else
-                {
-                    list.Add(foto);
+                    CerrarServicio();
                 }
 
-                string JsonFotos = JsonConvert.SerializeObject(list);
-                Session["FotosJson"] = JsonFotos;
-                Session["Fotos"] = list;
-                EntidadesCompartidas.Lugar l = (EntidadesCompartidas.Lugar)Session["LugarActual"];
-                l.Fotos = list;
-               
-
-                return View("AdministrarLugares");
-
+                return View();
             }
 
         public ActionResult FeedbackDueño()
@@ -336,6 +468,59 @@ namespace MVCFinal.Controllers
 
             return View();
         }
+
+
+        #endregion
+
+
+        #region Exceptions
+
+        private String CodigoCatch(Exception ex)
+        {
+            String msg = ex.Message; ;
+            if (msg.Length > 100)
+                msg = msg.Substring(0, 100);
+            return msg;
+        }
+
+        private String CodigoCatchSoap(SoapException ex)
+        {
+            String msg = "Error al procesar la solicitud. Verifique informacion igresada.";
+
+            if (ex.Detail.InnerText.CompareTo(String.Empty) == 0)
+            {
+                if (ex.Message.Contains("&$"))
+                {
+                    msg = (ex.Message.Split((new String[] { "&$" }), StringSplitOptions.RemoveEmptyEntries))[1];
+                }
+            }
+            else
+            {
+                if (ex.Detail.InnerText.Length > 100)
+                    msg = ex.Detail.InnerText.Substring(0, 100);
+                else
+                    msg = ex.Detail.InnerText;
+            }
+            return msg;
+        }
+
+        private String CodigoCatchFault(FaultException ex)
+        {
+            String msg = ex.Message;
+
+            if (msg.Contains("&$"))
+            {
+                msg = (ex.Message.Split((new String[] { "&$" }), StringSplitOptions.RemoveEmptyEntries))[1];
+            }
+            else
+            {
+                if (msg.Length > 100)
+                    msg = msg.Substring(0, 100);
+            }
+            return msg;
+        }
+
+        #endregion
 
 
 

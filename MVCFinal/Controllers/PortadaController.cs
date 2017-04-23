@@ -10,19 +10,9 @@ namespace MVCFinal.Controllers
 {
     public class PortadaController : Controller
     {
-        //
-        // GET: /Portada/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        public ActionResult Principal()
-        {
-            return View();
-        }
-
+        #region ServicioWCF
 
         Maps.IServicioEvento _ServicioWCF = null;
 
@@ -36,9 +26,35 @@ namespace MVCFinal.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Text = "Problemas al crear Servicio: " + ex.Message;
+                throw new System.ServiceModel.FaultException(ex.Message);
             }
             return _ServicioWCF;
+        }
+
+        private void CerrarServicio()
+        {
+            if (_ServicioWCF != null)
+            {
+                Maps.ServicioEventoClient e = new ServicioEventoClient();
+
+                e.Close();
+
+            }
+        }
+
+
+        #endregion
+
+
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Principal()
+        {
+            return View();
         }
 
 

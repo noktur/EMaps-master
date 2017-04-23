@@ -112,7 +112,7 @@ namespace MVCFinal.Maps {
         EntidadesCompartidas.Pais BuscarPais(string pNombre);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/BuscarCiudad", ReplyAction="http://tempuri.org/IServicioEvento/BuscarCiudadResponse")]
-        EntidadesCompartidas.Ciudad BuscarCiudad(string pNombrePais, EntidadesCompartidas.Pais UnPais);
+        EntidadesCompartidas.Ciudad BuscarCiudad(string pNombreCiudad);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioEvento/ListarCiudades", ReplyAction="http://tempuri.org/IServicioEvento/ListarCiudadesResponse")]
         EntidadesCompartidas.Ciudad[] ListarCiudades();
@@ -348,8 +348,8 @@ namespace MVCFinal.Maps {
             return base.Channel.BuscarPais(pNombre);
         }
         
-        public EntidadesCompartidas.Ciudad BuscarCiudad(string pNombrePais, EntidadesCompartidas.Pais UnPais) {
-            return base.Channel.BuscarCiudad(pNombrePais, UnPais);
+        public EntidadesCompartidas.Ciudad BuscarCiudad(string pNombreCiudad) {
+            return base.Channel.BuscarCiudad(pNombreCiudad);
         }
         
         public EntidadesCompartidas.Ciudad[] ListarCiudades() {

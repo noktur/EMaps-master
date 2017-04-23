@@ -26,3 +26,10 @@ C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Persistencia\bin\Debug\EntidadesCo
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Persistencia\obj\Debug\Persistencia.csprojResolveAssemblyReference.cache
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Persistencia\obj\Debug\Persistencia.dll
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Persistencia\obj\Debug\Persistencia.pdb
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\bin\Debug\Persistencia.dll
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\bin\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\obj\Debug\Persistencia.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\obj\Debug\Persistencia.dll
+C:\Users\Matias\Desktop\EMaps-master\Persistencia\obj\Debug\Persistencia.pdb

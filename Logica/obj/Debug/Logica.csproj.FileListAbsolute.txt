@@ -34,3 +34,12 @@ C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Logica\bin\Debug\Persistencia.pdb
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Logica\obj\Debug\Logica.csprojResolveAssemblyReference.cache
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Logica\obj\Debug\Logica.dll
 C:\Users\Matias\Desktop\nuevo proyecto\E-Maps\Logica\obj\Debug\Logica.pdb
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\Logica.dll
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\Logica.pdb
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\EntidadesCompartidas.dll
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\Persistencia.dll
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\Matias\Desktop\EMaps-master\Logica\bin\Debug\Persistencia.pdb
+C:\Users\Matias\Desktop\EMaps-master\Logica\obj\Debug\Logica.csprojResolveAssemblyReference.cache
+C:\Users\Matias\Desktop\EMaps-master\Logica\obj\Debug\Logica.dll
+C:\Users\Matias\Desktop\EMaps-master\Logica\obj\Debug\Logica.pdb

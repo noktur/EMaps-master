@@ -19,45 +19,116 @@ namespace Wcf_Sistema
 
         void IServicioEvento.AltaLugar(Lugar l)
         {
+            try
+            {
             FabricaLogica.getLogicaLugar().AltaLugar(l);
+            }
+            catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
         }
 
         void IServicioEvento.ModificarLugar(Lugar l)
         {
+            try
+            {
             FabricaLogica.getLogicaLugar().ModificarLugar(l);
+            }
+            catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
         }
 
         void IServicioEvento.BajaLugar(Lugar l)
         {
+            try
+            {
             FabricaLogica.getLogicaLugar().BajaLugar(l);
+            }
+            catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
         }
 
         Lugar IServicioEvento.BuscarLugar(string NombreLugar)
         {
             Lugar _Lugar = null;
 
+            try
+            {
+
             _Lugar = FabricaLogica.getLogicaLugar().BuscarLugar(NombreLugar);
+            }
+            catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
 
             return _Lugar;
         }
 
          List<Lugar>  IServicioEvento.ListarLugares()
         {
-            return FabricaLogica.getLogicaLugar().ListarLugares();
+             List<Lugar> e=null;
+
+             try
+             {
+            e= FabricaLogica.getLogicaLugar().ListarLugares();
+             }
+             catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
+
+             return e;
         }
 
           List<Lugar> IServicioEvento.ListarLugaresDisponibles()
          {
-             return FabricaLogica.getLogicaLugar().ListarLugaresDisponibles();
+              List<Lugar> e=null;
+              try
+              {
+             e= FabricaLogica.getLogicaLugar().ListarLugaresDisponibles();
+              }
+              catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
+
+              return e;
          }
           List<Lugar> IServicioEvento.ListarLugaresCiudad(string pNombreCiudad)
          {
-             return FabricaLogica.getLogicaLugar().ListarLugaresCiudad(pNombreCiudad);
+
+              List<Lugar> e=null;
+              try
+              {
+             e= FabricaLogica.getLogicaLugar().ListarLugaresCiudad(pNombreCiudad);
+              }
+              catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
+
+              return e;
          }
 
           Lugar IServicioEvento.BuscarMapaLugar(int IdMapa)
          {
-             return FabricaLogica.getLogicaLugar().BuscarMapaLugar(IdMapa);
+              Lugar e=null;
+              try
+              {
+             e= FabricaLogica.getLogicaLugar().BuscarMapaLugar(IdMapa);
+              }
+              catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
+
+              return e;
          }
 
         #endregion
@@ -66,26 +137,55 @@ namespace Wcf_Sistema
 
         void IServicioEvento.AltaMapa(Mapa m)
         {
-            FabricaLogica.getLogicaMapa().AltaMapa(m);
+            try
+            {
+                FabricaLogica.getLogicaMapa().AltaMapa(m);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
         }
 
         void IServicioEvento.ModificarMapa(Mapa m)
         {
-            FabricaLogica.getLogicaMapa().ModificarMapa(m);
+            try
+            {
+                FabricaLogica.getLogicaMapa().ModificarMapa(m);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
 
         Mapa IServicioEvento.BuscarMapa(int IdMapa)
         {
             Mapa _Mapa = null;
+            try
+            {
 
-            _Mapa = FabricaLogica.getLogicaMapa().BuscarMapa(IdMapa);
+                _Mapa = FabricaLogica.getLogicaMapa().BuscarMapa(IdMapa);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
 
             return _Mapa;
         }
 
         void IServicioEvento.BajaMapa(Mapa m)
         {
-            FabricaLogica.getLogicaMapa().BajaMapa(m);
+            try
+            {
+                FabricaLogica.getLogicaMapa().BajaMapa(m);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
 
         #endregion
@@ -94,29 +194,85 @@ namespace Wcf_Sistema
 
          void IServicioEvento.AltaAlquiler(Alquiler e)
         {
-            FabricaLogica.getLogicaAlquiler().AltaAlquiler(e);
+            try
+            {
+                FabricaLogica.getLogicaAlquiler().AltaAlquiler(e);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          void IServicioEvento.BajaAlquiler(Alquiler e)
         {
-            FabricaLogica.getLogicaAlquiler().BajaAlquiler(e);
+            try
+            {
+                FabricaLogica.getLogicaAlquiler().BajaAlquiler(e);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
 
          Alquiler IServicioEvento.BuscarAlquiler(int IdAlquiler)
         {
-            return FabricaLogica.getLogicaAlquiler().BuscarAlquiler(IdAlquiler);
+            Alquiler e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaAlquiler().BuscarAlquiler(IdAlquiler);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          List<Alquiler> IServicioEvento.ListarAlquileres()
         {
-            return FabricaLogica.getLogicaAlquiler().ListarAlquileres();
+           List<Alquiler> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaAlquiler().ListarAlquileres();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          List<Alquiler> IServicioEvento.ListarAlquileresArea(int IdArea)
         {
-            return FabricaLogica.getLogicaAlquiler().ListarAlquileresArea(IdArea);
+
+            List<Alquiler> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaAlquiler().ListarAlquileresArea(IdArea);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
          List<Alquiler> IServicioEvento.ListarAlquileresOrganizador(string Ci)
         {
-            return FabricaLogica.getLogicaAlquiler().ListarAlquileresOrganizador(Ci);
+
+            List<Alquiler> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaAlquiler().ListarAlquileresOrganizador(Ci);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
 
@@ -127,36 +283,108 @@ namespace Wcf_Sistema
 
         void IServicioEvento.AltaArea(Area a)
         {
-            FabricaLogica.getLogicaArea().AltaArea(a);
+            try
+            {
+                FabricaLogica.getLogicaArea().AltaArea(a);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+           
         }
          void IServicioEvento.ModificarArea(Area a)
         {
-            FabricaLogica.getLogicaArea().ModificarArea(a);
+            try
+            {
+                FabricaLogica.getLogicaArea().ModificarArea(a);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          Area IServicioEvento.BuscarArea(int IdArea)
         {
-            return FabricaLogica.getLogicaArea().BuscarArea(IdArea);
+            Area e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaArea().BuscarArea(IdArea);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
          Area IServicioEvento.BuscarAreaPorNombre(string NombreArea)
         {
-            return FabricaLogica.getLogicaArea().BuscarAreaPorNombre(NombreArea);
+
+            Area e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaArea().BuscarAreaPorNombre(NombreArea);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          void IServicioEvento.AltaPuntodeArea(Area a, Punto p)
         {
-            FabricaLogica.getLogicaArea().AltaPuntodeArea(a, p);
+            try
+            {
+                FabricaLogica.getLogicaArea().AltaPuntodeArea(a, p);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          void IServicioEvento.BajaArea(Area a)
         {
-            FabricaLogica.getLogicaArea().BajaArea(a);
+            try
+            {
+                FabricaLogica.getLogicaArea().BajaArea(a);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
-        List<Area> IServicioEvento.ListarAreasDeMapa(int IdMapa)
-        {
-            return FabricaLogica.getLogicaArea().ListarAreasDeMapa(IdMapa);
-        }
+         List<Area> IServicioEvento.ListarAreasDeMapa(int IdMapa)
+         {
+             List<Area> e = null;
+             try
+             {
+                 e = FabricaLogica.getLogicaArea().ListarAreasDeMapa(IdMapa);
+             }
+             catch (FaultException ex)
+             {
+                 CodigoCatchFault(ex);
+             }
+
+             return e;
+         }
         List<Punto> IServicioEvento.ListarPuntosDeUnArea(Area a)
         {
-            return FabricaLogica.getLogicaArea().ListarPuntosDeUnArea(a);
+
+            List<Punto> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaArea().ListarPuntosDeUnArea(a);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
+
         }
 
         #endregion
@@ -165,73 +393,140 @@ namespace Wcf_Sistema
 
         void IServicioEvento.AltaUbicacion(Ubicacion U)
         {
-            if (U is Pais)
+            try
             {
-                FabricaLogica.getLogicaUbicacion().Alta((Pais)U);
+                if (U is Pais)
+                {
+                    FabricaLogica.getLogicaUbicacion().Alta((Pais)U);
+                }
+                else if (U is Ciudad)
+                {
+                    FabricaLogica.getLogicaUbicacion().Alta((Ciudad)U);
+                }
             }
-            else if(U is Ciudad)
+            catch (FaultException ex)
             {
-                FabricaLogica.getLogicaUbicacion().Alta((Ciudad)U);
+                CodigoCatchFault(ex);
             }
 
         }
 
         void IServicioEvento.ModificarUbicacion(Ubicacion U)
         {
-            if (U is Pais)
+            try
             {
-                FabricaLogica.getLogicaUbicacion().Modificar((Pais)U);
+                if (U is Pais)
+                {
+                    FabricaLogica.getLogicaUbicacion().Modificar((Pais)U);
+                }
+                else if (U is Ciudad)
+                {
+                    FabricaLogica.getLogicaUbicacion().Modificar((Ciudad)U);
+                }
             }
-            else if (U is Ciudad)
+            catch (FaultException ex)
             {
-                FabricaLogica.getLogicaUbicacion().Modificar((Ciudad)U);
+                CodigoCatchFault(ex);
             }
         }
 
         void IServicioEvento.EliminarUbicacion(Ubicacion U)
         {
-            if (U is Pais)
+            try
             {
-                FabricaLogica.getLogicaUbicacion().Eliminar((Pais)U);
+                if (U is Pais)
+                {
+                    FabricaLogica.getLogicaUbicacion().Eliminar((Pais)U);
+                }
+                else if (U is Ciudad)
+                {
+                    FabricaLogica.getLogicaUbicacion().Eliminar((Ciudad)U);
+                }
             }
-            else if (U is Ciudad)
+            catch (FaultException ex)
             {
-                FabricaLogica.getLogicaUbicacion().Eliminar((Ciudad)U);
+                CodigoCatchFault(ex);
             }
         }
 
 
         Pais IServicioEvento.BuscarPais(string pNombre)
         {
+
             Pais _Pais = null;
 
-            _Pais = FabricaLogica.getLogicaUbicacion().BuscarPais(pNombre);
+            try
+            {
+                _Pais = FabricaLogica.getLogicaUbicacion().BuscarPais(pNombre);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
 
             return _Pais;
         }
 
-        Ciudad IServicioEvento.BuscarCiudad(string pNombreCiudad, Pais UnPais)
+        Ciudad IServicioEvento.BuscarCiudad(string pNombreCiudad)
         {
             Ciudad _Ciudad = null;
 
-            _Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(pNombreCiudad);
+            try
+            {
+                _Ciudad = FabricaLogica.getLogicaUbicacion().BuscarCiudad(pNombreCiudad);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
 
             return _Ciudad;
         }
 
         List<Ciudad> IServicioEvento.ListarCiudades()
         {
-            return FabricaLogica.getLogicaUbicacion().ListarCiudades();
+
+            List<Ciudad> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUbicacion().ListarCiudades();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         List<Pais> IServicioEvento.ListarPais()
         {
-            return FabricaLogica.getLogicaUbicacion().ListarPais();
+
+            List<Pais> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUbicacion().ListarPais();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         List<Ciudad> IServicioEvento.ListarCiudadesPais(Pais UnPais)
         {
-            return FabricaLogica.getLogicaUbicacion().ListarCiudadesPais(UnPais);
+            List<Ciudad> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUbicacion().ListarCiudadesPais(UnPais);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+            return e;
         }
 
         #endregion
@@ -240,24 +535,54 @@ namespace Wcf_Sistema
 
         void IServicioEvento.AltaUsuario(Usuario U)
         {
-            FabricaLogica.getLogicaUsuario().Alta(U);
+            try
+            {
+                FabricaLogica.getLogicaUsuario().Alta(U);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+            
         }
 
         void IServicioEvento.ModificarUsuario(Usuario U)
         {
-            FabricaLogica.getLogicaUsuario().Modificar(U);
+            try
+            {
+                FabricaLogica.getLogicaUsuario().Modificar(U);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
 
         void IServicioEvento.EliminarUsuario(Usuario U)
         {
-            FabricaLogica.getLogicaUsuario().Eliminar(U);
+            try
+            {
+                FabricaLogica.getLogicaUsuario().Eliminar(U);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
 
         Usuario IServicioEvento.BuscarUsuario(string pDoc)
         {
             Usuario _Usuario = null;
 
-            _Usuario = FabricaLogica.getLogicaUsuario().Buscar(pDoc);
+            try
+            {
+
+                _Usuario = FabricaLogica.getLogicaUsuario().Buscar(pDoc);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
 
             return _Usuario;
         }
@@ -266,29 +591,77 @@ namespace Wcf_Sistema
         {
             Usuario _Usuario = null;
 
-            _Usuario = FabricaLogica.getLogicaUsuario().Login(nomUsu, pass);
+            try
+            {
+                _Usuario = FabricaLogica.getLogicaUsuario().Login(nomUsu, pass);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
 
             return _Usuario;
         }
 
         List<Admin> IServicioEvento.ListarAdmin()
         {
-            return FabricaLogica.getLogicaUsuario().ListarAdmin();
+            List<Admin> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUsuario().ListarAdmin();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         List<Dueño> IServicioEvento.ListarDueños()
         {
-            return FabricaLogica.getLogicaUsuario().ListarDueños();
+
+            List<Dueño> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUsuario().ListarDueños();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         List<Organizador> IServicioEvento.ListarOrganizadores()
         {
-            return FabricaLogica.getLogicaUsuario().ListarOrganizadores();
+            List<Organizador> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUsuario().ListarOrganizadores();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         List<Cliente> IServicioEvento.ListarClientes()
         {
-            return FabricaLogica.getLogicaUsuario().ListarClientes();
+            List<Cliente> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaUsuario().ListarClientes();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         #endregion
@@ -297,46 +670,155 @@ namespace Wcf_Sistema
 
          void IServicioEvento.AltaEvento(Evento p)
         {
-            FabricaLogica.getLogicaEvento().AltaEvento(p);
+            try
+            {
+                FabricaLogica.getLogicaEvento().AltaEvento(p);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          void IServicioEvento.ComprobarEstadoEvento(Evento UnEvento, DateTime fecha1, DateTime fecha2)
         {
-            FabricaLogica.getLogicaEvento().ComprobarEstadoEvento(UnEvento, fecha1, fecha2);
+            try
+            {
+                FabricaLogica.getLogicaEvento().ComprobarEstadoEvento(UnEvento, fecha1, fecha2);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          void IServicioEvento.BajaEvento(Evento e)
         {
-            FabricaLogica.getLogicaEvento().BajaEvento(e);
+            try
+            {
+                FabricaLogica.getLogicaEvento().BajaEvento(e);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
         }
          Evento IServicioEvento.BuscarEvento(int IdEvento)
         {
-            return FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+            Evento e = null;
+            try
+            {
+                e=FabricaLogica.getLogicaEvento().BuscarEvento(IdEvento);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          Categoria IServicioEvento.BuscarCategoria(string NombreCategoria)
         {
-            return FabricaLogica.getLogicaEvento().BuscarCategoria(NombreCategoria);
+            Categoria e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaEvento().BuscarCategoria(NombreCategoria);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          List<Categoria> IServicioEvento.ListarCategorias()
         {
-            return FabricaLogica.getLogicaEvento().ListarCategorias();
+            List<Categoria> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaEvento().ListarCategorias();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
         List<Evento> IServicioEvento.ListarEventosOrdenFecha()
         {
-            return FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+            List<Evento> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaEvento().ListarEventosOrdenFecha();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          List<Evento> IServicioEvento.ListarEventosOrganizador(string CiOrganizador)
         {
-            return FabricaLogica.getLogicaEvento().ListarEventosOrganizador(CiOrganizador);
+
+            List<Evento> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaEvento().ListarEventosOrganizador(CiOrganizador);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }       
         List<Evento> IServicioEvento.ListarEventosReservados()
         {
-            return FabricaLogica.getLogicaEvento().ListarEventosReservados();
+            List<Evento> e = null;
+            try
+            {
+                e= FabricaLogica.getLogicaEvento().ListarEventosReservados();
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
          List<Evento> IServicioEvento.ListarEventosxArea(int IdArea)
         {
-            return FabricaLogica.getLogicaEvento().ListarEventosxArea(IdArea);
+            List<Evento> e = null;
+            try
+            {
+                e=FabricaLogica.getLogicaEvento().ListarEventosxArea(IdArea);
+            }
+            catch (FaultException ex)
+            {
+                CodigoCatchFault(ex);
+            }
+
+            return e;
         }
 
         #endregion
+
+
+        private String CodigoCatchFault(FaultException ex)
+        {
+            String msg = ex.Message;
+
+            if (msg.Contains("&$"))
+            {
+                msg = (ex.Message.Split((new String[] { "&$" }), StringSplitOptions.RemoveEmptyEntries))[1];
+            }
+            else
+            {
+                if (msg.Length > 100)
+                    msg = msg.Substring(0, 100);
+            }
+            return msg;
+        }
 
     }
 }
